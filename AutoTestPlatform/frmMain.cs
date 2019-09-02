@@ -117,7 +117,7 @@ namespace AutoTestPlatform
         }
 
         #region 信息显示
-        private void ShowInfo(string info)
+        public void ShowInfo(string info)
         {
             txtInfo.BeginInvoke((MethodInvoker)delegate
             {

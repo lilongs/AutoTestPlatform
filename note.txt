@@ -1,0 +1,1 @@
+将SDK安装目录下“Bin"文件中kvaDbLib.dll文件复制到项目生成目录下即可加载使用”kvadblibCLSNET.dll“文件
