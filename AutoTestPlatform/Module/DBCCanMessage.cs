@@ -11,25 +11,8 @@ namespace AutoTestPlatform.Module
 {
     public class DBCCanMessage
     {
-        int chanHandle;
-        int msgId;
-        int msgFlags;
 
-        Kvadblib.Hnd dh;
-        Kvadblib.MessageHnd msgHandle;
-
-        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-
-        public DBCCanMessage(int chanHandle, int msgId, int msgFlags, Kvadblib.Hnd dh, Kvadblib.MessageHnd msgHandle)
-        {
-            this.chanHandle = chanHandle;
-            this.msgId = msgId;
-            this.msgFlags = msgFlags;
-            this.dh = dh;
-            this.msgHandle = msgHandle;
-        }
-
-        public bool LoadDB(string filename)
+        public bool LoadDB(string filename,out Kvadblib.Hnd dh)
         {
            
             Kvadblib.Hnd hnd = new Kvadblib.Hnd();
@@ -43,11 +26,15 @@ namespace AutoTestPlatform.Module
             {
                 dh = hnd;
             }
+            else
+            {
+                dh = hnd;
+            }
 
             return status == Kvadblib.Status.OK;
         }
 
-        public bool InitChanel(int channel)
+        public bool InitChanel(int channel,out int chanHandle)
         {
             bool channelOn = false;
             Canlib.canStatus status;
@@ -67,11 +54,12 @@ namespace AutoTestPlatform.Module
             else
             {
                 channelOn = false;
+                chanHandle = hnd;
             }
             return channelOn;
         }
 
-        public List<Message> LoadMessages()
+        public List<Message> LoadMessages(Kvadblib.Hnd dh)
         {
             Kvadblib.MessageHnd mh;
             Kvadblib.Status status;
@@ -102,7 +90,7 @@ namespace AutoTestPlatform.Module
             }
         }
 
-        public List<Signal> LoadSignals()
+        public List<Signal> LoadSignals(Kvadblib.MessageHnd msgHandle)
         {
             int row = 0;
             Kvadblib.SignalHnd sh;
@@ -136,7 +124,7 @@ namespace AutoTestPlatform.Module
             }
         }
 
-        public void SendMessage(List<Signal> signals)
+        public void SendMessage(List<Signal> signals, Kvadblib.MessageHnd msgHandle,int chanHandle,int msgId,int msgFlags)
         {
             byte[] data = new byte[8];
 
@@ -173,7 +161,7 @@ namespace AutoTestPlatform.Module
             
         }
 
-        public KeyValuePair<long, double> ReadMessage(out Message message)
+        public KeyValuePair<long, double> ReadMessage(Kvadblib.MessageHnd msgHandle, int chanHandle, int msgId,out Message message)
         {
             Canlib.canStatus status;
             int id;
@@ -197,7 +185,7 @@ namespace AutoTestPlatform.Module
                     {
                         Message m = new Message(id, data, dlc, flags, time);
                         message = m;
-                        result = ProcessMessage(m);
+                        result = ProcessMessage(msgHandle,m);
                     }
                 }
                 else if (status != Canlib.canStatus.canERR_NOMSG)
@@ -209,7 +197,7 @@ namespace AutoTestPlatform.Module
             return result;
         }
 
-        private KeyValuePair<long, double> ProcessMessage(Message m)
+        private KeyValuePair<long, double> ProcessMessage(Kvadblib.MessageHnd msgHandle,Message m)
         {
             KeyValuePair<long, double> result=new KeyValuePair<long, double>();
             Kvadblib.SignalHnd sh;
