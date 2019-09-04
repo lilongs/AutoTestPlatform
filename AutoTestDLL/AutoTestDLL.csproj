@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\AmmeterConfiguration.cs" />
     <Compile Include="Model\ElectricCurrent.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Signal.cs" />

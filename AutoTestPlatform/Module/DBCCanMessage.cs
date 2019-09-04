@@ -161,7 +161,7 @@ namespace AutoTestPlatform.Module
             
         }
 
-        public KeyValuePair<long, double> ReadMessage(Kvadblib.MessageHnd msgHandle, int chanHandle, int msgId,out Message message)
+        public Dictionary<long, double> ReadMessage(Kvadblib.MessageHnd msgHandle, int chanHandle, int msgId,out Message message)
         {
             Canlib.canStatus status;
             int id;
@@ -171,7 +171,7 @@ namespace AutoTestPlatform.Module
             long time;
             bool noError = true;
             message = null;
-            KeyValuePair<long, double> result = new KeyValuePair<long, double>();
+            Dictionary<long, double> result = new Dictionary<long, double>();
 
             status = Canlib.canReadWait(chanHandle, out id, data, out dlc, out flags, out time, 50);
             
@@ -197,9 +197,9 @@ namespace AutoTestPlatform.Module
             return result;
         }
 
-        private KeyValuePair<long, double> ProcessMessage(Kvadblib.MessageHnd msgHandle,Message m)
+        private Dictionary<long, double> ProcessMessage(Kvadblib.MessageHnd msgHandle,Message m)
         {
-            KeyValuePair<long, double> result=new KeyValuePair<long, double>();
+            Dictionary<long, double> result=new Dictionary<long, double>();
             Kvadblib.SignalHnd sh;
             Kvadblib.Status status = Kvadblib.GetFirstSignal(msgHandle, out sh);
             int i = 0;
@@ -207,7 +207,7 @@ namespace AutoTestPlatform.Module
             {
                 double value;
                 status = Kvadblib.GetSignalValueFloat(sh, out value, m.data, m.dlc);
-                result=new KeyValuePair<long, double>(m.time, value);
+                result.Add(m.time, value);
                 i++;
                 status = Kvadblib.GetNextSignal(msgHandle, out sh);
             }
