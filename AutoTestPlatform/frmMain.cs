@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AutoTestPlatform
 {
@@ -40,11 +41,8 @@ namespace AutoTestPlatform
                     InitTree();
                     ExpandTree();
                 }
-                LoadAmmeterConfigurationInfo();
-
-                Thread t = new Thread(new ThreadStart(GetData));
-                t.IsBackground = true;
-                t.Start();
+                InitAmmeterConfigurationInfo();
+                InitChart();
             }
             catch (Exception ex)
             {
@@ -52,20 +50,49 @@ namespace AutoTestPlatform
             }
         }
 
-        private void GetData()
+        private void InitChart()
         {
-            var timer = new System.Timers.Timer();
-            timer.Interval = 10000;
-            timer.Enabled = true;
-            timer.AutoReset = true;
-            timer.Start();
-            timer.Elapsed += (o, a) =>
+            DateTime time = DateTime.Now;
+            System.Timers.Timer chartTimer = new System.Timers.Timer();
+            chartTimer.Interval = 1000;
+            chartTimer.Elapsed += chartTimer_Tick;
+
+            Series series = chart1.Series[0];
+            series.ChartType = SeriesChartType.Spline;
+            series.IsXValueIndexed = true;
+            series.XValueType = ChartValueType.Time;
+            series.Name = "温度曲线";
+
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+            chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
+            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+            
+            chartTimer.Start();
+        }
+
+        private void chartTimer_Tick(object sender, EventArgs e)
+        {
+            ChartValueFill(new Random().Next(1,100));
+        }
+        
+        private void ammeter_Tick(object sender,EventArgs e)
+        {
+            foreach (AmmeterConfiguration ammeter in ammeterList)
             {
-                foreach(AmmeterConfiguration ammeter in ammeterList)
-                {
-                    AmmterFillData(ammeter.ammeterName,123);
-                }                
-            };
+                AmmterFillData(ammeter.ammeterName, new Random().Next(1,200));
+            }
+        }
+
+        private void ChartValueFill(double value)
+        {
+            SysLog.CreateTemperatureLog(value.ToString());
+            chart1.BeginInvoke((MethodInvoker)delegate
+            {
+                Series series = chart1.Series[0];
+                series.Points.AddXY(DateTime.Now, value);
+                chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+            });
         }
 
         private List<TypeList> LoadTypeList()
@@ -118,8 +145,12 @@ namespace AutoTestPlatform
             }
         }
 
-        private void LoadAmmeterConfigurationInfo()
+        private void InitAmmeterConfigurationInfo()
         {
+            System.Timers.Timer ammeterTimer = new System.Timers.Timer();
+            ammeterTimer.Interval = 1000;
+            ammeterTimer.Elapsed += ammeter_Tick;
+
             string path = Application.StartupPath + "\\SysConfig";
             string json = JsonOperate.GetJson(path, "AmmeterConfiguration.json");
             ammeterList = JsonConvert.DeserializeObject<List<AmmeterConfiguration>>(json);
@@ -129,12 +160,13 @@ namespace AutoTestPlatform
                 foreach (AmmeterConfiguration ammeter in ammeterList)
                 {
                     string ammeterName = ammeter.ammeterName;
-                    InitAmmeterConfigurationInfo(ammeterName);
+                    LoadAmmeterConfigurationInfo(ammeterName);
                 }
             }
+            ammeterTimer.Start();
         }
 
-        private void InitAmmeterConfigurationInfo(string aGaugeName)
+        private void LoadAmmeterConfigurationInfo(string aGaugeName)
         {
             AGauge aGauge1 = new AGauge();
             System.Windows.Forms.AGaugeLabel aGaugeLabel1 = new System.Windows.Forms.AGaugeLabel();
@@ -234,6 +266,7 @@ namespace AutoTestPlatform
 
         public void AmmterFillData(string aGaugeName, float value)
         {
+            SysLog.CreateAmmeterLog(aGaugeName+","+value.ToString());
             ((AGauge)this.Controls.Find(aGaugeName, true)[0]).BeginInvoke((MethodInvoker)delegate
             {
                 ((AGauge)this.Controls.Find(aGaugeName, true)[0]).Value = value;
@@ -384,7 +417,7 @@ namespace AutoTestPlatform
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
             {
-                LoadAmmeterConfigurationInfo();
+                InitAmmeterConfigurationInfo();
             }
         }
 

@@ -10,14 +10,11 @@ namespace AutoTestDLL.Util
     public static class SysLog
     {
 
-        public static void CreateLog(string errInfo)
+        public static void CreateAmmeterLog(string Info)
         {
             DateTime now = DateTime.Now;
-            //FileOperate.CreateDirectory("E:\\log");
-            //FileOperate.CreateFile("E:\\log\\"+now.ToString("yyyyMMdd") + ".log",new List<string>() { now.ToString("yyyy-MM-dd HH:mm:ss") + "," + errInfo  });
 
-
-            string folder = "E:\\data ";
+            string folder = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "data\\Ammeter\\";
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
             string filename = folder + "/" + now.ToString("yyyyMMdd") + ".txt";
@@ -25,7 +22,7 @@ namespace AutoTestDLL.Util
             {
                 FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
                 StreamWriter sr = new StreamWriter(fs);
-                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + errInfo);
+                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + Info);
                 sr.Close();
                 fs.Close();
             }
@@ -33,11 +30,37 @@ namespace AutoTestDLL.Util
             {
                 FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
                 StreamWriter sr = new StreamWriter(fs);
-                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + errInfo);
+                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + Info);
                 sr.Close();
                 fs.Close();
             }
         }
 
+
+        public static void CreateTemperatureLog(string Info)
+        {
+            DateTime now = DateTime.Now;
+
+            string folder = AppDomain.CurrentDomain.SetupInformation.ApplicationBase+"data\\Temperature\\";
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+
+            string filename = folder + "/" + now.ToString("yyyyMMdd") + ".txt";
+            if (File.Exists(filename))
+            {
+                FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                StreamWriter sr = new StreamWriter(fs);
+                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + Info);
+                sr.Close();
+                fs.Close();
+            }
+            else
+            {
+                FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                StreamWriter sr = new StreamWriter(fs);
+                sr.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "," + Info);
+                sr.Close();
+                fs.Close();
+            }
+        }
     }
 }

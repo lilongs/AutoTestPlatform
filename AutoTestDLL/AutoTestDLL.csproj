@@ -66,6 +66,7 @@
     <Compile Include="Model\ElectricCurrent.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Signal.cs" />
+    <Compile Include="Model\TempSensorConfiguration.cs" />
     <Compile Include="Model\TestStep.cs" />
     <Compile Include="Util\CSScriptHelper.cs" />
     <Compile Include="Util\FileOperate.cs" />
