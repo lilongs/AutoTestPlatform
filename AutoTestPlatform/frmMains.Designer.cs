@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,18 +159,18 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.IsXValueIndexed = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series2);
+            series6.ChartArea = "ChartArea1";
+            series6.IsXValueIndexed = true;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chart1.Series.Add(series6);
             this.chart1.Size = new System.Drawing.Size(400, 264);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -191,33 +191,40 @@
             // 
             // testUnit6
             // 
-            this.testUnit6.Location = new System.Drawing.Point(931, 286);
+            this.testUnit6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.testUnit6.Location = new System.Drawing.Point(934, 325);
             this.testUnit6.Name = "testUnit6";
-            this.testUnit6.Size = new System.Drawing.Size(458, 277);
+            this.testUnit6.Size = new System.Drawing.Size(458, 316);
             this.testUnit6.TabIndex = 5;
             this.testUnit6.Tag = "Equipment6";
             // 
             // testUnit5
             // 
-            this.testUnit5.Location = new System.Drawing.Point(467, 286);
+            this.testUnit5.Location = new System.Drawing.Point(467, 325);
             this.testUnit5.Name = "testUnit5";
-            this.testUnit5.Size = new System.Drawing.Size(458, 277);
+            this.testUnit5.Size = new System.Drawing.Size(458, 316);
             this.testUnit5.TabIndex = 4;
             this.testUnit5.Tag = "Equipment5";
             // 
             // testUnit4
             // 
-            this.testUnit4.Location = new System.Drawing.Point(3, 286);
+            this.testUnit4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.testUnit4.Location = new System.Drawing.Point(3, 325);
             this.testUnit4.Name = "testUnit4";
-            this.testUnit4.Size = new System.Drawing.Size(458, 277);
+            this.testUnit4.Size = new System.Drawing.Size(458, 316);
             this.testUnit4.TabIndex = 3;
             this.testUnit4.Tag = "Equipment4";
             // 
             // testUnit3
             // 
+            this.testUnit3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.testUnit3.Location = new System.Drawing.Point(931, 3);
             this.testUnit3.Name = "testUnit3";
-            this.testUnit3.Size = new System.Drawing.Size(458, 277);
+            this.testUnit3.Size = new System.Drawing.Size(458, 316);
             this.testUnit3.TabIndex = 2;
             this.testUnit3.Tag = "Equipment3";
             // 
@@ -225,15 +232,17 @@
             // 
             this.testUnit2.Location = new System.Drawing.Point(467, 3);
             this.testUnit2.Name = "testUnit2";
-            this.testUnit2.Size = new System.Drawing.Size(458, 277);
+            this.testUnit2.Size = new System.Drawing.Size(458, 316);
             this.testUnit2.TabIndex = 1;
             this.testUnit2.Tag = "Equipment2";
             // 
             // testUnit1
             // 
+            this.testUnit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.testUnit1.Location = new System.Drawing.Point(3, 3);
             this.testUnit1.Name = "testUnit1";
-            this.testUnit1.Size = new System.Drawing.Size(458, 277);
+            this.testUnit1.Size = new System.Drawing.Size(458, 316);
             this.testUnit1.TabIndex = 0;
             this.testUnit1.Tag = "Equipment1";
             // 

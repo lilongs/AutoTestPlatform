@@ -182,7 +182,7 @@ namespace WindowsFormsControlLibrary
                             continue;
                         }
                         string stepname = step.stepname;
-                        ShowInfo("正在进行：" + typename + "--" + stepname + "测试！");
+                        ShowInfo("正在进行：" + typename + "--" + stepname + "测试！",Color.Red);
                         ElectricCurrent electric = new ElectricCurrent();
                         electric.time = DateTime.Now.ToShortTimeString();
                         electric.electricity = "123";
@@ -195,15 +195,20 @@ namespace WindowsFormsControlLibrary
             }
         }
 
-        public void ShowInfo(string info)
+        public void ShowInfo(string info, Color color)
         {
-            txtInfo.BeginInvoke((MethodInvoker)delegate
+            richTextBox1.BeginInvoke((MethodInvoker)delegate
             {
-                if (txtInfo.Items.Count > 200)
-                {
-                    txtInfo.Items.RemoveAt(0);
-                }
-                txtInfo.Items.Add(info);
+                richTextBox1.SelectionStart = richTextBox1.TextLength;
+                richTextBox1.SelectionLength = 0;
+                richTextBox1.SelectionColor = color;
+                if (String.IsNullOrEmpty(richTextBox1.Text))
+                    richTextBox1.AppendText(info);
+                else
+                    richTextBox1.AppendText(Environment.NewLine + info);
+                richTextBox1.SelectionColor = richTextBox1.ForeColor;
+
+                richTextBox1.ScrollToCaret();
             });
         }
 

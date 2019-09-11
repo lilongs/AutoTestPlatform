@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using WindowsFormsControlLibrary;
 
 namespace AutoTestPlatform
 {
@@ -31,7 +32,18 @@ namespace AutoTestPlatform
         {
             try
             {
-               
+                int x = this.panel1.Width;
+                int y = this.panel1.Height;
+
+                int _x = x / 3;
+                int _y = y / 2;
+
+                for(int i = 0; i < 6; i++)
+                {
+                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Width = _x;
+                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Height = _y;
+                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Location = new System.Drawing.Point((i%3) * _x+3, (i/3) *_y +3);
+                }
             }
             catch (Exception ex)
             {
