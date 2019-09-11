@@ -128,9 +128,9 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txtEquipment.Text = row.Cells["equipment"].Value is null?"": row.Cells["equipment"].Value.ToString();
-                    this.combParamter.Text= row.Cells["paramter"].Value is null ? "" : row.Cells["paramter"].Value.ToString();
-                    this.combValue.Text = row.Cells["value"].Value is null ? "" : row.Cells["value"].Value.ToString();
+                    this.txtEquipment.Text = row.Cells["equipment"].Value == null?"": row.Cells["equipment"].Value.ToString();
+                    this.combParamter.Text= row.Cells["paramter"].Value == null ? "" : row.Cells["paramter"].Value.ToString();
+                    this.combValue.Text = row.Cells["value"].Value == null ? "" : row.Cells["value"].Value.ToString();
                 }
             }
             catch (Exception ex)

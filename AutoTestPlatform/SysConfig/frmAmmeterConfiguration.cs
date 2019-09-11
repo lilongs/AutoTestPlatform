@@ -134,13 +134,13 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txtAmmeterName.Text = row.Cells["ammeterName"].Value is null?"": row.Cells["ammeterName"].Value.ToString();
-                    this.txtPortName.Text= row.Cells["portName"].Value is null ? "" : row.Cells["portName"].Value.ToString();
-                    this.txtBaudRate.Text = row.Cells["baudrate"].Value is null ? "" : row.Cells["baudrate"].Value.ToString();
-                    this.txtParity.Text= row.Cells["parity"].Value is null ? "" : row.Cells["parity"].Value.ToString();
-                    this.txtDataBits.Text =row.Cells["dataBits"].Value is null ? "" : row.Cells["dataBits"].Value.ToString();
-                    this.txtStopBits.Text =  row.Cells["stopBits"].Value is null ? "" : row.Cells["stopBits"].Value.ToString();
-                    this.txtHandshake.Text =  row.Cells["handshake"].Value is null ? "" : row.Cells["handshake"].Value.ToString();
+                    this.txtAmmeterName.Text = row.Cells["ammeterName"].Value == null?"": row.Cells["ammeterName"].Value.ToString();
+                    this.txtPortName.Text= row.Cells["portName"].Value == null ? "" : row.Cells["portName"].Value.ToString();
+                    this.txtBaudRate.Text = row.Cells["baudrate"].Value == null ? "" : row.Cells["baudrate"].Value.ToString();
+                    this.txtParity.Text= row.Cells["parity"].Value == null ? "" : row.Cells["parity"].Value.ToString();
+                    this.txtDataBits.Text =row.Cells["dataBits"].Value == null ? "" : row.Cells["dataBits"].Value.ToString();
+                    this.txtStopBits.Text =  row.Cells["stopBits"].Value == null ? "" : row.Cells["stopBits"].Value.ToString();
+                    this.txtHandshake.Text =  row.Cells["handshake"].Value == null ? "" : row.Cells["handshake"].Value.ToString();
                 }
             }
             catch (Exception ex)

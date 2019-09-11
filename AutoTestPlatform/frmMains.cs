@@ -44,6 +44,8 @@ namespace AutoTestPlatform
                     ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Height = _y;
                     ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Location = new System.Drawing.Point((i%3) * _x+3, (i/3) *_y +3);
                 }
+                InitChart();
+                
             }
             catch (Exception ex)
             {
@@ -55,26 +57,29 @@ namespace AutoTestPlatform
         {
             DateTime time = DateTime.Now;
             System.Timers.Timer chartTimer = new System.Timers.Timer();
-            chartTimer.Interval = 1000;
+            chartTimer.Interval = 150;
             chartTimer.Elapsed += chartTimer_Tick;
 
             Series series = chart1.Series[0];
             series.ChartType = SeriesChartType.Spline;
             series.IsXValueIndexed = true;
             series.XValueType = ChartValueType.Time;
-            series.Name = "温度曲线";
+            series.Name = "TemperatureCurve";
 
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
             chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
             chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
             chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            
+            chart1.Legends[0].Docking = Docking.Top;
+
             chartTimer.Start();
         }
 
         private void chartTimer_Tick(object sender, EventArgs e)
         {
             ChartValueFill(new Random().Next(1,100));
+            testUnit1.ChartValueFill(new Random().Next(1, 100));
+            testUnit2.ChartValueFill(new Random().Next(1, 100));
         }
         
         private void ammeter_Tick(object sender,EventArgs e)
@@ -95,12 +100,6 @@ namespace AutoTestPlatform
                 chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
             });
         }
-
-     
-
-        
-
-        
 
         private void InitAmmeterConfigurationInfo()
         {

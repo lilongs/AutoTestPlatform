@@ -11,6 +11,7 @@ using AutoTestDLL.Model;
 using System.Threading;
 using AutoTestDLL.Util;
 using Newtonsoft.Json;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsControlLibrary
 {
@@ -38,6 +39,7 @@ namespace WindowsFormsControlLibrary
                     InitTree();
                     ExpandTree();
                 }
+                InitChart();
             }
             catch (Exception ex)
             {
@@ -76,6 +78,32 @@ namespace WindowsFormsControlLibrary
             return temp;
         }
 
+        private void InitChart()
+        {
+            Series series = chart1.Series[0];
+            series.ChartType = SeriesChartType.Spline;
+            series.IsXValueIndexed = true;
+            series.XValueType = ChartValueType.DateTime;
+            series.Name = this.Tag.ToString()+ "CurrentCurve";
+
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
+            chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
+            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+            chart1.Legends[0].Docking= Docking.Top;
+        }
+
+        public void ChartValueFill(double value)
+        {
+            chart1.BeginInvoke((MethodInvoker)delegate
+            {
+                Series series = chart1.Series[0];
+                series.Points.AddXY(DateTime.Now, value);
+                chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+            });
+        }
+
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             try
@@ -100,8 +128,6 @@ namespace WindowsFormsControlLibrary
                 logger.Error(ex, ex.Message);
             }
         }
-
-        
 
         private void InitTree()
         {
@@ -177,6 +203,19 @@ namespace WindowsFormsControlLibrary
                 {
                     foreach (TestStep step in item.Value)
                     {
+                        string type=step.typename;
+                        switch(step.typename)
+                        {
+                            case "PTL":
+                                //Step1 
+                                //Step2
+                                break;
+                            case "K03":
+                                //Step1 
+                                //Step2
+                                break;
+                        }
+
                         if (i > step.repeat)
                         {
                             continue;
