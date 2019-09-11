@@ -1,6 +1,6 @@
-﻿namespace AutoTestPlatform.TestSequence
+﻿namespace AutoTestPlatform.SysConfig
 {
-    partial class frmTestSequncenManager
+    partial class frmCOMConfiguration
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTestSequncenManager));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCOMConfiguration));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.open = new System.Windows.Forms.ToolStripButton();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.delete = new System.Windows.Forms.ToolStripButton();
             this.quit = new System.Windows.Forms.ToolStripButton();
-            this.label_parentname = new System.Windows.Forms.Label();
-            this.combtypename = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtstepname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtmodename = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtcycletime = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtvoltage = new System.Windows.Forms.TextBox();
-            this.txtrepeat = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtParity = new System.Windows.Forms.ComboBox();
+            this.txtBaudRate = new System.Windows.Forms.ComboBox();
+            this.txtHandshake = new System.Windows.Forms.ComboBox();
+            this.txtStopBits = new System.Windows.Forms.ComboBox();
+            this.txtDataBits = new System.Windows.Forms.ComboBox();
+            this.txtPortName = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +53,6 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.open,
             this.save,
             this.delete,
             this.quit});
@@ -64,16 +61,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(908, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // open
-            // 
-            this.open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.open.Image = ((System.Drawing.Image)(resources.GetObject("open.Image")));
-            this.open.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.open.Name = "open";
-            this.open.Size = new System.Drawing.Size(23, 22);
-            this.open.Text = "Open";
-            this.open.Click += new System.EventHandler(this.open_Click);
             // 
             // save
             // 
@@ -105,156 +92,188 @@
             this.quit.Text = "Quit";
             this.quit.Click += new System.EventHandler(this.quit_Click);
             // 
-            // label_parentname
-            // 
-            this.label_parentname.AutoSize = true;
-            this.label_parentname.Font = new System.Drawing.Font("Arial", 15F);
-            this.label_parentname.Location = new System.Drawing.Point(68, 31);
-            this.label_parentname.Name = "label_parentname";
-            this.label_parentname.Size = new System.Drawing.Size(37, 23);
-            this.label_parentname.TabIndex = 8;
-            this.label_parentname.Text = "G6";
-            // 
-            // combtypename
-            // 
-            this.combtypename.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combtypename.FormattingEnabled = true;
-            this.combtypename.Location = new System.Drawing.Point(254, 37);
-            this.combtypename.Name = "combtypename";
-            this.combtypename.Size = new System.Drawing.Size(121, 20);
-            this.combtypename.TabIndex = 6;
-            this.combtypename.SelectedIndexChanged += new System.EventHandler(this.combtypename_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(184, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Typename:";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 82);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(644, 514);
+            this.dataGridView1.Size = new System.Drawing.Size(644, 558);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
-            // 
-            // txtstepname
-            // 
-            this.txtstepname.Location = new System.Drawing.Point(743, 165);
-            this.txtstepname.Name = "txtstepname";
-            this.txtstepname.Size = new System.Drawing.Size(142, 21);
-            this.txtstepname.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(667, 166);
+            this.label3.Location = new System.Drawing.Point(677, 100);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 15);
+            this.label3.Size = new System.Drawing.Size(66, 15);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Stepname:";
+            this.label3.Text = "PortName:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(662, 211);
+            this.label4.Location = new System.Drawing.Point(678, 141);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 15);
+            this.label4.Size = new System.Drawing.Size(65, 15);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Modename:";
-            // 
-            // txtmodename
-            // 
-            this.txtmodename.Location = new System.Drawing.Point(743, 209);
-            this.txtmodename.Name = "txtmodename";
-            this.txtmodename.Size = new System.Drawing.Size(142, 21);
-            this.txtmodename.TabIndex = 1;
+            this.label4.Text = "BaudRate:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(670, 301);
+            this.label5.Location = new System.Drawing.Point(686, 223);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 15);
+            this.label5.Size = new System.Drawing.Size(57, 15);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Cycletime:";
+            this.label5.Text = "DataBits:";
             // 
-            // txtcycletime
+            // label11
             // 
-            this.txtcycletime.Location = new System.Drawing.Point(743, 297);
-            this.txtcycletime.Name = "txtcycletime";
-            this.txtcycletime.Size = new System.Drawing.Size(142, 21);
-            this.txtcycletime.TabIndex = 3;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(684, 256);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 15);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Voltage:";
-            // 
-            // txtvoltage
-            // 
-            this.txtvoltage.Location = new System.Drawing.Point(743, 253);
-            this.txtvoltage.Name = "txtvoltage";
-            this.txtvoltage.Size = new System.Drawing.Size(142, 21);
-            this.txtvoltage.TabIndex = 2;
-            // 
-            // txtrepeat
-            // 
-            this.txtrepeat.Location = new System.Drawing.Point(743, 341);
-            this.txtrepeat.Name = "txtrepeat";
-            this.txtrepeat.Size = new System.Drawing.Size(142, 21);
-            this.txtrepeat.TabIndex = 4;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(703, 184);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 15);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Parity:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(684, 346);
+            this.label7.Location = new System.Drawing.Point(687, 264);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 15);
+            this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 11;
-            this.label7.Text = "Repeat:";
+            this.label7.Text = "StopBits:";
             // 
-            // frmTestSequncenManager
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(669, 305);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 15);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Handshake:";
+            // 
+            // txtParity
+            // 
+            this.txtParity.FormattingEnabled = true;
+            this.txtParity.Items.AddRange(new object[] {
+            "None",
+            "Odd",
+            "Even",
+            "Mark",
+            "Space"});
+            this.txtParity.Location = new System.Drawing.Point(752, 182);
+            this.txtParity.Name = "txtParity";
+            this.txtParity.Size = new System.Drawing.Size(142, 20);
+            this.txtParity.TabIndex = 3;
+            // 
+            // txtBaudRate
+            // 
+            this.txtBaudRate.FormattingEnabled = true;
+            this.txtBaudRate.Items.AddRange(new object[] {
+            "600",
+            "1200",
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400"});
+            this.txtBaudRate.Location = new System.Drawing.Point(752, 140);
+            this.txtBaudRate.Name = "txtBaudRate";
+            this.txtBaudRate.Size = new System.Drawing.Size(142, 20);
+            this.txtBaudRate.TabIndex = 2;
+            // 
+            // txtHandshake
+            // 
+            this.txtHandshake.FormattingEnabled = true;
+            this.txtHandshake.Items.AddRange(new object[] {
+            "None",
+            "XOnXOff",
+            "RequestToSend",
+            "RequestToSendXOnXOff"});
+            this.txtHandshake.Location = new System.Drawing.Point(752, 308);
+            this.txtHandshake.Name = "txtHandshake";
+            this.txtHandshake.Size = new System.Drawing.Size(142, 20);
+            this.txtHandshake.TabIndex = 6;
+            // 
+            // txtStopBits
+            // 
+            this.txtStopBits.FormattingEnabled = true;
+            this.txtStopBits.Items.AddRange(new object[] {
+            "None",
+            "One",
+            "Two",
+            "OnePointFive"});
+            this.txtStopBits.Location = new System.Drawing.Point(752, 266);
+            this.txtStopBits.Name = "txtStopBits";
+            this.txtStopBits.Size = new System.Drawing.Size(142, 20);
+            this.txtStopBits.TabIndex = 5;
+            // 
+            // txtDataBits
+            // 
+            this.txtDataBits.FormattingEnabled = true;
+            this.txtDataBits.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8"});
+            this.txtDataBits.Location = new System.Drawing.Point(752, 224);
+            this.txtDataBits.Name = "txtDataBits";
+            this.txtDataBits.Size = new System.Drawing.Size(142, 20);
+            this.txtDataBits.TabIndex = 4;
+            // 
+            // txtPortName
+            // 
+            this.txtPortName.FormattingEnabled = true;
+            this.txtPortName.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9"});
+            this.txtPortName.Location = new System.Drawing.Point(752, 98);
+            this.txtPortName.Name = "txtPortName";
+            this.txtPortName.Size = new System.Drawing.Size(142, 20);
+            this.txtPortName.TabIndex = 1;
+            // 
+            // frmCOMConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 599);
+            this.Controls.Add(this.txtPortName);
+            this.Controls.Add(this.txtDataBits);
+            this.Controls.Add(this.txtStopBits);
+            this.Controls.Add(this.txtHandshake);
+            this.Controls.Add(this.txtBaudRate);
+            this.Controls.Add(this.txtParity);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtrepeat);
-            this.Controls.Add(this.txtcycletime);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtvoltage);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtmodename);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtstepname);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.combtypename);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label_parentname);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "frmTestSequncenManager";
+            this.Name = "frmCOMConfiguration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TestSequenceManageForm";
+            this.Text = "Ammeter Paramter Configuration";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAmmeterConfiguration_FormClosed);
             this.Load += new System.EventHandler(this.frmTestSequncenManager_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -267,23 +286,21 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton open;
         private System.Windows.Forms.ToolStripButton save;
         private System.Windows.Forms.ToolStripButton quit;
-        private System.Windows.Forms.Label label_parentname;
-        private System.Windows.Forms.ComboBox combtypename;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtstepname;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtmodename;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtcycletime;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtvoltage;
-        private System.Windows.Forms.TextBox txtrepeat;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripButton delete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox txtParity;
+        private System.Windows.Forms.ComboBox txtBaudRate;
+        private System.Windows.Forms.ComboBox txtHandshake;
+        private System.Windows.Forms.ComboBox txtStopBits;
+        private System.Windows.Forms.ComboBox txtDataBits;
+        private System.Windows.Forms.ComboBox txtPortName;
     }
 }

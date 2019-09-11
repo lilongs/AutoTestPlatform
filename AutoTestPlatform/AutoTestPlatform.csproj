@@ -100,15 +100,33 @@
     <Compile Include="frmKvaserDBSend.Designer.cs">
       <DependentUpon>frmKvaserDBSend.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmMains.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmMains.Designer.cs">
+      <DependentUpon>frmMains.cs</DependentUpon>
     </Compile>
     <Compile Include="Module\DBCCanMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysConfig\frmEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysConfig\frmEquipment.Designer.cs">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysConfig\frmCOMConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysConfig\frmCOMConfiguration.Designer.cs">
+      <DependentUpon>frmCOMConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysConfig\frmCANConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysConfig\frmCANConfiguration.Designer.cs">
+      <DependentUpon>frmCANConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="SysConfig\frmTemperatureConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +138,12 @@
     </Compile>
     <Compile Include="SysConfig\frmAmmeterConfiguration.Designer.cs">
       <DependentUpon>frmAmmeterConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestSequence\frmSelectEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestSequence\frmSelectEquipment.Designer.cs">
+      <DependentUpon>frmSelectEquipment.cs</DependentUpon>
     </Compile>
     <Compile Include="TestSequence\frmSelectTestType.cs">
       <SubType>Form</SubType>
@@ -133,6 +157,12 @@
     <Compile Include="TestSequence\frmTestSequncenManager.Designer.cs">
       <DependentUpon>frmTestSequncenManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestSequence\frmEquipmentTestType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestSequence\frmEquipmentTestType.Designer.cs">
+      <DependentUpon>frmEquipmentTestType.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestSequence\frmTestTypeManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,8 +172,8 @@
     <EmbeddedResource Include="frmKvaserDBSend.resx">
       <DependentUpon>frmKvaserDBSend.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmMains.resx">
+      <DependentUpon>frmMains.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -155,17 +185,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SysConfig\frmEquipment.resx">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysConfig\frmCOMConfiguration.resx">
+      <DependentUpon>frmCOMConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysConfig\frmCANConfiguration.resx">
+      <DependentUpon>frmCANConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SysConfig\frmTemperatureConfiguration.resx">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SysConfig\frmAmmeterConfiguration.resx">
       <DependentUpon>frmAmmeterConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestSequence\frmSelectEquipment.resx">
+      <DependentUpon>frmSelectEquipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestSequence\frmSelectTestType.resx">
       <DependentUpon>frmSelectTestType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestSequence\frmTestSequncenManager.resx">
       <DependentUpon>frmTestSequncenManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestSequence\frmEquipmentTestType.resx">
+      <DependentUpon>frmEquipmentTestType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestSequence\frmTestTypeManager.resx">
       <DependentUpon>frmTestTypeManager.cs</DependentUpon>
@@ -194,6 +239,10 @@
     <ProjectReference Include="..\AutoTestDLL\AutoTestDLL.csproj">
       <Project>{e323ee59-0196-4456-a1c6-5bacd18374a2}</Project>
       <Name>AutoTestDLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsFormsControlLibrary\WindowsFormsControlLibrary.csproj">
+      <Project>{e90c2f84-9029-4ae7-a876-0d91988b67d2}</Project>
+      <Name>WindowsFormsControlLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

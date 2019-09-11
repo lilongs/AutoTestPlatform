@@ -122,7 +122,6 @@ namespace AutoTestPlatform.TestSequence
                     item.modename = txtmodename.Text.Trim();
                     item.voltage = txtvoltage.Text.Trim();
                     item.cycletime = txtcycletime.Text.Trim();
-                    item.msg = txtmsg.Text.Trim();
                     int msg = -1;
                     item.repeat= int.TryParse(txtrepeat.Text.Trim(), out msg) ? int.Parse(txtrepeat.Text.Trim()) : 1;
                 }
@@ -134,7 +133,6 @@ namespace AutoTestPlatform.TestSequence
                     step.modename = txtmodename.Text.Trim();
                     step.voltage = txtvoltage.Text.Trim();
                     step.cycletime = txtcycletime.Text.Trim();
-                    step.msg = txtmsg.Text.Trim();
                     int msg = -1;
                     step.repeat = int.TryParse(txtrepeat.Text.Trim(), out msg) ? int.Parse(txtrepeat.Text.Trim()) : 1;
                     stepList.Add(step);
@@ -202,7 +200,6 @@ namespace AutoTestPlatform.TestSequence
                 this.txtvoltage.Text= row.Cells["voltage"].Value.ToString();
                 this.txtcycletime.Text = row.Cells["cycletime"].Value.ToString();
                 this.txtrepeat.Text = row.Cells["repeat"].Value.ToString();
-                this.txtmsg.Text = row.Cells["msg"].Value.ToString();
             }
         }
     }

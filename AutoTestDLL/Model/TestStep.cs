@@ -14,6 +14,5 @@ namespace AutoTestDLL.Model
         public string voltage { get; set; }
         public string cycletime { get; set; }
         public int repeat { get; set; }
-        public string msg { get; set; }
     }
 }
