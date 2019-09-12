@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,16 +45,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.testUnit6 = new WindowsFormsControlLibrary.TestUnit();
-            this.testUnit5 = new WindowsFormsControlLibrary.TestUnit();
-            this.testUnit4 = new WindowsFormsControlLibrary.TestUnit();
-            this.testUnit3 = new WindowsFormsControlLibrary.TestUnit();
-            this.testUnit2 = new WindowsFormsControlLibrary.TestUnit();
-            this.testUnit1 = new WindowsFormsControlLibrary.TestUnit();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -159,93 +152,31 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.IsXValueIndexed = true;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(400, 264);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.testUnit6);
-            this.panel1.Controls.Add(this.testUnit5);
-            this.panel1.Controls.Add(this.testUnit4);
-            this.panel1.Controls.Add(this.testUnit3);
-            this.panel1.Controls.Add(this.testUnit2);
-            this.panel1.Controls.Add(this.testUnit1);
+            this.panel1.AutoScroll = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1395, 646);
             this.panel1.TabIndex = 14;
-            // 
-            // testUnit6
-            // 
-            this.testUnit6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.testUnit6.Location = new System.Drawing.Point(934, 325);
-            this.testUnit6.Name = "testUnit6";
-            this.testUnit6.Size = new System.Drawing.Size(458, 316);
-            this.testUnit6.TabIndex = 5;
-            this.testUnit6.Tag = "Equipment6";
-            // 
-            // testUnit5
-            // 
-            this.testUnit5.Location = new System.Drawing.Point(467, 325);
-            this.testUnit5.Name = "testUnit5";
-            this.testUnit5.Size = new System.Drawing.Size(458, 316);
-            this.testUnit5.TabIndex = 4;
-            this.testUnit5.Tag = "Equipment5";
-            // 
-            // testUnit4
-            // 
-            this.testUnit4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.testUnit4.Location = new System.Drawing.Point(3, 325);
-            this.testUnit4.Name = "testUnit4";
-            this.testUnit4.Size = new System.Drawing.Size(458, 316);
-            this.testUnit4.TabIndex = 3;
-            this.testUnit4.Tag = "Equipment4";
-            // 
-            // testUnit3
-            // 
-            this.testUnit3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.testUnit3.Location = new System.Drawing.Point(931, 3);
-            this.testUnit3.Name = "testUnit3";
-            this.testUnit3.Size = new System.Drawing.Size(458, 316);
-            this.testUnit3.TabIndex = 2;
-            this.testUnit3.Tag = "Equipment3";
-            // 
-            // testUnit2
-            // 
-            this.testUnit2.Location = new System.Drawing.Point(467, 3);
-            this.testUnit2.Name = "testUnit2";
-            this.testUnit2.Size = new System.Drawing.Size(458, 316);
-            this.testUnit2.TabIndex = 1;
-            this.testUnit2.Tag = "Equipment2";
-            // 
-            // testUnit1
-            // 
-            this.testUnit1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.testUnit1.Location = new System.Drawing.Point(3, 3);
-            this.testUnit1.Name = "testUnit1";
-            this.testUnit1.Size = new System.Drawing.Size(458, 316);
-            this.testUnit1.TabIndex = 0;
-            this.testUnit1.Tag = "Equipment1";
             // 
             // frmMains
             // 
@@ -256,7 +187,6 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.Name = "frmMains";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TestPlatform";
@@ -268,7 +198,6 @@
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,12 +218,6 @@
         private System.Windows.Forms.ToolStripMenuItem cANConfiguration;
         private System.Windows.Forms.ToolStripMenuItem cOMConfiguration;
         private System.Windows.Forms.ToolStripMenuItem equipmentConfiguration;
-        private WindowsFormsControlLibrary.TestUnit testUnit1;
-        private WindowsFormsControlLibrary.TestUnit testUnit3;
-        private WindowsFormsControlLibrary.TestUnit testUnit2;
-        private WindowsFormsControlLibrary.TestUnit testUnit6;
-        private WindowsFormsControlLibrary.TestUnit testUnit5;
-        private WindowsFormsControlLibrary.TestUnit testUnit4;
         private System.Windows.Forms.ToolStripMenuItem equipmentTestInfo;
     }
 }

@@ -27,29 +27,61 @@ namespace AutoTestPlatform
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
+        Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             try
             {
-                int x = this.panel1.Width;
-                int y = this.panel1.Height;
-
-                int _x = x / 3;
-                int _y = y / 2;
-
-                for(int i = 0; i < 6; i++)
-                {
-                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Width = _x;
-                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Height = _y;
-                    ((TestUnit)this.Controls.Find("testUnit" + (i+1).ToString(), true)[0]).Location = new System.Drawing.Point((i%3) * _x+3, (i/3) *_y +3);
-                }
+                LoadEquipmentInfo();
+                LoadTestUnitControl();
                 InitChart();
-                
             }
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
+            }
+        }
+
+        private void LoadTestUnitControl()
+        {
+            int i = 0;
+            int x = this.panel1.Width;
+            int y = this.panel1.Height;
+
+            int _x = (x-40)/3;
+            int _y = 500;
+
+            foreach(var item in DicEquipmentInfo)
+            {
+                string eq = item.Key;
+
+                item.Value.Width = _x;
+                item.Value.Height = _y;
+                item.Value.Location = new System.Drawing.Point((i % 3) * (_x+10) + 3, (i / 3) * (_y+20) + 3);
+                panel1.Controls.Add(item.Value);
+                i++;
+            }
+        }
+
+        private void LoadEquipmentInfo()
+        {
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
+            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            if (temp != null)
+            {
+                foreach (EquipmentConfiguration equipment in temp)
+                {
+                    string eq = equipment.equipment;
+                    TestUnit testUnit = new TestUnit();
+                    testUnit.Name = eq;
+                    testUnit.Tag = eq;
+                    if (!DicEquipmentInfo.ContainsKey(eq))
+                    {
+                        DicEquipmentInfo.Add(eq, testUnit);
+                    }
+                }
             }
         }
 
@@ -78,8 +110,10 @@ namespace AutoTestPlatform
         private void chartTimer_Tick(object sender, EventArgs e)
         {
             ChartValueFill(new Random().Next(1,100));
-            testUnit1.ChartValueFill(new Random().Next(1, 100));
-            testUnit2.ChartValueFill(new Random().Next(1, 100));
+            foreach(var item in DicEquipmentInfo)
+            {
+                item.Value.ChartValueFill(new Random().Next(1, 100));
+            }
         }
         
         private void ammeter_Tick(object sender,EventArgs e)
@@ -92,13 +126,19 @@ namespace AutoTestPlatform
 
         private void ChartValueFill(double value)
         {
-            SysLog.CreateTemperatureLog(value.ToString());
-            chart1.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
-                Series series = chart1.Series[0];
-                series.Points.AddXY(DateTime.Now, value);
-                chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
-            });
+                chart1.BeginInvoke((MethodInvoker)delegate
+                {
+                    Series series = chart1.Series[0];
+                    if (series.Points.Count > 200)
+                    {
+                        series.Points.RemoveAt(0);
+                    }
+                    series.Points.AddXY(DateTime.Now, value);
+                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+                });
+            }
         }
 
         private void InitAmmeterConfigurationInfo()

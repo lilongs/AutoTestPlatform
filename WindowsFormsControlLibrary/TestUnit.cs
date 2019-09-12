@@ -95,19 +95,29 @@ namespace WindowsFormsControlLibrary
 
         public void ChartValueFill(double value)
         {
-            chart1.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
-                Series series = chart1.Series[0];
-                series.Points.AddXY(DateTime.Now, value);
-                chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
-            });
+                chart1.BeginInvoke((MethodInvoker)delegate
+                {
+                    Series series = chart1.Series[0];
+                    if (series.Points.Count > 200)
+                    {
+                        series.Points.RemoveAt(0);
+                    }
+                    series.Points.AddXY(DateTime.Now, value);
+                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+                });
+            }
         }
-
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             try
             {
+                if(!String.IsNullOrEmpty(richTextBox1.Text))
+                {
+                    richTextBox1.Text = string.Empty;
+                }
                 foreach (TreeNode node in treeView1.Nodes)
                 {
                     GetAllSelectedNode(node);
@@ -197,9 +207,9 @@ namespace WindowsFormsControlLibrary
             {
                 string typename = item.Key;
 
-                var max = item.Value.Max(t => t.cycletime);
+                var max = item.Value.Max(t => t.repeat);
                 int n = Convert.ToInt32(max);
-                for (int i = 1; i < n; i++)
+                for (int i = 0; i < n; i++)
                 {
                     foreach (TestStep step in item.Value)
                     {
