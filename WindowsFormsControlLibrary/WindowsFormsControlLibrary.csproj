@@ -55,18 +55,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TemperatureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TemperatureControl.Designer.cs">
+      <DependentUpon>TemperatureControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestUnit.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TestUnit.Designer.cs">
       <DependentUpon>TestUnit.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestUnit1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestUnit1.Designer.cs">
+      <DependentUpon>TestUnit1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TemperatureControl.resx">
+      <DependentUpon>TemperatureControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestUnit.resx">
       <DependentUpon>TestUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestUnit1.resx">
+      <DependentUpon>TestUnit1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace AutoTestDLL.Model
     {
         public string typename { get; set; }
         public string stepname { get; set; }
-        public string modename { get; set; }
+        public string modelname { get; set; }
         public string voltage { get; set; }
         public string cycletime { get; set; }
         public int repeat { get; set; }

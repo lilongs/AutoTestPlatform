@@ -28,39 +28,25 @@ namespace AutoTestPlatform
 
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
+        Dictionary<string,TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             try
             {
+                System.Timers.Timer chartTimer = new System.Timers.Timer();
+                chartTimer.Interval = 150;
+                chartTimer.Elapsed += chartTimer_Tick;
+                chartTimer.Start();
+
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
-                InitChart();
+                LoadTemperatureInfo();                
+                LoadTemperatureControl();
             }
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-            }
-        }
-
-        private void LoadTestUnitControl()
-        {
-            int i = 0;
-            int x = this.panel1.Width;
-            int y = this.panel1.Height;
-
-            int _x = (x-40)/3;
-            int _y = 500;
-
-            foreach(var item in DicEquipmentInfo)
-            {
-                string eq = item.Key;
-
-                item.Value.Width = _x;
-                item.Value.Height = _y;
-                item.Value.Location = new System.Drawing.Point((i % 3) * (_x+10) + 3, (i / 3) * (_y+20) + 3);
-                panel1.Controls.Add(item.Value);
-                i++;
             }
         }
 
@@ -85,59 +71,89 @@ namespace AutoTestPlatform
             }
         }
 
-        private void InitChart()
+        private void LoadTemperatureInfo()
         {
-            DateTime time = DateTime.Now;
-            System.Timers.Timer chartTimer = new System.Timers.Timer();
-            chartTimer.Interval = 150;
-            chartTimer.Elapsed += chartTimer_Tick;
-
-            Series series = chart1.Series[0];
-            series.ChartType = SeriesChartType.Spline;
-            series.IsXValueIndexed = true;
-            series.XValueType = ChartValueType.Time;
-            series.Name = "TemperatureCurve";
-
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
-            chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
-            chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            chart1.Legends[0].Docking = Docking.Top;
-
-            chartTimer.Start();
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "TempSensorConfiguration.json");
+            List<TempSensorConfiguration> temp = JsonConvert.DeserializeObject<List<TempSensorConfiguration>>(json);
+            if (temp != null)
+            {
+                foreach (TempSensorConfiguration t in temp)
+                {
+                    string sensorName = t.sensorName;
+                    TemperatureControl temperature = new TemperatureControl();
+                    temperature.Name = sensorName;
+                    temperature.Tag = sensorName;
+                    if (!DicTemperatureInfo.ContainsKey(sensorName))
+                    {
+                        DicTemperatureInfo.Add(sensorName, temperature);
+                    }
+                }
+            }
         }
+
+        private void LoadTestUnitControl()
+        {
+            int i = 0;
+            int x = this.panel1.Width;
+            int y = this.panel1.Height;
+
+            int _x = 800;
+            int _y = 450;
+
+            foreach(var item in DicEquipmentInfo)
+            {
+                string eq = item.Key;
+
+                item.Value.Width = _x;
+                item.Value.Height = _y;
+                item.Value.Location = new System.Drawing.Point((i % 3) * (_x+10) + 3, (i / 3) * (_y+20) + 3);
+                panel1.Controls.Add(item.Value);
+                i++;
+            }
+        }
+
+        private void LoadTemperatureControl()
+        {
+            int i = 0;
+            int x = this.panel2.Width;
+            int y = this.panel2.Height;
+
+            int _x = x-22;
+            int _y = (y-20)/3;
+
+            foreach (var item in DicTemperatureInfo)
+            {
+                string sensor = item.Key;
+
+                item.Value.Width = _x;
+                item.Value.Height = _y;
+                item.Value.Location = new System.Drawing.Point((i % 1) * (_x + 10) + 3, (i / 1) * (_y + 20) + 3);
+                panel2.Controls.Add(item.Value);
+                i++;
+            }
+        }
+
 
         private void chartTimer_Tick(object sender, EventArgs e)
         {
-            ChartValueFill(new Random().Next(1,100));
+            foreach(var it in DicTemperatureInfo)
+            {
+                it.Value.ChartValueFill(new Random().Next(1, 100));
+            }
+
             foreach(var item in DicEquipmentInfo)
             {
                 item.Value.ChartValueFill(new Random().Next(1, 100));
             }
         }
-        
+
+        #region 电流表样式图列加载（暂未用）
         private void ammeter_Tick(object sender,EventArgs e)
         {
             foreach (AmmeterConfiguration ammeter in ammeterList)
             {
                 AmmterFillData(ammeter.ammeterName, new Random().Next(1,200));
-            }
-        }
-
-        private void ChartValueFill(double value)
-        {
-            if (this.IsHandleCreated)
-            {
-                chart1.BeginInvoke((MethodInvoker)delegate
-                {
-                    Series series = chart1.Series[0];
-                    if (series.Points.Count > 200)
-                    {
-                        series.Points.RemoveAt(0);
-                    }
-                    series.Points.AddXY(DateTime.Now, value);
-                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
-                });
             }
         }
 
@@ -269,8 +285,8 @@ namespace AutoTestPlatform
                 ((AGauge)this.Controls.Find(aGaugeName, true)[0]).GaugeLabels.FindByName("GaugeLabel1").Text = aGaugeName + ":" + value;
             });
         }
+        #endregion
 
-        
         private void TestTypeEdit_Click(object sender, EventArgs e)
         {
             frmTestTypeManager form = new frmTestTypeManager();

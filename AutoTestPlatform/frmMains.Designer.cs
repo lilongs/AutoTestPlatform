@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,11 +40,8 @@
             this.TestSequenceEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentTestInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -65,10 +59,10 @@
             // 
             this.sysConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ammeterConfiguration,
-            this.temperatureConfiguration,
             this.cANConfiguration,
             this.cOMConfiguration,
-            this.equipmentConfiguration});
+            this.equipmentConfiguration,
+             this.temperatureConfiguration});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
             this.sysConfigToolStripMenuItem.Text = "SysConfig";
@@ -142,32 +136,12 @@
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chart1);
+            this.panel2.AutoScroll = true;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(1395, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(402, 646);
             this.panel2.TabIndex = 13;
-            // 
-            // chart1
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
-            this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.IsXValueIndexed = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(400, 264);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
             // 
             // panel1
             // 
@@ -196,8 +170,6 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,7 +185,6 @@
         private System.Windows.Forms.ToolStripMenuItem ammeterConfiguration;
         private System.Windows.Forms.ToolStripMenuItem temperatureConfiguration;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem cANConfiguration;
         private System.Windows.Forms.ToolStripMenuItem cOMConfiguration;

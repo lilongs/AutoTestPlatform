@@ -15,22 +15,18 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsControlLibrary
 {
-    public partial class TestUnit: UserControl
+    public partial class TestUnit1: UserControl
     {
-        public TestUnit()
+        public TestUnit1()
         {
             InitializeComponent();
         }
-        private System.Timers.Timer testTimer = new System.Timers.Timer();
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         private List<TypeList> list = new List<TypeList>();
         Dictionary<string, List<TestStep>> ReadyTestInfo = null;
         private List<TypeList> selectedList = new List<TypeList>();
         private List<TestStep> testInfo = new List<TestStep>();
-        private DateTime testStartTime = new DateTime();
-
-        private List<TestStep> CompletedList = new List<TestStep>();
 
         private void TestUnit_Load(object sender, EventArgs e)
         {
@@ -44,9 +40,6 @@ namespace WindowsFormsControlLibrary
                     ExpandTree();
                 }
                 InitChart();
-
-                testTimer.Interval = 60;
-                testTimer.Elapsed += testTimer_Tick;
             }
             catch (Exception ex)
             {
@@ -121,12 +114,7 @@ namespace WindowsFormsControlLibrary
         {
             try
             {
-                testStartTime = DateTime.Now;
-                testTimer.Start();
-
-                CompletedList.Clear();
-                this.dataGridView1.DataSource = null;
-                if (!String.IsNullOrEmpty(richTextBox1.Text))
+                if(!String.IsNullOrEmpty(richTextBox1.Text))
                 {
                     richTextBox1.Text = string.Empty;
                 }
@@ -148,17 +136,6 @@ namespace WindowsFormsControlLibrary
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-            }
-        }
-
-        private void testTimer_Tick(object sender, EventArgs e)
-        {
-            if (this.IsHandleCreated)
-            {
-                txttesttime.BeginInvoke((MethodInvoker)delegate
-                {
-                    this.txttesttime.Text = string.Format("{0:F1}s", (DateTime.Now - testStartTime).TotalSeconds);
-                });
             }
         }
 
@@ -236,16 +213,6 @@ namespace WindowsFormsControlLibrary
                 {
                     foreach (TestStep step in item.Value)
                     {
-                        CompletedList.Add(step);
-                        dataGridView1.BeginInvoke((MethodInvoker)delegate
-                        {
-                            this.dataGridView1.DataSource = null;
-                            this.dataGridView1.DataSource = CompletedList;
-                            this.dataGridView1.Rows[CompletedList.Count - 1].Selected = true;
-                            this.dataGridView1.CurrentCell = this.dataGridView1.Rows[CompletedList.Count - 1].Cells[0];
-                        });
-
-                        FillStepInfo(step);
                         string type=step.typename;
                         switch(step.typename)
                         {
@@ -272,36 +239,9 @@ namespace WindowsFormsControlLibrary
                         #region can消息发送和com信息接收（待完成）
                         #endregion
                         Thread.Sleep(Convert.ToInt32(step.cycletime));
-
-                       
                     }
                 }
             }
-            testTimer.Stop();
-        }
-
-        private void FillStepInfo(TestStep step)
-        {
-            txttypename.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txttypename.Text = step.typename;
-            });
-            txtstepname.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtstepname.Text = step.stepname;
-            });
-            txtmodelname.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtmodelname.Text = step.modelname;
-            });
-            txtvoltage.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtvoltage.Text = step.voltage;
-            });
-            txtcycletime.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtcycletime.Text = step.cycletime;
-            });
         }
 
         public void ShowInfo(string info, Color color)

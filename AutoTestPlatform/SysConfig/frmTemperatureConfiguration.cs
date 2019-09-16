@@ -52,37 +52,30 @@ namespace AutoTestPlatform.SysConfig
             try
             {
                 #region CheckInput
-                if (String.IsNullOrEmpty(txtTempSensorName.Text.Trim()))
+                if (String.IsNullOrEmpty(txtSensorName.Text.Trim()))
                 {
-                    MessageBox.Show("SensorName can't be empty!");
+                    MessageBox.Show("Equipment can't be empty!");
                     return;
                 }
-                if (String.IsNullOrEmpty(txtPortName.Text))
+                if (String.IsNullOrEmpty(combParamter.Text))
                 {
-                    MessageBox.Show("PortName can't be empty!");
+                    MessageBox.Show("Paramter can't be empty!");
                     return;
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.sensorName == txtTempSensorName.Text.Trim() && c.portName == txtPortName.Text).FirstOrDefault();
+                var item= list.Where(c => c.sensorName == txtSensorName.Text.Trim() && c.paramter == combParamter.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim())?0:Convert.ToInt32(txtBaudRate.Text.Trim());
-                    item.parity = (Parity)Enum.Parse(typeof(Parity), label11.Text);
-                    item.dataBits= String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
-                    item.stopBits= (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text);
-                    item.handshake= (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text);
+                    item.paramter= combParamter.Text;
+                    item.value= combValue.Text;
                 }
                 else
                 {
                     TempSensorConfiguration temp = new TempSensorConfiguration();
-                    temp.sensorName = txtTempSensorName.Text.Trim();
-                    temp.portName = txtPortName.Text.Trim();
-                    temp.baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(txtBaudRate.Text.Trim());
-                    temp.parity = (Parity)Enum.Parse(typeof(Parity), txtParity.Text, true);
-                    temp.dataBits = String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
-                    temp.stopBits = (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text,true);
-                    temp.handshake = (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text, true);
+                    temp.sensorName = txtSensorName.Text.Trim();
+                    temp.paramter = combParamter.Text;
+                    temp.value = combValue.Text;
                     list.Add(temp);
                 }               
 
@@ -100,11 +93,12 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string sensorName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["sensorName"].Value.ToString();
-                string portName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["portName"].Value.ToString();
+                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["sensorName"].Value.ToString();
+                string paramter = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["paramter"].Value.ToString();
+                string value= this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["value"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].sensorName == sensorName && list[i].portName == portName)
+                    if (list[i].sensorName == equipment && list[i].paramter == paramter && list[i].value == value)
                     {
                         list.RemoveAt(i);
                     }
@@ -134,13 +128,9 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txtTempSensorName.Text = row.Cells["sensorName"].Value == null?"": row.Cells["sensorName"].Value.ToString();
-                    this.txtPortName.Text= row.Cells["portName"].Value == null ? "" : row.Cells["portName"].Value.ToString();
-                    this.txtBaudRate.Text = row.Cells["baudrate"].Value == null ? "" : row.Cells["baudrate"].Value.ToString();
-                    this.txtParity.Text= row.Cells["parity"].Value == null ? "" : row.Cells["parity"].Value.ToString();
-                    this.txtDataBits.Text =row.Cells["dataBits"].Value == null ? "" : row.Cells["dataBits"].Value.ToString();
-                    this.txtStopBits.Text =  row.Cells["stopBits"].Value == null ? "" : row.Cells["stopBits"].Value.ToString();
-                    this.txtHandshake.Text =  row.Cells["handshake"].Value == null ? "" : row.Cells["handshake"].Value.ToString();
+                    this.txtSensorName.Text = row.Cells["sensorName"].Value == null?"": row.Cells["sensorName"].Value.ToString();
+                    this.combParamter.Text= row.Cells["paramter"].Value == null ? "" : row.Cells["paramter"].Value.ToString();
+                    this.combValue.Text = row.Cells["value"].Value == null ? "" : row.Cells["value"].Value.ToString();
                 }
             }
             catch (Exception ex)
@@ -149,9 +139,39 @@ namespace AutoTestPlatform.SysConfig
             }
         }
 
-        private void frmTempSensorConfiguration_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmAmmeterConfiguration_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void combParamter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string type = combParamter.Text;
+            LoadValue(type);
+        }
+
+        private void LoadValue(string type)
+        {
+            this.combValue.DataSource = null;
+            switch (type)
+            {
+                case "CAN":                  
+                    string path = Application.StartupPath + "\\SysConfig";
+                    string json = JsonOperate.GetJson(path, "CAN.json");
+                    List<CAN> temp = JsonConvert.DeserializeObject<List<CAN>>(json);
+                    this.combValue.DataSource = temp;
+                    this.combValue.DisplayMember = "channel";
+                    break;
+                case "COM":
+                    string path2 = Application.StartupPath + "\\SysConfig";
+                    string json2 = JsonOperate.GetJson(path2, "COM.json");
+                    List<COM> temp2 = JsonConvert.DeserializeObject<List<COM>>(json2);
+                    this.combValue.DataSource = temp2;
+                    this.combValue.DisplayMember = "portName";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

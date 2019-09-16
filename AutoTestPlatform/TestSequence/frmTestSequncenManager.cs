@@ -119,7 +119,7 @@ namespace AutoTestPlatform.TestSequence
                 var item= stepList.Where(c => c.stepname == txtstepname.Text.Trim() && c.typename == combtypename.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.modename = txtmodename.Text.Trim();
+                    item.modelname = txtmodename.Text.Trim();
                     item.voltage = txtvoltage.Text.Trim();
                     item.cycletime = txtcycletime.Text.Trim();
                     int msg = -1;
@@ -130,7 +130,7 @@ namespace AutoTestPlatform.TestSequence
                     TestStep step = new TestStep();
                     step.typename = combtypename.Text;
                     step.stepname = txtstepname.Text.Trim();
-                    step.modename = txtmodename.Text.Trim();
+                    step.modelname = txtmodename.Text.Trim();
                     step.voltage = txtvoltage.Text.Trim();
                     step.cycletime = txtcycletime.Text.Trim();
                     int msg = -1;
@@ -196,7 +196,7 @@ namespace AutoTestPlatform.TestSequence
             {
                 DataGridViewRow row = this.dataGridView1.CurrentRow;
                 this.txtstepname.Text= row.Cells["stepname"].Value.ToString();
-                this.txtmodename.Text = row.Cells["modename"].Value.ToString();
+                this.txtmodename.Text = row.Cells["modelname"].Value.ToString();
                 this.txtvoltage.Text= row.Cells["voltage"].Value.ToString();
                 this.txtcycletime.Text = row.Cells["cycletime"].Value.ToString();
                 this.txtrepeat.Text = row.Cells["repeat"].Value.ToString();
