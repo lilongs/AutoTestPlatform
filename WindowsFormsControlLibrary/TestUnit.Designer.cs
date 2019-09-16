@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -42,24 +42,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txttesttime = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtcycletime = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtvoltage = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtmodelname = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtstepname = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txttypename = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txttypename = new System.Windows.Forms.TextBox();
-            this.txtstepname = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtmodelname = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtvoltage = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtcycletime = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txttesttime = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -97,22 +97,22 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.LabelAutoFitMaxFontSize = 7;
-            chartArea2.AxisX.LabelAutoFitMinFontSize = 7;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea3.AxisX.LabelAutoFitMaxFontSize = 7;
+            chartArea3.AxisX.LabelAutoFitMinFontSize = 7;
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.IsXValueIndexed = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.IsXValueIndexed = true;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(374, 414);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -207,6 +207,102 @@
             this.tabPage4.Text = "Step info";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // txttesttime
+            // 
+            this.txttesttime.Location = new System.Drawing.Point(71, 193);
+            this.txttesttime.Name = "txttesttime";
+            this.txttesttime.Size = new System.Drawing.Size(115, 21);
+            this.txttesttime.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(33, 193);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 12);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Test:";
+            // 
+            // txtcycletime
+            // 
+            this.txtcycletime.Location = new System.Drawing.Point(71, 166);
+            this.txtcycletime.Name = "txtcycletime";
+            this.txtcycletime.Size = new System.Drawing.Size(115, 21);
+            this.txtcycletime.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Cycletime:";
+            // 
+            // txtvoltage
+            // 
+            this.txtvoltage.Location = new System.Drawing.Point(71, 139);
+            this.txtvoltage.Name = "txtvoltage";
+            this.txtvoltage.Size = new System.Drawing.Size(115, 21);
+            this.txtvoltage.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 142);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Voltage:";
+            // 
+            // txtmodelname
+            // 
+            this.txtmodelname.Location = new System.Drawing.Point(71, 112);
+            this.txtmodelname.Name = "txtmodelname";
+            this.txtmodelname.Size = new System.Drawing.Size(115, 21);
+            this.txtmodelname.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 115);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "ModelName:";
+            // 
+            // txtstepname
+            // 
+            this.txtstepname.Location = new System.Drawing.Point(71, 85);
+            this.txtstepname.Name = "txtstepname";
+            this.txtstepname.Size = new System.Drawing.Size(115, 21);
+            this.txtstepname.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 88);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "StepName:";
+            // 
+            // txttypename
+            // 
+            this.txttypename.Location = new System.Drawing.Point(71, 58);
+            this.txttypename.Name = "txttypename";
+            this.txttypename.Size = new System.Drawing.Size(115, 21);
+            this.txttypename.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "TypeName:";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -272,102 +368,6 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "TypeName:";
-            // 
-            // txttypename
-            // 
-            this.txttypename.Location = new System.Drawing.Point(71, 58);
-            this.txttypename.Name = "txttypename";
-            this.txttypename.Size = new System.Drawing.Size(115, 21);
-            this.txttypename.TabIndex = 1;
-            // 
-            // txtstepname
-            // 
-            this.txtstepname.Location = new System.Drawing.Point(71, 85);
-            this.txtstepname.Name = "txtstepname";
-            this.txtstepname.Size = new System.Drawing.Size(115, 21);
-            this.txtstepname.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "StepName:";
-            // 
-            // txtmodelname
-            // 
-            this.txtmodelname.Location = new System.Drawing.Point(71, 112);
-            this.txtmodelname.Name = "txtmodelname";
-            this.txtmodelname.Size = new System.Drawing.Size(115, 21);
-            this.txtmodelname.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 115);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "ModelName:";
-            // 
-            // txtvoltage
-            // 
-            this.txtvoltage.Location = new System.Drawing.Point(71, 139);
-            this.txtvoltage.Name = "txtvoltage";
-            this.txtvoltage.Size = new System.Drawing.Size(115, 21);
-            this.txtvoltage.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 142);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Voltage:";
-            // 
-            // txtcycletime
-            // 
-            this.txtcycletime.Location = new System.Drawing.Point(71, 166);
-            this.txtcycletime.Name = "txtcycletime";
-            this.txtcycletime.Size = new System.Drawing.Size(115, 21);
-            this.txtcycletime.TabIndex = 9;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 169);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Cycletime:";
-            // 
-            // txttesttime
-            // 
-            this.txttesttime.Location = new System.Drawing.Point(71, 193);
-            this.txttesttime.Name = "txttesttime";
-            this.txttesttime.Size = new System.Drawing.Size(115, 21);
-            this.txttesttime.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(33, 193);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 12);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Test:";
-            // 
             // TestUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -401,7 +401,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Panel panel2;

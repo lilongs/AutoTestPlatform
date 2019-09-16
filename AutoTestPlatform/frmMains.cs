@@ -29,6 +29,7 @@ namespace AutoTestPlatform
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string,TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
+        List<Color> colors = new List<Color>() { Color.DarkOrange,Color.Chartreuse,Color.Pink,Color.Violet, Color.SkyBlue,Color.SpringGreen };
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -108,6 +109,7 @@ namespace AutoTestPlatform
                 item.Value.Width = _x;
                 item.Value.Height = _y;
                 item.Value.Location = new System.Drawing.Point((i % 3) * (_x+10) + 3, (i / 3) * (_y+20) + 3);
+                item.Value.treeView1.BackColor = colors[i];
                 panel1.Controls.Add(item.Value);
                 i++;
             }
