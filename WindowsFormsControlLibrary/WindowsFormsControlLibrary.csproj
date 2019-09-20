@@ -31,6 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v17.1.Win, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -55,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Countdown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Countdown.Designer.cs">
+      <DependentUpon>Countdown.cs</DependentUpon>
+    </Compile>
     <Compile Include="TemperatureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +80,12 @@
     <Compile Include="TestUnit.Designer.cs">
       <DependentUpon>TestUnit.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestUnit2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestUnit2.Designer.cs">
+      <DependentUpon>TestUnit2.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestUnit1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -77,11 +96,18 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Countdown.resx">
+      <DependentUpon>Countdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="TemperatureControl.resx">
       <DependentUpon>TemperatureControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestUnit.resx">
       <DependentUpon>TestUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestUnit2.resx">
+      <DependentUpon>TestUnit2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestUnit1.resx">
       <DependentUpon>TestUnit1.cs</DependentUpon>

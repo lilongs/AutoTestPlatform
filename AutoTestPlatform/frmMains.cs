@@ -5,15 +5,8 @@ using AutoTestPlatform.TestSequence;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using WindowsFormsControlLibrary;
 
 namespace AutoTestPlatform
@@ -28,8 +21,13 @@ namespace AutoTestPlatform
 
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
-        Dictionary<string,TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
-        List<Color> colors = new List<Color>() { Color.DarkOrange,Color.Chartreuse,Color.Pink,Color.Violet, Color.SkyBlue,Color.SpringGreen };
+        Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
+        List<Color> colors = new List<Color>() {
+            Color.FromArgb(230,23,23),Color.FromArgb(246,98,98), Color.FromArgb(154, 61,61),//RED
+            Color.FromArgb(115,114,57),Color.FromArgb(150,214,21),Color.FromArgb(193,241,96),//GREEN
+            Color.FromArgb(37,92,92),Color.FromArgb(14,138,138),Color.FromArgb(85,215,215),//BLUE
+            Color.FromArgb(234,129,41),Color.FromArgb(255,130,26),Color.FromArgb(255,177,113),//YELLOW
+        };
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -42,7 +40,7 @@ namespace AutoTestPlatform
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
-                LoadTemperatureInfo();                
+                LoadTemperatureInfo();
                 LoadTemperatureControl();
             }
             catch (Exception ex)
@@ -102,13 +100,13 @@ namespace AutoTestPlatform
             int _x = 800;
             int _y = 450;
 
-            foreach(var item in DicEquipmentInfo)
+            foreach (var item in DicEquipmentInfo)
             {
                 string eq = item.Key;
 
                 item.Value.Width = _x;
                 item.Value.Height = _y;
-                item.Value.Location = new System.Drawing.Point((i % 3) * (_x+10) + 3, (i / 3) * (_y+20) + 3);
+                item.Value.Location = new System.Drawing.Point((i % 3) * (_x + 10) + 3, (i / 3) * (_y + 20) + 3);
                 item.Value.treeView1.BackColor = colors[i];
                 panel1.Controls.Add(item.Value);
                 i++;
@@ -121,8 +119,8 @@ namespace AutoTestPlatform
             int x = this.panel2.Width;
             int y = this.panel2.Height;
 
-            int _x = x-22;
-            int _y = (y-20)/3;
+            int _x = x - 22;
+            int _y = (y - 20) / 3;
 
             foreach (var item in DicTemperatureInfo)
             {
@@ -139,23 +137,23 @@ namespace AutoTestPlatform
 
         private void chartTimer_Tick(object sender, EventArgs e)
         {
-            foreach(var it in DicTemperatureInfo)
+            foreach (var it in DicTemperatureInfo)
             {
                 it.Value.ChartValueFill(new Random().Next(1, 100));
             }
 
-            foreach(var item in DicEquipmentInfo)
+            foreach (var item in DicEquipmentInfo)
             {
                 item.Value.ChartValueFill(new Random().Next(1, 100));
             }
         }
 
         #region 电流表样式图列加载（暂未用）
-        private void ammeter_Tick(object sender,EventArgs e)
+        private void ammeter_Tick(object sender, EventArgs e)
         {
             foreach (AmmeterConfiguration ammeter in ammeterList)
             {
-                AmmterFillData(ammeter.ammeterName, new Random().Next(1,200));
+                AmmterFillData(ammeter.ammeterName, new Random().Next(1, 200));
             }
         }
 
@@ -280,7 +278,7 @@ namespace AutoTestPlatform
 
         public void AmmterFillData(string aGaugeName, float value)
         {
-            SysLog.CreateAmmeterLog(aGaugeName+","+value.ToString());
+            SysLog.CreateAmmeterLog(aGaugeName + "," + value.ToString());
             ((AGauge)this.Controls.Find(aGaugeName, true)[0]).BeginInvoke((MethodInvoker)delegate
             {
                 ((AGauge)this.Controls.Find(aGaugeName, true)[0]).Value = value;

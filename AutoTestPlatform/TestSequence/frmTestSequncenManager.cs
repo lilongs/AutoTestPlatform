@@ -115,13 +115,15 @@ namespace AutoTestPlatform.TestSequence
                     return;
                 }
                 #endregion
+                double result = -1;
+
                 string path = Application.StartupPath + "\\TestInfo";
                 var item= stepList.Where(c => c.stepname == txtstepname.Text.Trim() && c.typename == combtypename.Text).FirstOrDefault();
                 if (item != null)
                 {
                     item.modelname = txtmodename.Text.Trim();
-                    item.voltage = txtvoltage.Text.Trim();
-                    item.cycletime = txtcycletime.Text.Trim();
+                    item.voltage = double.TryParse(txtvoltage.Text.Trim(),out result) ? double.Parse(txtvoltage.Text.Trim()):0;
+                    item.cycletime = double.TryParse(txtcycletime.Text.Trim(), out result) ? double.Parse(txtcycletime.Text.Trim()) : 0;
                     int msg = -1;
                     item.repeat= int.TryParse(txtrepeat.Text.Trim(), out msg) ? int.Parse(txtrepeat.Text.Trim()) : 1;
                 }
@@ -131,8 +133,8 @@ namespace AutoTestPlatform.TestSequence
                     step.typename = combtypename.Text;
                     step.stepname = txtstepname.Text.Trim();
                     step.modelname = txtmodename.Text.Trim();
-                    step.voltage = txtvoltage.Text.Trim();
-                    step.cycletime = txtcycletime.Text.Trim();
+                    step.voltage = double.TryParse(txtvoltage.Text.Trim(), out result) ? double.Parse(txtvoltage.Text.Trim()) : 0;
+                    step.cycletime = double.TryParse(txtcycletime.Text.Trim(), out result) ? double.Parse(txtcycletime.Text.Trim()) : 0;
                     int msg = -1;
                     step.repeat = int.TryParse(txtrepeat.Text.Trim(), out msg) ? int.Parse(txtrepeat.Text.Trim()) : 1;
                     stepList.Add(step);
