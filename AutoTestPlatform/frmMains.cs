@@ -22,6 +22,7 @@ namespace AutoTestPlatform
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
+        Dictionary<string, PublicElectricControl> DicPublicElectricInfo = new Dictionary<string, PublicElectricControl>();
         List<Color> colors = new List<Color>() {
             Color.FromArgb(230,23,23),Color.FromArgb(246,98,98), Color.FromArgb(154, 61,61),//RED
             Color.FromArgb(115,114,57),Color.FromArgb(150,214,21),Color.FromArgb(193,241,96),//GREEN
@@ -40,6 +41,8 @@ namespace AutoTestPlatform
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
+                LoadPublicElectricInfo();
+                LoadPublicElectricControl();
                 LoadTemperatureInfo();
                 LoadTemperatureControl();
             }
@@ -91,6 +94,17 @@ namespace AutoTestPlatform
             }
         }
 
+        private void LoadPublicElectricInfo()
+        {
+            PublicElectricControl electricControl = new PublicElectricControl();
+            electricControl.Name = "electricControl";
+
+            if (!DicPublicElectricInfo.ContainsKey(electricControl.Name))
+            {
+                DicPublicElectricInfo.Add(electricControl.Name, electricControl);
+            }
+        }
+
         private void LoadTestUnitControl()
         {
             int i = 0;
@@ -124,12 +138,31 @@ namespace AutoTestPlatform
 
             foreach (var item in DicTemperatureInfo)
             {
-                string sensor = item.Key;
+                item.Value.Width = _x;
+                item.Value.Height = _y;
+                item.Value.Location = new System.Drawing.Point((i % 1) * (_x + 10) + 3, (i / 1) * (_y + 20) + 3);
+                panel4.Controls.Add(item.Value);
+                i++;
+            }
+        }
+
+        private void LoadPublicElectricControl()
+        {
+            int i = 0;
+            int x = this.panel2.Width;
+            int y = this.panel2.Height;
+
+            int _x = x ;
+            int _y = (y - 20) / 3;
+
+            foreach (var item in DicPublicElectricInfo)
+            {
+                string name = item.Key;
 
                 item.Value.Width = _x;
                 item.Value.Height = _y;
                 item.Value.Location = new System.Drawing.Point((i % 1) * (_x + 10) + 3, (i / 1) * (_y + 20) + 3);
-                panel2.Controls.Add(item.Value);
+                panel3.Controls.Add(item.Value);
                 i++;
             }
         }
@@ -145,6 +178,16 @@ namespace AutoTestPlatform
             foreach (var item in DicEquipmentInfo)
             {
                 item.Value.ChartValueFill(new Random().Next(1, 100));
+            }
+
+            foreach(var its in DicPublicElectricInfo)
+            {
+                CurrentElectricValue value = new CurrentElectricValue();
+                value.now = DateTime.Now;
+                value.currentValue = new Random().Next(1, 1000);
+                value.voltageValue = new Random().Next(0, 13000);
+
+                its.Value.ChartValueFill(value);
             }
         }
 

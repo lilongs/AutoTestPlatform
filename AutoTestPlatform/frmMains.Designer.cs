@@ -31,17 +31,20 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.temperatureConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.cOMConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.temperatureConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestTypeEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.TestSequenceEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentTestInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -62,7 +65,7 @@
             this.cANConfiguration,
             this.cOMConfiguration,
             this.equipmentConfiguration,
-             this.temperatureConfiguration});
+            this.temperatureConfiguration});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
             this.sysConfigToolStripMenuItem.Text = "SysConfig";
@@ -74,13 +77,6 @@
             this.ammeterConfiguration.Text = "AmmeterConfiguration";
             this.ammeterConfiguration.Visible = false;
             this.ammeterConfiguration.Click += new System.EventHandler(this.ammeterConfiguration_Click);
-            // 
-            // temperatureConfiguration
-            // 
-            this.temperatureConfiguration.Name = "temperatureConfiguration";
-            this.temperatureConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.temperatureConfiguration.Text = "TemperatureConfiguration";
-            this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
             // 
             // cANConfiguration
             // 
@@ -102,6 +98,13 @@
             this.equipmentConfiguration.Size = new System.Drawing.Size(230, 22);
             this.equipmentConfiguration.Text = "Equipment Configuration";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
+            // 
+            // temperatureConfiguration
+            // 
+            this.temperatureConfiguration.Name = "temperatureConfiguration";
+            this.temperatureConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.temperatureConfiguration.Text = "TemperatureConfiguration";
+            this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -136,12 +139,32 @@
             // 
             // panel2
             // 
-            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(1395, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(402, 646);
             this.panel2.TabIndex = 13;
+            // 
+            // panel4
+            // 
+            this.panel4.AutoScroll = true;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 324);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(402, 322);
+            this.panel4.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(402, 324);
+            this.panel3.TabIndex = 0;
             // 
             // panel1
             // 
@@ -170,6 +193,7 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,6 +214,8 @@
         private System.Windows.Forms.ToolStripMenuItem cOMConfiguration;
         private System.Windows.Forms.ToolStripMenuItem equipmentConfiguration;
         private System.Windows.Forms.ToolStripMenuItem equipmentTestInfo;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

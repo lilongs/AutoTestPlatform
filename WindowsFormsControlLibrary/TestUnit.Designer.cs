@@ -40,6 +40,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.countdown1 = new WindowsFormsControlLibrary.Countdown();
             this.label11 = new System.Windows.Forms.Label();
             this.txttesttime = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -68,7 +69,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.countdown1 = new WindowsFormsControlLibrary.Countdown();
             this.panel1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -193,6 +193,13 @@
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Step info";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // countdown1
+            // 
+            this.countdown1.Location = new System.Drawing.Point(6, 244);
+            this.countdown1.Name = "countdown1";
+            this.countdown1.Size = new System.Drawing.Size(282, 58);
+            this.countdown1.TabIndex = 13;
             // 
             // label11
             // 
@@ -344,8 +351,13 @@
             // 
             // chart1
             // 
+            chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.LabelAutoFitMaxFontSize = 7;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 7;
+            chartArea1.AxisX.LabelStyle.Angle = 45;
+            chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
+            chartArea1.AxisY.Title = "mA";
+            chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -463,13 +475,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(555, 354);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
-            // 
-            // countdown1
-            // 
-            this.countdown1.Location = new System.Drawing.Point(6, 244);
-            this.countdown1.Name = "countdown1";
-            this.countdown1.Size = new System.Drawing.Size(282, 58);
-            this.countdown1.TabIndex = 13;
             // 
             // TestUnit
             // 
