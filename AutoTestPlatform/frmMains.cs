@@ -18,7 +18,7 @@ namespace AutoTestPlatform
             InitializeComponent();
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-
+        private System.Timers.Timer chartTimer = new System.Timers.Timer();
         private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
@@ -34,8 +34,7 @@ namespace AutoTestPlatform
         {
             try
             {
-                System.Timers.Timer chartTimer = new System.Timers.Timer();
-                chartTimer.Interval = 150;
+                chartTimer.Interval = 1000;
                 chartTimer.Elapsed += chartTimer_Tick;
                 chartTimer.Start();
 
@@ -121,7 +120,7 @@ namespace AutoTestPlatform
                 item.Value.Width = _x;
                 item.Value.Height = _y;
                 item.Value.Location = new System.Drawing.Point((i % 3) * (_x + 10) + 3, (i / 3) * (_y + 20) + 3);
-                item.Value.treeView1.BackColor = colors[i];
+                item.Value.treeView1.BackColor = colors[3];
                 panel1.Controls.Add(item.Value);
                 i++;
             }

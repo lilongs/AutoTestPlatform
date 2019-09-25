@@ -28,28 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.cOMConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestTypeEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.TestSequenceEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtInfo = new System.Windows.Forms.ListBox();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.equipmentTestInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.testUnit1 = new WindowsFormsControlLibrary.TestUnit();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -59,7 +60,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1284, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1797, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -67,6 +68,9 @@
             // 
             this.sysConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ammeterConfiguration,
+            this.cANConfiguration,
+            this.cOMConfiguration,
+            this.equipmentConfiguration,
             this.temperatureConfiguration});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
@@ -76,8 +80,27 @@
             // 
             this.ammeterConfiguration.Name = "ammeterConfiguration";
             this.ammeterConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.ammeterConfiguration.Text = "AmmeterConfiguration";
-            this.ammeterConfiguration.Click += new System.EventHandler(this.ammeterConfiguration_Click);
+            // 
+            // cANConfiguration
+            // 
+            this.cANConfiguration.Name = "cANConfiguration";
+            this.cANConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cANConfiguration.Text = "CAN Configuration";
+            this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
+            // 
+            // cOMConfiguration
+            // 
+            this.cOMConfiguration.Name = "cOMConfiguration";
+            this.cOMConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cOMConfiguration.Text = "COM Configuration";
+            this.cOMConfiguration.Click += new System.EventHandler(this.cOMConfiguration_Click);
+            // 
+            // equipmentConfiguration
+            // 
+            this.equipmentConfiguration.Name = "equipmentConfiguration";
+            this.equipmentConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.equipmentConfiguration.Text = "Equipment Configuration";
+            this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
             // temperatureConfiguration
             // 
@@ -90,7 +113,8 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TestTypeEdit,
-            this.TestSequenceEdit});
+            this.TestSequenceEdit,
+            this.equipmentTestInfo});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(66, 21);
             this.editToolStripMenuItem.Text = "TestEdit";
@@ -98,120 +122,95 @@
             // TestTypeEdit
             // 
             this.TestTypeEdit.Name = "TestTypeEdit";
-            this.TestTypeEdit.Size = new System.Drawing.Size(178, 22);
+            this.TestTypeEdit.Size = new System.Drawing.Size(185, 22);
             this.TestTypeEdit.Text = "TestTypeEdit";
             this.TestTypeEdit.Click += new System.EventHandler(this.TestTypeEdit_Click);
             // 
             // TestSequenceEdit
             // 
             this.TestSequenceEdit.Name = "TestSequenceEdit";
-            this.TestSequenceEdit.Size = new System.Drawing.Size(178, 22);
+            this.TestSequenceEdit.Size = new System.Drawing.Size(185, 22);
             this.TestSequenceEdit.Text = "TestSequenceEdit";
             this.TestSequenceEdit.Click += new System.EventHandler(this.TestSequenceEdit_Click);
             // 
-            // txtInfo
+            // equipmentTestInfo
             // 
-            this.txtInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInfo.FormattingEnabled = true;
-            this.txtInfo.ItemHeight = 12;
-            this.txtInfo.Location = new System.Drawing.Point(3, 17);
-            this.txtInfo.Name = "txtInfo";
-            this.txtInfo.Size = new System.Drawing.Size(1278, 245);
-            this.txtInfo.TabIndex = 7;
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(129, 36);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(83, 35);
-            this.btnStart.TabIndex = 8;
-            this.btnStart.Text = "TestStart";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 12);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Select Test Steps:";
-            // 
-            // treeView1
-            // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Location = new System.Drawing.Point(0, 77);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(391, 323);
-            this.treeView1.TabIndex = 10;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtInfo);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 406);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1284, 265);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "MsgInfo";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(397, 36);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(476, 364);
-            this.panel1.TabIndex = 12;
+            this.equipmentTestInfo.Name = "equipmentTestInfo";
+            this.equipmentTestInfo.Size = new System.Drawing.Size(185, 22);
+            this.equipmentTestInfo.Text = "EquipmentTestInfo";
+            this.equipmentTestInfo.Click += new System.EventHandler(this.equipmentTestInfo_Click);
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chart1);
-            this.panel2.Location = new System.Drawing.Point(879, 36);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(1395, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(402, 364);
+            this.panel2.Size = new System.Drawing.Size(402, 646);
             this.panel2.TabIndex = 13;
             // 
-            // chart1
+            // panel4
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(400, 362);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
+            this.panel4.AutoScroll = true;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 324);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(402, 322);
+            this.panel4.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(402, 324);
+            this.panel3.TabIndex = 0;
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 25);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
+            this.xtraTabControl1.TabIndex = 14;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.testUnit1);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1389, 617);
+            this.xtraTabPage1.Text = "xtraTabPage1";
+            // 
+            // testUnit1
+            // 
+            this.testUnit1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.testUnit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.testUnit1.Location = new System.Drawing.Point(0, 0);
+            this.testUnit1.Name = "testUnit1";
+            this.testUnit1.Size = new System.Drawing.Size(1389, 617);
+            this.testUnit1.TabIndex = 0;
+            this.testUnit1.Tag = "Equipment1";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1389, 617);
+            this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 671);
+            this.ClientSize = new System.Drawing.Size(1797, 671);
+            this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
@@ -223,9 +222,10 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,17 +237,20 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TestSequenceEdit;
         private System.Windows.Forms.ToolStripMenuItem TestTypeEdit;
-        private System.Windows.Forms.ListBox txtInfo;
-        private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem sysConfigToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ammeterConfiguration;
         private System.Windows.Forms.ToolStripMenuItem temperatureConfiguration;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.ToolStripMenuItem cANConfiguration;
+        private System.Windows.Forms.ToolStripMenuItem cOMConfiguration;
+        private System.Windows.Forms.ToolStripMenuItem equipmentConfiguration;
+        private System.Windows.Forms.ToolStripMenuItem equipmentTestInfo;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private WindowsFormsControlLibrary.TestUnit testUnit1;
     }
 }
 

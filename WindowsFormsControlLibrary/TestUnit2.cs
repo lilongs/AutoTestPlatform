@@ -15,7 +15,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsControlLibrary
 {
-    public partial class TestUnit2: UserControl
+    public partial class TestUnit2 : UserControl
     {
         public TestUnit2()
         {
@@ -31,6 +31,7 @@ namespace WindowsFormsControlLibrary
         private DateTime testStartTime = new DateTime();
 
         private List<TestStep> CompletedList = new List<TestStep>();
+        double CountTime = 0d;
 
         private void TestUnit_Load(object sender, EventArgs e)
         {
@@ -45,7 +46,7 @@ namespace WindowsFormsControlLibrary
                 }
                 InitChart();
 
-                testTimer.Interval = 60;
+                testTimer.Interval = 1;
                 testTimer.Elapsed += testTimer_Tick;
             }
             catch (Exception ex)
@@ -153,11 +154,30 @@ namespace WindowsFormsControlLibrary
 
         private void testTimer_Tick(object sender, EventArgs e)
         {
+            //测试持续时间=当前时间-测试开始时间
+            TimeSpan sp = DateTime.Now - testStartTime;
+            //倒计时时间
+            double diff = CountTime - sp.TotalSeconds;
+            TimeSpan sp2 = TimeSpan.FromSeconds(diff);
+
             if (this.IsHandleCreated)
             {
                 txttesttime.BeginInvoke((MethodInvoker)delegate
                 {
-                    this.txttesttime.Text = string.Format("{0:F1}s", (DateTime.Now - testStartTime).TotalSeconds);
+                    //this.txttesttime.Text = 
+                    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
+                });
+
+                countdown1.BeginInvoke((MethodInvoker)delegate
+                {
+                    if (diff <= 0)
+                    {
+                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                    }
+                    else
+                    {
+                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                    }
                 });
             }
         }
@@ -226,6 +246,13 @@ namespace WindowsFormsControlLibrary
 
         private void RunTest()
         {
+            //获取待测试步骤的总CycleTime
+            CountTime = 0;
+            foreach (var it in ReadyTestInfo)
+            {
+                CountTime+=it.Value.Sum(t => t.cycletime);
+            }
+
             foreach (var item in ReadyTestInfo)
             {
                 string typename = item.Key;
@@ -264,14 +291,18 @@ namespace WindowsFormsControlLibrary
                             continue;
                         }
                         string stepname = step.stepname;
-                        ShowInfo("正在进行：" + typename + "--" + stepname + "测试！",Color.Red);
-                        ElectricCurrent electric = new ElectricCurrent();
-                        electric.time = DateTime.Now.ToShortTimeString();
-                        electric.electricity = "123";
+                        string modelname = step.modelname;
+                        ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！",Color.Red);
+                        //Actual test steps
+                        ShowInfo(richTextBox2, typename+"-"+stepname);
+                        //Measuring value
+                        ShowInfo(richTextBox3,"OK");
+                        //Model
+                        ShowInfo(richTextBox4, modelname);
 
                         #region can消息发送和com信息接收（待完成）
                         #endregion
-                        Thread.Sleep(Convert.ToInt32(step.cycletime));
+                        Thread.Sleep(Convert.ToInt32(step.cycletime)*1000);
 
                        
                     }
@@ -304,20 +335,28 @@ namespace WindowsFormsControlLibrary
             });
         }
 
-        public void ShowInfo(string info, Color color)
+        public void ShowInfo(RichTextBox richTextBox, string info, Color color)
         {
-            richTextBox1.BeginInvoke((MethodInvoker)delegate
+            richTextBox.BeginInvoke((MethodInvoker)delegate
             {
-                richTextBox1.SelectionStart = richTextBox1.TextLength;
-                richTextBox1.SelectionLength = 0;
-                richTextBox1.SelectionColor = color;
-                if (String.IsNullOrEmpty(richTextBox1.Text))
-                    richTextBox1.AppendText(info);
+                richTextBox.SelectionStart = richTextBox.TextLength;
+                richTextBox.SelectionLength = 0;
+                richTextBox.SelectionColor = color;
+                if (String.IsNullOrEmpty(richTextBox.Text))
+                    richTextBox.AppendText(info);
                 else
-                    richTextBox1.AppendText(Environment.NewLine + info);
-                richTextBox1.SelectionColor = richTextBox1.ForeColor;
+                    richTextBox.AppendText(Environment.NewLine + info);
+                richTextBox.SelectionColor = richTextBox.ForeColor;
 
-                richTextBox1.ScrollToCaret();
+                richTextBox.ScrollToCaret();
+            });
+        }
+
+        public void ShowInfo(RichTextBox richTextBox, string info)
+        {
+            richTextBox.BeginInvoke((MethodInvoker)delegate
+            {
+                richTextBox.Text = info;
             });
         }
 

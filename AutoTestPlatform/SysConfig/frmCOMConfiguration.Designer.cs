@@ -272,7 +272,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmCOMConfiguration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ammeter Paramter Configuration";
+            this.Text = "COM Paramter Configuration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAmmeterConfiguration_FormClosed);
             this.Load += new System.EventHandler(this.frmTestSequncenManager_Load);
             this.toolStrip1.ResumeLayout(false);

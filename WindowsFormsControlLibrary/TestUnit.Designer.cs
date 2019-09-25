@@ -38,24 +38,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.countdown1 = new WindowsFormsControlLibrary.Countdown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txttesttime = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtcycletime = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtvoltage = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtmodelname = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtstepname = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txttypename = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -65,24 +49,56 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnStart = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
+            this.txtFAZIT = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtPCBPartnumber = new System.Windows.Forms.Label();
+            this.txtHARDWARE = new System.Windows.Forms.Label();
+            this.txtSOFRWARE = new System.Windows.Forms.Label();
+            this.txtSPAREPART = new System.Windows.Forms.Label();
+            this.txtPRPDUCTPartnumber = new System.Windows.Forms.Label();
+            this.txttesttime = new System.Windows.Forms.Label();
+            this.txtcycletime = new System.Windows.Forms.Label();
+            this.txtvoltage = new System.Windows.Forms.Label();
+            this.txtmodelname = new System.Windows.Forms.Label();
+            this.txtstepname = new System.Windows.Forms.Label();
+            this.txttypename = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.countdown1 = new WindowsFormsControlLibrary.Countdown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabPage3.SuspendLayout();
+            this.xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
+            this.xtraTabControl2.SuspendLayout();
+            this.xtraTabPage4.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -95,7 +111,7 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 386);
+            this.panel1.Location = new System.Drawing.Point(0, 400);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(867, 62);
             this.panel1.TabIndex = 0;
@@ -160,174 +176,25 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Actual test steps:";
             // 
-            // tabControl2
+            // xtraTabControl1
             // 
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tabControl2.Location = new System.Drawing.Point(569, 0);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(298, 386);
-            this.tabControl2.TabIndex = 3;
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(594, 400);
+            this.xtraTabControl1.TabIndex = 5;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2,
+            this.xtraTabPage3});
             // 
-            // tabPage4
+            // xtraTabPage1
             // 
-            this.tabPage4.Controls.Add(this.countdown1);
-            this.tabPage4.Controls.Add(this.label11);
-            this.tabPage4.Controls.Add(this.txttesttime);
-            this.tabPage4.Controls.Add(this.label7);
-            this.tabPage4.Controls.Add(this.txtcycletime);
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.txtvoltage);
-            this.tabPage4.Controls.Add(this.label5);
-            this.tabPage4.Controls.Add(this.txtmodelname);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.Controls.Add(this.txtstepname);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.txttypename);
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(290, 360);
-            this.tabPage4.TabIndex = 0;
-            this.tabPage4.Text = "Step info";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // countdown1
-            // 
-            this.countdown1.Location = new System.Drawing.Point(6, 244);
-            this.countdown1.Name = "countdown1";
-            this.countdown1.Size = new System.Drawing.Size(282, 58);
-            this.countdown1.TabIndex = 13;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 224);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Countdown:";
-            // 
-            // txttesttime
-            // 
-            this.txttesttime.Location = new System.Drawing.Point(98, 191);
-            this.txttesttime.Name = "txttesttime";
-            this.txttesttime.Size = new System.Drawing.Size(115, 21);
-            this.txttesttime.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(60, 191);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 12);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Test:";
-            // 
-            // txtcycletime
-            // 
-            this.txtcycletime.Location = new System.Drawing.Point(98, 164);
-            this.txtcycletime.Name = "txtcycletime";
-            this.txtcycletime.Size = new System.Drawing.Size(115, 21);
-            this.txtcycletime.TabIndex = 9;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 167);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Cycletime:";
-            // 
-            // txtvoltage
-            // 
-            this.txtvoltage.Location = new System.Drawing.Point(98, 137);
-            this.txtvoltage.Name = "txtvoltage";
-            this.txtvoltage.Size = new System.Drawing.Size(115, 21);
-            this.txtvoltage.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(42, 140);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Voltage:";
-            // 
-            // txtmodelname
-            // 
-            this.txtmodelname.Location = new System.Drawing.Point(98, 110);
-            this.txtmodelname.Name = "txtmodelname";
-            this.txtmodelname.Size = new System.Drawing.Size(115, 21);
-            this.txtmodelname.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 113);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "ModelName:";
-            // 
-            // txtstepname
-            // 
-            this.txtstepname.Location = new System.Drawing.Point(98, 83);
-            this.txtstepname.Name = "txtstepname";
-            this.txtstepname.Size = new System.Drawing.Size(115, 21);
-            this.txtstepname.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "StepName:";
-            // 
-            // txttypename
-            // 
-            this.txttypename.Location = new System.Drawing.Point(98, 56);
-            this.txttypename.Name = "txttypename";
-            this.txttypename.Size = new System.Drawing.Size(115, 21);
-            this.txttypename.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "TypeName:";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(569, 386);
-            this.tabControl1.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(561, 360);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Test step output";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.xtraTabPage1.Controls.Add(this.panel2);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(588, 371);
+            this.xtraTabPage1.Text = "Test step output";
             // 
             // panel2
             // 
@@ -335,18 +202,18 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(555, 354);
-            this.panel2.TabIndex = 0;
+            this.panel2.Size = new System.Drawing.Size(588, 371);
+            this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.chart1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(208, 0);
+            this.panel3.Location = new System.Drawing.Point(173, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(345, 352);
+            this.panel3.Size = new System.Drawing.Size(413, 369);
             this.panel3.TabIndex = 18;
             // 
             // chart1
@@ -372,7 +239,7 @@
             series1.Name = "Series1";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(345, 352);
+            this.chart1.Size = new System.Drawing.Size(413, 369);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
             // 
@@ -383,7 +250,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(208, 352);
+            this.panel4.Size = new System.Drawing.Size(173, 369);
             this.panel4.TabIndex = 17;
             // 
             // panel5
@@ -392,7 +259,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 43);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(208, 309);
+            this.panel5.Size = new System.Drawing.Size(173, 326);
             this.panel5.TabIndex = 16;
             // 
             // treeView1
@@ -401,7 +268,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(208, 309);
+            this.treeView1.Size = new System.Drawing.Size(173, 326);
             this.treeView1.TabIndex = 14;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             // 
@@ -412,14 +279,14 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(208, 43);
+            this.panel6.Size = new System.Drawing.Size(173, 43);
             this.panel6.TabIndex = 15;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(122, 6);
+            this.btnStart.Location = new System.Drawing.Point(105, 7);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(79, 25);
+            this.btnStart.Size = new System.Drawing.Size(68, 25);
             this.btnStart.TabIndex = 12;
             this.btnStart.Text = "TestStart";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -428,73 +295,373 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 12);
+            this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 13;
             this.label1.Text = "Select Test Steps:";
             // 
-            // tabPage2
+            // xtraTabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(561, 360);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Execute test steps";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.xtraTabPage2.Controls.Add(this.dataGridView1);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(588, 371);
+            this.xtraTabPage2.Text = "Execute test steps";
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(555, 354);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Size = new System.Drawing.Size(588, 371);
+            this.dataGridView1.TabIndex = 1;
             // 
-            // tabPage3
+            // xtraTabPage3
             // 
-            this.tabPage3.Controls.Add(this.richTextBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(561, 360);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Debugging";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.xtraTabPage3.Controls.Add(this.richTextBox1);
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(588, 371);
+            this.xtraTabPage3.Text = "Debugging";
             // 
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(555, 354);
-            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Size = new System.Drawing.Size(588, 371);
+            this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
+            // 
+            // xtraTabControl2
+            // 
+            this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.xtraTabControl2.Location = new System.Drawing.Point(594, 0);
+            this.xtraTabControl2.Name = "xtraTabControl2";
+            this.xtraTabControl2.SelectedTabPage = this.xtraTabPage4;
+            this.xtraTabControl2.Size = new System.Drawing.Size(273, 400);
+            this.xtraTabControl2.TabIndex = 6;
+            this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage4});
+            // 
+            // xtraTabPage4
+            // 
+            this.xtraTabPage4.Controls.Add(this.txtFAZIT);
+            this.xtraTabPage4.Controls.Add(this.label18);
+            this.xtraTabPage4.Controls.Add(this.label11);
+            this.xtraTabPage4.Controls.Add(this.txtPCBPartnumber);
+            this.xtraTabPage4.Controls.Add(this.txtHARDWARE);
+            this.xtraTabPage4.Controls.Add(this.txtSOFRWARE);
+            this.xtraTabPage4.Controls.Add(this.txtSPAREPART);
+            this.xtraTabPage4.Controls.Add(this.txtPRPDUCTPartnumber);
+            this.xtraTabPage4.Controls.Add(this.txttesttime);
+            this.xtraTabPage4.Controls.Add(this.txtcycletime);
+            this.xtraTabPage4.Controls.Add(this.txtvoltage);
+            this.xtraTabPage4.Controls.Add(this.txtmodelname);
+            this.xtraTabPage4.Controls.Add(this.txtstepname);
+            this.xtraTabPage4.Controls.Add(this.txttypename);
+            this.xtraTabPage4.Controls.Add(this.label16);
+            this.xtraTabPage4.Controls.Add(this.label15);
+            this.xtraTabPage4.Controls.Add(this.label14);
+            this.xtraTabPage4.Controls.Add(this.label13);
+            this.xtraTabPage4.Controls.Add(this.label12);
+            this.xtraTabPage4.Controls.Add(this.countdown1);
+            this.xtraTabPage4.Controls.Add(this.label7);
+            this.xtraTabPage4.Controls.Add(this.label6);
+            this.xtraTabPage4.Controls.Add(this.label5);
+            this.xtraTabPage4.Controls.Add(this.label4);
+            this.xtraTabPage4.Controls.Add(this.label3);
+            this.xtraTabPage4.Controls.Add(this.label2);
+            this.xtraTabPage4.Name = "xtraTabPage4";
+            this.xtraTabPage4.Size = new System.Drawing.Size(267, 371);
+            this.xtraTabPage4.Text = "Step info";
+            // 
+            // txtFAZIT
+            // 
+            this.txtFAZIT.AutoSize = true;
+            this.txtFAZIT.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFAZIT.Location = new System.Drawing.Point(213, 132);
+            this.txtFAZIT.Name = "txtFAZIT";
+            this.txtFAZIT.Size = new System.Drawing.Size(30, 16);
+            this.txtFAZIT.TabIndex = 60;
+            this.txtFAZIT.Text = "null";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(12, 133);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(75, 15);
+            this.label18.TabIndex = 59;
+            this.label18.Text = "FAZIT String:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 301);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 15);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Time remaining:";
+            // 
+            // txtPCBPartnumber
+            // 
+            this.txtPCBPartnumber.AutoSize = true;
+            this.txtPCBPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPCBPartnumber.Location = new System.Drawing.Point(213, 12);
+            this.txtPCBPartnumber.Name = "txtPCBPartnumber";
+            this.txtPCBPartnumber.Size = new System.Drawing.Size(30, 16);
+            this.txtPCBPartnumber.TabIndex = 58;
+            this.txtPCBPartnumber.Text = "null";
+            // 
+            // txtHARDWARE
+            // 
+            this.txtHARDWARE.AutoSize = true;
+            this.txtHARDWARE.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHARDWARE.Location = new System.Drawing.Point(213, 108);
+            this.txtHARDWARE.Name = "txtHARDWARE";
+            this.txtHARDWARE.Size = new System.Drawing.Size(30, 16);
+            this.txtHARDWARE.TabIndex = 57;
+            this.txtHARDWARE.Text = "null";
+            // 
+            // txtSOFRWARE
+            // 
+            this.txtSOFRWARE.AutoSize = true;
+            this.txtSOFRWARE.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSOFRWARE.Location = new System.Drawing.Point(213, 84);
+            this.txtSOFRWARE.Name = "txtSOFRWARE";
+            this.txtSOFRWARE.Size = new System.Drawing.Size(30, 16);
+            this.txtSOFRWARE.TabIndex = 56;
+            this.txtSOFRWARE.Text = "null";
+            // 
+            // txtSPAREPART
+            // 
+            this.txtSPAREPART.AutoSize = true;
+            this.txtSPAREPART.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSPAREPART.Location = new System.Drawing.Point(213, 60);
+            this.txtSPAREPART.Name = "txtSPAREPART";
+            this.txtSPAREPART.Size = new System.Drawing.Size(30, 16);
+            this.txtSPAREPART.TabIndex = 55;
+            this.txtSPAREPART.Text = "null";
+            // 
+            // txtPRPDUCTPartnumber
+            // 
+            this.txtPRPDUCTPartnumber.AutoSize = true;
+            this.txtPRPDUCTPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPRPDUCTPartnumber.Location = new System.Drawing.Point(213, 36);
+            this.txtPRPDUCTPartnumber.Name = "txtPRPDUCTPartnumber";
+            this.txtPRPDUCTPartnumber.Size = new System.Drawing.Size(30, 16);
+            this.txtPRPDUCTPartnumber.TabIndex = 54;
+            this.txtPRPDUCTPartnumber.Text = "null";
+            // 
+            // txttesttime
+            // 
+            this.txttesttime.AutoSize = true;
+            this.txttesttime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txttesttime.Location = new System.Drawing.Point(213, 276);
+            this.txttesttime.Name = "txttesttime";
+            this.txttesttime.Size = new System.Drawing.Size(30, 16);
+            this.txttesttime.TabIndex = 53;
+            this.txttesttime.Text = "null";
+            // 
+            // txtcycletime
+            // 
+            this.txtcycletime.AutoSize = true;
+            this.txtcycletime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcycletime.Location = new System.Drawing.Point(213, 252);
+            this.txtcycletime.Name = "txtcycletime";
+            this.txtcycletime.Size = new System.Drawing.Size(30, 16);
+            this.txtcycletime.TabIndex = 52;
+            this.txtcycletime.Text = "null";
+            // 
+            // txtvoltage
+            // 
+            this.txtvoltage.AutoSize = true;
+            this.txtvoltage.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvoltage.Location = new System.Drawing.Point(213, 228);
+            this.txtvoltage.Name = "txtvoltage";
+            this.txtvoltage.Size = new System.Drawing.Size(30, 16);
+            this.txtvoltage.TabIndex = 51;
+            this.txtvoltage.Text = "null";
+            // 
+            // txtmodelname
+            // 
+            this.txtmodelname.AutoSize = true;
+            this.txtmodelname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtmodelname.Location = new System.Drawing.Point(213, 204);
+            this.txtmodelname.Name = "txtmodelname";
+            this.txtmodelname.Size = new System.Drawing.Size(30, 16);
+            this.txtmodelname.TabIndex = 50;
+            this.txtmodelname.Text = "null";
+            // 
+            // txtstepname
+            // 
+            this.txtstepname.AutoSize = true;
+            this.txtstepname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtstepname.Location = new System.Drawing.Point(213, 180);
+            this.txtstepname.Name = "txtstepname";
+            this.txtstepname.Size = new System.Drawing.Size(30, 16);
+            this.txtstepname.TabIndex = 49;
+            this.txtstepname.Text = "null";
+            // 
+            // txttypename
+            // 
+            this.txttypename.AutoSize = true;
+            this.txttypename.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txttypename.Location = new System.Drawing.Point(213, 156);
+            this.txttypename.Name = "txttypename";
+            this.txttypename.Size = new System.Drawing.Size(30, 16);
+            this.txttypename.TabIndex = 48;
+            this.txttypename.Text = "null";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(12, 13);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(103, 15);
+            this.label16.TabIndex = 46;
+            this.label16.Text = "PCB Partnumber:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(12, 109);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(114, 15);
+            this.label15.TabIndex = 44;
+            this.label15.Text = "VW ECU Hardware:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(12, 85);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(197, 15);
+            this.label14.TabIndex = 42;
+            this.label14.Text = "VW ECU SoftwareVersion Number:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(12, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(89, 15);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "VW Spare Part:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(12, 37);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(120, 15);
+            this.label12.TabIndex = 38;
+            this.label12.Text = "Product Partnumber:";
+            // 
+            // countdown1
+            // 
+            this.countdown1.Location = new System.Drawing.Point(3, 314);
+            this.countdown1.Name = "countdown1";
+            this.countdown1.Size = new System.Drawing.Size(201, 50);
+            this.countdown1.TabIndex = 37;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 277);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 15);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Test:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 253);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 15);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "Cycletime:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 229);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "Voltage:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 205);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 15);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "ModelName:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 181);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "StepName:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 157);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 15);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "TypeName:";
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.xtraTabControl1);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(594, 400);
+            this.panel7.TabIndex = 7;
             // 
             // TestUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.tabControl2);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.xtraTabControl2);
             this.Controls.Add(this.panel1);
             this.Name = "TestUnit";
-            this.Size = new System.Drawing.Size(867, 448);
+            this.Size = new System.Drawing.Size(867, 462);
             this.Tag = "Equipment1";
             this.Load += new System.EventHandler(this.TestUnit_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -502,9 +669,14 @@
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
+            this.xtraTabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
+            this.xtraTabControl2.ResumeLayout(false);
+            this.xtraTabPage4.ResumeLayout(false);
+            this.xtraTabPage4.PerformLayout();
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -512,22 +684,16 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TextBox txttesttime;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtcycletime;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtvoltage;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtmodelname;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtstepname;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txttypename;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox richTextBox4;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
@@ -537,17 +703,36 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.Label label11;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
         private Countdown countdown1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label txtPCBPartnumber;
+        private System.Windows.Forms.Label txtHARDWARE;
+        private System.Windows.Forms.Label txtSOFRWARE;
+        private System.Windows.Forms.Label txtSPAREPART;
+        private System.Windows.Forms.Label txtPRPDUCTPartnumber;
+        private System.Windows.Forms.Label txttesttime;
+        private System.Windows.Forms.Label txtcycletime;
+        private System.Windows.Forms.Label txtvoltage;
+        private System.Windows.Forms.Label txtmodelname;
+        private System.Windows.Forms.Label txtstepname;
+        private System.Windows.Forms.Label txttypename;
+        private System.Windows.Forms.Label txtFAZIT;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel7;
     }
 }

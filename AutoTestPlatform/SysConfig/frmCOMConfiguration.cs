@@ -94,7 +94,6 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string ammeterName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["ammeterName"].Value.ToString();
                 string portName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["portName"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
