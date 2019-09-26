@@ -52,7 +52,7 @@ namespace WindowsFormsControlLibrary
                 chart1.BeginInvoke((MethodInvoker)delegate
                 {
                     Series series = chart1.Series[0];
-                    if (series.Points.Count > 200)
+                    if (series.Points.Count > 2000)
                     {
                         series.Points.RemoveAt(0);
                     }
@@ -60,7 +60,7 @@ namespace WindowsFormsControlLibrary
                     chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
 
                     Series series2 = chart1.Series[1];
-                    if (series2.Points.Count > 200)
+                    if (series2.Points.Count > 2000)
                     {
                         series2.Points.RemoveAt(0);
                     }

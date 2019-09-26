@@ -59,24 +59,24 @@ namespace AutoTestPlatform.SysConfig
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.portName == txtPortName.Text).FirstOrDefault();
+                var item= list.Where(c => c.PortName == txtPortName.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim())?0:Convert.ToInt32(txtBaudRate.Text.Trim());
-                    item.parity = (Parity)Enum.Parse(typeof(Parity), label11.Text);
-                    item.dataBits= String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
-                    item.stopBits= (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text);
-                    item.handshake= (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text);
+                    item.Baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim())?0:Convert.ToInt32(txtBaudRate.Text.Trim());
+                    item.Parity = (Parity)Enum.Parse(typeof(Parity), label11.Text);
+                    item.DataBits= String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
+                    item.StopBits= (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text);
+                    item.Handshake= (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text);
                 }
                 else
                 {
                     COM com = new COM();
-                    com.portName = txtPortName.Text.Trim();
-                    com.baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(txtBaudRate.Text.Trim());
-                    com.parity = (Parity)Enum.Parse(typeof(Parity), txtParity.Text, true);
-                    com.dataBits = String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
-                    com.stopBits = (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text,true);
-                    com.handshake = (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text, true);
+                    com.PortName = txtPortName.Text.Trim();
+                    com.Baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(txtBaudRate.Text.Trim());
+                    com.Parity = (Parity)Enum.Parse(typeof(Parity), txtParity.Text, true);
+                    com.DataBits = String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
+                    com.StopBits = (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text,true);
+                    com.Handshake = (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text, true);
                     list.Add(com);
                 }               
 
@@ -97,7 +97,7 @@ namespace AutoTestPlatform.SysConfig
                 string portName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["portName"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].portName == portName)
+                    if (list[i].PortName == portName)
                     {
                         list.RemoveAt(i);
                     }

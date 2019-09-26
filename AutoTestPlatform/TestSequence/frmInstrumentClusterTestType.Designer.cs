@@ -1,6 +1,6 @@
 ﻿namespace AutoTestPlatform.TestSequence
 {
-    partial class frmEquipmentTestType
+    partial class frmInstrumentClusterTestType
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEquipmentTestType));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInstrumentClusterTestType));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.delete = new System.Windows.Forms.ToolStripButton();
@@ -89,21 +89,22 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(560, 158);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(113, 12);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Equipment";
+            this.label1.Text = "InstrumentCluster:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(560, 208);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 4;
-            this.label2.Text = "TypeName";
+            this.label2.Text = "TypeName:";
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 28);
             this.dataGridView1.Name = "dataGridView1";
@@ -141,7 +142,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmEquipmentTestType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EquipmentTestTypeEdit";
+            this.Text = "InstrumentClusterTestTypeEdit";
             this.Load += new System.EventHandler(this.frmTestTypeManager_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

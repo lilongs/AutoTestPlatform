@@ -2,6 +2,7 @@
 using AutoTestDLL.Util;
 using AutoTestPlatform.SysConfig;
 using AutoTestPlatform.TestSequence;
+using DevExpress.XtraTab;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,8 @@ namespace AutoTestPlatform
                 chartTimer.Start();
 
                 LoadEquipmentInfo();
-                //LoadTestUnitControl();
+                LoadTestUnitControl();
+
                 LoadPublicElectricInfo();
                 LoadPublicElectricControl();
                 LoadTemperatureInfo();
@@ -54,13 +56,13 @@ namespace AutoTestPlatform
         private void LoadEquipmentInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
-            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
-                foreach (EquipmentConfiguration equipment in temp)
+                foreach (InstrumentClusterConfiguration equipment in temp)
                 {
-                    string eq = equipment.equipment;
+                    string eq = equipment.InstrumentCluster;
                     TestUnit testUnit = new TestUnit();
                     testUnit.Name = eq;
                     testUnit.Tag = eq;
@@ -81,7 +83,7 @@ namespace AutoTestPlatform
             {
                 foreach (TempSensorConfiguration t in temp)
                 {
-                    string sensorName = t.sensorName;
+                    string sensorName = t.SensorName;
                     TemperatureControl temperature = new TemperatureControl();
                     temperature.Name = sensorName;
                     temperature.Tag = sensorName;
@@ -106,24 +108,19 @@ namespace AutoTestPlatform
 
         private void LoadTestUnitControl()
         {
-            int i = 0;
-            //int x = this.panel1.Width;
-            //int y = this.panel1.Height;
-
-            int _x = 800;
-            int _y = 450;
-
+            
             foreach (var item in DicEquipmentInfo)
             {
-                string eq = item.Key;
-
-                item.Value.Width = _x;
-                item.Value.Height = _y;
-                item.Value.Location = new System.Drawing.Point((i % 3) * (_x + 10) + 3, (i / 3) * (_y + 20) + 3);
-                item.Value.treeView1.BackColor = colors[3];
-                //panel1.Controls.Add(item.Value);
-                i++;
+                XtraTabPage xpage = new XtraTabPage();
+                xpage.Name = item.Key;
+                xpage.Text = item.Key+" test unit";
+                xpage.Controls.Add(item.Value);
+                item.Value.Dock = DockStyle.Fill;
+                xtraTabControl1.TabPages.Add(xpage);
+                
             }
+            if(xtraTabControl1.TabPages.Count>0)
+                xtraTabControl1.SelectedTabPageIndex = 0;
         }
 
         private void LoadTemperatureControl()
@@ -240,13 +237,13 @@ namespace AutoTestPlatform
 
         private void equipmentConfiguration_Click(object sender, EventArgs e)
         {
-            frmEquipment frm = new frmEquipment();
+            frmInstrumentClusterConfiguration frm = new frmInstrumentClusterConfiguration();
             frm.ShowDialog();
         }
 
         private void equipmentTestInfo_Click(object sender, EventArgs e)
         {
-            frmEquipmentTestType frm = new frmEquipmentTestType();
+            frmInstrumentClusterTestType frm = new frmInstrumentClusterTestType();
             frm.ShowDialog();
         }
     }

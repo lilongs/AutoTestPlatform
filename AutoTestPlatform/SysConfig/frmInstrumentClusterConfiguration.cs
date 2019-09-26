@@ -14,14 +14,14 @@ using System.Windows.Forms;
 
 namespace AutoTestPlatform.SysConfig
 {
-    public partial class frmEquipment : Form
+    public partial class frmInstrumentClusterConfiguration : Form
     {
-        public frmEquipment()
+        public frmInstrumentClusterConfiguration()
         {
             InitializeComponent();
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private List<EquipmentConfiguration> list = new List<EquipmentConfiguration>();
+        private List<InstrumentClusterConfiguration> list = new List<InstrumentClusterConfiguration>();
 
         private void frmTestSequncenManager_Load(object sender, EventArgs e)
         {
@@ -38,8 +38,8 @@ namespace AutoTestPlatform.SysConfig
         private void LoadInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
-            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
                 list = temp;
@@ -64,23 +64,23 @@ namespace AutoTestPlatform.SysConfig
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.equipment == txtEquipment.Text.Trim() && c.paramter == combParamter.Text).FirstOrDefault();
+                var item= list.Where(c => c.InstrumentCluster == txtEquipment.Text.Trim() && c.CommunicationType == combParamter.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.paramter= combParamter.Text;
-                    item.value= combValue.Text;
+                    item.CommunicationType= combParamter.Text;
+                    item.Value= combValue.Text;
                 }
                 else
                 {
-                    EquipmentConfiguration equipment = new EquipmentConfiguration();
-                    equipment.equipment = txtEquipment.Text.Trim();
-                    equipment.paramter = combParamter.Text;
-                    equipment.value = combValue.Text;
+                    InstrumentClusterConfiguration equipment = new InstrumentClusterConfiguration();
+                    equipment.InstrumentCluster = txtEquipment.Text.Trim();
+                    equipment.CommunicationType = combParamter.Text;
+                    equipment.Value = combValue.Text;
                     list.Add(equipment);
                 }               
 
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "EquipmentConfiguration.json", json);
+                JsonOperate.SaveJson(path, "InstrumentClusterConfiguration.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -93,19 +93,19 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["equipment"].Value.ToString();
-                string paramter = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["paramter"].Value.ToString();
-                string value= this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["value"].Value.ToString();
+                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["InstrumentCluster"].Value.ToString();
+                string paramter = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["CommunicationType"].Value.ToString();
+                string value= this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["Value"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].equipment == equipment && list[i].paramter == paramter && list[i].value == value)
+                    if (list[i].InstrumentCluster == equipment && list[i].CommunicationType == paramter && list[i].Value == value)
                     {
                         list.RemoveAt(i);
                     }
                 }
                 string path = Application.StartupPath + "\\SysConfig";
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "EquipmentConfiguration.json", json);
+                JsonOperate.SaveJson(path, "InstrumentClusterConfiguration.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -128,9 +128,9 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txtEquipment.Text = row.Cells["equipment"].Value == null?"": row.Cells["equipment"].Value.ToString();
-                    this.combParamter.Text= row.Cells["paramter"].Value == null ? "" : row.Cells["paramter"].Value.ToString();
-                    this.combValue.Text = row.Cells["value"].Value == null ? "" : row.Cells["value"].Value.ToString();
+                    this.txtEquipment.Text = row.Cells["InstrumentCluster"].Value == null?"": row.Cells["InstrumentCluster"].Value.ToString();
+                    this.combParamter.Text= row.Cells["CommunicationType"].Value == null ? "" : row.Cells["CommunicationType"].Value.ToString();
+                    this.combValue.Text = row.Cells["Value"].Value == null ? "" : row.Cells["Value"].Value.ToString();
                 }
             }
             catch (Exception ex)

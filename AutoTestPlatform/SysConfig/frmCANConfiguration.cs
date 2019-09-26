@@ -64,16 +64,16 @@ namespace AutoTestPlatform.SysConfig
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.channel == combChannel.Text).FirstOrDefault();
+                var item= list.Where(c => c.Channel == combChannel.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim())?0:Convert.ToInt32(combBaudRate.Text.Trim());
+                    item.Baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim())?0:Convert.ToInt32(combBaudRate.Text.Trim());
                 }
                 else
                 {
                     CAN can = new CAN();
-                    can.channel = String.IsNullOrEmpty(combChannel.Text.Trim()) ? "" : combChannel.Text.Trim();
-                    can.baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(combBaudRate.Text.Trim());
+                    can.Channel = String.IsNullOrEmpty(combChannel.Text.Trim()) ? "" : combChannel.Text.Trim();
+                    can.Baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(combBaudRate.Text.Trim());
                     list.Add(can);
                 }               
 
@@ -95,7 +95,7 @@ namespace AutoTestPlatform.SysConfig
                 string baudrate = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["baudrate"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].channel.ToString() == channel && list[i].baudrate.ToString() == baudrate)
+                    if (list[i].Channel.ToString() == channel && list[i].Baudrate.ToString() == baudrate)
                     {
                         list.RemoveAt(i);
                     }

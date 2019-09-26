@@ -64,18 +64,18 @@ namespace AutoTestPlatform.SysConfig
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.sensorName == txtSensorName.Text.Trim() && c.paramter == combParamter.Text).FirstOrDefault();
+                var item= list.Where(c => c.SensorName == txtSensorName.Text.Trim() && c.CommunicationType == combParamter.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.paramter= combParamter.Text;
-                    item.value= combValue.Text;
+                    item.CommunicationType= combParamter.Text;
+                    item.Value= combValue.Text;
                 }
                 else
                 {
                     TempSensorConfiguration temp = new TempSensorConfiguration();
-                    temp.sensorName = txtSensorName.Text.Trim();
-                    temp.paramter = combParamter.Text;
-                    temp.value = combValue.Text;
+                    temp.SensorName = txtSensorName.Text.Trim();
+                    temp.CommunicationType = combParamter.Text;
+                    temp.Value = combValue.Text;
                     list.Add(temp);
                 }               
 
@@ -93,12 +93,12 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["sensorName"].Value.ToString();
-                string paramter = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["paramter"].Value.ToString();
-                string value= this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["value"].Value.ToString();
+                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["SensorName"].Value.ToString();
+                string paramter = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["CommunicationType"].Value.ToString();
+                string value= this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["Value"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].sensorName == equipment && list[i].paramter == paramter && list[i].value == value)
+                    if (list[i].SensorName == equipment && list[i].CommunicationType == paramter && list[i].Value == value)
                     {
                         list.RemoveAt(i);
                     }
@@ -128,9 +128,9 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txtSensorName.Text = row.Cells["sensorName"].Value == null?"": row.Cells["sensorName"].Value.ToString();
-                    this.combParamter.Text= row.Cells["paramter"].Value == null ? "" : row.Cells["paramter"].Value.ToString();
-                    this.combValue.Text = row.Cells["value"].Value == null ? "" : row.Cells["value"].Value.ToString();
+                    this.txtSensorName.Text = row.Cells["SensorName"].Value == null?"": row.Cells["SensorName"].Value.ToString();
+                    this.combParamter.Text= row.Cells["CommunicationType"].Value == null ? "" : row.Cells["CommunicationType"].Value.ToString();
+                    this.combValue.Text = row.Cells["Value"].Value == null ? "" : row.Cells["Value"].Value.ToString();
                 }
             }
             catch (Exception ex)

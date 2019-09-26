@@ -55,13 +55,13 @@ namespace AutoTestPlatform
         private void LoadEquipmentInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
-            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
-                foreach (EquipmentConfiguration equipment in temp)
+                foreach (InstrumentClusterConfiguration equipment in temp)
                 {
-                    string eq = equipment.equipment;
+                    string eq = equipment.InstrumentCluster;
                     TestUnit testUnit = new TestUnit();
                     testUnit.Name = eq;
                     testUnit.Tag = eq;
@@ -82,7 +82,7 @@ namespace AutoTestPlatform
             {
                 foreach (TempSensorConfiguration t in temp)
                 {
-                    string sensorName = t.sensorName;
+                    string sensorName = t.SensorName;
                     TemperatureControl temperature = new TemperatureControl();
                     temperature.Name = sensorName;
                     temperature.Tag = sensorName;
@@ -398,13 +398,13 @@ namespace AutoTestPlatform
 
         private void equipmentConfiguration_Click(object sender, EventArgs e)
         {
-            frmEquipment frm = new frmEquipment();
+            frmInstrumentClusterConfiguration frm = new frmInstrumentClusterConfiguration();
             frm.ShowDialog();
         }
 
         private void equipmentTestInfo_Click(object sender, EventArgs e)
         {
-            frmEquipmentTestType frm = new frmEquipmentTestType();
+            frmInstrumentClusterTestType frm = new frmInstrumentClusterTestType();
             frm.ShowDialog();
         }
     }

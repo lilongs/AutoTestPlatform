@@ -67,13 +67,13 @@
             this.equipmentConfiguration,
             this.temperatureConfiguration});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
-            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
-            this.sysConfigToolStripMenuItem.Text = "SysConfig";
+            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(144, 21);
+            this.sysConfigToolStripMenuItem.Text = "System Configuration";
             // 
             // ammeterConfiguration
             // 
             this.ammeterConfiguration.Name = "ammeterConfiguration";
-            this.ammeterConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.ammeterConfiguration.Size = new System.Drawing.Size(265, 22);
             this.ammeterConfiguration.Text = "AmmeterConfiguration";
             this.ammeterConfiguration.Visible = false;
             this.ammeterConfiguration.Click += new System.EventHandler(this.ammeterConfiguration_Click);
@@ -81,29 +81,29 @@
             // cANConfiguration
             // 
             this.cANConfiguration.Name = "cANConfiguration";
-            this.cANConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cANConfiguration.Size = new System.Drawing.Size(265, 22);
             this.cANConfiguration.Text = "CAN Configuration";
             this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
             // 
             // cOMConfiguration
             // 
             this.cOMConfiguration.Name = "cOMConfiguration";
-            this.cOMConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cOMConfiguration.Size = new System.Drawing.Size(265, 22);
             this.cOMConfiguration.Text = "COM Configuration";
             this.cOMConfiguration.Click += new System.EventHandler(this.cOMConfiguration_Click);
             // 
             // equipmentConfiguration
             // 
             this.equipmentConfiguration.Name = "equipmentConfiguration";
-            this.equipmentConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.equipmentConfiguration.Text = "Equipment Configuration";
+            this.equipmentConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.equipmentConfiguration.Text = "Instrument Cluster Configuration";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
             // temperatureConfiguration
             // 
             this.temperatureConfiguration.Name = "temperatureConfiguration";
-            this.temperatureConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.temperatureConfiguration.Text = "TemperatureConfiguration";
+            this.temperatureConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.temperatureConfiguration.Text = "Temperature Configuration";
             this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
             // 
             // editToolStripMenuItem
@@ -119,22 +119,22 @@
             // TestTypeEdit
             // 
             this.TestTypeEdit.Name = "TestTypeEdit";
-            this.TestTypeEdit.Size = new System.Drawing.Size(185, 22);
+            this.TestTypeEdit.Size = new System.Drawing.Size(225, 22);
             this.TestTypeEdit.Text = "TestTypeEdit";
             this.TestTypeEdit.Click += new System.EventHandler(this.TestTypeEdit_Click);
             // 
             // TestSequenceEdit
             // 
             this.TestSequenceEdit.Name = "TestSequenceEdit";
-            this.TestSequenceEdit.Size = new System.Drawing.Size(185, 22);
+            this.TestSequenceEdit.Size = new System.Drawing.Size(225, 22);
             this.TestSequenceEdit.Text = "TestSequenceEdit";
             this.TestSequenceEdit.Click += new System.EventHandler(this.TestSequenceEdit_Click);
             // 
             // equipmentTestInfo
             // 
             this.equipmentTestInfo.Name = "equipmentTestInfo";
-            this.equipmentTestInfo.Size = new System.Drawing.Size(185, 22);
-            this.equipmentTestInfo.Text = "EquipmentTestInfo";
+            this.equipmentTestInfo.Size = new System.Drawing.Size(225, 22);
+            this.equipmentTestInfo.Text = "InstrumentClusterTestInfo";
             this.equipmentTestInfo.Click += new System.EventHandler(this.equipmentTestInfo_Click);
             // 
             // panel2

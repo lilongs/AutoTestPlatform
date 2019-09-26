@@ -25,6 +25,7 @@ namespace WindowsFormsControlLibrary
 
         private void InitChart()
         {
+            this.groupControl1.Text = this.Tag.ToString() + " temperature curve";
             Series series = chart1.Series[0];
             series.ChartType = SeriesChartType.Spline;
             series.IsXValueIndexed = true;
@@ -36,6 +37,7 @@ namespace WindowsFormsControlLibrary
             chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
             chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
             chart1.Legends[0].Docking = Docking.Top;
+
         }
 
         public void ChartValueFill(double value)

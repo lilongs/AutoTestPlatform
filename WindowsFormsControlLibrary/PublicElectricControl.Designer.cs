@@ -32,8 +32,12 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PublicElectricControl));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
@@ -52,7 +56,7 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
+            this.chart1.Location = new System.Drawing.Point(2, 39);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.IsXValueIndexed = true;
@@ -66,20 +70,36 @@
             series2.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(513, 302);
+            this.chart1.Size = new System.Drawing.Size(509, 261);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
+            // 
+            // groupControl1
+            // 
+            this.groupControl1.AllowBorderColorBlending = true;
+            this.groupControl1.AppearanceCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupControl1.AppearanceCaption.Options.UseBorderColor = true;
+            this.groupControl1.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl1.CaptionImageOptions.Image")));
+            this.groupControl1.Controls.Add(this.chart1);
+            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl1.Location = new System.Drawing.Point(0, 0);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(513, 302);
+            this.groupControl1.TabIndex = 2;
+            this.groupControl1.Text = "System power information";
             // 
             // PublicElectricControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.groupControl1);
             this.Name = "PublicElectricControl";
             this.Size = new System.Drawing.Size(513, 302);
             this.Load += new System.EventHandler(this.TemperatureControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -87,5 +107,6 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
     }
 }

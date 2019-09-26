@@ -20,7 +20,7 @@ namespace AutoTestPlatform.TestSequence
             InitializeComponent();
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private List<EquipmentConfiguration> list = new List<EquipmentConfiguration>();
+        private List<InstrumentClusterConfiguration> list = new List<InstrumentClusterConfiguration>();
         public string select_equipment = string.Empty;
         private void frmSelectEquipment_Load(object sender, EventArgs e)
         {
@@ -37,14 +37,14 @@ namespace AutoTestPlatform.TestSequence
         private void LoadInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
-            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
-                foreach(EquipmentConfiguration equipment in temp)
+                foreach(InstrumentClusterConfiguration equipment in temp)
                 {
-                    if(!this.listBox1.Items.Contains(equipment.equipment))
-                    this.listBox1.Items.Add(equipment.equipment);
+                    if(!this.listBox1.Items.Contains(equipment.InstrumentCluster))
+                    this.listBox1.Items.Add(equipment.InstrumentCluster);
                 }
                 
             }

@@ -1,6 +1,6 @@
 ﻿namespace AutoTestPlatform.SysConfig
 {
-    partial class frmEquipment
+    partial class frmInstrumentClusterConfiguration
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEquipment));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInstrumentClusterConfiguration));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.save = new System.Windows.Forms.ToolStripButton();
             this.delete = new System.Windows.Forms.ToolStripButton();
@@ -88,6 +88,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 28);
             this.dataGridView1.Name = "dataGridView1";
@@ -99,36 +100,36 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(648, 203);
+            this.label1.Location = new System.Drawing.Point(634, 200);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 12);
+            this.label1.Size = new System.Drawing.Size(113, 12);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Equipment";
+            this.label1.Text = "InstrumentCluster:";
             // 
             // txtEquipment
             // 
-            this.txtEquipment.Location = new System.Drawing.Point(719, 200);
+            this.txtEquipment.Location = new System.Drawing.Point(758, 197);
             this.txtEquipment.Name = "txtEquipment";
-            this.txtEquipment.Size = new System.Drawing.Size(164, 21);
+            this.txtEquipment.Size = new System.Drawing.Size(125, 21);
             this.txtEquipment.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(654, 248);
+            this.label2.Location = new System.Drawing.Point(634, 250);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Paramter";
+            this.label2.Text = "CommunicationType:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(672, 293);
+            this.label3.Location = new System.Drawing.Point(706, 293);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Value";
+            this.label3.Text = "Value:";
             // 
             // combParamter
             // 
@@ -136,9 +137,9 @@
             this.combParamter.Items.AddRange(new object[] {
             "CAN",
             "COM"});
-            this.combParamter.Location = new System.Drawing.Point(719, 245);
+            this.combParamter.Location = new System.Drawing.Point(758, 242);
             this.combParamter.Name = "combParamter";
-            this.combParamter.Size = new System.Drawing.Size(164, 20);
+            this.combParamter.Size = new System.Drawing.Size(125, 20);
             this.combParamter.TabIndex = 18;
             this.combParamter.SelectedIndexChanged += new System.EventHandler(this.combParamter_SelectedIndexChanged);
             // 
@@ -148,12 +149,12 @@
             this.combValue.Items.AddRange(new object[] {
             "CAN",
             "COM"});
-            this.combValue.Location = new System.Drawing.Point(719, 290);
+            this.combValue.Location = new System.Drawing.Point(758, 290);
             this.combValue.Name = "combValue";
-            this.combValue.Size = new System.Drawing.Size(164, 20);
+            this.combValue.Size = new System.Drawing.Size(125, 20);
             this.combValue.TabIndex = 19;
             // 
-            // frmEquipment
+            // frmInstrumentClusterConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,9 +167,9 @@
             this.Controls.Add(this.txtEquipment);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "frmEquipment";
+            this.Name = "frmInstrumentClusterConfiguration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Equipment Paramter Configuration";
+            this.Text = "Instrument cluster paramter configuration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAmmeterConfiguration_FormClosed);
             this.Load += new System.EventHandler(this.frmTestSequncenManager_Load);
             this.toolStrip1.ResumeLayout(false);

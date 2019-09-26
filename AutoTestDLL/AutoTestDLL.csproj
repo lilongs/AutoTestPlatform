@@ -69,7 +69,7 @@
     <Compile Include="Model\COM.cs" />
     <Compile Include="Model\CurrentElectricValue.cs" />
     <Compile Include="Model\ElectricCurrent.cs" />
-    <Compile Include="Model\EquipmentConfiguration.cs" />
+    <Compile Include="Model\InstrumentClusterConfiguration.cs" />
     <Compile Include="Model\EquipmentTestInfo.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Signal.cs" />

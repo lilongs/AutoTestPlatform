@@ -30,7 +30,6 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.cOMConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,18 +38,14 @@
             this.TestTypeEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.TestSequenceEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentTestInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.ammeterConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.testUnit1 = new WindowsFormsControlLibrary.TestUnit();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -67,46 +62,40 @@
             // sysConfigToolStripMenuItem
             // 
             this.sysConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ammeterConfiguration,
             this.cANConfiguration,
             this.cOMConfiguration,
             this.equipmentConfiguration,
             this.temperatureConfiguration});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
-            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(77, 21);
-            this.sysConfigToolStripMenuItem.Text = "SysConfig";
-            // 
-            // ammeterConfiguration
-            // 
-            this.ammeterConfiguration.Name = "ammeterConfiguration";
-            this.ammeterConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(144, 21);
+            this.sysConfigToolStripMenuItem.Text = "System Configuration";
             // 
             // cANConfiguration
             // 
             this.cANConfiguration.Name = "cANConfiguration";
-            this.cANConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cANConfiguration.Size = new System.Drawing.Size(265, 22);
             this.cANConfiguration.Text = "CAN Configuration";
             this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
             // 
             // cOMConfiguration
             // 
             this.cOMConfiguration.Name = "cOMConfiguration";
-            this.cOMConfiguration.Size = new System.Drawing.Size(230, 22);
+            this.cOMConfiguration.Size = new System.Drawing.Size(265, 22);
             this.cOMConfiguration.Text = "COM Configuration";
             this.cOMConfiguration.Click += new System.EventHandler(this.cOMConfiguration_Click);
             // 
             // equipmentConfiguration
             // 
             this.equipmentConfiguration.Name = "equipmentConfiguration";
-            this.equipmentConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.equipmentConfiguration.Text = "Equipment Configuration";
+            this.equipmentConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.equipmentConfiguration.Text = "Instrument Cluster Configuration";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
             // temperatureConfiguration
             // 
             this.temperatureConfiguration.Name = "temperatureConfiguration";
-            this.temperatureConfiguration.Size = new System.Drawing.Size(230, 22);
-            this.temperatureConfiguration.Text = "TemperatureConfiguration";
+            this.temperatureConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.temperatureConfiguration.Text = "Temperature Configuration";
             this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
             // 
             // editToolStripMenuItem
@@ -122,23 +111,28 @@
             // TestTypeEdit
             // 
             this.TestTypeEdit.Name = "TestTypeEdit";
-            this.TestTypeEdit.Size = new System.Drawing.Size(185, 22);
+            this.TestTypeEdit.Size = new System.Drawing.Size(225, 22);
             this.TestTypeEdit.Text = "TestTypeEdit";
             this.TestTypeEdit.Click += new System.EventHandler(this.TestTypeEdit_Click);
             // 
             // TestSequenceEdit
             // 
             this.TestSequenceEdit.Name = "TestSequenceEdit";
-            this.TestSequenceEdit.Size = new System.Drawing.Size(185, 22);
+            this.TestSequenceEdit.Size = new System.Drawing.Size(225, 22);
             this.TestSequenceEdit.Text = "TestSequenceEdit";
             this.TestSequenceEdit.Click += new System.EventHandler(this.TestSequenceEdit_Click);
             // 
             // equipmentTestInfo
             // 
             this.equipmentTestInfo.Name = "equipmentTestInfo";
-            this.equipmentTestInfo.Size = new System.Drawing.Size(185, 22);
-            this.equipmentTestInfo.Text = "EquipmentTestInfo";
+            this.equipmentTestInfo.Size = new System.Drawing.Size(225, 22);
+            this.equipmentTestInfo.Text = "InstrumentClusterTestInfo";
             this.equipmentTestInfo.Click += new System.EventHandler(this.equipmentTestInfo_Click);
+            // 
+            // ammeterConfiguration
+            // 
+            this.ammeterConfiguration.Name = "ammeterConfiguration";
+            this.ammeterConfiguration.Size = new System.Drawing.Size(32, 19);
             // 
             // panel2
             // 
@@ -174,35 +168,8 @@
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 25);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
             this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
             this.xtraTabControl1.TabIndex = 14;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
-            // 
-            // xtraTabPage1
-            // 
-            this.xtraTabPage1.Controls.Add(this.testUnit1);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1389, 617);
-            this.xtraTabPage1.Text = "xtraTabPage1";
-            // 
-            // testUnit1
-            // 
-            this.testUnit1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.testUnit1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.testUnit1.Location = new System.Drawing.Point(0, 0);
-            this.testUnit1.Name = "testUnit1";
-            this.testUnit1.Size = new System.Drawing.Size(1389, 617);
-            this.testUnit1.TabIndex = 0;
-            this.testUnit1.Tag = "Equipment1";
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1389, 617);
-            this.xtraTabPage2.Text = "xtraTabPage2";
             // 
             // frmMain
             // 
@@ -224,8 +191,6 @@
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,9 +213,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private WindowsFormsControlLibrary.TestUnit testUnit1;
     }
 }
 

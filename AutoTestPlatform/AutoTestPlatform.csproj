@@ -129,11 +129,11 @@
     <Compile Include="SysConfig\frmTemperatureConfiguration.Designer.cs">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="SysConfig\frmEquipment.cs">
+    <Compile Include="SysConfig\frmInstrumentClusterConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmEquipment.Designer.cs">
-      <DependentUpon>frmEquipment.cs</DependentUpon>
+    <Compile Include="SysConfig\frmInstrumentClusterConfiguration.Designer.cs">
+      <DependentUpon>frmInstrumentClusterConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="SysConfig\frmCOMConfiguration.cs">
       <SubType>Form</SubType>
@@ -171,11 +171,11 @@
     <Compile Include="TestSequence\frmTestSequncenManager.Designer.cs">
       <DependentUpon>frmTestSequncenManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestSequence\frmEquipmentTestType.cs">
+    <Compile Include="TestSequence\frmInstrumentClusterTestType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestSequence\frmEquipmentTestType.Designer.cs">
-      <DependentUpon>frmEquipmentTestType.cs</DependentUpon>
+    <Compile Include="TestSequence\frmInstrumentClusterTestType.Designer.cs">
+      <DependentUpon>frmInstrumentClusterTestType.cs</DependentUpon>
     </Compile>
     <Compile Include="TestSequence\frmTestTypeManager.cs">
       <SubType>Form</SubType>
@@ -205,8 +205,8 @@
     <EmbeddedResource Include="SysConfig\frmTemperatureConfiguration.resx">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SysConfig\frmEquipment.resx">
-      <DependentUpon>frmEquipment.cs</DependentUpon>
+    <EmbeddedResource Include="SysConfig\frmInstrumentClusterConfiguration.resx">
+      <DependentUpon>frmInstrumentClusterConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SysConfig\frmCOMConfiguration.resx">
       <DependentUpon>frmCOMConfiguration.cs</DependentUpon>
@@ -226,8 +226,8 @@
     <EmbeddedResource Include="TestSequence\frmTestSequncenManager.resx">
       <DependentUpon>frmTestSequncenManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestSequence\frmEquipmentTestType.resx">
-      <DependentUpon>frmEquipmentTestType.cs</DependentUpon>
+    <EmbeddedResource Include="TestSequence\frmInstrumentClusterTestType.resx">
+      <DependentUpon>frmInstrumentClusterTestType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestSequence\frmTestTypeManager.resx">
       <DependentUpon>frmTestTypeManager.cs</DependentUpon>

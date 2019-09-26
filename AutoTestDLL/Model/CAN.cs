@@ -8,7 +8,7 @@ namespace AutoTestDLL.Model
 {
     public class CAN
     {
-        public string channel { get; set; }
-        public int baudrate { get; set; }
+        public string Channel { get; set; }
+        public int Baudrate { get; set; }
     }
 }

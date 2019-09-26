@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace AutoTestPlatform.TestSequence
 {
-    public partial class frmEquipmentTestType : Form
+    public partial class frmInstrumentClusterTestType : Form
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public frmEquipmentTestType()
+        public frmInstrumentClusterTestType()
         {
             InitializeComponent();
         }
@@ -39,7 +39,7 @@ namespace AutoTestPlatform.TestSequence
         private void LoadEquipmentTestInfo()
         {
             string path = Application.StartupPath + "\\TestInfo";
-            string json = JsonOperate.GetJson(path, "EquipmentTestInfo.json");
+            string json = JsonOperate.GetJson(path, "InstrumentClusterTestInfo.json");
             List<EquipmentTestInfo> temp = JsonConvert.DeserializeObject<List<EquipmentTestInfo>>(json);
             if (temp != null)
             {
@@ -63,15 +63,15 @@ namespace AutoTestPlatform.TestSequence
         private void LoadEquipmentInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "EquipmentConfiguration.json");
-            List<EquipmentConfiguration> temp = JsonConvert.DeserializeObject<List<EquipmentConfiguration>>(json);
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
-                foreach(EquipmentConfiguration equipment in temp)
+                foreach(InstrumentClusterConfiguration equipment in temp)
                 {
                     
-                    if(!combEquipment.Items.Contains(equipment.equipment))
-                        this.combEquipment.Items.Add(equipment.equipment);
+                    if(!combEquipment.Items.Contains(equipment.InstrumentCluster))
+                        this.combEquipment.Items.Add(equipment.InstrumentCluster);
                 }
             }
         }
@@ -81,22 +81,22 @@ namespace AutoTestPlatform.TestSequence
             try
             {
                 string path = Application.StartupPath + "\\TestInfo";
-                var item = list.Where(x => x.equipment == combEquipment.Text && x.typename == combtypename.Text).FirstOrDefault();
+                var item = list.Where(x => x.InstrumentCluster == combEquipment.Text && x.TypeName == combtypename.Text).FirstOrDefault();
                 if (item!=null)
                 {
-                    item.equipment = combEquipment.Text;
-                    item.typename = combtypename.Text;
+                    item.InstrumentCluster = combEquipment.Text;
+                    item.TypeName = combtypename.Text;
                 }
                 else
                 {
                     EquipmentTestInfo testInfo = new EquipmentTestInfo();
-                    testInfo.equipment = combEquipment.Text;
-                    testInfo.typename = combtypename.Text;
+                    testInfo.InstrumentCluster = combEquipment.Text;
+                    testInfo.TypeName = combtypename.Text;
                     list.Add(testInfo);
                 }              
 
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "EquipmentTestInfo.json", json);
+                JsonOperate.SaveJson(path, "InstrumentClusterTestInfo.json", json);
                 LoadEquipmentTestInfo();
             }
             catch(Exception ex)
@@ -109,18 +109,18 @@ namespace AutoTestPlatform.TestSequence
         {
             try
             {
-                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["equipment"].Value.ToString();
-                string typename = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["typename"].Value.ToString();
+                string equipment = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["InstrumentCluster"].Value.ToString();
+                string typename = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["TypeName"].Value.ToString();
                 for (int i=0;i< list.Count;i++)
                 {
-                    if (list[i].typename == typename && list[i].equipment==equipment)
+                    if (list[i].TypeName == typename && list[i].InstrumentCluster==equipment)
                     {
                         list.RemoveAt(i);
                     }
                 }
                 string path = Application.StartupPath + "\\TestInfo";
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "EquipmentTestInfo.json", json);
+                JsonOperate.SaveJson(path, "InstrumentClusterTestInfo.json", json);
                 LoadEquipmentTestInfo();
             }
             catch (Exception ex)
@@ -139,8 +139,8 @@ namespace AutoTestPlatform.TestSequence
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = this.dataGridView1.CurrentRow;
-                this.combEquipment.Text = row.Cells["equipment"].Value.ToString();
-                this.combtypename.Text = row.Cells["typename"].Value.ToString();
+                this.combEquipment.Text = row.Cells["InstrumentCluster"].Value.ToString();
+                this.combtypename.Text = row.Cells["TypeName"].Value.ToString();
             }
         }
     }

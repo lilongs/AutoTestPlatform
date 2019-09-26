@@ -64,18 +64,18 @@ namespace WindowsFormsControlLibrary
             List<TypeList> result = new List<TypeList>();
 
            string path = Application.StartupPath + "\\TestInfo";
-            string json = JsonOperate.GetJson(path, "EquipmentTestInfo.json");
+            string json = JsonOperate.GetJson(path, "InstrumentClusterTestInfo.json");
             List<EquipmentTestInfo> temp = JsonConvert.DeserializeObject<List<EquipmentTestInfo>>(json);
 
             string json2 = JsonOperate.GetJson(path, "TypeList.json");
             List<TypeList>  temp2 = JsonConvert.DeserializeObject<List<TypeList>>(json2);
             if (temp != null && temp2!=null)
             {
-                List<EquipmentTestInfo>  list=temp.Where(t => t.equipment == this.Tag.ToString()).ToList();
+                List<EquipmentTestInfo>  list=temp.Where(t => t.InstrumentCluster == this.Tag.ToString()).ToList();
 
                 foreach (EquipmentTestInfo info in list)
                 {
-                    result.AddRange(temp2.Where(t => t.typename == info.typename || t.parentname==info.typename).ToList());
+                    result.AddRange(temp2.Where(t => t.typename == info.TypeName || t.parentname==info.TypeName).ToList());
                 }
             }
             return result;

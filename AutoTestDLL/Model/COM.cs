@@ -9,12 +9,12 @@ namespace AutoTestDLL.Model
 {
     public class COM
     {
-        public string portName { get; set; }
-        public int baudrate { get; set; }
-        public Parity parity { get; set; }
-        public int dataBits { get; set; }
-        public StopBits stopBits { get; set; }
-        public Handshake handshake { get; set; }
+        public string PortName { get; set; }
+        public int Baudrate { get; set; }
+        public Parity Parity { get; set; }
+        public int DataBits { get; set; }
+        public StopBits StopBits { get; set; }
+        public Handshake Handshake { get; set; }
 
         private SerialPort SP_ReadData = null;
 
@@ -32,11 +32,11 @@ namespace AutoTestDLL.Model
             SP_ReadData.Parity = Parity;
 
             this.SP_ReadData = serial;
-            this.portName = PortName;
-            this.baudrate = BaudRate;
-            this.dataBits = DataBits;
-            this.stopBits = StopBits;
-            this.parity = Parity;
+            this.PortName = PortName;
+            this.Baudrate = BaudRate;
+            this.DataBits = DataBits;
+            this.StopBits = StopBits;
+            this.Parity = Parity;
         }
 
         public void Open()

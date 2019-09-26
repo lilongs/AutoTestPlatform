@@ -9,8 +9,8 @@ namespace AutoTestDLL.Model
 {
     public class TempSensorConfiguration
     {
-        public string sensorName { get; set; }
-        public string paramter { get; set; }
-        public string value { get; set; }
+        public string SensorName { get; set; }
+        public string CommunicationType { get; set; }
+        public string Value { get; set; }
     }
 }
