@@ -39,7 +39,7 @@ namespace AutoTestPlatform
                 chartTimer.Start();
 
                 LoadEquipmentInfo();
-                LoadTestUnitControl();
+                //LoadTestUnitControl();
                 LoadPublicElectricInfo();
                 LoadPublicElectricControl();
                 LoadTemperatureInfo();

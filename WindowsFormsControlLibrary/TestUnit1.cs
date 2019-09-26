@@ -15,9 +15,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsControlLibrary
 {
-    public partial class TestUnit : UserControl
+    public partial class TestUnit1 : UserControl
     {
-        public TestUnit()
+        public TestUnit1()
         {
             InitializeComponent();
         }
@@ -33,8 +33,6 @@ namespace WindowsFormsControlLibrary
         private List<TestStep> CompletedList = new List<TestStep>();
         double CountTime = 0d;
 
-        public DateTime startTime = new DateTime();
-        private double maxValue=0;
         private void TestUnit_Load(object sender, EventArgs e)
         {
             try
@@ -47,9 +45,7 @@ namespace WindowsFormsControlLibrary
                     ExpandTree();
                 }
                 InitChart();
-                this.groupControl3.Text = this.Tag.ToString() + " step info:";
 
-                startTime = DateTime.Now;
                 testTimer.Interval = 1;
                 testTimer.Elapsed += testTimer_Tick;
             }
@@ -89,21 +85,20 @@ namespace WindowsFormsControlLibrary
             temp = JsonConvert.DeserializeObject<List<TypeList>>(json);
             return temp;
         }
-       
+
         private void InitChart()
         {
-            this.groupControl1.Text = this.Tag.ToString() + " current curve";
             Series series = chart1.Series[0];
             series.ChartType = SeriesChartType.Spline;
             series.IsXValueIndexed = true;
             series.XValueType = ChartValueType.DateTime;
-            series.Name = this.Tag.ToString() + "CurrentCurve";
+            series.Name = this.Tag.ToString()+ "CurrentCurve";
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
             chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
             chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
             chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            //chart1.Legends[0].Docking = Docking.Top;
+            chart1.Legends[0].Docking= Docking.Top;
         }
 
         public void ChartValueFill(double value)
@@ -113,7 +108,7 @@ namespace WindowsFormsControlLibrary
                 chart1.BeginInvoke((MethodInvoker)delegate
                 {
                     Series series = chart1.Series[0];
-                    if (series.Points.Count > 2000)
+                    if (series.Points.Count > 200)
                     {
                         series.Points.RemoveAt(0);
                     }
@@ -169,6 +164,7 @@ namespace WindowsFormsControlLibrary
             {
                 txttesttime.BeginInvoke((MethodInvoker)delegate
                 {
+                    //this.txttesttime.Text = 
                     this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
                 });
 

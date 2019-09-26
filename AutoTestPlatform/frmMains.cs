@@ -36,7 +36,7 @@ namespace AutoTestPlatform
             {
                 chartTimer.Interval = 1000;
                 chartTimer.Elapsed += chartTimer_Tick;
-                chartTimer.Start();
+                
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
@@ -44,6 +44,7 @@ namespace AutoTestPlatform
                 LoadPublicElectricControl();
                 LoadTemperatureInfo();
                 LoadTemperatureControl();
+                chartTimer.Start();
             }
             catch (Exception ex)
             {
@@ -110,8 +111,8 @@ namespace AutoTestPlatform
             int x = this.panel1.Width;
             int y = this.panel1.Height;
 
-            int _x = 800;
-            int _y = 450;
+            int _x = 944;
+            int _y = 462;
 
             foreach (var item in DicEquipmentInfo)
             {
@@ -169,25 +170,33 @@ namespace AutoTestPlatform
 
         private void chartTimer_Tick(object sender, EventArgs e)
         {
-            foreach (var it in DicTemperatureInfo)
+            try
             {
-                it.Value.ChartValueFill(new Random().Next(1, 100));
-            }
+                foreach (var it in DicTemperatureInfo)
+                {
+                    it.Value.ChartValueFill(new Random().Next(1, 100));
+                }
 
-            foreach (var item in DicEquipmentInfo)
+                foreach (var item in DicEquipmentInfo)
+                {
+                    item.Value.ChartValueFill(new Random().Next(1, 100));
+                }
+
+                foreach (var its in DicPublicElectricInfo)
+                {
+                    CurrentElectricValue value = new CurrentElectricValue();
+                    value.now = DateTime.Now;
+                    value.currentValue = new Random().Next(1, 1000);
+                    value.voltageValue = new Random().Next(0, 13000);
+
+                    its.Value.ChartValueFill(value);
+                }
+            }
+            catch(Exception ex)
             {
-                item.Value.ChartValueFill(new Random().Next(1, 100));
+                logger.Error(ex, ex.Message);
             }
-
-            foreach(var its in DicPublicElectricInfo)
-            {
-                CurrentElectricValue value = new CurrentElectricValue();
-                value.now = DateTime.Now;
-                value.currentValue = new Random().Next(1, 1000);
-                value.voltageValue = new Random().Next(0, 13000);
-
-                its.Value.ChartValueFill(value);
-            }
+            
         }
 
         #region 电流表样式图列加载（暂未用）
