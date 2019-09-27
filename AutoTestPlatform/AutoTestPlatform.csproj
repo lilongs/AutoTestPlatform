@@ -102,6 +102,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmKvaserCommunication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKvaserCommunication.Designer.cs">
+      <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmKvaserDBSend.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,7 +126,8 @@
     <Compile Include="frmMains.Designer.cs">
       <DependentUpon>frmMains.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\DBCCanMessage.cs" />
+    <Compile Include="Module\KvaserDbcCommunication.cs" />
+    <Compile Include="Module\KvaserCommunication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysConfig\frmTemperatureConfiguration.cs">
@@ -183,6 +190,9 @@
     <Compile Include="TestSequence\frmTestTypeManager.Designer.cs">
       <DependentUpon>frmTestTypeManager.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmKvaserCommunication.resx">
+      <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmKvaserDBSend.resx">
       <DependentUpon>frmKvaserDBSend.cs</DependentUpon>
     </EmbeddedResource>

@@ -25,7 +25,7 @@ namespace AutoTestPlatform
             transmitter.WorkerReportsProgress = true;
             transmitter.ProgressChanged += new ProgressChangedEventHandler(ProcessMessage);
         }
-        DBCCanMessage dBCCan = new DBCCanMessage();
+        KvaserDbcCommunication dBCCan = new KvaserDbcCommunication();
         Kvadblib.Hnd dh;
         Kvadblib.MessageHnd msgHandle;
 

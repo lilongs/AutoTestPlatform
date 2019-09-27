@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsControlLibrary
 {
-    partial class TestUnit
+    partial class TestUnit3
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestUnit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestUnit3));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.panel0 = new DevExpress.XtraEditors.GroupControl();
             this.panel1 = new DevExpress.XtraEditors.GroupControl();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -40,6 +40,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel7 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.txtFAZIT = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -71,10 +72,10 @@
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.btnStart = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -82,10 +83,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel0)).BeginInit();
+            this.panel0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel7)).BeginInit();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -93,33 +96,32 @@
             this.xtraTabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupControl1
+            // panel0
             // 
-            this.groupControl1.AllowBorderColorBlending = true;
-            this.groupControl1.AppearanceCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.groupControl1.AppearanceCaption.Options.UseBorderColor = true;
-            this.groupControl1.Controls.Add(this.xtraTabControl1);
-            this.groupControl1.Controls.Add(this.groupControl3);
-            this.groupControl1.Controls.Add(this.panel1);
-            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.ShowCaption = false;
-            this.groupControl1.Size = new System.Drawing.Size(919, 464);
-            this.groupControl1.TabIndex = 0;
-            this.groupControl1.Text = "groupControl1";
+            this.panel0.AllowBorderColorBlending = true;
+            this.panel0.AppearanceCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panel0.AppearanceCaption.Options.UseBorderColor = true;
+            this.panel0.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.panel0.Controls.Add(this.panel1);
+            this.panel0.Controls.Add(this.panel7);
+            this.panel0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel0.Location = new System.Drawing.Point(0, 0);
+            this.panel0.Name = "panel0";
+            this.panel0.ShowCaption = false;
+            this.panel0.Size = new System.Drawing.Size(919, 464);
+            this.panel0.TabIndex = 0;
             // 
             // panel1
             // 
@@ -130,11 +132,11 @@
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(2, 401);
+            this.panel1.Location = new System.Drawing.Point(0, 403);
             this.panel1.Name = "panel1";
             this.panel1.ShowCaption = false;
-            this.panel1.Size = new System.Drawing.Size(915, 61);
-            this.panel1.TabIndex = 1;
+            this.panel1.Size = new System.Drawing.Size(919, 61);
+            this.panel1.TabIndex = 0;
             // 
             // richTextBox4
             // 
@@ -196,6 +198,17 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Actual test steps:";
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.groupControl3);
+            this.panel7.Controls.Add(this.xtraTabControl1);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.ShowCaption = false;
+            this.panel7.Size = new System.Drawing.Size(919, 402);
+            this.panel7.TabIndex = 7;
+            // 
             // groupControl3
             // 
             this.groupControl3.AllowBorderColorBlending = true;
@@ -231,8 +244,8 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupControl3.Location = new System.Drawing.Point(663, 2);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(254, 399);
-            this.groupControl3.TabIndex = 4;
+            this.groupControl3.Size = new System.Drawing.Size(254, 398);
+            this.groupControl3.TabIndex = 3;
             this.groupControl3.Text = "Step info:";
             // 
             // txtFAZIT
@@ -494,12 +507,14 @@
             // 
             // xtraTabControl1
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
+            this.xtraTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 4);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(661, 399);
-            this.xtraTabControl1.TabIndex = 6;
+            this.xtraTabControl1.Size = new System.Drawing.Size(662, 393);
+            this.xtraTabControl1.TabIndex = 5;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
             this.xtraTabPage2,
@@ -509,7 +524,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.panel2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(655, 370);
+            this.xtraTabPage1.Size = new System.Drawing.Size(656, 364);
             this.xtraTabPage1.Text = "Test step output";
             // 
             // panel2
@@ -520,33 +535,33 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(655, 370);
+            this.panel2.Size = new System.Drawing.Size(656, 364);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.groupControl2);
+            this.panel3.Controls.Add(this.groupControl1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(214, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(439, 368);
+            this.panel3.Size = new System.Drawing.Size(440, 362);
             this.panel3.TabIndex = 18;
             // 
-            // groupControl2
+            // groupControl1
             // 
-            this.groupControl2.AllowBorderColorBlending = true;
-            this.groupControl2.AppearanceCaption.BorderColor = System.Drawing.Color.LightBlue;
-            this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
-            this.groupControl2.AppearanceCaption.Options.UseBorderColor = true;
-            this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl2.CaptionImageOptions.Image")));
-            this.groupControl2.Controls.Add(this.chart1);
-            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 0);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(439, 368);
-            this.groupControl2.TabIndex = 3;
-            this.groupControl2.Text = "Current curve";
+            this.groupControl1.AllowBorderColorBlending = true;
+            this.groupControl1.AppearanceCaption.BorderColor = System.Drawing.Color.LightBlue;
+            this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
+            this.groupControl1.AppearanceCaption.Options.UseBorderColor = true;
+            this.groupControl1.AppearanceCaption.Options.UseFont = true;
+            this.groupControl1.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl1.CaptionImageOptions.Image")));
+            this.groupControl1.Controls.Add(this.chart1);
+            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl1.Location = new System.Drawing.Point(0, 0);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(440, 362);
+            this.groupControl1.TabIndex = 3;
+            this.groupControl1.Text = "Current curve";
             // 
             // chart1
             // 
@@ -572,35 +587,35 @@
             series1.Name = "Series1";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(435, 327);
+            this.chart1.Size = new System.Drawing.Size(436, 321);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.groupControl4);
+            this.panel4.Controls.Add(this.groupControl2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(214, 368);
+            this.panel4.Size = new System.Drawing.Size(214, 362);
             this.panel4.TabIndex = 17;
             // 
-            // groupControl4
+            // groupControl2
             // 
-            this.groupControl4.AllowBorderColorBlending = true;
-            this.groupControl4.AppearanceCaption.BorderColor = System.Drawing.Color.LightGreen;
-            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
-            this.groupControl4.AppearanceCaption.Options.UseBorderColor = true;
-            this.groupControl4.AppearanceCaption.Options.UseFont = true;
-            this.groupControl4.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl4.CaptionImageOptions.Image")));
-            this.groupControl4.Controls.Add(this.btnStart);
-            this.groupControl4.Controls.Add(this.panel5);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(0, 0);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(214, 368);
-            this.groupControl4.TabIndex = 3;
-            this.groupControl4.Text = "Select test step:";
+            this.groupControl2.AllowBorderColorBlending = true;
+            this.groupControl2.AppearanceCaption.BorderColor = System.Drawing.Color.LightGreen;
+            this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
+            this.groupControl2.AppearanceCaption.Options.UseBorderColor = true;
+            this.groupControl2.AppearanceCaption.Options.UseFont = true;
+            this.groupControl2.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl2.CaptionImageOptions.Image")));
+            this.groupControl2.Controls.Add(this.btnStart);
+            this.groupControl2.Controls.Add(this.panel5);
+            this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl2.Location = new System.Drawing.Point(0, 0);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(214, 362);
+            this.groupControl2.TabIndex = 3;
+            this.groupControl2.Text = "Select test step:";
             // 
             // btnStart
             // 
@@ -618,7 +633,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(2, 39);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(210, 327);
+            this.panel5.Size = new System.Drawing.Size(210, 321);
             this.panel5.TabIndex = 16;
             // 
             // treeView1
@@ -627,7 +642,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(210, 327);
+            this.treeView1.Size = new System.Drawing.Size(210, 321);
             this.treeView1.TabIndex = 14;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             // 
@@ -635,7 +650,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.dataGridView1);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(652, 422);
+            this.xtraTabPage2.Size = new System.Drawing.Size(651, 369);
             this.xtraTabPage2.Text = "Execute test steps";
             // 
             // dataGridView1
@@ -646,14 +661,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(652, 422);
+            this.dataGridView1.Size = new System.Drawing.Size(651, 369);
             this.dataGridView1.TabIndex = 1;
             // 
             // xtraTabPage3
             // 
             this.xtraTabPage3.Controls.Add(this.richTextBox1);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(652, 422);
+            this.xtraTabPage3.Size = new System.Drawing.Size(651, 369);
             this.xtraTabPage3.Text = "Debugging";
             // 
             // richTextBox1
@@ -661,7 +676,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(652, 422);
+            this.richTextBox1.Size = new System.Drawing.Size(651, 369);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -669,16 +684,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupControl1);
+            this.Controls.Add(this.panel0);
             this.Name = "TestUnit";
             this.Size = new System.Drawing.Size(919, 464);
             this.Tag = "Equipment1";
             this.Load += new System.EventHandler(this.TestUnit_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panel0)).EndInit();
+            this.panel0.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel7)).EndInit();
+            this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
@@ -687,12 +704,12 @@
             this.xtraTabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -703,55 +720,56 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.GroupControl panel0;
         private DevExpress.XtraEditors.GroupControl panel1;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
-        private System.Windows.Forms.Label txtFAZIT;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label txtPCBPartnumber;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label txtHARDWARE;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label txtSOFRWARE;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label txtSPAREPART;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label txtPRPDUCTPartnumber;
-        private Countdown countdown1;
-        private System.Windows.Forms.Label txttesttime;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label txtcycletime;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label txtvoltage;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label txtmodelname;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label txtstepname;
-        private System.Windows.Forms.Label txttypename;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox richTextBox4;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel panel4;
-        private DevExpress.XtraEditors.GroupControl groupControl4;
-        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.TreeView treeView1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private Countdown countdown1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label txtPCBPartnumber;
+        private System.Windows.Forms.Label txtHARDWARE;
+        private System.Windows.Forms.Label txtSOFRWARE;
+        private System.Windows.Forms.Label txtSPAREPART;
+        private System.Windows.Forms.Label txtPRPDUCTPartnumber;
+        private System.Windows.Forms.Label txttesttime;
+        private System.Windows.Forms.Label txtcycletime;
+        private System.Windows.Forms.Label txtvoltage;
+        private System.Windows.Forms.Label txtmodelname;
+        private System.Windows.Forms.Label txtstepname;
+        private System.Windows.Forms.Label txttypename;
+        private System.Windows.Forms.Label txtFAZIT;
+        private System.Windows.Forms.Label label18;
+        private DevExpress.XtraEditors.GroupControl panel7;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
     }
 }

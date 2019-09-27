@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutoTestPlatform.Module
 {
-    public class DBCCanMessage
+    public class KvaserDbcCommunication
     {
 
         public bool LoadDB(string filename,out Kvadblib.Hnd dh)

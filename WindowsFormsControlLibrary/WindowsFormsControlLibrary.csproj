@@ -91,6 +91,12 @@
     <Compile Include="TestUnit.Designer.cs">
       <DependentUpon>TestUnit.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestUnit3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestUnit3.Designer.cs">
+      <DependentUpon>TestUnit3.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestUnit1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestUnit.resx">
       <DependentUpon>TestUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestUnit3.resx">
+      <DependentUpon>TestUnit3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestUnit1.resx">
       <DependentUpon>TestUnit1.cs</DependentUpon>

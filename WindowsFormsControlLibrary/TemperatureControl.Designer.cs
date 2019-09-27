@@ -65,6 +65,9 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.AllowBorderColorBlending = true;
+            this.groupControl1.AppearanceCaption.BorderColor = System.Drawing.Color.Coral;
+            this.groupControl1.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl1.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl1.CaptionImageOptions.Image")));
             this.groupControl1.Controls.Add(this.chart1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
