@@ -108,6 +108,12 @@
     <Compile Include="frmKvaserCommunication.Designer.cs">
       <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmKvaserDBNodeMessageSend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKvaserDBNodeMessageSend.Designer.cs">
+      <DependentUpon>frmKvaserDBNodeMessageSend.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmKvaserDBSend.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,8 +132,8 @@
     <Compile Include="frmMains.Designer.cs">
       <DependentUpon>frmMains.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\KvaserDbcCommunication.cs" />
     <Compile Include="Module\KvaserCommunication.cs" />
+    <Compile Include="Module\KvaserDbcMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysConfig\frmTemperatureConfiguration.cs">
@@ -192,6 +198,9 @@
     </Compile>
     <EmbeddedResource Include="frmKvaserCommunication.resx">
       <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKvaserDBNodeMessageSend.resx">
+      <DependentUpon>frmKvaserDBNodeMessageSend.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmKvaserDBSend.resx">
       <DependentUpon>frmKvaserDBSend.cs</DependentUpon>

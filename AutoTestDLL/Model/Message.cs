@@ -14,6 +14,7 @@ namespace AutoTestDLL.Model
         public int dlc { get; set; }
         public int flags { get; set; }
         public long time { get; set; }
+        public string tx_node { get; set; }
 
         public Message()
         {

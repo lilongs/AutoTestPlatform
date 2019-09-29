@@ -14,9 +14,9 @@ using Kvaser.Kvadblib;
 
 namespace AutoTestPlatform
 {
-    public partial class frmKvaserDBSend : Form
+    public partial class frmKvaserDBNodeMessageSend : Form
     {
-        public frmKvaserDBSend()
+        public frmKvaserDBNodeMessageSend()
         {
             InitializeComponent();
             //Set up the BackgroundWorker
@@ -31,7 +31,8 @@ namespace AutoTestPlatform
 
         private readonly BackgroundWorker transmitter;
 
-        List<Signal> signalList = new List<Signal>();
+        List<AutoTestDLL.Model.Message> messages = new List<AutoTestDLL.Model.Message>();
+        
 
         private void loadDbButton_Click(object sender, EventArgs e)
         {
@@ -57,31 +58,21 @@ namespace AutoTestPlatform
         private void SetupMessagesBox()
         {
             List<AutoTestDLL.Model.Message> list = dBCCan.LoadMessages();
-            boxItems.DataSource = list;
-            boxItems.DisplayMember = "name";
-            boxItems.ValueMember = "id";
+            messages = list.Where(x => x.tx_node == "BCM" || x.tx_node == "Gateway").ToList();
+            dataGridView2.DataSource = messages;
             
             UpdateButtons();
         }
 
         private void UpdateButtons()
         {
-            loadMsgButton.Enabled = dBCCan.hasDb;
             initButton.Enabled = !dBCCan.channelOn;
             closeButton.Enabled = dBCCan.channelOn;
-            sendMsgButton.Enabled = dBCCan.channelOn && dBCCan.hasMessage;
+            sendMsgButton.Enabled = dBCCan.channelOn;
             startAutoButton.Enabled = dBCCan.channelOn && dBCCan.hasMessage && !autoTransmit;
             stopTransmitButton.Enabled = autoTransmit;
         }
 
-        private void loadMsgButton_Click(object sender, EventArgs e)
-        {
-            int messageID = Convert.ToInt32(this.boxItems.SelectedValue);
-            this.dataGridView1.DataSource = null;
-            signalList = dBCCan.LoadSignalsById(messageID);
-            this.dataGridView1.DataSource = signalList;
-            UpdateButtons();
-        }
 
         private void initButton_Click(object sender, EventArgs e)
         {
@@ -92,8 +83,18 @@ namespace AutoTestPlatform
 
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
-            dBCCan.sendMsg(signalList);
+            SendAllMessage();
             UpdateButtons();
+        }
+
+        private void SendAllMessage()
+        {
+            foreach (AutoTestDLL.Model.Message message in messages)
+            {
+                List<Signal> signalList = new List<Signal>();
+                signalList = dBCCan.LoadSignalsById(message.id);
+                dBCCan.sendMsg(signalList);
+            }
         }
 
         private void startAutoButton_Click(object sender, EventArgs e)
@@ -133,7 +134,7 @@ namespace AutoTestPlatform
 
         private void ProcessMessage(object sender, ProgressChangedEventArgs e)
         {
-            dBCCan.sendMsg(signalList);
+            SendAllMessage();
         }
 
         private void closeButton_Click(object sender, EventArgs e)
