@@ -11,7 +11,7 @@ namespace AutoTestPlatform.Module
     public class KvaserDbcMessage
     {
         //Handle for the channel to listen for messages on
-        int chanHandle;
+        public int chanHandle;
         //Handle to the database and the message to send
         Kvadblib.Hnd dh;
         Kvadblib.MessageHnd msgHandle;
@@ -25,7 +25,6 @@ namespace AutoTestPlatform.Module
         public bool channelOn = false;
         public bool hasMessage = false;
         public bool hasDb = false;
-
 
         /*
          * Loads a database from the file selected by the user.
@@ -54,7 +53,7 @@ namespace AutoTestPlatform.Module
                 msgId = ((MsgId & -2147483648) == 0) ? MsgId : MsgId ^ -2147483648;
                 msgFlags = ((MsgId & -2147483648) == 0) ? 0 : Canlib.canMSG_EXT;
                 hasMessage = true;
-                result= LoadSignals();
+                result = LoadSignals();
             }
             return result;
         }
@@ -88,7 +87,7 @@ namespace AutoTestPlatform.Module
             bool result = false;
             if (hasMessage && channelOn)
             {
-                result=SendMessage(signals);
+                result = SendMessage(signals);
             }
             return result;
         }
@@ -134,14 +133,30 @@ namespace AutoTestPlatform.Module
                 Kvadblib.MESSAGE flags;
                 status = Kvadblib.GetMsgName(mh, out name);
                 status = Kvadblib.GetMsgId(mh, out id, out flags);
-                status = Kvadblib.GetMsgSendNode(mh,out nh);
-                status = Kvadblib.GetNodeName(nh,out nodeName);
+                status = Kvadblib.GetMsgSendNode(mh, out nh);
+                status = Kvadblib.GetNodeName(nh, out nodeName);
+
+                Kvadblib.AttributeHnd ah;
+                int attEunmVal=8;
+                status = Kvadblib.GetAttributeByName(dh, "GenMsgSendType", out ah);//获取ah用于存储对应message的ah
+                status = Kvadblib.GetMsgAttributeByName(mh, "GenMsgSendType", ref ah);//获取对应message的attribute信息
+                Kvadblib.GetAttributeValueEnumeration(ah, out attEunmVal);
+
+                int GenMsgCycleTime = 0;
+                status = Kvadblib.GetAttributeByName(dh, "GenMsgCycleTime", out ah);//获取ah用于存储对应message的ah
+                status = Kvadblib.GetMsgAttributeByName(mh, "GenMsgCycleTime", ref ah);//获取对应message的attribute信息
+                Kvadblib.GetAttributeValueInt(ah, out GenMsgCycleTime);
+
 
                 Message message = new Message();
                 message.id = id;
                 message.name = name;
                 message.tx_node = nodeName;
+                message.GenMsgSendType = this.GenMsgSendType[attEunmVal];
+                message.GenMsgCycleTime = GenMsgCycleTime;
+
                 messages.Add(message);
+
 
                 status = Kvadblib.GetNextMsg(dh, out mh);
             }
@@ -170,7 +185,7 @@ namespace AutoTestPlatform.Module
                 status = Kvadblib.GetSignalUnit(sh, out unit);
                 status = Kvadblib.GetSignalValueLimits(sh, out min, out max);
                 status = Kvadblib.GetSignalValueScaling(sh, out scale, out offset);
-                
+
                 Signal s = new Signal(name, max, min, min, scale);
                 signals.Add(s);
 
@@ -223,24 +238,19 @@ namespace AutoTestPlatform.Module
             return error;
         }
 
-        public Message ReadMessage()
+        public Message ReadMessage(int readHandle, out Canlib.canStatus status)
         {
-            Canlib.canStatus status;
+            status = Canlib.canStatus.canOK;
             Message m = null;
             int id;
             byte[] data = new byte[8];
             int dlc;
             int flags;
             long time;
-            status = Canlib.canReadWait(chanHandle, out id, data, out dlc, out flags, out time, 50);
 
-            if (status == Canlib.canStatus.canOK)
-            {
-                if (id == msgId)
-                {
-                    m = new Message(id, data, dlc, flags, time);
-                }
-            }
+            status = Canlib.canReadWait(readHandle, out id, data, out dlc, out flags, out time, 50);
+            m = new Message(id, data, dlc, flags, time);
+
             return m;
         }
 
@@ -255,7 +265,20 @@ namespace AutoTestPlatform.Module
             Canlib.canClose(chanHandle);
         }
 
-             
+        private List<string> GenMsgSendType = new List<string>()
+        {
+            "Cyclic",
+            "not_used",
+            "not_used",
+            "not_used",
+            "not_used",
+            "not_used",
+            "not_used",
+            "IfActive",
+            "NoMsgSendType"
+        };
+
+
     }
 
 }

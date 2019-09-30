@@ -108,6 +108,12 @@
     <Compile Include="frmKvaserCommunication.Designer.cs">
       <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmKvaserDBNodeMessageRecevied.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKvaserDBNodeMessageRecevied.Designer.cs">
+      <DependentUpon>frmKvaserDBNodeMessageRecevied.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmKvaserDBNodeMessageSend.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </Compile>
     <EmbeddedResource Include="frmKvaserCommunication.resx">
       <DependentUpon>frmKvaserCommunication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKvaserDBNodeMessageRecevied.resx">
+      <DependentUpon>frmKvaserDBNodeMessageRecevied.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmKvaserDBNodeMessageSend.resx">
       <DependentUpon>frmKvaserDBNodeMessageSend.cs</DependentUpon>

@@ -52,7 +52,6 @@ namespace AutoTestDLL.Model
         {
             // 接收数据
             byte[] buffer = null;
-            byte[] data = new byte[2048];
             int receiveCount = 0;
             while (true)
             {
@@ -60,15 +59,19 @@ namespace AutoTestDLL.Model
                 if (SP_ReadData.BytesToRead < 1)
                 {
                     buffer = new byte[receiveCount];
-                    Array.Copy(data, 0, buffer, 0, receiveCount);
+                    Array.Copy(read_data, 0, buffer, 0, receiveCount);
                     break;
                 }
 
-                receiveCount += SP_ReadData.Read(data, receiveCount, SP_ReadData.BytesToRead);
+                receiveCount += SP_ReadData.Read(read_data, receiveCount, SP_ReadData.BytesToRead);
             }
 
-            if (receiveCount == 0) return;
-            data = buffer;
+            if (receiveCount == 0)
+            {
+                return;
+                
+            }
+            read_data = buffer;
         }
 
         public void Send(byte[] bt)

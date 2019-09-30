@@ -16,7 +16,7 @@ namespace AutoTestPlatform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmKvaserDBNodeMessageSend());
+            Application.Run(new frmKvaserDBNodeMessageRecevied());
         }
     }
 }

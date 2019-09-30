@@ -15,6 +15,8 @@ namespace AutoTestDLL.Model
         public int flags { get; set; }
         public long time { get; set; }
         public string tx_node { get; set; }
+        public string GenMsgSendType { get; set; }
+        public int GenMsgCycleTime { get; set; }
 
         public Message()
         {
