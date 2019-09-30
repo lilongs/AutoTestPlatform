@@ -12,6 +12,7 @@ using System.Threading;
 using AutoTestDLL.Util;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
+using AutoTestDLL.Module;
 
 namespace WindowsFormsControlLibrary
 {
@@ -21,7 +22,6 @@ namespace WindowsFormsControlLibrary
         {
             InitializeComponent();
         }
-        private System.Timers.Timer testTimer = new System.Timers.Timer();
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         private List<TypeList> list = new List<TypeList>();
@@ -31,10 +31,8 @@ namespace WindowsFormsControlLibrary
         private DateTime testStartTime = new DateTime();
 
         private List<TestStep> CompletedList = new List<TestStep>();
-        double CountTime = 0d;
 
-        public DateTime startTime = new DateTime();
-        private double maxValue=0;
+        public DateTime TestStartTime = new DateTime();
         private void TestUnit_Load(object sender, EventArgs e)
         {
             try
@@ -47,11 +45,9 @@ namespace WindowsFormsControlLibrary
                     ExpandTree();
                 }
                 InitChart();
+                InitCan();
                 this.groupControl3.Text = this.Tag.ToString() + " step info:";
 
-                startTime = DateTime.Now;
-                testTimer.Interval = 1;
-                testTimer.Elapsed += testTimer_Tick;
             }
             catch (Exception ex)
             {
@@ -128,7 +124,6 @@ namespace WindowsFormsControlLibrary
             try
             {
                 testStartTime = DateTime.Now;
-                testTimer.Start();
 
                 CompletedList.Clear();
                 this.dataGridView1.DataSource = null;
@@ -146,43 +141,22 @@ namespace WindowsFormsControlLibrary
                 {
                     ReadyTestInfo.Add(tp.typename, testInfo.Where(x => x.typename == tp.typename).ToList());
                 }
+                //测试步骤线程
                 Thread th = new Thread(RunTest);
                 th.IsBackground = true;
                 th.Start();
+
+                //循环发送BCM、Gateway信息
+                IsTestEnd = false;
+                Thread th2 = new Thread(Send_BCM_Gateway_CanMessage);
+                th2.IsBackground = true;
+                th2.Start();
+
                 selectedList.Clear();
             }
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
-            }
-        }
-
-        private void testTimer_Tick(object sender, EventArgs e)
-        {
-            //测试持续时间=当前时间-测试开始时间
-            TimeSpan sp = DateTime.Now - testStartTime;
-            //倒计时时间
-            double diff = CountTime - sp.TotalSeconds;
-            TimeSpan sp2 = TimeSpan.FromSeconds(diff);
-
-            if (this.IsHandleCreated)
-            {
-                txttesttime.BeginInvoke((MethodInvoker)delegate
-                {
-                    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
-                });
-
-                countdown1.BeginInvoke((MethodInvoker)delegate
-                {
-                    if (diff <= 0)
-                    {
-                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
-                    }
-                    else
-                    {
-                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
-                    }
-                });
             }
         }
 
@@ -250,8 +224,9 @@ namespace WindowsFormsControlLibrary
 
         private void RunTest()
         {
+            TestStartTime = DateTime.Now;
             //获取待测试步骤的总CycleTime
-            CountTime = 0;
+            double CountTime = 0;
             foreach (var it in ReadyTestInfo)
             {
                 CountTime+=it.Value.Sum(t => t.cycletime);
@@ -267,6 +242,10 @@ namespace WindowsFormsControlLibrary
                 {
                     foreach (TestStep step in item.Value)
                     {
+                        if (i > step.repeat)
+                        {
+                            continue;
+                        }
                         CompletedList.Add(step);
                         dataGridView1.BeginInvoke((MethodInvoker)delegate
                         {
@@ -290,10 +269,6 @@ namespace WindowsFormsControlLibrary
                                 break;
                         }
 
-                        if (i > step.repeat)
-                        {
-                            continue;
-                        }
                         string stepname = step.stepname;
                         string modelname = step.modelname;
                         ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！",Color.Red);
@@ -304,15 +279,80 @@ namespace WindowsFormsControlLibrary
                         //Model
                         ShowInfo(richTextBox4, modelname);
 
-                        #region can消息发送和com信息接收（待完成）
-                        #endregion
-                        Thread.Sleep(Convert.ToInt32(step.cycletime)*1000);
-
-                       
+                        TimeSpan sp = DateTime.Now - TestStartTime;
+                        //测试持续时间
+                        txttesttime.BeginInvoke((MethodInvoker)delegate
+                        {
+                            this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
+                        });
+                        //测试倒计时
+                        double diff = CountTime - sp.TotalSeconds;
+                        TimeSpan sp2 = TimeSpan.FromSeconds(diff);
+                        countdown1.BeginInvoke((MethodInvoker)delegate
+                        {
+                            if (diff <= 0)
+                            {
+                                countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                            }
+                            else
+                            {
+                                countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                            }
+                        });
                     }
                 }
             }
-            testTimer.Stop();
+            IsTestEnd = true;
+        }
+
+
+        KvaserDbcMessage dBCCan = new KvaserDbcMessage();
+        List<AutoTestDLL.Model.Message> message_List = new List<AutoTestDLL.Model.Message>();
+        bool IsTestEnd = false;
+        private void InitCan()
+        {
+            //LoadDB            
+            dBCCan.loadDb(Application.StartupPath + "\\DbcFile\\MQB2020.MQB_W_KCAN_KMatrix_V9.06.02F_20181213_MB_mod1(1).dbc");
+            //LoadMessage and filter Node is  "BCM" and "Gateway" ,GenMsgSendType is "Cyclic"
+            List<AutoTestDLL.Model.Message> list = dBCCan.LoadMessages();
+            message_List = list.Where(x => (x.tx_node == "BCM" || x.tx_node == "Gateway") && x.GenMsgSendType == "Cyclic").ToList();
+            //initChannel
+            dBCCan.initChannel(0);
+        }
+
+        private void Send_BCM_Gateway_CanMessage()
+        {
+            if (message_List.Count > 0)
+            {
+                while (true)
+                {
+                    if(!IsTestEnd)
+                    {
+                        //LoadSignal
+                        foreach (AutoTestDLL.Model.Message message in message_List)
+                        {
+                            if (message.GenMsgCycleTime == message.CycleCount)
+                            {
+                                List<Signal> signalList = new List<Signal>();
+                                signalList = dBCCan.LoadSignalsById(message.id);
+                                dBCCan.sendMsg(signalList);
+                                message.CycleCount = 0;
+                            }
+                            else
+                            {
+                                message.CycleCount += 10;
+                            }
+                            Thread.Sleep(10);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
+            }
+
         }
 
         private void FillStepInfo(TestStep step)

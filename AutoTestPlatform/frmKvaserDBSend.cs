@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoTestDLL.Model;
+using AutoTestDLL.Module;
 using AutoTestPlatform.Module;
 using canlibCLSNET;
 using Kvaser.Kvadblib;

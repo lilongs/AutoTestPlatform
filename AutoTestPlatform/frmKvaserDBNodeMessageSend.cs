@@ -8,9 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoTestDLL.Model;
-using AutoTestPlatform.Module;
-using canlibCLSNET;
-using Kvaser.Kvadblib;
+using AutoTestDLL.Module;
 
 namespace AutoTestPlatform
 {

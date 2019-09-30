@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AutoTestPlatform.Module
+namespace AutoTestDLL.Module
 {
     public class KvaserDbcMessage
     {
@@ -154,6 +154,7 @@ namespace AutoTestPlatform.Module
                 message.tx_node = nodeName;
                 message.GenMsgSendType = this.GenMsgSendType[attEunmVal];
                 message.GenMsgCycleTime = GenMsgCycleTime;
+                message.CycleCount = 0;
 
                 messages.Add(message);
 

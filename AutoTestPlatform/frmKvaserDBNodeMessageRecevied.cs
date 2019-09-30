@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoTestDLL.Model;
+using AutoTestDLL.Module;
 using AutoTestPlatform.Module;
 using canlibCLSNET;
 using Kvaser.Kvadblib;
@@ -58,7 +59,8 @@ namespace AutoTestPlatform
         private void SetupMessagesBox()
         {
             List<AutoTestDLL.Model.Message> list = dBCCan.LoadMessages();
-            messages = list.Where(x => x.tx_node == "BCM" || x.tx_node == "Gateway").ToList();
+            messages = list.Where(x => (x.tx_node == "BCM" || x.tx_node == "Gateway") && x.GenMsgSendType=="Cyclic" ).ToList();
+
             dataGridView2.DataSource = messages;
             
             UpdateButtons();

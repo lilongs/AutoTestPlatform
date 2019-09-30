@@ -51,8 +51,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="canlibCLSNET">
+      <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\canlibCLSNET.dll</HintPath>
+    </Reference>
     <Reference Include="CSScriptLibrary, Version=3.29.0.0, Culture=neutral, PublicKeyToken=70fcc3d18c749033, processorArchitecture=MSIL">
       <HintPath>..\packages\CS-Script.lib.3.29.0\lib\CSScriptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="kvadblibCLSNET">
+      <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\kvadblibCLSNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +81,7 @@
     <Compile Include="Model\Signal.cs" />
     <Compile Include="Model\TempSensorConfiguration.cs" />
     <Compile Include="Model\TestStep.cs" />
+    <Compile Include="Module\KvaserDbcMessage.cs" />
     <Compile Include="Util\CSScriptHelper.cs" />
     <Compile Include="Util\FileOperate.cs" />
     <Compile Include="Util\JsonOperate.cs" />
