@@ -44,16 +44,20 @@ namespace AutoTestDLL.Module
         {
             List<Signal> result = new List<Signal>();
             Kvadblib.MessageHnd mh;
+
             Kvadblib.Status status = Kvadblib.GetMsgById(dh, MsgId, out mh);
             if (status == Kvadblib.Status.OK)
             {
                 Kvadblib.MESSAGE f;
+                int dlc;
                 msgHandle = mh;
                 Kvadblib.GetMsgId(mh, out msgId, out f);
+                Kvadblib.GetMsgDlc(mh,out dlc);
+                
                 msgId = ((MsgId & -2147483648) == 0) ? MsgId : MsgId ^ -2147483648;
                 msgFlags = ((MsgId & -2147483648) == 0) ? 0 : Canlib.canMSG_EXT;
                 hasMessage = true;
-                result = LoadSignals();
+                result = LoadSignals(dlc);
             }
             return result;
         }
@@ -61,7 +65,7 @@ namespace AutoTestDLL.Module
         /*
          * Initiates the channel
          */
-        public void initChannel(int channel)
+        public void initChannel(int channel,string bitrate)
         {
             Canlib.canStatus status;
 
@@ -70,7 +74,15 @@ namespace AutoTestDLL.Module
             if (hnd >= 0)
             {
                 chanHandle = hnd;
-                status = Canlib.canSetBusParams(chanHandle, Canlib.canBITRATE_250K, 0, 0, 0, 0, 0);
+
+                Dictionary<string, int> dicBitRates = new Dictionary<string, int>() {
+                    { "125 kb/s", Canlib.canBITRATE_125K},
+                    { "250 kb/s", Canlib.canBITRATE_250K},
+                    { "500 kb/s", Canlib.canBITRATE_500K},
+                    { "1 Mb/s", Canlib.BAUD_1M}
+                };
+
+                status = Canlib.canSetBusParams(chanHandle, dicBitRates[bitrate], 0, 0, 0, 0, 0);
                 status = Canlib.canBusOn(chanHandle);
                 if (status == Canlib.canStatus.canOK)
                 {
@@ -82,12 +94,12 @@ namespace AutoTestDLL.Module
         /*
          * Sends a message if one is constructed and we are on bus
          */
-        public bool sendMsg(List<Signal> signals)
+        public bool sendMsg(int dlc,List<Signal> signals)
         {
             bool result = false;
             if (hasMessage && channelOn)
             {
-                result = SendMessage(signals);
+                result = SendMessage(dlc,signals);
             }
             return result;
         }
@@ -129,10 +141,12 @@ namespace AutoTestDLL.Module
             {
                 string name;
                 int id;
+                int dlc;
                 string nodeName;
                 Kvadblib.MESSAGE flags;
                 status = Kvadblib.GetMsgName(mh, out name);
                 status = Kvadblib.GetMsgId(mh, out id, out flags);
+                status = Kvadblib.GetMsgDlc(mh,out dlc);
                 status = Kvadblib.GetMsgSendNode(mh, out nh);
                 status = Kvadblib.GetNodeName(nh, out nodeName);
 
@@ -151,6 +165,7 @@ namespace AutoTestDLL.Module
                 Message message = new Message();
                 message.id = id;
                 message.name = name;
+                message.dlc = dlc;
                 message.tx_node = nodeName;
                 message.GenMsgSendType = this.GenMsgSendType[attEunmVal];
                 message.GenMsgCycleTime = GenMsgCycleTime;
@@ -169,7 +184,7 @@ namespace AutoTestDLL.Module
          * Constructs a form for creating messages.
          * Consists of one TextBox for every signal in the loaded message.
          */
-        private List<Signal> LoadSignals()
+        private List<Signal> LoadSignals(int dlc)
         {
             Kvadblib.SignalHnd sh;
             Kvadblib.Status status = Kvadblib.GetFirstSignal(msgHandle, out sh);
@@ -179,15 +194,18 @@ namespace AutoTestDLL.Module
             {
                 string name;
                 string unit;
-                double min, max, scale, offset;
+                double min, max, scale, offset,val;
+                //byte[] data = new byte[dlc];
 
                 //Construct the text for the label
                 status = Kvadblib.GetSignalName(sh, out name);
                 status = Kvadblib.GetSignalUnit(sh, out unit);
                 status = Kvadblib.GetSignalValueLimits(sh, out min, out max);
                 status = Kvadblib.GetSignalValueScaling(sh, out scale, out offset);
+                //status = Kvadblib.GetSignalValueFloat(sh, out val, data, dlc);
 
-                Signal s = new Signal(name, max, min, min, scale);
+                //Signal s = new Signal(name, max, min, min, scale);
+                Signal s = new Signal(name,max,min,min,scale);
                 signals.Add(s);
 
 
@@ -201,9 +219,9 @@ namespace AutoTestDLL.Module
          * Constructs a message from the form and sends it
          * to the channel
          */
-        private bool SendMessage(List<Signal> signals)
+        private bool SendMessage(int dlc,List<Signal> signals)
         {
-            byte[] data = new byte[8];
+            byte[] data = new byte[dlc];
 
             Kvadblib.Status status = Kvadblib.Status.OK;
             Kvadblib.SignalHnd sh;
@@ -222,7 +240,7 @@ namespace AutoTestDLL.Module
 
                 Kvadblib.GetSignalValueLimits(sh, out min, out max);
 
-                status = Kvadblib.StoreSignalValuePhys(sh, data, 8, s.Value);
+                status = Kvadblib.StoreSignalValuePhys(sh, data, dlc, s.Value);
 
                 //Check if the signal value was successfully stored and that it's in the correct interval
                 if (status != Kvadblib.Status.OK || s.Value < min || s.Value > max)
@@ -234,7 +252,7 @@ namespace AutoTestDLL.Module
 
             if (!error)
             {
-                Canlib.canWriteWait(chanHandle, msgId, data, 8, msgFlags, 50);
+                Canlib.canWriteWait(chanHandle, msgId, data, dlc, msgFlags, 50);
             }
             return error;
         }

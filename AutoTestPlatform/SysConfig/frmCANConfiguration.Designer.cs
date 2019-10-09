@@ -37,7 +37,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.combBaudRate = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.combChannel = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -122,36 +121,14 @@
             // 
             this.combBaudRate.FormattingEnabled = true;
             this.combBaudRate.Items.AddRange(new object[] {
-            "5",
-            "10",
-            "20",
-            "25",
-            "40",
-            "50",
-            "62.5",
-            "80",
-            "100",
-            "125",
-            "200",
-            "250",
-            "400",
-            "500",
-            "800",
-            "1000"});
+            "125 kb/s",
+            "250 kb/s",
+            "500 kb/s",
+            "1 Mb/s"});
             this.combBaudRate.Location = new System.Drawing.Point(722, 176);
             this.combBaudRate.Name = "combBaudRate";
             this.combBaudRate.Size = new System.Drawing.Size(142, 20);
             this.combBaudRate.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(866, 179);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "(kb/s)";
             // 
             // combChannel
             // 
@@ -179,7 +156,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 599);
             this.Controls.Add(this.combChannel);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.combBaudRate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -208,7 +184,6 @@
         private System.Windows.Forms.ToolStripButton delete;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox combBaudRate;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox combChannel;
     }
 }

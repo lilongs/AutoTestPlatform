@@ -56,7 +56,7 @@
     <Reference Include="AGauge, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AGauge_V2.2.0.2\lib\AGauge.dll</HintPath>
     </Reference>
-    <Reference Include="canlibCLSNET, Version=8.28.846.1, Culture=neutral, PublicKeyToken=bb7f2cd46200de24, processorArchitecture=AMD64">
+    <Reference Include="canlibCLSNET, Version=8.28.846.1, Culture=neutral, PublicKeyToken=bb7f2cd46200de24, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\canlibCLSNET.dll</HintPath>
     </Reference>

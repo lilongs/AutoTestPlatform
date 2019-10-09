@@ -96,10 +96,38 @@ namespace WindowsFormsControlLibrary
             series.Name = this.Tag.ToString() + "CurrentCurve";
 
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
-            chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
+            chart1.ChartAreas[0].AxisX.ScaleView.Size = 10;
             chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
             chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
             //chart1.Legends[0].Docking = Docking.Top;
+        }
+
+        private void InitChart2()
+        {
+            this.groupControl1.Text = this.Tag.ToString() + " current curve";
+            // Zoom into the X axis
+            //chart1.ChartAreas[0].AxisX.ScaleView.Zoom(1, 1);
+            // Enable range selection and zooming end user interface
+            chart1.ChartAreas[0].CursorX.IsUserEnabled = true;
+            chart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
+            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].CursorY.IsUserEnabled = true;
+            chart1.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
+            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+            //将滚动内嵌到坐标轴中
+            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+            chart1.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
+            // 设置滚动条的大小
+            chart1.ChartAreas[0].AxisX.ScrollBar.Size = 10;
+            chart1.ChartAreas[0].AxisY.ScrollBar.Size = 10;
+            // 设置滚动条的按钮的风格，下面代码是将所有滚动条上的按钮都显示出来
+            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;
+            chart1.ChartAreas[0].AxisY.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;
+            // 设置自动放大与缩小的最小量
+            chart1.ChartAreas[0].AxisX.ScaleView.SmallScrollSize = double.NaN;
+            chart1.ChartAreas[0].AxisX.ScaleView.SmallScrollMinSize = 1;
+            chart1.ChartAreas[0].AxisY.ScaleView.SmallScrollSize = double.NaN;
+            chart1.ChartAreas[0].AxisY.ScaleView.SmallScrollMinSize = 1;
         }
 
         public void ChartValueFill(double value)
@@ -114,7 +142,7 @@ namespace WindowsFormsControlLibrary
                         series.Points.RemoveAt(0);
                     }
                     series.Points.AddXY(DateTime.Now, value);
-                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 10;
                 });
             }
         }
@@ -307,50 +335,172 @@ namespace WindowsFormsControlLibrary
 
 
         KvaserDbcMessage dBCCan = new KvaserDbcMessage();
-        List<AutoTestDLL.Model.Message> message_List = new List<AutoTestDLL.Model.Message>();
+        List<AutoTestDLL.Model.Message> message_List1 = new List<AutoTestDLL.Model.Message>();
+        List<AutoTestDLL.Model.Message> message_List2 = new List<AutoTestDLL.Model.Message>();
         bool IsTestEnd = false;
+        private List<InstrumentClusterConfiguration> LoadICInfo()
+        {
+            List<InstrumentClusterConfiguration> temp = new List<InstrumentClusterConfiguration>();
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
+            return temp;
+        }
+
+        private List<CAN> LoadCANInfo()
+        {
+            List<CAN> listCAN = new List<CAN>();
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "CAN.json");
+            listCAN = JsonConvert.DeserializeObject<List<CAN>>(json);
+            return listCAN;
+        }
         private void InitCan()
         {
             //LoadDB            
             dBCCan.loadDb(Application.StartupPath + "\\DbcFile\\MQB2020.MQB_W_KCAN_KMatrix_V9.06.02F_20181213_MB_mod1(1).dbc");
+            
             //LoadMessage and filter Node is  "BCM" and "Gateway" ,GenMsgSendType is "Cyclic"
             List<AutoTestDLL.Model.Message> list = dBCCan.LoadMessages();
-            message_List = list.Where(x => (x.tx_node == "BCM" || x.tx_node == "Gateway") && x.GenMsgSendType == "Cyclic").ToList();
+            message_List1 = list.Where(x => (x.name == "Airbag_01" || x.name == "Dimmung_01" || x.name == "ESP_24" || x.name== "Klemmen_Status_01" || x.name== "LH_EPS_01" || x.name== "RKA_01")).ToList();
+            message_List2 = list.Where(x => (x.name== "RKA_01" || x.name== "LH_EPS_01" || x.name== "ESP_24" || x.name== "ESP_20" || x.name== "Airbag_01")).ToList();
+            //get this ic configuration
+            List<InstrumentClusterConfiguration>  listIC=LoadICInfo();
+            List<CAN> listCAN = LoadCANInfo();
+            
+            string channelName=listIC.Where(x=>x.InstrumentCluster==this.Tag.ToString() && x.CommunicationType=="CAN").ToList()[0].Value;
+            string bitrate=listCAN.Where(x => x.Channel == channelName).ToList()[0].Baudrate;
+
+            int channelNo = -1;
+            channelName = channelName.Replace("channel", "");
+            int.TryParse(channelName, out channelNo);
+            
             //initChannel
-            dBCCan.initChannel(0);
+            dBCCan.initChannel(channelNo, bitrate);
         }
+
 
         private void Send_BCM_Gateway_CanMessage()
         {
-            if (message_List.Count > 0)
+            if (message_List1.Count > 0 && message_List2.Count >0)
             {
                 while (true)
                 {
-                    if(!IsTestEnd)
+                    //if(!IsTestEnd)
+                    if(true)
                     {
-                        //LoadSignal
-                        foreach (AutoTestDLL.Model.Message message in message_List)
+                        //Step1:
+                        foreach (AutoTestDLL.Model.Message message in message_List1)
                         {
                             if (message.GenMsgCycleTime == message.CycleCount)
                             {
                                 List<Signal> signalList = new List<Signal>();
                                 signalList = dBCCan.LoadSignalsById(message.id);
-                                dBCCan.sendMsg(signalList);
+
+                                List<Signal> temp = new List<Signal>();
+
+                                foreach(Signal s in signalList)
+                                {
+                                    if(s.name== "AB_Lampe")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                    else if(s.name == "DI_KL_58xd")
+                                    {
+                                        s.Value = 200;
+                                    }
+                                    else if (s.name == "ESP_Lampe")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                    else if (s.name == "BK_Lampe_02")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                    else if (s.name == "ABS_Lampe")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                    else if (s.name == "ZAS_Kl_15")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                    else if (s.name == "EPS_Warnungen")
+                                    {
+                                        s.Value = 3;
+                                    }
+                                    else if (s.name == "RKA_Warnungen_02")
+                                    {
+                                        s.Value = 1;
+                                    }
+                                }
+                                dBCCan.sendMsg(message.dlc,signalList);
                                 message.CycleCount = 0;
                             }
                             else
                             {
                                 message.CycleCount += 10;
                             }
-                            Thread.Sleep(10);
                         }
+
+                        //Step2 :Sleeping 1 second
+                        /*  Thread.Sleep(1000);
+
+                          //Step3:
+                          foreach (AutoTestDLL.Model.Message message in message_List2)
+                          {
+                              if (message.GenMsgCycleTime == message.CycleCount)
+                              {
+                                  List<Signal> signalList = new List<Signal>();
+                                  signalList = dBCCan.LoadSignalsById(message.id);
+
+                                  foreach(Signal s in signalList)
+                                  {
+                                      if(s.name== "RKA_Warnungen_02")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                      else if(s.name== "EPS_Warnungen")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                      else if(s.name== "ABS_Lampe")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                      else if (s.name== "ESP_Lampe")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                      else if(s.name== "BK_Lampe_02")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                      else if(s.name== "ESP_Zaehnezahl")
+                                      {
+                                          s.Value = 13;
+                                      }
+                                      else if(s.name== "AB_Lampe")
+                                      {
+                                          s.Value = 0;
+                                      }
+                                  }
+                                  dBCCan.sendMsg(message.dlc, signalList);
+                                  message.CycleCount = 0;
+                              }
+                              else
+                              {
+                                  message.CycleCount += 10;
+                              }
+                          }*/
                     }
                     else
                     {
                         break;
                     }
+                    
+                    Thread.Sleep(10);
                 }
-                
             }
 
         }

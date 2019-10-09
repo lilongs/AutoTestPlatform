@@ -41,6 +41,8 @@
             // 
             // chart1
             // 
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelStyle.Angle = 45;
             chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
             chartArea1.AxisY.Title = "℃";
             chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
@@ -53,6 +55,7 @@
             this.chart1.Location = new System.Drawing.Point(2, 39);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.IsVisibleInLegend = false;
             series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";

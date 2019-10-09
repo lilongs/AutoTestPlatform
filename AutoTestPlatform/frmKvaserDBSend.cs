@@ -87,13 +87,13 @@ namespace AutoTestPlatform
         private void initButton_Click(object sender, EventArgs e)
         {
             int channel = Convert.ToInt32(this.channelBox.Text);
-            dBCCan.initChannel(channel);
+            dBCCan.initChannel(channel, "250 kb/s");
             UpdateButtons();
         }
 
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
-            dBCCan.sendMsg(signalList);
+            dBCCan.sendMsg(8,signalList);
             UpdateButtons();
         }
 
@@ -134,7 +134,7 @@ namespace AutoTestPlatform
 
         private void ProcessMessage(object sender, ProgressChangedEventArgs e)
         {
-            dBCCan.sendMsg(signalList);
+            dBCCan.sendMsg(8,signalList);
         }
 
         private void closeButton_Click(object sender, EventArgs e)

@@ -79,7 +79,7 @@ namespace AutoTestPlatform
         private void initButton_Click(object sender, EventArgs e)
         {
             int channel = Convert.ToInt32(this.channelBox.Text);
-            dBCCan.initChannel(channel);
+            dBCCan.initChannel(channel, "250 kb/s");
             UpdateButtons();
         }
 
@@ -95,7 +95,7 @@ namespace AutoTestPlatform
             {
                 List<Signal> signalList = new List<Signal>();
                 signalList = dBCCan.LoadSignalsById(message.id);
-                dBCCan.sendMsg(signalList);
+                dBCCan.sendMsg(message.dlc,signalList);
             }
         }
 

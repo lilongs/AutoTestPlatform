@@ -67,13 +67,13 @@ namespace AutoTestPlatform.SysConfig
                 var item= list.Where(c => c.Channel == combChannel.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.Baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim())?0:Convert.ToInt32(combBaudRate.Text.Trim());
+                    item.Baudrate = combBaudRate.Text.Trim();
                 }
                 else
                 {
                     CAN can = new CAN();
                     can.Channel = String.IsNullOrEmpty(combChannel.Text.Trim()) ? "" : combChannel.Text.Trim();
-                    can.Baudrate = String.IsNullOrEmpty(combBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(combBaudRate.Text.Trim());
+                    can.Baudrate =combBaudRate.Text.Trim();
                     list.Add(can);
                 }               
 
