@@ -1,4 +1,4 @@
-﻿namespace AutoTestPlatform.SysConfig
+﻿namespace AutoTestPlatform.TemperatureSensorConfiguration
 {
     partial class frmCOMConfiguration
     {
@@ -58,7 +58,7 @@
             this.quit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(908, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(883, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -109,7 +109,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(677, 100);
+            this.label3.Location = new System.Drawing.Point(656, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 15);
             this.label3.TabIndex = 5;
@@ -119,7 +119,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(678, 141);
+            this.label4.Location = new System.Drawing.Point(657, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 15);
             this.label4.TabIndex = 7;
@@ -129,7 +129,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(686, 223);
+            this.label5.Location = new System.Drawing.Point(665, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 15);
             this.label5.TabIndex = 11;
@@ -139,7 +139,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(703, 184);
+            this.label11.Location = new System.Drawing.Point(682, 126);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(40, 15);
             this.label11.TabIndex = 9;
@@ -149,7 +149,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(687, 264);
+            this.label7.Location = new System.Drawing.Point(666, 206);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 11;
@@ -159,7 +159,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(669, 305);
+            this.label1.Location = new System.Drawing.Point(648, 247);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 15);
             this.label1.TabIndex = 13;
@@ -174,7 +174,7 @@
             "Even",
             "Mark",
             "Space"});
-            this.txtParity.Location = new System.Drawing.Point(752, 182);
+            this.txtParity.Location = new System.Drawing.Point(731, 124);
             this.txtParity.Name = "txtParity";
             this.txtParity.Size = new System.Drawing.Size(142, 20);
             this.txtParity.TabIndex = 3;
@@ -190,7 +190,7 @@
             "9600",
             "19200",
             "38400"});
-            this.txtBaudRate.Location = new System.Drawing.Point(752, 140);
+            this.txtBaudRate.Location = new System.Drawing.Point(731, 82);
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.Size = new System.Drawing.Size(142, 20);
             this.txtBaudRate.TabIndex = 2;
@@ -203,7 +203,7 @@
             "XOnXOff",
             "RequestToSend",
             "RequestToSendXOnXOff"});
-            this.txtHandshake.Location = new System.Drawing.Point(752, 308);
+            this.txtHandshake.Location = new System.Drawing.Point(731, 250);
             this.txtHandshake.Name = "txtHandshake";
             this.txtHandshake.Size = new System.Drawing.Size(142, 20);
             this.txtHandshake.TabIndex = 6;
@@ -216,7 +216,7 @@
             "One",
             "Two",
             "OnePointFive"});
-            this.txtStopBits.Location = new System.Drawing.Point(752, 266);
+            this.txtStopBits.Location = new System.Drawing.Point(731, 208);
             this.txtStopBits.Name = "txtStopBits";
             this.txtStopBits.Size = new System.Drawing.Size(142, 20);
             this.txtStopBits.TabIndex = 5;
@@ -229,7 +229,7 @@
             "6",
             "7",
             "8"});
-            this.txtDataBits.Location = new System.Drawing.Point(752, 224);
+            this.txtDataBits.Location = new System.Drawing.Point(731, 166);
             this.txtDataBits.Name = "txtDataBits";
             this.txtDataBits.Size = new System.Drawing.Size(142, 20);
             this.txtDataBits.TabIndex = 4;
@@ -247,7 +247,7 @@
             "COM7",
             "COM8",
             "COM9"});
-            this.txtPortName.Location = new System.Drawing.Point(752, 98);
+            this.txtPortName.Location = new System.Drawing.Point(731, 40);
             this.txtPortName.Name = "txtPortName";
             this.txtPortName.Size = new System.Drawing.Size(142, 20);
             this.txtPortName.TabIndex = 1;
@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 599);
+            this.ClientSize = new System.Drawing.Size(883, 599);
             this.Controls.Add(this.txtPortName);
             this.Controls.Add(this.txtDataBits);
             this.Controls.Add(this.txtStopBits);

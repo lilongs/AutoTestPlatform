@@ -55,7 +55,7 @@ namespace WindowsFormsControlLibrary
                 chart1.BeginInvoke((MethodInvoker)delegate
                 {
                     Series series = chart1.Series[0];
-                    if (series.Points.Count > 200)
+                    if (series.Points.Count > 2000)
                     {
                         series.Points.RemoveAt(0);
                     }

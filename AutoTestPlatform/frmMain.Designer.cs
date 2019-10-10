@@ -31,9 +31,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sysConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOMConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.temperatureConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.temperatureSensorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cOMConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.temperatureConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.powerMeterAddressConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.powerMeterAddressConfigurationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TestTypeEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.TestSequenceEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +47,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -53,6 +56,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sysConfigToolStripMenuItem,
+            this.temperatureSensorConfigurationToolStripMenuItem,
+            this.powerMeterAddressConfigurationToolStripMenuItem,
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -64,41 +69,70 @@
             // 
             this.sysConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cANConfiguration,
-            this.cOMConfiguration,
             this.equipmentConfiguration,
-            this.temperatureConfiguration,
             this.maualToolStripMenuItem});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
-            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(144, 21);
-            this.sysConfigToolStripMenuItem.Text = "System Configuration";
+            this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(209, 21);
+            this.sysConfigToolStripMenuItem.Text = "Instrument Cluster Configuration";
             // 
             // cANConfiguration
             // 
             this.cANConfiguration.Name = "cANConfiguration";
-            this.cANConfiguration.Size = new System.Drawing.Size(266, 22);
+            this.cANConfiguration.Size = new System.Drawing.Size(322, 22);
             this.cANConfiguration.Text = "CAN Configuration";
             this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
-            // 
-            // cOMConfiguration
-            // 
-            this.cOMConfiguration.Name = "cOMConfiguration";
-            this.cOMConfiguration.Size = new System.Drawing.Size(266, 22);
-            this.cOMConfiguration.Text = "COM Configuration";
-            this.cOMConfiguration.Click += new System.EventHandler(this.cOMConfiguration_Click);
             // 
             // equipmentConfiguration
             // 
             this.equipmentConfiguration.Name = "equipmentConfiguration";
-            this.equipmentConfiguration.Size = new System.Drawing.Size(266, 22);
-            this.equipmentConfiguration.Text = "Instrument Cluster Configuration";
+            this.equipmentConfiguration.Size = new System.Drawing.Size(322, 22);
+            this.equipmentConfiguration.Text = "Instrument Cluster Paramter Configuration";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
-            // temperatureConfiguration
+            // maualToolStripMenuItem
             // 
-            this.temperatureConfiguration.Name = "temperatureConfiguration";
-            this.temperatureConfiguration.Size = new System.Drawing.Size(266, 22);
-            this.temperatureConfiguration.Text = "Temperature Configuration";
-            this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
+            this.maualToolStripMenuItem.Name = "maualToolStripMenuItem";
+            this.maualToolStripMenuItem.Size = new System.Drawing.Size(322, 22);
+            this.maualToolStripMenuItem.Text = "Manual Instruction Configuration";
+            this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
+            // 
+            // temperatureSensorConfigurationToolStripMenuItem
+            // 
+            this.temperatureSensorConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cOMConfigurationToolStripMenuItem,
+            this.temperatureConfigurationToolStripMenuItem});
+            this.temperatureSensorConfigurationToolStripMenuItem.Name = "temperatureSensorConfigurationToolStripMenuItem";
+            this.temperatureSensorConfigurationToolStripMenuItem.Size = new System.Drawing.Size(222, 21);
+            this.temperatureSensorConfigurationToolStripMenuItem.Text = "Temperature Sensor Configuration";
+            // 
+            // cOMConfigurationToolStripMenuItem
+            // 
+            this.cOMConfigurationToolStripMenuItem.Name = "cOMConfigurationToolStripMenuItem";
+            this.cOMConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.cOMConfigurationToolStripMenuItem.Text = "COM Configuration";
+            this.cOMConfigurationToolStripMenuItem.Click += new System.EventHandler(this.cOMConfiguration_Click);
+            // 
+            // temperatureConfigurationToolStripMenuItem
+            // 
+            this.temperatureConfigurationToolStripMenuItem.Name = "temperatureConfigurationToolStripMenuItem";
+            this.temperatureConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.temperatureConfigurationToolStripMenuItem.Text = "Temperature Configuration";
+            this.temperatureConfigurationToolStripMenuItem.Click += new System.EventHandler(this.temperatureConfiguration_Click);
+            // 
+            // powerMeterAddressConfigurationToolStripMenuItem
+            // 
+            this.powerMeterAddressConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.powerMeterAddressConfigurationToolStripMenuItem1});
+            this.powerMeterAddressConfigurationToolStripMenuItem.Name = "powerMeterAddressConfigurationToolStripMenuItem";
+            this.powerMeterAddressConfigurationToolStripMenuItem.Size = new System.Drawing.Size(230, 21);
+            this.powerMeterAddressConfigurationToolStripMenuItem.Text = "Power Meter Address Configuration";
+            // 
+            // powerMeterAddressConfigurationToolStripMenuItem1
+            // 
+            this.powerMeterAddressConfigurationToolStripMenuItem1.Name = "powerMeterAddressConfigurationToolStripMenuItem1";
+            this.powerMeterAddressConfigurationToolStripMenuItem1.Size = new System.Drawing.Size(282, 22);
+            this.powerMeterAddressConfigurationToolStripMenuItem1.Text = "Power meter address configuration";
+            this.powerMeterAddressConfigurationToolStripMenuItem1.Click += new System.EventHandler(this.powerMeterAddressConfigurationToolStripMenuItem1_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -173,13 +207,6 @@
             this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
             this.xtraTabControl1.TabIndex = 14;
             // 
-            // maualToolStripMenuItem
-            // 
-            this.maualToolStripMenuItem.Name = "maualToolStripMenuItem";
-            this.maualToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
-            this.maualToolStripMenuItem.Text = "Manual Instruction Configuration";
-            this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -213,16 +240,19 @@
         private System.Windows.Forms.ToolStripMenuItem TestTypeEdit;
         private System.Windows.Forms.ToolStripMenuItem sysConfigToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ammeterConfiguration;
-        private System.Windows.Forms.ToolStripMenuItem temperatureConfiguration;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem cANConfiguration;
-        private System.Windows.Forms.ToolStripMenuItem cOMConfiguration;
         private System.Windows.Forms.ToolStripMenuItem equipmentConfiguration;
         private System.Windows.Forms.ToolStripMenuItem equipmentTestInfo;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private System.Windows.Forms.ToolStripMenuItem maualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem powerMeterAddressConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem powerMeterAddressConfigurationToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem temperatureSensorConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cOMConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem temperatureConfigurationToolStripMenuItem;
     }
 }
 

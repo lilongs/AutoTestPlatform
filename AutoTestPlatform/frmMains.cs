@@ -1,6 +1,8 @@
 ﻿using AutoTestDLL.Model;
 using AutoTestDLL.Util;
+using AutoTestPlatform.InstrumentClusterConfigurations;
 using AutoTestPlatform.SysConfig;
+using AutoTestPlatform.TemperatureSensorConfiguration;
 using AutoTestPlatform.TestSequence;
 using Newtonsoft.Json;
 using System;

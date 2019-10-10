@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AutoTestPlatform.SysConfig
+namespace AutoTestPlatform.InstrumentClusterConfigurations
 {
     public partial class frmInstrumentClusterConfiguration : Form
     {
@@ -21,7 +21,7 @@ namespace AutoTestPlatform.SysConfig
             InitializeComponent();
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private List<InstrumentClusterConfiguration> list = new List<InstrumentClusterConfiguration>();
+        private List<AutoTestDLL.Model.InstrumentClusterConfiguration> list = new List<AutoTestDLL.Model.InstrumentClusterConfiguration>();
 
         private void frmTestSequncenManager_Load(object sender, EventArgs e)
         {
@@ -39,7 +39,7 @@ namespace AutoTestPlatform.SysConfig
         {
             string path = Application.StartupPath + "\\SysConfig";
             string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
-            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
+            List<AutoTestDLL.Model.InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<AutoTestDLL.Model.InstrumentClusterConfiguration>>(json);
             if (temp != null)
             {
                 list = temp;
@@ -72,7 +72,7 @@ namespace AutoTestPlatform.SysConfig
                 }
                 else
                 {
-                    InstrumentClusterConfiguration equipment = new InstrumentClusterConfiguration();
+                    AutoTestDLL.Model.InstrumentClusterConfiguration equipment = new AutoTestDLL.Model.InstrumentClusterConfiguration();
                     equipment.InstrumentCluster = txtEquipment.Text.Trim();
                     equipment.CommunicationType = combParamter.Text;
                     equipment.Value = combValue.Text;

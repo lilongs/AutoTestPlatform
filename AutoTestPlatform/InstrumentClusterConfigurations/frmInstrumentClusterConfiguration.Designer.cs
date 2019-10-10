@@ -1,4 +1,4 @@
-﻿namespace AutoTestPlatform.SysConfig
+﻿namespace AutoTestPlatform.InstrumentClusterConfigurations
 {
     partial class frmInstrumentClusterConfiguration
     {
@@ -52,7 +52,7 @@
             this.quit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(908, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(893, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -100,7 +100,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(634, 200);
+            this.label1.Location = new System.Drawing.Point(636, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 12);
             this.label1.TabIndex = 12;
@@ -108,15 +108,15 @@
             // 
             // txtEquipment
             // 
-            this.txtEquipment.Location = new System.Drawing.Point(758, 197);
+            this.txtEquipment.Location = new System.Drawing.Point(760, 30);
             this.txtEquipment.Name = "txtEquipment";
             this.txtEquipment.Size = new System.Drawing.Size(125, 21);
-            this.txtEquipment.TabIndex = 13;
+            this.txtEquipment.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(634, 250);
+            this.label2.Location = new System.Drawing.Point(636, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 14;
@@ -125,7 +125,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(706, 293);
+            this.label3.Location = new System.Drawing.Point(708, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 16;
@@ -135,12 +135,11 @@
             // 
             this.combParamter.FormattingEnabled = true;
             this.combParamter.Items.AddRange(new object[] {
-            "CAN",
-            "COM"});
-            this.combParamter.Location = new System.Drawing.Point(758, 242);
+            "CAN"});
+            this.combParamter.Location = new System.Drawing.Point(760, 75);
             this.combParamter.Name = "combParamter";
             this.combParamter.Size = new System.Drawing.Size(125, 20);
-            this.combParamter.TabIndex = 18;
+            this.combParamter.TabIndex = 1;
             this.combParamter.SelectedIndexChanged += new System.EventHandler(this.combParamter_SelectedIndexChanged);
             // 
             // combValue
@@ -149,16 +148,16 @@
             this.combValue.Items.AddRange(new object[] {
             "CAN",
             "COM"});
-            this.combValue.Location = new System.Drawing.Point(758, 290);
+            this.combValue.Location = new System.Drawing.Point(760, 123);
             this.combValue.Name = "combValue";
             this.combValue.Size = new System.Drawing.Size(125, 20);
-            this.combValue.TabIndex = 19;
+            this.combValue.TabIndex = 2;
             // 
             // frmInstrumentClusterConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 599);
+            this.ClientSize = new System.Drawing.Size(893, 599);
             this.Controls.Add(this.combValue);
             this.Controls.Add(this.combParamter);
             this.Controls.Add(this.dataGridView1);

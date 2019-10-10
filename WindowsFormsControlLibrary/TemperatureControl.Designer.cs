@@ -48,7 +48,7 @@
             chartArea1.AxisY.Title = "℃";
             chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
             chartArea1.AxisY2.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
-            chartArea1.AxisY2.Title = "%";
+            chartArea1.AxisY2.Title = "RH%";
             chartArea1.AxisY2.TitleAlignment = System.Drawing.StringAlignment.Far;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);

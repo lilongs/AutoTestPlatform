@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AutoTestPlatform.SysConfig
+namespace AutoTestPlatform.TemperatureSensorConfiguration
 {
     public partial class frmTemperatureConfiguration : Form
     {

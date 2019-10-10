@@ -12,21 +12,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AutoTestPlatform.SysConfig
+namespace AutoTestPlatform.PowerMeterConfiguration
 {
-    public partial class frmCANConfiguration : Form
+    public partial class frmPowerMeterConfiguration : Form
     {
-        public frmCANConfiguration()
+        public frmPowerMeterConfiguration()
         {
             InitializeComponent();
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private List<CAN> list = new List<CAN>();
+        private List<PowerMeter> list = new List<PowerMeter>();
 
         private void frmTestSequncenManager_Load(object sender, EventArgs e)
         {
             try
             {
+                Fillinstrumentcluster();
                 LoadInfo();
             }
             catch (Exception ex)
@@ -35,11 +36,27 @@ namespace AutoTestPlatform.SysConfig
             }
         }
 
+        private void Fillinstrumentcluster()
+        {
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
+            if (temp != null)
+            {
+                foreach (InstrumentClusterConfiguration equipment in temp)
+                {
+
+                    if (!txtic.Items.Contains(equipment.InstrumentCluster))
+                        this.txtic.Items.Add(equipment.InstrumentCluster);
+                }
+            }
+        }
+
         private void LoadInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "CAN.json");
-            List<CAN> temp = JsonConvert.DeserializeObject<List<CAN>>(json);
+            string json = JsonOperate.GetJson(path, "PowerMeter.json");
+            List<PowerMeter> temp = JsonConvert.DeserializeObject<List<PowerMeter>>(json);
             if (temp != null)
             {
                 list = temp;
@@ -52,33 +69,33 @@ namespace AutoTestPlatform.SysConfig
             try
             {
                 #region CheckInput
-                if (String.IsNullOrEmpty(combChannel.Text.Trim()))
+                if (String.IsNullOrEmpty(txtic.Text.Trim()))
                 {
-                    MessageBox.Show("Channel can't be empty!");
+                    MessageBox.Show("instrumentcluster can't be empty!");
                     return;
                 }
-                if (String.IsNullOrEmpty(combBaudRate.Text))
+                if (String.IsNullOrEmpty(txtaddr.Text.Trim()))
                 {
-                    MessageBox.Show("PortName can't be empty!");
+                    MessageBox.Show("address can't be empty!");
                     return;
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.Channel == combChannel.Text).FirstOrDefault();
+                var item= list.Where(c => c.instrumentcluster == txtic.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.Baudrate = combBaudRate.Text.Trim();
+                    item.address = txtaddr.Text.Trim();
                 }
                 else
                 {
-                    CAN can = new CAN();
-                    can.Channel = String.IsNullOrEmpty(combChannel.Text.Trim()) ? "" : combChannel.Text.Trim();
-                    can.Baudrate =combBaudRate.Text.Trim();
-                    list.Add(can);
+                    PowerMeter Ins = new PowerMeter();
+                    Ins.instrumentcluster = txtic.Text.Trim();
+                    Ins.address = txtaddr.Text.Trim();
+                    list.Add(Ins);
                 }               
 
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "CAN.json", json);
+                JsonOperate.SaveJson(path, "PowerMeter.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -91,18 +108,17 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string channel = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["channel"].Value.ToString();
-                string baudrate = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["baudrate"].Value.ToString();
+                string instrumentcluster = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["instrumentcluster"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].Channel.ToString() == channel && list[i].Baudrate.ToString() == baudrate)
+                    if (list[i].instrumentcluster.ToString() == instrumentcluster)
                     {
                         list.RemoveAt(i);
                     }
                 }
                 string path = Application.StartupPath + "\\SysConfig";
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "CAN.json", json);
+                JsonOperate.SaveJson(path, "PowerMeter.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -125,8 +141,8 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.combChannel.Text = row.Cells["channel"].Value == null?"": row.Cells["channel"].Value.ToString();
-                    this.combBaudRate.Text = row.Cells["baudrate"].Value == null ? "" : row.Cells["baudrate"].Value.ToString();
+                    this.txtic.Text = row.Cells["instrumentcluster"].Value == null ? "" : row.Cells["instrumentcluster"].Value.ToString();
+                    this.txtaddr.Text = row.Cells["address"].Value == null?"": row.Cells["address"].Value.ToString();
                 }
             }
             catch (Exception ex)

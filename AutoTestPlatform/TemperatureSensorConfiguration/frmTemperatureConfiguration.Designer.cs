@@ -1,4 +1,4 @@
-﻿namespace AutoTestPlatform.SysConfig
+﻿namespace AutoTestPlatform.TemperatureSensorConfiguration
 {
     partial class frmTemperatureConfiguration
     {
@@ -52,7 +52,7 @@
             this.quit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(908, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(917, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -100,7 +100,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(648, 203);
+            this.label1.Location = new System.Drawing.Point(676, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 12;
@@ -108,24 +108,24 @@
             // 
             // txtSensorName
             // 
-            this.txtSensorName.Location = new System.Drawing.Point(719, 200);
+            this.txtSensorName.Location = new System.Drawing.Point(753, 33);
             this.txtSensorName.Name = "txtSensorName";
             this.txtSensorName.Size = new System.Drawing.Size(164, 21);
-            this.txtSensorName.TabIndex = 13;
+            this.txtSensorName.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(654, 248);
+            this.label2.Location = new System.Drawing.Point(634, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Paramter:";
+            this.label2.Text = "CommunicationType:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(672, 293);
+            this.label3.Location = new System.Drawing.Point(706, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 16;
@@ -135,12 +135,11 @@
             // 
             this.combParamter.FormattingEnabled = true;
             this.combParamter.Items.AddRange(new object[] {
-            "CAN",
             "COM"});
-            this.combParamter.Location = new System.Drawing.Point(719, 245);
+            this.combParamter.Location = new System.Drawing.Point(753, 78);
             this.combParamter.Name = "combParamter";
             this.combParamter.Size = new System.Drawing.Size(164, 20);
-            this.combParamter.TabIndex = 18;
+            this.combParamter.TabIndex = 1;
             this.combParamter.SelectedIndexChanged += new System.EventHandler(this.combParamter_SelectedIndexChanged);
             // 
             // combValue
@@ -149,16 +148,16 @@
             this.combValue.Items.AddRange(new object[] {
             "CAN",
             "COM"});
-            this.combValue.Location = new System.Drawing.Point(719, 290);
+            this.combValue.Location = new System.Drawing.Point(753, 123);
             this.combValue.Name = "combValue";
             this.combValue.Size = new System.Drawing.Size(164, 20);
-            this.combValue.TabIndex = 19;
+            this.combValue.TabIndex = 2;
             // 
             // frmTemperatureConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 599);
+            this.ClientSize = new System.Drawing.Size(917, 599);
             this.Controls.Add(this.combValue);
             this.Controls.Add(this.combParamter);
             this.Controls.Add(this.dataGridView1);
@@ -169,7 +168,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "frmTemperatureConfiguration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Equipment Paramter Configuration";
+            this.Text = "Temperature Paramter Configuration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAmmeterConfiguration_FormClosed);
             this.Load += new System.EventHandler(this.frmTestSequncenManager_Load);
             this.toolStrip1.ResumeLayout(false);

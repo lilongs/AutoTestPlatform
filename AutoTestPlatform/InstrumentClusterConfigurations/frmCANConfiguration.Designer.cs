@@ -1,4 +1,4 @@
-﻿namespace AutoTestPlatform.SysConfig
+﻿namespace AutoTestPlatform.InstrumentClusterConfigurations
 {
     partial class frmCANConfiguration
     {
@@ -50,7 +50,7 @@
             this.quit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(918, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(874, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -101,7 +101,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(648, 177);
+            this.label4.Location = new System.Drawing.Point(649, 88);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 15);
             this.label4.TabIndex = 7;
@@ -111,7 +111,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(656, 133);
+            this.label2.Location = new System.Drawing.Point(657, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 15);
             this.label2.TabIndex = 5;
@@ -125,10 +125,10 @@
             "250 kb/s",
             "500 kb/s",
             "1 Mb/s"});
-            this.combBaudRate.Location = new System.Drawing.Point(722, 176);
+            this.combBaudRate.Location = new System.Drawing.Point(720, 87);
             this.combBaudRate.Name = "combBaudRate";
             this.combBaudRate.Size = new System.Drawing.Size(142, 20);
-            this.combBaudRate.TabIndex = 2;
+            this.combBaudRate.TabIndex = 1;
             // 
             // combChannel
             // 
@@ -145,16 +145,16 @@
             "channel8",
             "channel9",
             "channel10"});
-            this.combChannel.Location = new System.Drawing.Point(719, 128);
+            this.combChannel.Location = new System.Drawing.Point(720, 39);
             this.combChannel.Name = "combChannel";
             this.combChannel.Size = new System.Drawing.Size(142, 20);
-            this.combChannel.TabIndex = 11;
+            this.combChannel.TabIndex = 0;
             // 
             // frmCANConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 599);
+            this.ClientSize = new System.Drawing.Size(874, 599);
             this.Controls.Add(this.combChannel);
             this.Controls.Add(this.combBaudRate);
             this.Controls.Add(this.label4);

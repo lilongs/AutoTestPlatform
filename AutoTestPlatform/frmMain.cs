@@ -1,6 +1,8 @@
 ﻿using AutoTestDLL.Model;
 using AutoTestDLL.Util;
-using AutoTestPlatform.SysConfig;
+using AutoTestPlatform.InstrumentClusterConfigurations;
+using AutoTestPlatform.PowerMeterConfiguration;
+using AutoTestPlatform.TemperatureSensorConfiguration;
 using AutoTestPlatform.TestSequence;
 using DevExpress.XtraTab;
 using Newtonsoft.Json;
@@ -255,6 +257,12 @@ namespace AutoTestPlatform
         private void maualToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManualInstruction frm = new frmManualInstruction();
+            frm.ShowDialog();
+        }
+
+        private void powerMeterAddressConfigurationToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmPowerMeterConfiguration frm = new frmPowerMeterConfiguration();
             frm.ShowDialog();
         }
     }

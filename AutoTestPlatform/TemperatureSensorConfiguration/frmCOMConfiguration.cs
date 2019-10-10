@@ -12,17 +12,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AutoTestPlatform.SysConfig
+namespace AutoTestPlatform.TemperatureSensorConfiguration
 {
-    public partial class frmManualInstruction : Form
+    public partial class frmCOMConfiguration : Form
     {
-        public frmManualInstruction()
+        public frmCOMConfiguration()
         {
             InitializeComponent();
-            this.dataGridView1.AutoGenerateColumns = false;
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private List<ManualInstruction> list = new List<ManualInstruction>();
+        private List<COM> list = new List<COM>();
 
         private void frmTestSequncenManager_Load(object sender, EventArgs e)
         {
@@ -39,8 +38,8 @@ namespace AutoTestPlatform.SysConfig
         private void LoadInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "ManualInstrustion.json");
-            List<ManualInstruction> temp = JsonConvert.DeserializeObject<List<ManualInstruction>>(json);
+            string json = JsonOperate.GetJson(path, "COM.json");
+            List<COM> temp = JsonConvert.DeserializeObject<List<COM>>(json);
             if (temp != null)
             {
                 list = temp;
@@ -53,44 +52,36 @@ namespace AutoTestPlatform.SysConfig
             try
             {
                 #region CheckInput
-                if (String.IsNullOrEmpty(txttype.Text.Trim()))
+                if (String.IsNullOrEmpty(txtPortName.Text))
                 {
-                    MessageBox.Show("type can't be empty!");
-                    return;
-                }
-                if (String.IsNullOrEmpty(txtid.Text.Trim()))
-                {
-                    MessageBox.Show("id can't be empty!");
-                    return;
-                }
-                if (String.IsNullOrEmpty(txtdata.Text.Trim()))
-                {
-                    MessageBox.Show("data can't be empty!");
+                    MessageBox.Show("PortName can't be empty!");
                     return;
                 }
                 #endregion
                 string path = Application.StartupPath + "\\SysConfig";
-                var item= list.Where(c => c.id == txtid.Text).FirstOrDefault();
+                var item= list.Where(c => c.PortName == txtPortName.Text).FirstOrDefault();
                 if (item != null)
                 {
-                    item.type = txttype.Text.Trim();
-                    item.dlc = Convert.ToInt32(txtdlc.Text.Trim());
-                    item.data = txtdata.Text.Trim();
-                    item.cycletime = Convert.ToInt32(txtct.Text.Trim());
+                    item.Baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim())?0:Convert.ToInt32(txtBaudRate.Text.Trim());
+                    item.Parity = (Parity)Enum.Parse(typeof(Parity), label11.Text);
+                    item.DataBits= String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
+                    item.StopBits= (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text);
+                    item.Handshake= (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text);
                 }
                 else
                 {
-                    ManualInstruction Ins = new ManualInstruction();
-                    Ins.type = txttype.Text.Trim();
-                    Ins.id = txtid.Text.Trim();
-                    Ins.dlc = Convert.ToInt32(txtdlc.Text.Trim());
-                    Ins.data = txtdata.Text.Trim();
-                    Ins.cycletime = Convert.ToInt32(txtct.Text.Trim());
-                    list.Add(Ins);
+                    COM com = new COM();
+                    com.PortName = txtPortName.Text.Trim();
+                    com.Baudrate = String.IsNullOrEmpty(txtBaudRate.Text.Trim()) ? 0 : Convert.ToInt32(txtBaudRate.Text.Trim());
+                    com.Parity = (Parity)Enum.Parse(typeof(Parity), txtParity.Text, true);
+                    com.DataBits = String.IsNullOrEmpty(txtDataBits.Text.Trim()) ? 0 : Convert.ToInt32(txtDataBits.Text.Trim());
+                    com.StopBits = (StopBits)Enum.Parse(typeof(StopBits), txtStopBits.Text,true);
+                    com.Handshake = (Handshake)Enum.Parse(typeof(Handshake), txtHandshake.Text, true);
+                    list.Add(com);
                 }               
 
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "ManualInstrustion.json", json);
+                JsonOperate.SaveJson(path, "COM.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -103,17 +94,17 @@ namespace AutoTestPlatform.SysConfig
         {
             try
             {
-                string id = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["id"].Value.ToString();
+                string portName = this.dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells["portName"].Value.ToString();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    if (list[i].id.ToString() == id)
+                    if (list[i].PortName == portName)
                     {
                         list.RemoveAt(i);
                     }
                 }
                 string path = Application.StartupPath + "\\SysConfig";
                 string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-                JsonOperate.SaveJson(path, "ManualInstrustion.json", json);
+                JsonOperate.SaveJson(path, "COM.json", json);
                 LoadInfo();
             }
             catch (Exception ex)
@@ -136,11 +127,12 @@ namespace AutoTestPlatform.SysConfig
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     DataGridViewRow row = this.dataGridView1.CurrentRow;
-                    this.txttype.Text = row.Cells["type"].Value == null ? "" : row.Cells["type"].Value.ToString();
-                    this.txtid.Text = row.Cells["id"].Value == null?"": row.Cells["id"].Value.ToString();
-                    this.txtdlc.Text = row.Cells["dlc"].Value == null ? "" : row.Cells["dlc"].Value.ToString();
-                    this.txtdata.Text = row.Cells["data"].Value == null ? "" : row.Cells["data"].Value.ToString();
-                    this.txtct.Text = row.Cells["cycletime"].Value == null ? "" : row.Cells["cycletime"].Value.ToString();
+                    this.txtPortName.Text= row.Cells["portName"].Value == null ? "" : row.Cells["portName"].Value.ToString();
+                    this.txtBaudRate.Text = row.Cells["baudrate"].Value == null ? "" : row.Cells["baudrate"].Value.ToString();
+                    this.txtParity.Text= row.Cells["parity"].Value == null ? "" : row.Cells["parity"].Value.ToString();
+                    this.txtDataBits.Text =row.Cells["dataBits"].Value == null ? "" : row.Cells["dataBits"].Value.ToString();
+                    this.txtStopBits.Text =  row.Cells["stopBits"].Value == null ? "" : row.Cells["stopBits"].Value.ToString();
+                    this.txtHandshake.Text =  row.Cells["handshake"].Value == null ? "" : row.Cells["handshake"].Value.ToString();
                 }
             }
             catch (Exception ex)

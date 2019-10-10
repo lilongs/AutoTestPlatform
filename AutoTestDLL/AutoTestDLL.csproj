@@ -79,6 +79,7 @@
     <Compile Include="Model\EquipmentTestInfo.cs" />
     <Compile Include="Model\ManualInstrustion.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\PowerMeter.cs" />
     <Compile Include="Model\Signal.cs" />
     <Compile Include="Model\Temperature_humidity.cs" />
     <Compile Include="Model\TempSensorConfiguration.cs" />

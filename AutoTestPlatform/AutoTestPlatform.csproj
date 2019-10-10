@@ -139,36 +139,42 @@
       <DependentUpon>frmMains.cs</DependentUpon>
     </Compile>
     <Compile Include="Module\KvaserCommunication.cs" />
+    <Compile Include="PowerMeterConfiguration\frmPowerMeterConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PowerMeterConfiguration\frmPowerMeterConfiguration.Designer.cs">
+      <DependentUpon>frmPowerMeterConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysConfig\frmManualInstruction.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmManualInstruction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmManualInstruction.Designer.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmManualInstruction.Designer.cs">
       <DependentUpon>frmManualInstruction.cs</DependentUpon>
     </Compile>
-    <Compile Include="SysConfig\frmTemperatureConfiguration.cs">
+    <Compile Include="TemperatureSensorConfiguration\frmTemperatureConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmTemperatureConfiguration.Designer.cs">
+    <Compile Include="TemperatureSensorConfiguration\frmTemperatureConfiguration.Designer.cs">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="SysConfig\frmInstrumentClusterConfiguration.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmInstrumentClusterConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmInstrumentClusterConfiguration.Designer.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmInstrumentClusterConfiguration.Designer.cs">
       <DependentUpon>frmInstrumentClusterConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="SysConfig\frmCOMConfiguration.cs">
+    <Compile Include="TemperatureSensorConfiguration\frmCOMConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmCOMConfiguration.Designer.cs">
+    <Compile Include="TemperatureSensorConfiguration\frmCOMConfiguration.Designer.cs">
       <DependentUpon>frmCOMConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="SysConfig\frmCANConfiguration.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmCANConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SysConfig\frmCANConfiguration.Designer.cs">
+    <Compile Include="InstrumentClusterConfigurations\frmCANConfiguration.Designer.cs">
       <DependentUpon>frmCANConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="SysConfig\frmAmmeterConfiguration.cs">
@@ -225,6 +231,9 @@
     <EmbeddedResource Include="frmMains.resx">
       <DependentUpon>frmMains.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PowerMeterConfiguration\frmPowerMeterConfiguration.resx">
+      <DependentUpon>frmPowerMeterConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -235,19 +244,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SysConfig\frmManualInstruction.resx">
+    <EmbeddedResource Include="InstrumentClusterConfigurations\frmManualInstruction.resx">
       <DependentUpon>frmManualInstruction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SysConfig\frmTemperatureConfiguration.resx">
+    <EmbeddedResource Include="TemperatureSensorConfiguration\frmTemperatureConfiguration.resx">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SysConfig\frmInstrumentClusterConfiguration.resx">
+    <EmbeddedResource Include="InstrumentClusterConfigurations\frmInstrumentClusterConfiguration.resx">
       <DependentUpon>frmInstrumentClusterConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SysConfig\frmCOMConfiguration.resx">
+    <EmbeddedResource Include="TemperatureSensorConfiguration\frmCOMConfiguration.resx">
       <DependentUpon>frmCOMConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SysConfig\frmCANConfiguration.resx">
+    <EmbeddedResource Include="InstrumentClusterConfigurations\frmCANConfiguration.resx">
       <DependentUpon>frmCANConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SysConfig\frmAmmeterConfiguration.resx">
