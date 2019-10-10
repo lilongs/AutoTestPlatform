@@ -141,6 +141,12 @@
     <Compile Include="Module\KvaserCommunication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysConfig\frmManualInstruction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysConfig\frmManualInstruction.Designer.cs">
+      <DependentUpon>frmManualInstruction.cs</DependentUpon>
+    </Compile>
     <Compile Include="SysConfig\frmTemperatureConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SysConfig\frmManualInstruction.resx">
+      <DependentUpon>frmManualInstruction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SysConfig\frmTemperatureConfiguration.resx">
       <DependentUpon>frmTemperatureConfiguration.cs</DependentUpon>
     </EmbeddedResource>

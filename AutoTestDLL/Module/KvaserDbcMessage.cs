@@ -257,6 +257,11 @@ namespace AutoTestDLL.Module
             return error;
         }
 
+        public void send(int id, int dlc, byte[] data, int flags)
+        {
+            Canlib.canStatus status = Canlib.canWrite(chanHandle, id, data, dlc, flags);
+        }
+
         public Message ReadMessage(int readHandle, out Canlib.canStatus status)
         {
             status = Canlib.canStatus.canOK;

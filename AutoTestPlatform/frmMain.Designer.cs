@@ -43,6 +43,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -65,7 +66,8 @@
             this.cANConfiguration,
             this.cOMConfiguration,
             this.equipmentConfiguration,
-            this.temperatureConfiguration});
+            this.temperatureConfiguration,
+            this.maualToolStripMenuItem});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(144, 21);
             this.sysConfigToolStripMenuItem.Text = "System Configuration";
@@ -73,28 +75,28 @@
             // cANConfiguration
             // 
             this.cANConfiguration.Name = "cANConfiguration";
-            this.cANConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.cANConfiguration.Size = new System.Drawing.Size(266, 22);
             this.cANConfiguration.Text = "CAN Configuration";
             this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
             // 
             // cOMConfiguration
             // 
             this.cOMConfiguration.Name = "cOMConfiguration";
-            this.cOMConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.cOMConfiguration.Size = new System.Drawing.Size(266, 22);
             this.cOMConfiguration.Text = "COM Configuration";
             this.cOMConfiguration.Click += new System.EventHandler(this.cOMConfiguration_Click);
             // 
             // equipmentConfiguration
             // 
             this.equipmentConfiguration.Name = "equipmentConfiguration";
-            this.equipmentConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.equipmentConfiguration.Size = new System.Drawing.Size(266, 22);
             this.equipmentConfiguration.Text = "Instrument Cluster Configuration";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
             // temperatureConfiguration
             // 
             this.temperatureConfiguration.Name = "temperatureConfiguration";
-            this.temperatureConfiguration.Size = new System.Drawing.Size(265, 22);
+            this.temperatureConfiguration.Size = new System.Drawing.Size(266, 22);
             this.temperatureConfiguration.Text = "Temperature Configuration";
             this.temperatureConfiguration.Click += new System.EventHandler(this.temperatureConfiguration_Click);
             // 
@@ -171,6 +173,13 @@
             this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
             this.xtraTabControl1.TabIndex = 14;
             // 
+            // maualToolStripMenuItem
+            // 
+            this.maualToolStripMenuItem.Name = "maualToolStripMenuItem";
+            this.maualToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
+            this.maualToolStripMenuItem.Text = "Manual Instruction Configuration";
+            this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -213,6 +222,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private System.Windows.Forms.ToolStripMenuItem maualToolStripMenuItem;
     }
 }
 

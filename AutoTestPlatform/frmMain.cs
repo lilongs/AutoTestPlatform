@@ -246,5 +246,11 @@ namespace AutoTestPlatform
             frmInstrumentClusterTestType frm = new frmInstrumentClusterTestType();
             frm.ShowDialog();
         }
+
+        private void maualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManualInstruction frm = new frmManualInstruction();
+            frm.ShowDialog();
+        }
     }
 }

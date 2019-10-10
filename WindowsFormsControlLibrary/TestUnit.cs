@@ -46,6 +46,7 @@ namespace WindowsFormsControlLibrary
                 }
                 InitChart();
                 InitCan();
+                LoadManualInstruction();
                 this.groupControl3.Text = this.Tag.ToString() + " step info:";
 
             }
@@ -179,6 +180,11 @@ namespace WindowsFormsControlLibrary
                 Thread th2 = new Thread(Send_BCM_Gateway_CanMessage);
                 th2.IsBackground = true;
                 th2.Start();
+
+                //循环发送手动指令
+                Thread th3 = new Thread(Send_ManualInstruction);
+                th3.IsBackground = true;
+                th3.Start();
 
                 selectedList.Clear();
             }
@@ -359,81 +365,43 @@ namespace WindowsFormsControlLibrary
         {
             //LoadDB            
             dBCCan.loadDb(Application.StartupPath + "\\DbcFile\\MQB2020.MQB_W_KCAN_KMatrix_V9.06.02F_20181213_MB_mod1(1).dbc");
-            
             //LoadMessage and filter Node is  "BCM" and "Gateway" ,GenMsgSendType is "Cyclic"
             List<AutoTestDLL.Model.Message> list = dBCCan.LoadMessages();
-            message_List1 = list.Where(x => (x.name == "Airbag_01" || x.name == "Dimmung_01" || x.name == "ESP_24" || x.name== "Klemmen_Status_01" || x.name== "LH_EPS_01" || x.name== "RKA_01")).ToList();
-            message_List2 = list.Where(x => (x.name== "RKA_01" || x.name== "LH_EPS_01" || x.name== "ESP_24" || x.name== "ESP_20" || x.name== "Airbag_01")).ToList();
+            message_List1 = list.Where(x => (x.tx_node == "BCM" || x.tx_node == "Gateway") && x.GenMsgSendType == "Cyclic").ToList();
+            //rule out manual instruct
+            message_List1 = message_List1.Where(x => (x.name != "Airbag_01" && x.name != "Dimmung_01" && x.name != "ESP_24" && x.name != "Klemmen_Status_01" && x.name != "LH_EPS_01" && x.name != "RKA_01" && x.name != "ESP_20")).ToList();
+
             //get this ic configuration
-            List<InstrumentClusterConfiguration>  listIC=LoadICInfo();
+            List<InstrumentClusterConfiguration> listIC = LoadICInfo();
             List<CAN> listCAN = LoadCANInfo();
-            
-            string channelName=listIC.Where(x=>x.InstrumentCluster==this.Tag.ToString() && x.CommunicationType=="CAN").ToList()[0].Value;
-            string bitrate=listCAN.Where(x => x.Channel == channelName).ToList()[0].Baudrate;
+
+            string channelName = listIC.Where(x => x.InstrumentCluster == this.Tag.ToString() && x.CommunicationType == "CAN").ToList()[0].Value;
+            string bitrate = listCAN.Where(x => x.Channel == channelName).ToList()[0].Baudrate;
 
             int channelNo = -1;
             channelName = channelName.Replace("channel", "");
             int.TryParse(channelName, out channelNo);
-            
+
             //initChannel
             dBCCan.initChannel(channelNo, bitrate);
         }
 
-
         private void Send_BCM_Gateway_CanMessage()
         {
-            if (message_List1.Count > 0 && message_List2.Count >0)
+            if (message_List1.Count > 0)
             {
                 while (true)
                 {
-                    //if(!IsTestEnd)
+                    //if (!IsTestEnd)
                     if(true)
                     {
-                        //Step1:
+                        //LoadSignal
                         foreach (AutoTestDLL.Model.Message message in message_List1)
                         {
                             if (message.GenMsgCycleTime == message.CycleCount)
                             {
                                 List<Signal> signalList = new List<Signal>();
                                 signalList = dBCCan.LoadSignalsById(message.id);
-
-                                List<Signal> temp = new List<Signal>();
-
-                                foreach(Signal s in signalList)
-                                {
-                                    if(s.name== "AB_Lampe")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                    else if(s.name == "DI_KL_58xd")
-                                    {
-                                        s.Value = 200;
-                                    }
-                                    else if (s.name == "ESP_Lampe")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                    else if (s.name == "BK_Lampe_02")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                    else if (s.name == "ABS_Lampe")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                    else if (s.name == "ZAS_Kl_15")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                    else if (s.name == "EPS_Warnungen")
-                                    {
-                                        s.Value = 3;
-                                    }
-                                    else if (s.name == "RKA_Warnungen_02")
-                                    {
-                                        s.Value = 1;
-                                    }
-                                }
                                 dBCCan.sendMsg(message.dlc,signalList);
                                 message.CycleCount = 0;
                             }
@@ -442,67 +410,59 @@ namespace WindowsFormsControlLibrary
                                 message.CycleCount += 10;
                             }
                         }
-
-                        //Step2 :Sleeping 1 second
-                        /*  Thread.Sleep(1000);
-
-                          //Step3:
-                          foreach (AutoTestDLL.Model.Message message in message_List2)
-                          {
-                              if (message.GenMsgCycleTime == message.CycleCount)
-                              {
-                                  List<Signal> signalList = new List<Signal>();
-                                  signalList = dBCCan.LoadSignalsById(message.id);
-
-                                  foreach(Signal s in signalList)
-                                  {
-                                      if(s.name== "RKA_Warnungen_02")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                      else if(s.name== "EPS_Warnungen")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                      else if(s.name== "ABS_Lampe")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                      else if (s.name== "ESP_Lampe")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                      else if(s.name== "BK_Lampe_02")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                      else if(s.name== "ESP_Zaehnezahl")
-                                      {
-                                          s.Value = 13;
-                                      }
-                                      else if(s.name== "AB_Lampe")
-                                      {
-                                          s.Value = 0;
-                                      }
-                                  }
-                                  dBCCan.sendMsg(message.dlc, signalList);
-                                  message.CycleCount = 0;
-                              }
-                              else
-                              {
-                                  message.CycleCount += 10;
-                              }
-                          }*/
+                        Thread.Sleep(10);
                     }
                     else
                     {
                         break;
                     }
-                    
-                    Thread.Sleep(10);
                 }
+
             }
 
+        }
+
+        List<ManualInstruction> listManualInstruction = new List<ManualInstruction>();
+        private void LoadManualInstruction()
+        {
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "ManualInstrustion.json");
+            listManualInstruction = JsonConvert.DeserializeObject<List<ManualInstruction>>(json);
+        }
+
+        private void Send_ManualInstruction()
+        {
+            if (listManualInstruction.Count > 0)
+            {
+                while (true)
+                {
+                    //if(!IsTestEnd)
+                    if(true)
+                    {
+                        foreach (ManualInstruction instruct in listManualInstruction)
+                        {
+                            if (instruct.cycletime == instruct.cyclecount && instruct.enable)
+                            {
+                                int id = Convert.ToInt32(instruct.id,16);
+                                int dlc = instruct.dlc;
+                                byte[] data= Sys.HexStringToBytes(instruct.data);
+
+                                dBCCan.send(id,dlc,data,0);
+                                instruct.cyclecount = 0;
+                            }
+                            else
+                            {
+                                instruct.cyclecount += 10;
+                            }
+                        }
+                        Thread.Sleep(10);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
         }
 
         private void FillStepInfo(TestStep step)
