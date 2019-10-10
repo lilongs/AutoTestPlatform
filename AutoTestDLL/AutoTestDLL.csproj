@@ -80,6 +80,7 @@
     <Compile Include="Model\ManualInstrustion.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Signal.cs" />
+    <Compile Include="Model\Temperature_humidity.cs" />
     <Compile Include="Model\TempSensorConfiguration.cs" />
     <Compile Include="Model\TestStep.cs" />
     <Compile Include="Module\KvaserDbcMessage.cs" />

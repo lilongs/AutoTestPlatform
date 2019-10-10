@@ -174,7 +174,12 @@ namespace AutoTestPlatform
             {
                 foreach (var it in DicTemperatureInfo)
                 {
-                    it.Value.ChartValueFill(new Random().Next(1, 100));
+                    Temperature_humidity temperature = new Temperature_humidity();
+                    temperature.now = DateTime.Now;
+                    temperature.temperatureValue = new Random().Next(1, 100);
+                    temperature.humidtyValue = new Random().Next(1, 50);
+
+                    it.Value.ChartValueFill(temperature);
                 }
 
                 foreach (var item in DicEquipmentInfo)

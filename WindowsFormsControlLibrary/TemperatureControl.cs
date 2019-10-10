@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using AutoTestDLL.Model;
 
 namespace WindowsFormsControlLibrary
 {
@@ -32,6 +33,13 @@ namespace WindowsFormsControlLibrary
             series.XValueType = ChartValueType.Time;
             series.Name = this.Tag.ToString()+"TemperatureCurve";
 
+            Series series2 = chart1.Series[1];
+            series2.ChartType = SeriesChartType.Spline;
+            series2.IsXValueIndexed = true;
+            series2.XValueType = ChartValueType.Time;
+            series2.Name = this.Tag.ToString() + "HumidityCurve";
+
+
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
             chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
             chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
@@ -40,7 +48,7 @@ namespace WindowsFormsControlLibrary
 
         }
 
-        public void ChartValueFill(double value)
+        public void ChartValueFill(Temperature_humidity value)
         {
             if (this.IsHandleCreated)
             {
@@ -51,8 +59,16 @@ namespace WindowsFormsControlLibrary
                     {
                         series.Points.RemoveAt(0);
                     }
-                    series.Points.AddXY(DateTime.Now, value);
+                    series.Points.AddXY(value.now, value.temperatureValue);
                     chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
+
+                    Series series2 = chart1.Series[1];
+                    if (series2.Points.Count > 2000)
+                    {
+                        series2.Points.RemoveAt(0);
+                    }
+                    series2.Points.AddXY(value.now, value.humidtyValue);//电压
+                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series2.Points.Count - 5;
                 });
             }
         }
