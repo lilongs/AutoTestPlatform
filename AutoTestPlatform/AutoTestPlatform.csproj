@@ -60,11 +60,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\canlibCLSNET.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Charts.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Sparkline.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1.UI, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.1.Wizard, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="kvadblibCLSNET, Version=8.28.846.1, Culture=neutral, PublicKeyToken=6ef18931d7bf9ad7, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\kvadblibCLSNET.dll</HintPath>
@@ -137,6 +143,12 @@
     </Compile>
     <Compile Include="frmMains.Designer.cs">
       <DependentUpon>frmMains.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoricalReview\frmHistoricalReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoricalReview\frmHistoricalReview.Designer.cs">
+      <DependentUpon>frmHistoricalReview.cs</DependentUpon>
     </Compile>
     <Compile Include="Module\KvaserCommunication.cs" />
     <Compile Include="PowerMeterConfiguration\frmPowerMeterConfiguration.cs">
@@ -231,9 +243,13 @@
     <EmbeddedResource Include="frmMains.resx">
       <DependentUpon>frmMains.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HistoricalReview\frmHistoricalReview.resx">
+      <DependentUpon>frmHistoricalReview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PowerMeterConfiguration\frmPowerMeterConfiguration.resx">
       <DependentUpon>frmPowerMeterConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

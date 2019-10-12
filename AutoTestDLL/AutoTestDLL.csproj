@@ -75,6 +75,7 @@
     <Compile Include="Model\COM.cs" />
     <Compile Include="Model\CurrentElectricValue.cs" />
     <Compile Include="Model\ElectricCurrent.cs" />
+    <Compile Include="Model\HistoryData.cs" />
     <Compile Include="Model\InstrumentClusterConfiguration.cs" />
     <Compile Include="Model\EquipmentTestInfo.cs" />
     <Compile Include="Model\ManualInstrustion.cs" />

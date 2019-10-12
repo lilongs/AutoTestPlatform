@@ -1,5 +1,6 @@
 ﻿using AutoTestDLL.Model;
 using AutoTestDLL.Util;
+using AutoTestPlatform.HistoricalReview;
 using AutoTestPlatform.InstrumentClusterConfigurations;
 using AutoTestPlatform.PowerMeterConfiguration;
 using AutoTestPlatform.TemperatureSensorConfiguration;
@@ -128,7 +129,7 @@ namespace AutoTestPlatform
         private void LoadTemperatureControl()
         {
             int i = 0;
-            int x = this.panel2.Width;
+            int x = this.panel4.Width;
             int y = this.panel2.Height;
 
             int _x = x - 22;
@@ -138,7 +139,7 @@ namespace AutoTestPlatform
             {
                 item.Value.Width = _x;
                 item.Value.Height = _y;
-                item.Value.Location = new System.Drawing.Point((i % 1) * (_x + 10) + 3, (i / 1) * (_y + 20) + 3);
+                item.Value.Location = new System.Drawing.Point((i % 1) * (_x + 10) + 3, (i / 1) * (_y + 10) + 3);
                 panel4.Controls.Add(item.Value);
                 i++;
             }
@@ -263,6 +264,12 @@ namespace AutoTestPlatform
         private void powerMeterAddressConfigurationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmPowerMeterConfiguration frm = new frmPowerMeterConfiguration();
+            frm.ShowDialog();
+        }
+
+        private void historicalInformationReviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmHistoricalReview frm = new frmHistoricalReview();
             frm.ShowDialog();
         }
     }

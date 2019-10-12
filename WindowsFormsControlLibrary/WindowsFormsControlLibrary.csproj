@@ -80,6 +80,12 @@
     <Compile Include="PublicElectricControl.Designer.cs">
       <DependentUpon>PublicElectricControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TemperatureControl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TemperatureControl2.Designer.cs">
+      <DependentUpon>TemperatureControl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="TemperatureControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="PublicElectricControl.resx">
       <DependentUpon>PublicElectricControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TemperatureControl2.resx">
+      <DependentUpon>TemperatureControl2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TemperatureControl.resx">
       <DependentUpon>TemperatureControl.cs</DependentUpon>
