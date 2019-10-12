@@ -43,6 +43,7 @@ namespace WindowsFormsControlLibrary
                     list = temp;
                     InitTree();
                     ExpandTree();
+                    
                 }
                 InitChart();
 
@@ -88,34 +89,18 @@ namespace WindowsFormsControlLibrary
 
         private void InitChart()
         {
-            Series series = chart1.Series[0];
-            series.ChartType = SeriesChartType.Spline;
-            series.IsXValueIndexed = true;
-            series.XValueType = ChartValueType.DateTime;
-            series.Name = this.Tag.ToString()+ "CurrentCurve";
-
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
-            chart1.ChartAreas[0].AxisX.ScaleView.Size = 5;
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
-            chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            chart1.Legends[0].Docking= Docking.Top;
+            userCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
         }
 
-        public void ChartValueFill(double value)
+        public void ChartValueFill(float value)
         {
-            if (this.IsHandleCreated)
-            {
-                chart1.BeginInvoke((MethodInvoker)delegate
+            userCurve1.AddCurveData(
+                new string[] { "A" },
+                new float[]
                 {
-                    Series series = chart1.Series[0];
-                    if (series.Points.Count > 200)
-                    {
-                        series.Points.RemoveAt(0);
-                    }
-                    series.Points.AddXY(DateTime.Now, value);
-                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 5;
-                });
-            }
+                    value
+                }
+            );
         }
 
         private void btnStart_Click(object sender, EventArgs e)

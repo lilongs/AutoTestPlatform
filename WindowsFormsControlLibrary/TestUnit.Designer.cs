@@ -29,16 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestUnit));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.userCurve1 = new WindowsFormsControlLibrary.UserCurve();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.btnStart = new System.Windows.Forms.Button();
@@ -91,7 +88,6 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
@@ -169,7 +165,7 @@
             this.groupControl2.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
             this.groupControl2.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl2.CaptionImageOptions.Image")));
-            this.groupControl2.Controls.Add(this.chart1);
+            this.groupControl2.Controls.Add(this.userCurve1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
             this.groupControl2.Name = "groupControl2";
@@ -177,48 +173,16 @@
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "Current curve";
             // 
-            // chart1
+            // userCurve1
             // 
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelAutoFitMaxFontSize = 9;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 9;
-            chartArea1.AxisX.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)((((((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.IncreaseFont | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.DecreaseFont) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.StaggeredLabels) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep30) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep45) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap)));
-            chartArea1.AxisX.LabelStyle.Angle = 45;
-            chartArea1.AxisX.LabelStyle.Format = "HH:mm:ss.fff";
-            chartArea1.AxisX.LabelStyle.Interval = 0D;
-            chartArea1.AxisX.ScaleView.MinSize = 9D;
-            chartArea1.AxisX.ScaleView.Size = 9D;
-            chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
-            chartArea1.AxisY.Title = "mA";
-            chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 83.63804F;
-            chartArea1.Position.Width = 91F;
-            chartArea1.Position.X = 3F;
-            chartArea1.Position.Y = 13.36196F;
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(2, 39);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.IsVisibleInLegend = false;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(435, 327);
-            this.chart1.TabIndex = 2;
-            this.chart1.Text = "chart1";
+            this.userCurve1.BackColor = System.Drawing.Color.Transparent;
+            this.userCurve1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userCurve1.Location = new System.Drawing.Point(2, 39);
+            this.userCurve1.Name = "userCurve1";
+            this.userCurve1.Size = new System.Drawing.Size(435, 327);
+            this.userCurve1.TabIndex = 1;
+            this.userCurve1.ValueMaxLeft = 200F;
+            this.userCurve1.ValueMaxRight = 5F;
             // 
             // panel4
             // 
@@ -698,7 +662,6 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
@@ -758,7 +721,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel panel4;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private System.Windows.Forms.Button btnStart;
@@ -768,5 +730,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private UserCurve userCurve1;
     }
 }

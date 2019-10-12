@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -42,7 +39,6 @@
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -82,13 +78,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.userCurve1 = new WindowsFormsControlLibrary.UserCurve();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -209,39 +205,12 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.chart1);
+            this.panel3.Controls.Add(this.userCurve1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(173, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(413, 369);
             this.panel3.TabIndex = 18;
-            // 
-            // chart1
-            // 
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelAutoFitMaxFontSize = 7;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 7;
-            chartArea1.AxisX.LabelStyle.Angle = 45;
-            chartArea1.AxisY.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
-            chartArea1.AxisY.Title = "mA";
-            chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 0);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(413, 369);
-            this.chart1.TabIndex = 1;
-            this.chart1.Text = "chart1";
             // 
             // panel4
             // 
@@ -645,7 +614,18 @@
             this.panel7.Size = new System.Drawing.Size(594, 400);
             this.panel7.TabIndex = 7;
             // 
-            // TestUnit
+            // userCurve1
+            // 
+            this.userCurve1.BackColor = System.Drawing.Color.Transparent;
+            this.userCurve1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userCurve1.Location = new System.Drawing.Point(0, 0);
+            this.userCurve1.Name = "userCurve1";
+            this.userCurve1.Size = new System.Drawing.Size(413, 369);
+            this.userCurve1.TabIndex = 0;
+            this.userCurve1.ValueMaxLeft = 200F;
+            this.userCurve1.ValueMaxRight = 5F;
+            // 
+            // TestUnit1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -653,7 +633,7 @@
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.xtraTabControl2);
             this.Controls.Add(this.panel1);
-            this.Name = "TestUnit";
+            this.Name = "TestUnit1";
             this.Size = new System.Drawing.Size(867, 462);
             this.Tag = "Equipment1";
             this.Load += new System.EventHandler(this.TestUnit_Load);
@@ -664,7 +644,6 @@
             this.xtraTabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -696,7 +675,6 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.TreeView treeView1;
@@ -734,5 +712,6 @@
         private System.Windows.Forms.Label txtFAZIT;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Panel panel7;
+        private UserCurve userCurve1;
     }
 }

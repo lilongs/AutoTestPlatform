@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using WindowsFormsControlLibrary;
 
@@ -23,16 +24,12 @@ namespace AutoTestPlatform
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private System.Timers.Timer chartTimer = new System.Timers.Timer();
-        private List<AmmeterConfiguration> ammeterList = new List<AmmeterConfiguration>();
+        private System.Timers.Timer changeSelectedPageTimer = new System.Timers.Timer();
+
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
         Dictionary<string, PublicElectricControl> DicPublicElectricInfo = new Dictionary<string, PublicElectricControl>();
-        List<Color> colors = new List<Color>() {
-            Color.FromArgb(230,23,23),Color.FromArgb(246,98,98), Color.FromArgb(154, 61,61),//RED
-            Color.FromArgb(115,114,57),Color.FromArgb(150,214,21),Color.FromArgb(193,241,96),//GREEN
-            Color.FromArgb(37,92,92),Color.FromArgb(14,138,138),Color.FromArgb(85,215,215),//BLUE
-            Color.FromArgb(234,129,41),Color.FromArgb(255,130,26),Color.FromArgb(255,177,113),//YELLOW
-        };
+        
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -41,6 +38,11 @@ namespace AutoTestPlatform
                 chartTimer.Interval = 1000;
                 chartTimer.Elapsed += chartTimer_Tick;
                 chartTimer.Start();
+
+                changeSelectedPageTimer.Interval = 10000;
+                changeSelectedPageTimer.Elapsed += changeSelectedPage;
+                changeSelectedPageTimer.Start();
+
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
@@ -173,7 +175,7 @@ namespace AutoTestPlatform
             {
                 Temperature_humidity temperature = new Temperature_humidity();
                 temperature.now = DateTime.Now;
-                temperature.temperatureValue = new Random().Next(1, 100);
+                temperature.temperatureValue = new Random().Next(-10, 100);
                 temperature.humidtyValue=new Random().Next(0, 50);
 
                 it.Value.ChartValueFill(temperature);
@@ -181,19 +183,36 @@ namespace AutoTestPlatform
 
             foreach (var item in DicEquipmentInfo)
             {
-                item.Value.ChartValueFill(new Random().Next(1, 100));
+                item.Value.ChartValueFill(new Random().Next(80, 100));
             }
 
             foreach(var its in DicPublicElectricInfo)
             {
                 CurrentElectricValue value = new CurrentElectricValue();
                 value.now = DateTime.Now;
-                value.currentValue = new Random().Next(1, 1000);
-                value.voltageValue = new Random().Next(0, 13000);
+                value.currentValue = new Random().Next(0, 1000);
+                value.voltageValue = new Random().Next(0, 500);
 
                 its.Value.ChartValueFill(value);
             }
         }
+
+        private void changeSelectedPage(object sender, EventArgs e)
+        {
+            xtraTabControl1.BeginInvoke((MethodInvoker)delegate
+            {
+                if (xtraTabControl1.TabPages.Count > 0)
+                {
+                    if(xtraTabControl1.SelectedTabPageIndex== xtraTabControl1.TabPages.Count-1)
+                    {
+                        xtraTabControl1.SelectedTabPageIndex = 0;
+                    }
+                    else
+                        xtraTabControl1.SelectedTabPageIndex = xtraTabControl1.SelectedTabPageIndex+1;
+                }
+            });                
+        }
+
 
         private void TestTypeEdit_Click(object sender, EventArgs e)
         {
@@ -270,6 +289,12 @@ namespace AutoTestPlatform
         private void historicalInformationReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmHistoricalReview frm = new frmHistoricalReview();
+            frm.ShowDialog();
+        }
+
+        private void iCReToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRefreshCycle frm = new frmRefreshCycle();
             frm.ShowDialog();
         }
     }

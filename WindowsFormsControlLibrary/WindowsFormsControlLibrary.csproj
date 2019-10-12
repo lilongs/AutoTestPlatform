@@ -80,6 +80,8 @@
     <Compile Include="PublicElectricControl.Designer.cs">
       <DependentUpon>PublicElectricControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="SoftBasic.cs" />
+    <Compile Include="SoftPainting.cs" />
     <Compile Include="TemperatureControl2.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +119,12 @@
       <DependentUpon>TestUnit2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCurve.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserCurve.designer.cs">
+      <DependentUpon>UserCurve.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestUnit2.resx">
       <DependentUpon>TestUnit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserCurve.resx">
+      <DependentUpon>UserCurve.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -150,6 +150,12 @@
     <Compile Include="HistoricalReview\frmHistoricalReview.Designer.cs">
       <DependentUpon>frmHistoricalReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="InstrumentClusterConfigurations\frmRefreshCycle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstrumentClusterConfigurations\frmRefreshCycle.Designer.cs">
+      <DependentUpon>frmRefreshCycle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Module\KvaserCommunication.cs" />
     <Compile Include="PowerMeterConfiguration\frmPowerMeterConfiguration.cs">
       <SubType>Form</SubType>
@@ -245,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HistoricalReview\frmHistoricalReview.resx">
       <DependentUpon>frmHistoricalReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstrumentClusterConfigurations\frmRefreshCycle.resx">
+      <DependentUpon>frmRefreshCycle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PowerMeterConfiguration\frmPowerMeterConfiguration.resx">
       <DependentUpon>frmPowerMeterConfiguration.cs</DependentUpon>

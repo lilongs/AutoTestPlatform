@@ -89,63 +89,18 @@ namespace WindowsFormsControlLibrary
        
         private void InitChart()
         {
-            this.groupControl1.Text = this.Tag.ToString() + " current curve";
-            Series series = chart1.Series[0];
-            series.ChartType = SeriesChartType.Spline;
-            series.IsXValueIndexed = true;
-            series.XValueType = ChartValueType.DateTime;
-            series.Name = this.Tag.ToString() + "CurrentCurve";
-
-            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss.fff";
-            chart1.ChartAreas[0].AxisX.ScaleView.Size = 10;
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
-            chart1.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            //chart1.Legends[0].Docking = Docking.Top;
+            userCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
         }
 
-        private void InitChart2()
+        public void ChartValueFill(float value)
         {
-            this.groupControl1.Text = this.Tag.ToString() + " current curve";
-            // Zoom into the X axis
-            //chart1.ChartAreas[0].AxisX.ScaleView.Zoom(1, 1);
-            // Enable range selection and zooming end user interface
-            chart1.ChartAreas[0].CursorX.IsUserEnabled = true;
-            chart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = true;
-            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chart1.ChartAreas[0].CursorY.IsUserEnabled = true;
-            chart1.ChartAreas[0].CursorY.IsUserSelectionEnabled = true;
-            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
-            //将滚动内嵌到坐标轴中
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
-            chart1.ChartAreas[0].AxisY.ScrollBar.IsPositionedInside = true;
-            // 设置滚动条的大小
-            chart1.ChartAreas[0].AxisX.ScrollBar.Size = 10;
-            chart1.ChartAreas[0].AxisY.ScrollBar.Size = 10;
-            // 设置滚动条的按钮的风格，下面代码是将所有滚动条上的按钮都显示出来
-            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;
-            chart1.ChartAreas[0].AxisY.ScrollBar.ButtonStyle = ScrollBarButtonStyles.All;
-            // 设置自动放大与缩小的最小量
-            chart1.ChartAreas[0].AxisX.ScaleView.SmallScrollSize = double.NaN;
-            chart1.ChartAreas[0].AxisX.ScaleView.SmallScrollMinSize = 1;
-            chart1.ChartAreas[0].AxisY.ScaleView.SmallScrollSize = double.NaN;
-            chart1.ChartAreas[0].AxisY.ScaleView.SmallScrollMinSize = 1;
-        }
-
-        public void ChartValueFill(double value)
-        {
-            if (this.IsHandleCreated)
-            {
-                chart1.BeginInvoke((MethodInvoker)delegate
-                {
-                    Series series = chart1.Series[0];
-                    if (series.Points.Count > 2000)
-                    {
-                        series.Points.RemoveAt(0);
-                    }
-                    series.Points.AddXY(DateTime.Now, value);
-                    chart1.ChartAreas[0].AxisX.ScaleView.Position = series.Points.Count - 10;
-                });
-            }
+            userCurve1.AddCurveData(
+               new string[] { "A" },
+               new float[]
+               {
+                    value
+               }
+           );
         }
 
         private void btnStart_Click(object sender, EventArgs e)

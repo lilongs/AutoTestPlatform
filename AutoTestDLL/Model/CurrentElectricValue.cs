@@ -9,7 +9,7 @@ namespace AutoTestDLL.Model
     public class CurrentElectricValue
     {
         public DateTime now { get; set; }
-        public double currentValue { get; set; }
-        public double voltageValue { get; set; }
+        public float currentValue { get; set; }
+        public float voltageValue { get; set; }
     }
 }

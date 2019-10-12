@@ -33,6 +33,7 @@
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCReToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureSensorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cOMConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,8 @@
             this.sysConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cANConfiguration,
             this.equipmentConfiguration,
-            this.maualToolStripMenuItem});
+            this.maualToolStripMenuItem,
+            this.iCReToolStripMenuItem});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(72, 21);
             this.sysConfigToolStripMenuItem.Text = "IC config";
@@ -81,14 +83,14 @@
             // cANConfiguration
             // 
             this.cANConfiguration.Name = "cANConfiguration";
-            this.cANConfiguration.Size = new System.Drawing.Size(267, 22);
+            this.cANConfiguration.Size = new System.Drawing.Size(223, 22);
             this.cANConfiguration.Text = "CAN config";
             this.cANConfiguration.Click += new System.EventHandler(this.cANConfiguration_Click);
             // 
             // equipmentConfiguration
             // 
             this.equipmentConfiguration.Name = "equipmentConfiguration";
-            this.equipmentConfiguration.Size = new System.Drawing.Size(267, 22);
+            this.equipmentConfiguration.Size = new System.Drawing.Size(223, 22);
             this.equipmentConfiguration.Text = "IC paramter config";
             this.equipmentConfiguration.Click += new System.EventHandler(this.equipmentConfiguration_Click);
             // 
@@ -98,6 +100,13 @@
             this.maualToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.maualToolStripMenuItem.Text = "Manual instruction config";
             this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
+            // 
+            // iCReToolStripMenuItem
+            // 
+            this.iCReToolStripMenuItem.Name = "iCReToolStripMenuItem";
+            this.iCReToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.iCReToolStripMenuItem.Text = "IC refresh cycle";
+            this.iCReToolStripMenuItem.Click += new System.EventHandler(this.iCReToolStripMenuItem_Click);
             // 
             // temperatureSensorConfigurationToolStripMenuItem
             // 
@@ -111,7 +120,7 @@
             // cOMConfigurationToolStripMenuItem
             // 
             this.cOMConfigurationToolStripMenuItem.Name = "cOMConfigurationToolStripMenuItem";
-            this.cOMConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.cOMConfigurationToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.cOMConfigurationToolStripMenuItem.Text = "COM config";
             this.cOMConfigurationToolStripMenuItem.Click += new System.EventHandler(this.cOMConfiguration_Click);
             // 
@@ -150,21 +159,21 @@
             // TestTypeEdit
             // 
             this.TestTypeEdit.Name = "TestTypeEdit";
-            this.TestTypeEdit.Size = new System.Drawing.Size(225, 22);
+            this.TestTypeEdit.Size = new System.Drawing.Size(178, 22);
             this.TestTypeEdit.Text = "TestTypeEdit";
             this.TestTypeEdit.Click += new System.EventHandler(this.TestTypeEdit_Click);
             // 
             // TestSequenceEdit
             // 
             this.TestSequenceEdit.Name = "TestSequenceEdit";
-            this.TestSequenceEdit.Size = new System.Drawing.Size(225, 22);
+            this.TestSequenceEdit.Size = new System.Drawing.Size(178, 22);
             this.TestSequenceEdit.Text = "TestSequenceEdit";
             this.TestSequenceEdit.Click += new System.EventHandler(this.TestSequenceEdit_Click);
             // 
             // equipmentTestInfo
             // 
             this.equipmentTestInfo.Name = "equipmentTestInfo";
-            this.equipmentTestInfo.Size = new System.Drawing.Size(180, 22);
+            this.equipmentTestInfo.Size = new System.Drawing.Size(178, 22);
             this.equipmentTestInfo.Text = "IC test info";
             this.equipmentTestInfo.Click += new System.EventHandler(this.equipmentTestInfo_Click);
             // 
@@ -273,6 +282,7 @@
         private System.Windows.Forms.ToolStripMenuItem temperatureConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem histroyDataRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historicalInformationReviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iCReToolStripMenuItem;
     }
 }
 

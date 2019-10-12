@@ -9,7 +9,7 @@ namespace AutoTestDLL.Model
     public class Temperature_humidity
     {
         public DateTime now { get; set; }
-        public double temperatureValue { get; set; }
-        public double humidtyValue { get; set; }
+        public float temperatureValue { get; set; }
+        public float humidtyValue { get; set; }
     }
 }
