@@ -24,7 +24,7 @@ namespace AutoTestPlatform
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private System.Timers.Timer chartTimer = new System.Timers.Timer();
-        private System.Timers.Timer changeSelectedPageTimer = new System.Timers.Timer();
+        public System.Timers.Timer changeSelectedPageTimer = new System.Timers.Timer();
 
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
@@ -39,10 +39,17 @@ namespace AutoTestPlatform
                 chartTimer.Elapsed += chartTimer_Tick;
                 chartTimer.Start();
 
-                changeSelectedPageTimer.Interval = 10000;
-                changeSelectedPageTimer.Elapsed += changeSelectedPage;
-                changeSelectedPageTimer.Start();
+                string info=frmRefreshCycle.LoadRefreshCycle();
+                string[] arr = info.Split(',');
+                int result = 10000;
+                int.TryParse(arr[0], out result);
 
+                changeSelectedPageTimer.Interval = result;
+                changeSelectedPageTimer.Elapsed += changeSelectedPage;
+                if (Convert.ToBoolean(arr[1]))
+                    changeSelectedPageTimer.Start();
+                else
+                    changeSelectedPageTimer.Stop();
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
@@ -210,7 +217,8 @@ namespace AutoTestPlatform
                     else
                         xtraTabControl1.SelectedTabPageIndex = xtraTabControl1.SelectedTabPageIndex+1;
                 }
-            });                
+            });           
+            
         }
 
 
@@ -295,7 +303,11 @@ namespace AutoTestPlatform
         private void iCReToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRefreshCycle frm = new frmRefreshCycle();
-            frm.ShowDialog();
+            frm.changeSelectedPageTimer = this.changeSelectedPageTimer;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                this.changeSelectedPageTimer = frm.changeSelectedPageTimer;
+            }
         }
     }
 }

@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.txtOld = new System.Windows.Forms.TextBox();
+            this.txtNew = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -44,28 +45,29 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Old refresh cycle:";
             // 
-            // button1
+            // btnOk
             // 
-            this.button1.Location = new System.Drawing.Point(253, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOk.Location = new System.Drawing.Point(253, 134);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // textBox1
+            // txtOld
             // 
-            this.textBox1.Location = new System.Drawing.Point(173, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 21);
-            this.textBox1.TabIndex = 2;
+            this.txtOld.Location = new System.Drawing.Point(173, 44);
+            this.txtOld.Name = "txtOld";
+            this.txtOld.Size = new System.Drawing.Size(155, 21);
+            this.txtOld.TabIndex = 2;
             // 
-            // textBox2
+            // txtNew
             // 
-            this.textBox2.Location = new System.Drawing.Point(173, 88);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(155, 21);
-            this.textBox2.TabIndex = 4;
+            this.txtNew.Location = new System.Drawing.Point(173, 88);
+            this.txtNew.Name = "txtNew";
+            this.txtNew.Size = new System.Drawing.Size(155, 21);
+            this.txtNew.TabIndex = 4;
             // 
             // label2
             // 
@@ -76,18 +78,31 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "New refresh cycle:";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(59, 138);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(108, 16);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "Enable refresh";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // frmRefreshCycle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 185);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(383, 186);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.txtNew);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtOld);
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label1);
             this.Name = "frmRefreshCycle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmRefreshCycle";
+            this.Load += new System.EventHandler(this.frmRefreshCycle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,9 +111,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.TextBox txtOld;
+        private System.Windows.Forms.TextBox txtNew;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
