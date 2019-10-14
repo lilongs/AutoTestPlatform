@@ -122,14 +122,17 @@ namespace TestThread
                 }
             }
         }
+        public bool IsStop = false;
+        public bool IsTestEnd = false;
         public void MeasureMeterCurrent(object tu)
         {
             StringBuilder MeterVal = new StringBuilder();
             MeterConfig.MeterInit(MeterSourceName);
             MeterConfig.SetVoltage(MeterRange, MeterResolution);
+            MeterConfig.MeasurementInit();
             int count = 0;
            // Random rd1 = new Random();        
-               while (true)
+               while (!IsStop||!IsTestEnd)
                {
                  //  MeterCurrent = rd1.Next(1, 100);
                    MeterCurrent = MeterConfig.MeasureSinglePoint();

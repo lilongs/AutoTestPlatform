@@ -103,9 +103,15 @@ namespace WindowsFormsControlLibrary
            );
         }
         TestThread1 TestThread_ = new TestThread1();
+        Thread th ;
+        Thread th2;
+        Thread th3;
+        Thread th4;
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnStart.Enabled = false;
+            btnPause.Enabled = true;
             TestThread_.MeterSourceName=GetPowerMeterName();
             if(TestThread_.MeterSourceName.Length==0)
             {
@@ -133,26 +139,77 @@ namespace WindowsFormsControlLibrary
                     ReadyTestInfo.Add(tp.typename, testInfo.Where(x => x.typename == tp.typename).ToList());
                 }
                 //测试步骤线程
-                Thread th = new Thread(RunTest);
+                th = new Thread(RunTest);
                 th.IsBackground = true;
                 th.Start();
 
                 //循环发送BCM、Gateway信息
                 IsTestEnd = false;
-                Thread th2 = new Thread(Send_BCM_Gateway_CanMessage);
+                th2 = new Thread(Send_BCM_Gateway_CanMessage);
                 th2.IsBackground = true;
                 th2.Start();
 
                 //循环发送手动指令
-                Thread th3 = new Thread(Send_ManualInstruction);
+                th3 = new Thread(Send_ManualInstruction);
                 th3.IsBackground = true;
                 th3.Start();
                 //电流表
                 TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
-                Thread th4 = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
+                th4 = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
                 th4.IsBackground = true;
                 th4.Start(this);
                 selectedList.Clear();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ThreadState Nowstate = th.ThreadState;
+                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin)
+                {
+                    //Pause the thread
+                    th.Suspend();
+                    //Disable the Pause button
+                    btnPause.Enabled = false;
+                    //Enable the resume button
+                    btnResume.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
+        }
+
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (th.ThreadState == ThreadState.SuspendRequested || th.ThreadState == ThreadState.Suspended)
+                {
+                    th.Resume();
+                    btnResume.Enabled = false;
+                    btnPause.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IsStop = true;
+                TestThread_.IsStop = true;
             }
             catch (Exception ex)
             {
@@ -234,6 +291,7 @@ namespace WindowsFormsControlLibrary
 
             foreach (var item in ReadyTestInfo)
             {
+                
                 string typename = item.Key;
 
                 var max = item.Value.Max(t => t.repeat);
@@ -242,6 +300,10 @@ namespace WindowsFormsControlLibrary
                 {
                     foreach (TestStep step in item.Value)
                     {
+                        if (!IsStop)
+                        {
+                            return;
+                        }
                         if (i > step.repeat)
                         {
                             continue;
@@ -256,8 +318,8 @@ namespace WindowsFormsControlLibrary
                         });
 
                         FillStepInfo(step);
-                        string type=step.typename;
-                        switch(step.typename)
+                        string type = step.typename;
+                        switch (step.typename)
                         {
                             case "PTL":
                                 //Step1 
@@ -271,11 +333,11 @@ namespace WindowsFormsControlLibrary
 
                         string stepname = step.stepname;
                         string modelname = step.modelname;
-                        ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！",Color.Red);
+                        ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！", Color.Red);
                         //Actual test steps
-                        ShowInfo(richTextBox2, typename+"-"+stepname);
+                        ShowInfo(richTextBox2, typename + "-" + stepname);
                         //Measuring value
-                        ShowInfo(richTextBox3,"OK");
+                        ShowInfo(richTextBox3, "OK");
                         //Model
                         ShowInfo(richTextBox4, modelname);
 
@@ -299,10 +361,15 @@ namespace WindowsFormsControlLibrary
                                 countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
                             }
                         });
+
                     }
-                }
+                }              
             }
-            IsTestEnd = true;
+            btnStart.BeginInvoke((MethodInvoker)delegate { btnStart.Enabled = true; });
+            btnPause.BeginInvoke((MethodInvoker)delegate { btnPause.Enabled = false; });
+            
+            //IsTestEnd = true;
+            //TestThread_.IsTestEnd = true;
         }
 
 
@@ -364,15 +431,14 @@ namespace WindowsFormsControlLibrary
             //initChannel
             dBCCan.initChannel(channelNo, bitrate);
         }
-
+        public bool IsStop = false;
         private void Send_BCM_Gateway_CanMessage()
         {
             if (message_List1.Count > 0)
             {
-                while (true)
+                while (!IsStop)
                 {
-                    //if (!IsTestEnd)
-                    if(true)
+                    if (!IsTestEnd)
                     {
                         //LoadSignal
                         foreach (AutoTestDLL.Model.Message message in message_List1)
@@ -413,10 +479,9 @@ namespace WindowsFormsControlLibrary
         {
             if (listManualInstruction.Count > 0)
             {
-                while (true)
+                while (!IsStop)
                 {
-                    //if(!IsTestEnd)
-                    if(true)
+                    if(!IsTestEnd)
                     {
                         foreach (ManualInstruction instruct in listManualInstruction)
                         {
@@ -438,7 +503,7 @@ namespace WindowsFormsControlLibrary
                     }
                     else
                     {
-                      ;
+                      break;
                     }
                 }
             }
@@ -512,5 +577,6 @@ namespace WindowsFormsControlLibrary
             }
         }
 
+        
     }
 }

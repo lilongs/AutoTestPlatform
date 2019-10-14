@@ -65,8 +65,10 @@
             this.txttypename = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.btnStart = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnResume = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -79,6 +81,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -497,7 +500,6 @@
             this.groupControl4.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl4.AppearanceCaption.Options.UseFont = true;
             this.groupControl4.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl4.CaptionImageOptions.Image")));
-            this.groupControl4.Controls.Add(this.btnStart);
             this.groupControl4.Controls.Add(this.panel5);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl4.Location = new System.Drawing.Point(0, 0);
@@ -506,24 +508,50 @@
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "Select test step:";
             // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(146, 8);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(68, 25);
-            this.btnStart.TabIndex = 12;
-            this.btnStart.Text = "TestStart";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnStop);
+            this.panel5.Controls.Add(this.btnResume);
+            this.panel5.Controls.Add(this.btnStart);
+            this.panel5.Controls.Add(this.btnPause);
             this.panel5.Controls.Add(this.treeView1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(2, 39);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(210, 327);
             this.panel5.TabIndex = 16;
+            // 
+            // btnResume
+            // 
+            this.btnResume.Enabled = false;
+            this.btnResume.Location = new System.Drawing.Point(123, 56);
+            this.btnResume.Name = "btnResume";
+            this.btnResume.Size = new System.Drawing.Size(83, 25);
+            this.btnResume.TabIndex = 15;
+            this.btnResume.Text = "TestResume";
+            this.btnResume.UseVisualStyleBackColor = true;
+            this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(123, 3);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(83, 25);
+            this.btnStart.TabIndex = 12;
+            this.btnStart.Text = "TestStart";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.Enabled = false;
+            this.btnPause.Location = new System.Drawing.Point(123, 30);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(83, 25);
+            this.btnPause.TabIndex = 12;
+            this.btnPause.Text = "TestPause";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // treeView1
             // 
@@ -644,6 +672,17 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Actual test steps:";
             // 
+            // btnStop
+            // 
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(123, 83);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(83, 25);
+            this.btnStop.TabIndex = 15;
+            this.btnStop.Text = "TestStop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // TestUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -731,5 +770,8 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private UserCurve userCurve1;
+        private System.Windows.Forms.Button btnPause;
+        private System.Windows.Forms.Button btnResume;
+        private System.Windows.Forms.Button btnStop;
     }
 }

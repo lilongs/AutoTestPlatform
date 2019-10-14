@@ -55,10 +55,16 @@ namespace Ag3446x_CS
             driver.Trigger.Source = Ag3446xTriggerSourceEnum.Ag3446xTriggerSourceImmediate;
            
         }
+
+        public void MeasurementInit()
+        {
+            driver.Measurement.Initiate();
+        }
+
         public ArrayList MesureMutiPoint()
         {
             
-            driver.Measurement.Initiate();
+            //driver.Measurement.Initiate();
             driver.Trigger.Count = 1;
             driver.Trigger.Delay = 0;
             driver.Trigger.SampleCount = 1000;
@@ -87,7 +93,7 @@ namespace Ag3446x_CS
         {
           
             double data2 = 0;
-              driver.Measurement.Initiate();
+              //driver.Measurement.Initiate();
                   driver.System.WaitForOperationComplete(1000);
                    data2 = driver.Measurement.Fetch(1000);
               return data2;
