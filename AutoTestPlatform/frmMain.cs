@@ -10,9 +10,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
+//using WindowsFormsControlLibrary.Module.TestThread;
 using WindowsFormsControlLibrary;
+
+using System.Configuration;
+using System.Threading;
+using TestThread;
+
 
 namespace AutoTestPlatform
 {
@@ -24,7 +29,7 @@ namespace AutoTestPlatform
         }
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private System.Timers.Timer chartTimer = new System.Timers.Timer();
-        public System.Timers.Timer changeSelectedPageTimer = new System.Timers.Timer();
+        private System.Timers.Timer changeSelectedPageTimer = new System.Timers.Timer();
 
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
@@ -35,11 +40,7 @@ namespace AutoTestPlatform
         {
             try
             {
-                chartTimer.Interval = 1000;
-                chartTimer.Elapsed += chartTimer_Tick;
-                chartTimer.Start();
-
-                string info=frmRefreshCycle.LoadRefreshCycle();
+                string info = frmRefreshCycle.LoadRefreshCycle();
                 string[] arr = info.Split(',');
                 int result = 10000;
                 int.TryParse(arr[0], out result);
@@ -54,8 +55,8 @@ namespace AutoTestPlatform
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
 
-                LoadPublicElectricInfo();
-                LoadPublicElectricControl();
+                //LoadPublicElectricInfo();
+                //LoadPublicElectricControl();
                 LoadTemperatureInfo();
                 LoadTemperatureControl();
             }
@@ -63,8 +64,86 @@ namespace AutoTestPlatform
             {
                 logger.Error(ex, ex.Message);
             }
+            //Thread Power Measure
+
+            foreach (var item in DicPublicElectricInfo)
+            {
+                TestThread1 TestThread_ = new TestThread1();
+                TestThread_.PowerSourceName = GetAppConfig("PowerSouceName");
+                if( TestThread_.PowerSourceName.Length==0)
+                {
+                    MessageBox.Show("Error Power Source Name");
+                }
+                string Datesandhour = DateTime.Now.ToString("MMdd_hh_mm_ss");
+                TestThread_.PowerFilePath = GetAppConfig("PowerFilePath");
+                TestThread_.PowerFileName = Datesandhour + ".txt";
+                if (GetAppConfig("PowerFileEnable") == "TRUE")
+                {
+                    TestThread_.MeasurePowerSwitch = true;
+                }
+                else TestThread_.MeasurePowerSwitch = false;
+                Thread ThreadMeasureCurrent = new Thread(new ParameterizedThreadStart(TestThread_.MeasurePowerVoltageandCurrent));
+                ThreadMeasureCurrent.IsBackground = true;
+                ThreadMeasureCurrent.Start(item.Value);
+            }
+
+            //Thread Temp&Humidity
+            TestThread1 TestThread_2 = new TestThread1();
+            string Datesandhour2 = DateTime.Now.ToString("MMdd_hh_mm_ss");
+            TestThread_2.TempFilePath = GetAppConfig("TempFilePath");
+            TestThread_2.TempFileName = Datesandhour2 + ".txt";
+            TestThread_2.TempSourceName = GetAppConfig("TempSouceName");
+            TestThread_2.TempSensor1Add = Convert.ToByte(GetAppConfig("TempSensor1Add"));
+            TestThread_2.TempSensor2Add = Convert.ToByte(GetAppConfig("TempSensor2Add"));
+            TestThread_2.TempSensor3Add = Convert.ToByte(GetAppConfig("TempSensor3Add"));
+
+            if (GetAppConfig("TempFileEnable") == "TRUE")
+            {
+                TestThread_2.MeasurTempSwitch = true;
+            }
+            else TestThread_2.MeasurTempSwitch = false;
+            Thread ThreadMeasureTemp = new Thread(new ParameterizedThreadStart(TestThread_2.MeasureTempandHumidity));
+            ThreadMeasureTemp.IsBackground = true;
+
+            List<TemperatureControl> tp = new List<TemperatureControl>();
+            foreach (var item in DicTemperatureInfo)
+            {
+                tp.Add(item.Value);
+            }
+            ThreadMeasureTemp.Start(tp);
+
+            //PCB control thread
+            TestThread1 ThreadPCBcontrol = new TestThread1();
+
+
         }
 
+        private void changeSelectedPage(object sender, EventArgs e)
+        {
+            xtraTabControl1.BeginInvoke((MethodInvoker)delegate
+            {
+                if (xtraTabControl1.TabPages.Count > 0)
+                {
+                    if (xtraTabControl1.SelectedTabPageIndex == xtraTabControl1.TabPages.Count - 1)
+                    {
+                        xtraTabControl1.SelectedTabPageIndex = 0;
+                    }
+                    else
+                        xtraTabControl1.SelectedTabPageIndex = xtraTabControl1.SelectedTabPageIndex + 1;
+                }
+            });
+
+        }
+        public static string GetAppConfig(string strKey)
+        {
+            string Path = System.Windows.Forms.Application.StartupPath;// 获取路径
+            string FileName = Path + "\\File.config";
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            map.ExeConfigFilename = FileName;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+            string key = config.AppSettings.Settings[strKey].Value;
+            return key;
+        }
         private void LoadEquipmentInfo()
         {
             string path = Application.StartupPath + "\\SysConfig";
@@ -176,52 +255,7 @@ namespace AutoTestPlatform
         }
 
 
-        private void chartTimer_Tick(object sender, EventArgs e)
-        {
-            foreach (var it in DicTemperatureInfo)
-            {
-                Temperature_humidity temperature = new Temperature_humidity();
-                temperature.now = DateTime.Now;
-                temperature.temperatureValue = new Random().Next(-10, 100);
-                temperature.humidtyValue=new Random().Next(0, 50);
-
-                it.Value.ChartValueFill(temperature);
-            }
-
-            foreach (var item in DicEquipmentInfo)
-            {
-                item.Value.ChartValueFill(new Random().Next(80, 100));
-            }
-
-            foreach(var its in DicPublicElectricInfo)
-            {
-                CurrentElectricValue value = new CurrentElectricValue();
-                value.now = DateTime.Now;
-                value.currentValue = new Random().Next(0, 1000);
-                value.voltageValue = new Random().Next(0, 500);
-
-                its.Value.ChartValueFill(value);
-            }
-        }
-
-        private void changeSelectedPage(object sender, EventArgs e)
-        {
-            xtraTabControl1.BeginInvoke((MethodInvoker)delegate
-            {
-                if (xtraTabControl1.TabPages.Count > 0)
-                {
-                    if(xtraTabControl1.SelectedTabPageIndex== xtraTabControl1.TabPages.Count-1)
-                    {
-                        xtraTabControl1.SelectedTabPageIndex = 0;
-                    }
-                    else
-                        xtraTabControl1.SelectedTabPageIndex = xtraTabControl1.SelectedTabPageIndex+1;
-                }
-            });           
-            
-        }
-
-
+      
         private void TestTypeEdit_Click(object sender, EventArgs e)
         {
             frmTestTypeManager form = new frmTestTypeManager();
@@ -300,7 +334,7 @@ namespace AutoTestPlatform
             frm.ShowDialog();
         }
 
-        private void iCReToolStripMenuItem_Click(object sender, EventArgs e)
+        private void iCRefreshCycleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRefreshCycle frm = new frmRefreshCycle();
             frm.changeSelectedPageTimer = this.changeSelectedPageTimer;
@@ -308,6 +342,7 @@ namespace AutoTestPlatform
             {
                 this.changeSelectedPageTimer = frm.changeSelectedPageTimer;
             }
+
         }
     }
 }

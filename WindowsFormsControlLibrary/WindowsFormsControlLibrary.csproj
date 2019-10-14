@@ -32,6 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Agilent.Ag3446x.Interop, Version=1.1.5.0, Culture=neutral, PublicKeyToken=ced78d295d1e0f2b, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_32\Agilent.Ag3446x.Interop\1.1.5.0__ced78d295d1e0f2b\Agilent.Ag3446x.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Agilent.AgilentE36xx.Interop, Version=1.5.0.0, Culture=neutral, PublicKeyToken=ced78d295d1e0f2b, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_32\Agilent.AgilentE36xx.Interop\1.5.0.0__ced78d295d1e0f2b\Agilent.AgilentE36xx.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="canlibCLSNET, Version=8.28.846.1, Culture=neutral, PublicKeyToken=bb7f2cd46200de24, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Kvaser\Canlib\dotnet\win32\fw40\canlibCLSNET.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Charts.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -44,6 +58,21 @@
     <Reference Include="DevExpress.XtraGauges.v17.1.Core, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGauges.v17.1.Win, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Ivi.DCPwr.Interop, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_32\Ivi.DCPwr.Interop\2.0.0.0__a128c98f1d7717c1\Ivi.DCPwr.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivi.Dmm.Interop, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_32\Ivi.Dmm.Interop\3.0.0.0__a128c98f1d7717c1\Ivi.Dmm.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Ivi.Driver.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a128c98f1d7717c1, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_32\Ivi.Driver.Interop\1.0.0.0__a128c98f1d7717c1\Ivi.Driver.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -74,6 +103,12 @@
     <Compile Include="Countdown.Designer.cs">
       <DependentUpon>Countdown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module\KvaserCommunication.cs" />
+    <Compile Include="Module\Meter34465.cs" />
+    <Compile Include="Module\PCBcontrol.cs" />
+    <Compile Include="Module\Power3544A.cs" />
+    <Compile Include="Module\RS485.cs" />
+    <Compile Include="Module\TestThread.cs" />
     <Compile Include="PublicElectricControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

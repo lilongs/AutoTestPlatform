@@ -13,6 +13,8 @@ using AutoTestDLL.Util;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using AutoTestDLL.Module;
+using TestThread;
+
 
 namespace WindowsFormsControlLibrary
 {
@@ -48,14 +50,12 @@ namespace WindowsFormsControlLibrary
                 InitCan();
                 LoadManualInstruction();
                 this.groupControl3.Text = this.Tag.ToString() + " step info:";
-
             }
             catch (Exception ex)
             {
                 logger.Error(ex, ex.Message);
             }
         }
-
         private List<TypeList> LoadEquipmentTestInfo()
         {
             List<TypeList> result = new List<TypeList>();
@@ -102,9 +102,16 @@ namespace WindowsFormsControlLibrary
                }
            );
         }
+        TestThread1 TestThread_ = new TestThread1();
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            TestThread_.MeterSourceName=GetPowerMeterName();
+            if(TestThread_.MeterSourceName.Length==0)
+            {
+              //  MessageBox.Show("Error Meter Source Name");
+                MessageBox.Show(TestThread_.MeterSourceName);
+            }
             try
             {
                 testStartTime = DateTime.Now;
@@ -140,7 +147,11 @@ namespace WindowsFormsControlLibrary
                 Thread th3 = new Thread(Send_ManualInstruction);
                 th3.IsBackground = true;
                 th3.Start();
-
+                //电流表
+                TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
+                Thread th4 = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
+                th4.IsBackground = true;
+                th4.Start(this);
                 selectedList.Clear();
             }
             catch (Exception ex)
@@ -307,7 +318,20 @@ namespace WindowsFormsControlLibrary
             temp = JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
             return temp;
         }
-
+        private List<PowerMeter>LoadPowerInfo()
+        {
+            List<PowerMeter> temp = new List<PowerMeter>();
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "PowerMeter.json");
+            temp = JsonConvert.DeserializeObject<List<PowerMeter>>(json);
+            return temp;
+        }
+        private string GetPowerMeterName()
+        {
+            List<PowerMeter> powermeter = LoadPowerInfo();
+            string temp = powermeter.Where(x => x.instrumentcluster == this.Tag.ToString()).ToList()[0].address;
+            return temp;
+        }
         private List<CAN> LoadCANInfo()
         {
             List<CAN> listCAN = new List<CAN>();
@@ -414,7 +438,7 @@ namespace WindowsFormsControlLibrary
                     }
                     else
                     {
-                        break;
+                      ;
                     }
                 }
             }

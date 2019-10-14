@@ -33,7 +33,6 @@
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iCReToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureSensorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cOMConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +49,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.iCRefreshCycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -75,7 +75,7 @@
             this.cANConfiguration,
             this.equipmentConfiguration,
             this.maualToolStripMenuItem,
-            this.iCReToolStripMenuItem});
+            this.iCRefreshCycleToolStripMenuItem});
             this.sysConfigToolStripMenuItem.Name = "sysConfigToolStripMenuItem";
             this.sysConfigToolStripMenuItem.Size = new System.Drawing.Size(72, 21);
             this.sysConfigToolStripMenuItem.Text = "IC config";
@@ -101,13 +101,6 @@
             this.maualToolStripMenuItem.Text = "Manual instruction config";
             this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
             // 
-            // iCReToolStripMenuItem
-            // 
-            this.iCReToolStripMenuItem.Name = "iCReToolStripMenuItem";
-            this.iCReToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.iCReToolStripMenuItem.Text = "IC refresh cycle";
-            this.iCReToolStripMenuItem.Click += new System.EventHandler(this.iCReToolStripMenuItem_Click);
-            // 
             // temperatureSensorConfigurationToolStripMenuItem
             // 
             this.temperatureSensorConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -116,6 +109,7 @@
             this.temperatureSensorConfigurationToolStripMenuItem.Name = "temperatureSensorConfigurationToolStripMenuItem";
             this.temperatureSensorConfigurationToolStripMenuItem.Size = new System.Drawing.Size(178, 21);
             this.temperatureSensorConfigurationToolStripMenuItem.Text = "Temperature sensor config";
+            this.temperatureSensorConfigurationToolStripMenuItem.Visible = false;
             // 
             // cOMConfigurationToolStripMenuItem
             // 
@@ -212,9 +206,9 @@
             this.panel4.AutoScroll = true;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 324);
+            this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(402, 322);
+            this.panel4.Size = new System.Drawing.Size(402, 646);
             this.panel4.TabIndex = 1;
             // 
             // panel3
@@ -223,7 +217,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(402, 324);
+            this.panel3.Size = new System.Drawing.Size(402, 0);
             this.panel3.TabIndex = 0;
             // 
             // xtraTabControl1
@@ -233,6 +227,13 @@
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
             this.xtraTabControl1.TabIndex = 14;
+            // 
+            // iCRefreshCycleToolStripMenuItem
+            // 
+            this.iCRefreshCycleToolStripMenuItem.Name = "iCRefreshCycleToolStripMenuItem";
+            this.iCRefreshCycleToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.iCRefreshCycleToolStripMenuItem.Text = "IC refresh cycle";
+            this.iCRefreshCycleToolStripMenuItem.Click += new System.EventHandler(this.iCRefreshCycleToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -282,7 +283,7 @@
         private System.Windows.Forms.ToolStripMenuItem temperatureConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem histroyDataRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historicalInformationReviewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iCReToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iCRefreshCycleToolStripMenuItem;
     }
 }
 

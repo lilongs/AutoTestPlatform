@@ -305,6 +305,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="File.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

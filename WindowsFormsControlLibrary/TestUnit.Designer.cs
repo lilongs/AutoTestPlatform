@@ -36,15 +36,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.userCurve1 = new WindowsFormsControlLibrary.UserCurve();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.txtFAZIT = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -72,6 +63,15 @@
             this.label16 = new System.Windows.Forms.Label();
             this.txtstepname = new System.Windows.Forms.Label();
             this.txttypename = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new DevExpress.XtraEditors.GroupControl();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -88,6 +88,8 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
@@ -95,8 +97,6 @@
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -107,7 +107,6 @@
             this.groupControl1.AppearanceCaption.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.groupControl1.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl1.Controls.Add(this.xtraTabControl1);
-            this.groupControl1.Controls.Add(this.groupControl3);
             this.groupControl1.Controls.Add(this.panel1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
@@ -123,7 +122,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(661, 399);
+            this.xtraTabControl1.Size = new System.Drawing.Size(915, 399);
             this.xtraTabControl1.TabIndex = 6;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -134,7 +133,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.panel2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(655, 370);
+            this.xtraTabPage1.Size = new System.Drawing.Size(909, 370);
             this.xtraTabPage1.Text = "Test step output";
             // 
             // panel2
@@ -145,16 +144,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(655, 370);
+            this.panel2.Size = new System.Drawing.Size(909, 370);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.groupControl2);
+            this.panel3.Controls.Add(this.groupControl3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(214, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(439, 368);
+            this.panel3.Size = new System.Drawing.Size(693, 368);
             this.panel3.TabIndex = 18;
             // 
             // groupControl2
@@ -167,9 +167,9 @@
             this.groupControl2.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl2.CaptionImageOptions.Image")));
             this.groupControl2.Controls.Add(this.userCurve1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 0);
+            this.groupControl2.Location = new System.Drawing.Point(0, 201);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(439, 368);
+            this.groupControl2.Size = new System.Drawing.Size(693, 167);
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "Current curve";
             // 
@@ -179,99 +179,10 @@
             this.userCurve1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userCurve1.Location = new System.Drawing.Point(2, 39);
             this.userCurve1.Name = "userCurve1";
-            this.userCurve1.Size = new System.Drawing.Size(435, 327);
-            this.userCurve1.TabIndex = 1;
-            this.userCurve1.ValueMaxLeft = 200F;
-            this.userCurve1.ValueMaxRight = 5F;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.groupControl4);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(214, 368);
-            this.panel4.TabIndex = 17;
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.AllowBorderColorBlending = true;
-            this.groupControl4.AppearanceCaption.BorderColor = System.Drawing.Color.LightGreen;
-            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
-            this.groupControl4.AppearanceCaption.Options.UseBorderColor = true;
-            this.groupControl4.AppearanceCaption.Options.UseFont = true;
-            this.groupControl4.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl4.CaptionImageOptions.Image")));
-            this.groupControl4.Controls.Add(this.btnStart);
-            this.groupControl4.Controls.Add(this.panel5);
-            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(0, 0);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(214, 368);
-            this.groupControl4.TabIndex = 3;
-            this.groupControl4.Text = "Select test step:";
-            // 
-            // btnStart
-            // 
-            this.btnStart.Location = new System.Drawing.Point(142, 8);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(68, 25);
-            this.btnStart.TabIndex = 12;
-            this.btnStart.Text = "TestStart";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.treeView1);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(2, 39);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(210, 327);
-            this.panel5.TabIndex = 16;
-            // 
-            // treeView1
-            // 
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(210, 327);
-            this.treeView1.TabIndex = 14;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Controls.Add(this.dataGridView1);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(655, 370);
-            this.xtraTabPage2.Text = "Execute test steps";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(655, 370);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // xtraTabPage3
-            // 
-            this.xtraTabPage3.Controls.Add(this.richTextBox1);
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(655, 370);
-            this.xtraTabPage3.Text = "Debugging";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(655, 370);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.userCurve1.Size = new System.Drawing.Size(689, 126);
+            this.userCurve1.TabIndex = 2;
+            this.userCurve1.ValueMaxLeft = 1.5F;
+            this.userCurve1.ValueMaxRight = 1.5F;
             // 
             // groupControl3
             // 
@@ -305,10 +216,10 @@
             this.groupControl3.Controls.Add(this.label16);
             this.groupControl3.Controls.Add(this.txtstepname);
             this.groupControl3.Controls.Add(this.txttypename);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupControl3.Location = new System.Drawing.Point(663, 2);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(254, 399);
+            this.groupControl3.Size = new System.Drawing.Size(693, 201);
             this.groupControl3.TabIndex = 4;
             this.groupControl3.Text = "Step info:";
             // 
@@ -316,7 +227,7 @@
             // 
             this.txtFAZIT.AutoSize = true;
             this.txtFAZIT.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFAZIT.Location = new System.Drawing.Point(204, 154);
+            this.txtFAZIT.Location = new System.Drawing.Point(360, 75);
             this.txtFAZIT.Name = "txtFAZIT";
             this.txtFAZIT.Size = new System.Drawing.Size(30, 16);
             this.txtFAZIT.TabIndex = 60;
@@ -326,17 +237,17 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(5, 108);
+            this.label14.Location = new System.Drawing.Point(224, 59);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(197, 15);
+            this.label14.Size = new System.Drawing.Size(127, 15);
             this.label14.TabIndex = 42;
-            this.label14.Text = "VW ECU SoftwareVersion Number:";
+            this.label14.Text = "VW ECU SW Number:";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(5, 154);
+            this.label18.Location = new System.Drawing.Point(224, 76);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(75, 15);
             this.label18.TabIndex = 59;
@@ -346,7 +257,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 177);
+            this.label2.Location = new System.Drawing.Point(5, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 24;
@@ -356,7 +267,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(5, 315);
+            this.label11.Location = new System.Drawing.Point(5, 156);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(97, 15);
             this.label11.TabIndex = 36;
@@ -366,7 +277,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(5, 200);
+            this.label3.Location = new System.Drawing.Point(224, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
             this.label3.TabIndex = 26;
@@ -376,7 +287,7 @@
             // 
             this.txtPCBPartnumber.AutoSize = true;
             this.txtPCBPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPCBPartnumber.Location = new System.Drawing.Point(204, 40);
+            this.txtPCBPartnumber.Location = new System.Drawing.Point(125, 41);
             this.txtPCBPartnumber.Name = "txtPCBPartnumber";
             this.txtPCBPartnumber.Size = new System.Drawing.Size(30, 16);
             this.txtPCBPartnumber.TabIndex = 58;
@@ -386,7 +297,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 223);
+            this.label4.Location = new System.Drawing.Point(5, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 15);
             this.label4.TabIndex = 28;
@@ -396,7 +307,7 @@
             // 
             this.txtHARDWARE.AutoSize = true;
             this.txtHARDWARE.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHARDWARE.Location = new System.Drawing.Point(204, 131);
+            this.txtHARDWARE.Location = new System.Drawing.Point(125, 76);
             this.txtHARDWARE.Name = "txtHARDWARE";
             this.txtHARDWARE.Size = new System.Drawing.Size(30, 16);
             this.txtHARDWARE.TabIndex = 57;
@@ -406,7 +317,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 246);
+            this.label5.Location = new System.Drawing.Point(224, 110);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 15);
             this.label5.TabIndex = 30;
@@ -416,7 +327,7 @@
             // 
             this.txtSOFRWARE.AutoSize = true;
             this.txtSOFRWARE.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSOFRWARE.Location = new System.Drawing.Point(204, 108);
+            this.txtSOFRWARE.Location = new System.Drawing.Point(360, 59);
             this.txtSOFRWARE.Name = "txtSOFRWARE";
             this.txtSOFRWARE.Size = new System.Drawing.Size(30, 16);
             this.txtSOFRWARE.TabIndex = 56;
@@ -426,7 +337,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 269);
+            this.label6.Location = new System.Drawing.Point(5, 128);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 15);
             this.label6.TabIndex = 32;
@@ -436,7 +347,7 @@
             // 
             this.txtSPAREPART.AutoSize = true;
             this.txtSPAREPART.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSPAREPART.Location = new System.Drawing.Point(204, 84);
+            this.txtSPAREPART.Location = new System.Drawing.Point(125, 59);
             this.txtSPAREPART.Name = "txtSPAREPART";
             this.txtSPAREPART.Size = new System.Drawing.Size(30, 16);
             this.txtSPAREPART.TabIndex = 55;
@@ -446,7 +357,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(5, 292);
+            this.label7.Location = new System.Drawing.Point(224, 127);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 15);
             this.label7.TabIndex = 34;
@@ -456,7 +367,7 @@
             // 
             this.txtPRPDUCTPartnumber.AutoSize = true;
             this.txtPRPDUCTPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPRPDUCTPartnumber.Location = new System.Drawing.Point(204, 61);
+            this.txtPRPDUCTPartnumber.Location = new System.Drawing.Point(360, 41);
             this.txtPRPDUCTPartnumber.Name = "txtPRPDUCTPartnumber";
             this.txtPRPDUCTPartnumber.Size = new System.Drawing.Size(30, 16);
             this.txtPRPDUCTPartnumber.TabIndex = 54;
@@ -464,7 +375,7 @@
             // 
             // countdown1
             // 
-            this.countdown1.Location = new System.Drawing.Point(5, 335);
+            this.countdown1.Location = new System.Drawing.Point(108, 147);
             this.countdown1.Name = "countdown1";
             this.countdown1.Size = new System.Drawing.Size(201, 50);
             this.countdown1.TabIndex = 37;
@@ -473,7 +384,7 @@
             // 
             this.txttesttime.AutoSize = true;
             this.txttesttime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttesttime.Location = new System.Drawing.Point(204, 291);
+            this.txttesttime.Location = new System.Drawing.Point(360, 128);
             this.txttesttime.Name = "txttesttime";
             this.txttesttime.Size = new System.Drawing.Size(30, 16);
             this.txttesttime.TabIndex = 53;
@@ -483,7 +394,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(5, 62);
+            this.label12.Location = new System.Drawing.Point(224, 42);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(120, 15);
             this.label12.TabIndex = 38;
@@ -493,7 +404,7 @@
             // 
             this.txtcycletime.AutoSize = true;
             this.txtcycletime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcycletime.Location = new System.Drawing.Point(204, 268);
+            this.txtcycletime.Location = new System.Drawing.Point(125, 129);
             this.txtcycletime.Name = "txtcycletime";
             this.txtcycletime.Size = new System.Drawing.Size(30, 16);
             this.txtcycletime.TabIndex = 52;
@@ -503,7 +414,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 85);
+            this.label13.Location = new System.Drawing.Point(5, 54);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(89, 15);
             this.label13.TabIndex = 40;
@@ -513,7 +424,7 @@
             // 
             this.txtvoltage.AutoSize = true;
             this.txtvoltage.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvoltage.Location = new System.Drawing.Point(204, 245);
+            this.txtvoltage.Location = new System.Drawing.Point(360, 112);
             this.txtvoltage.Name = "txtvoltage";
             this.txtvoltage.Size = new System.Drawing.Size(30, 16);
             this.txtvoltage.TabIndex = 51;
@@ -523,7 +434,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 131);
+            this.label15.Location = new System.Drawing.Point(5, 69);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(114, 15);
             this.label15.TabIndex = 44;
@@ -533,7 +444,7 @@
             // 
             this.txtmodelname.AutoSize = true;
             this.txtmodelname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtmodelname.Location = new System.Drawing.Point(204, 222);
+            this.txtmodelname.Location = new System.Drawing.Point(125, 112);
             this.txtmodelname.Name = "txtmodelname";
             this.txtmodelname.Size = new System.Drawing.Size(30, 16);
             this.txtmodelname.TabIndex = 50;
@@ -553,7 +464,7 @@
             // 
             this.txtstepname.AutoSize = true;
             this.txtstepname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtstepname.Location = new System.Drawing.Point(204, 199);
+            this.txtstepname.Location = new System.Drawing.Point(360, 92);
             this.txtstepname.Name = "txtstepname";
             this.txtstepname.Size = new System.Drawing.Size(30, 16);
             this.txtstepname.TabIndex = 49;
@@ -563,11 +474,100 @@
             // 
             this.txttypename.AutoSize = true;
             this.txttypename.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttypename.Location = new System.Drawing.Point(204, 176);
+            this.txttypename.Location = new System.Drawing.Point(125, 93);
             this.txttypename.Name = "txttypename";
             this.txttypename.Size = new System.Drawing.Size(30, 16);
             this.txttypename.TabIndex = 48;
             this.txttypename.Text = "null";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.groupControl4);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(214, 368);
+            this.panel4.TabIndex = 17;
+            // 
+            // groupControl4
+            // 
+            this.groupControl4.AllowBorderColorBlending = true;
+            this.groupControl4.AppearanceCaption.BorderColor = System.Drawing.Color.LightGreen;
+            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
+            this.groupControl4.AppearanceCaption.Options.UseBorderColor = true;
+            this.groupControl4.AppearanceCaption.Options.UseFont = true;
+            this.groupControl4.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl4.CaptionImageOptions.Image")));
+            this.groupControl4.Controls.Add(this.btnStart);
+            this.groupControl4.Controls.Add(this.panel5);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl4.Location = new System.Drawing.Point(0, 0);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(214, 368);
+            this.groupControl4.TabIndex = 3;
+            this.groupControl4.Text = "Select test step:";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(146, 8);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(68, 25);
+            this.btnStart.TabIndex = 12;
+            this.btnStart.Text = "TestStart";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.treeView1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(2, 39);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(210, 327);
+            this.panel5.TabIndex = 16;
+            // 
+            // treeView1
+            // 
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(210, 327);
+            this.treeView1.TabIndex = 14;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.dataGridView1);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(909, 370);
+            this.xtraTabPage2.Text = "Execute test steps";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(909, 370);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Controls.Add(this.richTextBox1);
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(909, 370);
+            this.xtraTabPage3.Text = "Debugging";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(909, 370);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
             // 
             // panel1
             // 
@@ -589,9 +589,9 @@
             this.richTextBox4.BackColor = System.Drawing.SystemColors.MenuText;
             this.richTextBox4.Font = new System.Drawing.Font("宋体", 16F);
             this.richTextBox4.ForeColor = System.Drawing.Color.LimeGreen;
-            this.richTextBox4.Location = new System.Drawing.Point(661, 21);
+            this.richTextBox4.Location = new System.Drawing.Point(462, 21);
             this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(249, 34);
+            this.richTextBox4.Size = new System.Drawing.Size(226, 34);
             this.richTextBox4.TabIndex = 7;
             this.richTextBox4.Text = "";
             // 
@@ -600,9 +600,9 @@
             this.richTextBox3.BackColor = System.Drawing.SystemColors.MenuText;
             this.richTextBox3.Font = new System.Drawing.Font("宋体", 16F);
             this.richTextBox3.ForeColor = System.Drawing.Color.LimeGreen;
-            this.richTextBox3.Location = new System.Drawing.Point(370, 21);
+            this.richTextBox3.Location = new System.Drawing.Point(224, 22);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(278, 34);
+            this.richTextBox3.Size = new System.Drawing.Size(226, 34);
             this.richTextBox3.TabIndex = 6;
             this.richTextBox3.Text = "";
             // 
@@ -613,14 +613,14 @@
             this.richTextBox2.ForeColor = System.Drawing.Color.LimeGreen;
             this.richTextBox2.Location = new System.Drawing.Point(11, 21);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(319, 34);
+            this.richTextBox2.Size = new System.Drawing.Size(205, 34);
             this.richTextBox2.TabIndex = 5;
             this.richTextBox2.Text = "";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(660, 4);
+            this.label10.Location = new System.Drawing.Point(461, 4);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(43, 14);
             this.label10.TabIndex = 2;
@@ -629,7 +629,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(367, 4);
+            this.label9.Location = new System.Drawing.Point(221, 5);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(97, 14);
             this.label9.TabIndex = 1;
@@ -662,6 +662,9 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            this.groupControl3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
@@ -669,9 +672,6 @@
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.xtraTabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
