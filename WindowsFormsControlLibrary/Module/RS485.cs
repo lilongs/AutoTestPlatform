@@ -20,9 +20,8 @@ namespace RS485
    SerialPort sp = new SerialPort();
 
  
-   public  int OPenPort(String Port)
+   public  int OPenPortsub(String Port)
    {
-      
        if (!sp.IsOpen)
        {
            sp.PortName = Port;
@@ -35,16 +34,28 @@ namespace RS485
            try
            {
               sp.Open();
-           }
+                    return 1;
+                }
            catch (System.Exception ex)
            {             
                sp.Close();
                sp.Dispose();
-               return -1;
+               return 2;
            }
        }
-       return 0;
+       return 2;
    }
+
+   public int OPenPort(string Port)
+        {
+            int result = OPenPortsub(Port);
+            while(result==2)
+            {
+                OPenPortsub(Port);
+                Thread.Sleep(500);
+            }
+            return 0;
+         }
    public  int ClosePort(String Port)
    {
 
@@ -53,16 +64,18 @@ namespace RS485
            try
            {
               sp.Close();
+              sp.Dispose();
            }
            catch (System.Exception ex)
            {
-               MessageBox.Show("Error:" + ex.Message, "Error");
-               return -1;
+             // MessageBox.Show("Error:" + ex.Message, "Error");
+             sp.Dispose();
+             return 2;
            }
        }
-       return 0;
+            return 1;
 
-   }
+    }
 
    public static byte[] crc16bitbybit(byte[] data)
         {

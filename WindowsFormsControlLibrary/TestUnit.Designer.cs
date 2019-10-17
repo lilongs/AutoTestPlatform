@@ -37,9 +37,7 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.userCurve1 = new WindowsFormsControlLibrary.UserCurve();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.txtFAZIT = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.Serialnumber = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,18 +52,19 @@
             this.txtPRPDUCTPartnumber = new System.Windows.Forms.Label();
             this.countdown1 = new WindowsFormsControlLibrary.Countdown();
             this.txttesttime = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.partnumber = new System.Windows.Forms.Label();
             this.txtcycletime = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.SWversion = new System.Windows.Forms.Label();
             this.txtvoltage = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.Fazit = new System.Windows.Forms.Label();
             this.txtmodelname = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.HWversion = new System.Windows.Forms.Label();
             this.txtstepname = new System.Windows.Forms.Label();
             this.txttypename = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnStop = new System.Windows.Forms.Button();
             this.btnResume = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -81,7 +80,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -193,9 +191,7 @@
             this.groupControl3.AppearanceCaption.BorderColor = System.Drawing.Color.Silver;
             this.groupControl3.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl3.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl3.CaptionImageOptions.Image")));
-            this.groupControl3.Controls.Add(this.txtFAZIT);
-            this.groupControl3.Controls.Add(this.label14);
-            this.groupControl3.Controls.Add(this.label18);
+            this.groupControl3.Controls.Add(this.Serialnumber);
             this.groupControl3.Controls.Add(this.label2);
             this.groupControl3.Controls.Add(this.label11);
             this.groupControl3.Controls.Add(this.label3);
@@ -210,13 +206,13 @@
             this.groupControl3.Controls.Add(this.txtPRPDUCTPartnumber);
             this.groupControl3.Controls.Add(this.countdown1);
             this.groupControl3.Controls.Add(this.txttesttime);
-            this.groupControl3.Controls.Add(this.label12);
+            this.groupControl3.Controls.Add(this.partnumber);
             this.groupControl3.Controls.Add(this.txtcycletime);
-            this.groupControl3.Controls.Add(this.label13);
+            this.groupControl3.Controls.Add(this.SWversion);
             this.groupControl3.Controls.Add(this.txtvoltage);
-            this.groupControl3.Controls.Add(this.label15);
+            this.groupControl3.Controls.Add(this.Fazit);
             this.groupControl3.Controls.Add(this.txtmodelname);
-            this.groupControl3.Controls.Add(this.label16);
+            this.groupControl3.Controls.Add(this.HWversion);
             this.groupControl3.Controls.Add(this.txtstepname);
             this.groupControl3.Controls.Add(this.txttypename);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -226,41 +222,21 @@
             this.groupControl3.TabIndex = 4;
             this.groupControl3.Text = "Step info:";
             // 
-            // txtFAZIT
+            // Serialnumber
             // 
-            this.txtFAZIT.AutoSize = true;
-            this.txtFAZIT.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFAZIT.Location = new System.Drawing.Point(360, 75);
-            this.txtFAZIT.Name = "txtFAZIT";
-            this.txtFAZIT.Size = new System.Drawing.Size(30, 16);
-            this.txtFAZIT.TabIndex = 60;
-            this.txtFAZIT.Text = "null";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(224, 59);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(127, 15);
-            this.label14.TabIndex = 42;
-            this.label14.Text = "VW ECU SW Number:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(224, 76);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(75, 15);
-            this.label18.TabIndex = 59;
-            this.label18.Text = "FAZIT String:";
+            this.Serialnumber.AutoSize = true;
+            this.Serialnumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Serialnumber.Location = new System.Drawing.Point(224, 59);
+            this.Serialnumber.Name = "Serialnumber";
+            this.Serialnumber.Size = new System.Drawing.Size(85, 15);
+            this.Serialnumber.TabIndex = 42;
+            this.Serialnumber.Text = "Serial number";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 87);
+            this.label2.Location = new System.Drawing.Point(5, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 24;
@@ -290,7 +266,7 @@
             // 
             this.txtPCBPartnumber.AutoSize = true;
             this.txtPCBPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPCBPartnumber.Location = new System.Drawing.Point(125, 41);
+            this.txtPCBPartnumber.Location = new System.Drawing.Point(125, 39);
             this.txtPCBPartnumber.Name = "txtPCBPartnumber";
             this.txtPCBPartnumber.Size = new System.Drawing.Size(30, 16);
             this.txtPCBPartnumber.TabIndex = 58;
@@ -300,7 +276,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 109);
+            this.label4.Location = new System.Drawing.Point(5, 107);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 15);
             this.label4.TabIndex = 28;
@@ -310,7 +286,7 @@
             // 
             this.txtHARDWARE.AutoSize = true;
             this.txtHARDWARE.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHARDWARE.Location = new System.Drawing.Point(125, 76);
+            this.txtHARDWARE.Location = new System.Drawing.Point(125, 72);
             this.txtHARDWARE.Name = "txtHARDWARE";
             this.txtHARDWARE.Size = new System.Drawing.Size(30, 16);
             this.txtHARDWARE.TabIndex = 57;
@@ -340,7 +316,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 128);
+            this.label6.Location = new System.Drawing.Point(5, 124);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 15);
             this.label6.TabIndex = 32;
@@ -350,7 +326,7 @@
             // 
             this.txtSPAREPART.AutoSize = true;
             this.txtSPAREPART.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSPAREPART.Location = new System.Drawing.Point(125, 59);
+            this.txtSPAREPART.Location = new System.Drawing.Point(125, 55);
             this.txtSPAREPART.Name = "txtSPAREPART";
             this.txtSPAREPART.Size = new System.Drawing.Size(30, 16);
             this.txtSPAREPART.TabIndex = 55;
@@ -370,7 +346,7 @@
             // 
             this.txtPRPDUCTPartnumber.AutoSize = true;
             this.txtPRPDUCTPartnumber.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPRPDUCTPartnumber.Location = new System.Drawing.Point(360, 41);
+            this.txtPRPDUCTPartnumber.Location = new System.Drawing.Point(360, 39);
             this.txtPRPDUCTPartnumber.Name = "txtPRPDUCTPartnumber";
             this.txtPRPDUCTPartnumber.Size = new System.Drawing.Size(30, 16);
             this.txtPRPDUCTPartnumber.TabIndex = 54;
@@ -393,35 +369,35 @@
             this.txttesttime.TabIndex = 53;
             this.txttesttime.Text = "null";
             // 
-            // label12
+            // partnumber
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(224, 42);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(120, 15);
-            this.label12.TabIndex = 38;
-            this.label12.Text = "Product Partnumber:";
+            this.partnumber.AutoSize = true;
+            this.partnumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partnumber.Location = new System.Drawing.Point(224, 39);
+            this.partnumber.Name = "partnumber";
+            this.partnumber.Size = new System.Drawing.Size(78, 15);
+            this.partnumber.TabIndex = 38;
+            this.partnumber.Text = "Part number:";
             // 
             // txtcycletime
             // 
             this.txtcycletime.AutoSize = true;
             this.txtcycletime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcycletime.Location = new System.Drawing.Point(125, 129);
+            this.txtcycletime.Location = new System.Drawing.Point(125, 123);
             this.txtcycletime.Name = "txtcycletime";
             this.txtcycletime.Size = new System.Drawing.Size(30, 16);
             this.txtcycletime.TabIndex = 52;
             this.txtcycletime.Text = "null";
             // 
-            // label13
+            // SWversion
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 54);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(89, 15);
-            this.label13.TabIndex = 40;
-            this.label13.Text = "VW Spare Part:";
+            this.SWversion.AutoSize = true;
+            this.SWversion.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SWversion.Location = new System.Drawing.Point(5, 56);
+            this.SWversion.Name = "SWversion";
+            this.SWversion.Size = new System.Drawing.Size(69, 15);
+            this.SWversion.TabIndex = 40;
+            this.SWversion.Text = "SW version";
             // 
             // txtvoltage
             // 
@@ -433,35 +409,35 @@
             this.txtvoltage.TabIndex = 51;
             this.txtvoltage.Text = "null";
             // 
-            // label15
+            // Fazit
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 69);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(114, 15);
-            this.label15.TabIndex = 44;
-            this.label15.Text = "VW ECU Hardware:";
+            this.Fazit.AutoSize = true;
+            this.Fazit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fazit.Location = new System.Drawing.Point(5, 73);
+            this.Fazit.Name = "Fazit";
+            this.Fazit.Size = new System.Drawing.Size(69, 15);
+            this.Fazit.TabIndex = 44;
+            this.Fazit.Text = "Fazit string:";
             // 
             // txtmodelname
             // 
             this.txtmodelname.AutoSize = true;
             this.txtmodelname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtmodelname.Location = new System.Drawing.Point(125, 112);
+            this.txtmodelname.Location = new System.Drawing.Point(125, 106);
             this.txtmodelname.Name = "txtmodelname";
             this.txtmodelname.Size = new System.Drawing.Size(30, 16);
             this.txtmodelname.TabIndex = 50;
             this.txtmodelname.Text = "null";
             // 
-            // label16
+            // HWversion
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(5, 39);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(103, 15);
-            this.label16.TabIndex = 46;
-            this.label16.Text = "PCB Partnumber:";
+            this.HWversion.AutoSize = true;
+            this.HWversion.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HWversion.Location = new System.Drawing.Point(5, 39);
+            this.HWversion.Name = "HWversion";
+            this.HWversion.Size = new System.Drawing.Size(73, 15);
+            this.HWversion.TabIndex = 46;
+            this.HWversion.Text = "HW version:";
             // 
             // txtstepname
             // 
@@ -477,7 +453,7 @@
             // 
             this.txttypename.AutoSize = true;
             this.txttypename.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttypename.Location = new System.Drawing.Point(125, 93);
+            this.txttypename.Location = new System.Drawing.Point(125, 89);
             this.txttypename.Name = "txttypename";
             this.txttypename.Size = new System.Drawing.Size(30, 16);
             this.txttypename.TabIndex = 48;
@@ -521,10 +497,23 @@
             this.panel5.Size = new System.Drawing.Size(210, 327);
             this.panel5.TabIndex = 16;
             // 
+            // btnStop
+            // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.Enabled = false;
+            this.btnStop.Location = new System.Drawing.Point(1, 285);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(83, 25);
+            this.btnStop.TabIndex = 15;
+            this.btnStop.Text = "TestStop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // btnResume
             // 
+            this.btnResume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnResume.Enabled = false;
-            this.btnResume.Location = new System.Drawing.Point(123, 56);
+            this.btnResume.Location = new System.Drawing.Point(123, 285);
             this.btnResume.Name = "btnResume";
             this.btnResume.Size = new System.Drawing.Size(83, 25);
             this.btnResume.TabIndex = 15;
@@ -534,7 +523,8 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(123, 3);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStart.Location = new System.Drawing.Point(1, 254);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(83, 25);
             this.btnStart.TabIndex = 12;
@@ -544,8 +534,9 @@
             // 
             // btnPause
             // 
+            this.btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnPause.Enabled = false;
-            this.btnPause.Location = new System.Drawing.Point(123, 30);
+            this.btnPause.Location = new System.Drawing.Point(123, 254);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(83, 25);
             this.btnPause.TabIndex = 12;
@@ -672,17 +663,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Actual test steps:";
             // 
-            // btnStop
-            // 
-            this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(123, 83);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(83, 25);
-            this.btnStop.TabIndex = 15;
-            this.btnStop.Text = "TestStop";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
             // TestUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -729,9 +709,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private System.Windows.Forms.Label txtFAZIT;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label Serialnumber;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label3;
@@ -746,13 +724,13 @@
         private System.Windows.Forms.Label txtPRPDUCTPartnumber;
         private Countdown countdown1;
         private System.Windows.Forms.Label txttesttime;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label partnumber;
         private System.Windows.Forms.Label txtcycletime;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label SWversion;
         private System.Windows.Forms.Label txtvoltage;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label Fazit;
         private System.Windows.Forms.Label txtmodelname;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label HWversion;
         private System.Windows.Forms.Label txtstepname;
         private System.Windows.Forms.Label txttypename;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;

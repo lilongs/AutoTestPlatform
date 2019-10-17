@@ -14,7 +14,8 @@ using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using AutoTestDLL.Module;
 using TestThread;
-
+using WindowsFormsControlLibrary.Module;
+using System.Configuration;
 
 namespace WindowsFormsControlLibrary
 {
@@ -60,19 +61,19 @@ namespace WindowsFormsControlLibrary
         {
             List<TypeList> result = new List<TypeList>();
 
-           string path = Application.StartupPath + "\\TestInfo";
+            string path = Application.StartupPath + "\\TestInfo";
             string json = JsonOperate.GetJson(path, "InstrumentClusterTestInfo.json");
             List<EquipmentTestInfo> temp = JsonConvert.DeserializeObject<List<EquipmentTestInfo>>(json);
 
             string json2 = JsonOperate.GetJson(path, "TypeList.json");
-            List<TypeList>  temp2 = JsonConvert.DeserializeObject<List<TypeList>>(json2);
-            if (temp != null && temp2!=null)
+            List<TypeList> temp2 = JsonConvert.DeserializeObject<List<TypeList>>(json2);
+            if (temp != null && temp2 != null)
             {
-                List<EquipmentTestInfo>  list=temp.Where(t => t.InstrumentCluster == this.Tag.ToString()).ToList();
+                List<EquipmentTestInfo> list = temp.Where(t => t.InstrumentCluster == this.Tag.ToString()).ToList();
 
                 foreach (EquipmentTestInfo info in list)
                 {
-                    result.AddRange(temp2.Where(t => t.typename == info.TypeName || t.parentname==info.TypeName).ToList());
+                    result.AddRange(temp2.Where(t => t.typename == info.TypeName || t.parentname == info.TypeName).ToList());
                 }
             }
             return result;
@@ -86,7 +87,7 @@ namespace WindowsFormsControlLibrary
             temp = JsonConvert.DeserializeObject<List<TypeList>>(json);
             return temp;
         }
-       
+
         private void InitChart()
         {
             userCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
@@ -103,19 +104,21 @@ namespace WindowsFormsControlLibrary
            );
         }
         TestThread1 TestThread_ = new TestThread1();
-        Thread th ;
+        Thread th;
         Thread th2;
         Thread th3;
         Thread th4;
-
+        Thread th5;
+        Thread thTestTime;
+        PCBcontrol PB = new PCBcontrol();
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
             btnPause.Enabled = true;
-            TestThread_.MeterSourceName=GetPowerMeterName();
-            if(TestThread_.MeterSourceName.Length==0)
+            TestThread_.MeterSourceName = GetPowerMeterName();
+            if (TestThread_.MeterSourceName.Length == 0)
             {
-              //  MessageBox.Show("Error Meter Source Name");
+                //  MessageBox.Show("Error Meter Source Name");
                 MessageBox.Show(TestThread_.MeterSourceName);
             }
             try
@@ -148,16 +151,21 @@ namespace WindowsFormsControlLibrary
                 th2 = new Thread(Send_BCM_Gateway_CanMessage);
                 th2.IsBackground = true;
                 th2.Start();
-
                 //循环发送手动指令
                 th3 = new Thread(Send_ManualInstruction);
                 th3.IsBackground = true;
                 th3.Start();
                 //电流表
-                TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
+                // TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
+                TestThread_.MeterFileRecordStep = Convert.ToInt32(GetAppConfig("MeterFileRecordStep"));
                 th4 = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
                 th4.IsBackground = true;
                 th4.Start(this);
+
+                th5 = new Thread(TestThread_.PCBcontrol);
+                th5.IsBackground = true;
+                th5.Start();
+
                 selectedList.Clear();
             }
             catch (Exception ex)
@@ -166,15 +174,30 @@ namespace WindowsFormsControlLibrary
             }
         }
 
+        private DateTime PauseTime;
+        private DateTime ResumeTime;
         private void btnPause_Click(object sender, EventArgs e)
         {
             try
             {
+                PauseTime = DateTime.Now;
                 ThreadState Nowstate = th.ThreadState;
-                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin)
+                ThreadState TestTimestate = thTestTime.ThreadState;
+
+                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin || Nowstate==ThreadState.Background)
                 {
                     //Pause the thread
                     th.Suspend();
+                    //Disable the Pause button
+                    btnPause.Enabled = false;
+                    //Enable the resume button
+                    btnResume.Enabled = true;
+                }
+
+                if (TestTimestate == ThreadState.Running || TestTimestate == ThreadState.WaitSleepJoin || TestTimestate == ThreadState.Background)
+                {
+                    //Pause the thread
+                    thTestTime.Suspend();
                     //Disable the Pause button
                     btnPause.Enabled = false;
                     //Enable the resume button
@@ -191,9 +214,18 @@ namespace WindowsFormsControlLibrary
         {
             try
             {
+                ResumeTime = DateTime.Now;
+                IsResume = true;
                 if (th.ThreadState == ThreadState.SuspendRequested || th.ThreadState == ThreadState.Suspended)
                 {
                     th.Resume();
+                    btnResume.Enabled = false;
+                    btnPause.Enabled = true;
+                }
+
+                if (thTestTime.ThreadState == ThreadState.SuspendRequested || thTestTime.ThreadState == ThreadState.Suspended)
+                {
+                    thTestTime.Resume();
                     btnResume.Enabled = false;
                     btnPause.Enabled = true;
                 }
@@ -279,19 +311,23 @@ namespace WindowsFormsControlLibrary
             testInfo = JsonConvert.DeserializeObject<List<TestStep>>(json);
         }
 
+        double CountTime = 0;
         private void RunTest()
         {
             TestStartTime = DateTime.Now;
             //获取待测试步骤的总CycleTime
-            double CountTime = 0;
+            thTestTime = new Thread(UpdateTestTime);
+            //thTestTime.IsBackground = true;
+            thTestTime.Start();
+
             foreach (var it in ReadyTestInfo)
             {
-                CountTime+=it.Value.Sum(t => t.cycletime);
+                CountTime += it.Value.Sum(t => t.cycletime);
             }
 
             foreach (var item in ReadyTestInfo)
             {
-                
+
                 string typename = item.Key;
 
                 var max = item.Value.Max(t => t.repeat);
@@ -300,7 +336,7 @@ namespace WindowsFormsControlLibrary
                 {
                     foreach (TestStep step in item.Value)
                     {
-                        if (!IsStop)
+                        if (IsStop)
                         {
                             return;
                         }
@@ -322,56 +358,356 @@ namespace WindowsFormsControlLibrary
                         switch (step.typename)
                         {
                             case "PTL":
-                                //Step1 
-                                //Step2
+                                PTLTestStep(step);
                                 break;
                             case "K03":
-                                //Step1 
-                                //Step2
+
                                 break;
                         }
 
-                        string stepname = step.stepname;
-                        string modelname = step.modelname;
-                        ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！", Color.Red);
-                        //Actual test steps
-                        ShowInfo(richTextBox2, typename + "-" + stepname);
-                        //Measuring value
-                        ShowInfo(richTextBox3, "OK");
-                        //Model
-                        ShowInfo(richTextBox4, modelname);
+                        //string stepname = step.stepname;
+                        //string modelname = step.modelname;
+                        //ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！", Color.Red);
+                        ////Actual test steps
+                        //ShowInfo(richTextBox2, typename + "-" + stepname);
+                        ////Measuring value
+                        //ShowInfo(richTextBox3, "OK");
+                        ////Model
+                        //ShowInfo(richTextBox4, modelname);
 
-                        TimeSpan sp = DateTime.Now - TestStartTime;
-                        //测试持续时间
-                        txttesttime.BeginInvoke((MethodInvoker)delegate
-                        {
-                            this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
-                        });
-                        //测试倒计时
-                        double diff = CountTime - sp.TotalSeconds;
-                        TimeSpan sp2 = TimeSpan.FromSeconds(diff);
-                        countdown1.BeginInvoke((MethodInvoker)delegate
-                        {
-                            if (diff <= 0)
-                            {
-                                countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
-                            }
-                            else
-                            {
-                                countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
-                            }
-                        });
+                        //TimeSpan sp = DateTime.Now - TestStartTime;
+                        ////测试持续时间
+                        //txttesttime.BeginInvoke((MethodInvoker)delegate
+                        //{
+                        //    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
+                        //});
+                        ////测试倒计时
+                        //double diff = CountTime - sp.TotalSeconds;
+                        //TimeSpan sp2 = TimeSpan.FromSeconds(diff);
+                        //countdown1.BeginInvoke((MethodInvoker)delegate
+                        //{
+                        //    if (diff <= 0)
+                        //    {
+                        //        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                        //    }
+                        //    else
+                        //    {
+                        //        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                        //    }
+                        //});
 
                     }
-                }              
+                }
             }
             btnStart.BeginInvoke((MethodInvoker)delegate { btnStart.Enabled = true; });
             btnPause.BeginInvoke((MethodInvoker)delegate { btnPause.Enabled = false; });
-            
+
             //IsTestEnd = true;
             //TestThread_.IsTestEnd = true;
         }
+        KvaserCommunication DIDV = new KvaserCommunication();
+        string FazitString = "";
+        private void InitHardware()
+        {
+            //Read HW version
+            //string msg = "";
+            //DIDV.CANmsgSend(msg);
+            //byte[] received1 = DIDV.CANmsgReceived();
+            //string HW=DIDV.HexstringToASCII(DIDV.ByteToHex(received1));
+            string HW = "123";
+            HWversion.BeginInvoke((MethodInvoker)delegate
+            {
+                this.HWversion.Text = HW;
+            });
+            // SW version
+            //msg = "";
+            //DIDV.CANmsgSend(msg);
+            //byte[] received2 = DIDV.CANmsgReceived();
+            //string SW = DIDV.HexstringToASCII(DIDV.ByteToHex(received2));
+            string SW = "123";
+            SWversion.BeginInvoke((MethodInvoker)delegate
+            {
+                this.SWversion.Text = SW;
+            });
+            //Fazit
+            //msg = "";
+            //DIDV.CANmsgSend(msg);
+            //byte[] received3 = DIDV.CANmsgReceived();
+            //string Fazit1 = DIDV.HexstringToASCII(DIDV.ByteToHex(received3));
+            string Fazit1 = "123";
+            FazitString = Fazit1;
+            Fazit.BeginInvoke((MethodInvoker)delegate
+            {
+                this.Fazit.Text = Fazit1;
+            });
+            // part number
+            //msg = "";
+            //DIDV.CANmsgSend(msg);
+            //byte[] received4 = DIDV.CANmsgReceived();
+            //string PartNum = DIDV.HexstringToASCII(DIDV.ByteToHex(received4));
+            string PartNum = "123";
+            partnumber.BeginInvoke((MethodInvoker)delegate
+            {
+                this.partnumber.Text = PartNum;
+            });
+            //serial number
+            //msg = "";
+            //DIDV.CANmsgSend(msg);
+            //byte[] received5 = DIDV.CANmsgReceived();
+            //string SerialNum = DIDV.HexstringToASCII(DIDV.ByteToHex(received5));
+            string SerialNum = "123";
+            Serialnumber.BeginInvoke((MethodInvoker)delegate
+            {
+                this.Serialnumber.Text = SerialNum;
+            });
+        }
+        private void SleepMode(double powerval, string step)
+        {
+            //enter sleep mode
+            int cnt = 0;
+            string msg = "";
+            string compearestr = "";
+            DIDV.CANmsgSend(msg);
+            byte[] received1 = DIDV.CANmsgReceived();
+            while (DIDV.Compare(DIDV.ByteToHex(received1), compearestr, 8) == 1 && cnt < 10)
+            {
+                DIDV.CANmsgSend(msg);
+                received1 = DIDV.CANmsgReceived();
+                Thread.Sleep(100);
+                cnt++;
+            }
+            if (DIDV.Compare(DIDV.ByteToHex(received1), compearestr, 8) == 1)
+            {
+                MessageBox.Show("Enter Sleep Mode Error..");
+                return;
+            }
+            string fazittemp = "";
+            string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
+            string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
+            if (FazitString.Length != 0)
+            {
+                fazittemp = FazitString;
+            }
+            else fazittemp = "0000000000";
+            TestThread_.PowerSourceVal = powerval;
+            TestThread_.MeterFileName = step + "_SleepMode" + Datesandhour1 + ".txt";
+            TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
+            TestThread_.MeterRange = 0.01;
+            TestThread_.MeterResolution = 0.0001;
+            TestThread_.MeasureMetertSwitch = true;
+        }
 
+        private void OperationMode(double powerval, string step)
+        {
+            string fazittemp = "";
+            if (FazitString.Length != 0)
+            {
+                fazittemp = FazitString;
+            }
+            else fazittemp = "0000000000";
+            TestThread_.PowerSourceVal = powerval;
+            string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
+            string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
+            TestThread_.MeterFileName = step + "_OperationMode" + Datesandhour1 + ".txt";
+            TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
+            TestThread_.MeterRange = 10;
+            TestThread_.MeterResolution = 0.0001;
+            TestThread_.MeasureMetertSwitch = true;
+            TestThread_.Channal = Convert.ToByte(this.Tag.ToString().Substring(2, 1));
+            TestThread_.PowerONOFF = false;
+            TestThread_.Function = 0;
+            Thread.Sleep(3000);
+            TestThread_.PowerONOFF = true;
+            TestThread_.Function = 0;
+        }
+        private void FunctionTest(double powerval, string step)
+        {
+            string fazittemp = "";
+            if (FazitString.Length != 0)
+            {
+                fazittemp = FazitString;
+            }
+            else fazittemp = "0000000000";
+            TestThread_.PowerSourceVal = powerval;
+            string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
+            string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
+            TestThread_.MeterFileName = step + "_OperationMode" + Datesandhour1 + ".txt";
+            TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
+            TestThread_.MeterRange = 10;
+            TestThread_.MeterResolution = 0.0001;
+            TestThread_.MeasureMetertSwitch = true;
+            //Check IC clock time;
+            //Check Reset counter
+            //Check Telletales
+            //Check Gauges:
+        }
+
+        
+        TimeSpan TimePause;
+        bool IsResume = false;
+        private void UpdateTestTime()
+        {
+            while (true)
+            {
+                if(IsTestEnd||IsStop)
+                {
+                    break;
+                }
+
+                if (IsResume)
+                {
+                    TimePause = TimePause + (ResumeTime - PauseTime);
+                    IsResume=false;
+                }
+
+                TimeSpan sp = (DateTime.Now - TestStartTime)-(TimePause);
+                //测试持续时间
+                txttesttime.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
+                });
+                //测试倒计时
+                double diff = CountTime - sp.TotalSeconds;
+                TimeSpan sp2 = TimeSpan.FromSeconds(diff);
+                countdown1.BeginInvoke((MethodInvoker)delegate
+                {
+                    if (diff <= 0)
+                    {
+                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                    }
+                    else
+                    {
+                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                    }
+                });
+                Thread.Sleep(100);
+            }            
+        }
+
+        private void UpdateTestStepInfo(TestStep step)
+        {
+            #region 界面步骤信息赋值
+            string typename = step.typename;
+            string stepname = step.stepname;
+            string modelname = step.modelname;
+            ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！", Color.Red);
+            //Actual test steps
+            ShowInfo(richTextBox2, typename + "-" + stepname);
+            //Measuring value
+            ShowInfo(richTextBox3, "OK");
+            //Model
+            ShowInfo(richTextBox4, modelname);
+            #endregion
+        }
+
+        private void PTLTestStep(TestStep step)
+        {
+            UpdateTestStepInfo(step);
+
+            DateTime centuryBegin = DateTime.Now;
+          
+            TimeSpan elapsedSpan = new TimeSpan();
+            if (step.stepname == "Step1")
+            {
+                InitHardware();
+               
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;             
+                    elapsedSpan = currentDate - centuryBegin;
+                    if(elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step2")
+            {
+             //   SleepMode(14.0, step.stepname);
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step3")
+            {
+              //  OperationMode(14.0, step.stepname);
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step4")
+            {
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step5")
+            {
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step6")
+            {
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step7")
+            {
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (step.stepname == "Step8")
+            {
+                while (true)
+                {
+                    DateTime currentDate = DateTime.Now;
+                    elapsedSpan = currentDate - centuryBegin;
+                    if (elapsedSpan.TotalSeconds >= step.cycletime)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
 
         KvaserDbcMessage dBCCan = new KvaserDbcMessage();
         List<AutoTestDLL.Model.Message> message_List1 = new List<AutoTestDLL.Model.Message>();
@@ -484,8 +820,8 @@ namespace WindowsFormsControlLibrary
                     if(!IsTestEnd)
                     {
                         foreach (ManualInstruction instruct in listManualInstruction)
-                        {
-                            if (instruct.cycletime == instruct.cyclecount && instruct.enable)
+                        {    //&& instruct.enable
+                            if (instruct.cycletime == instruct.cyclecount )
                             {
                                 int id = Convert.ToInt32(instruct.id,16);
                                 int dlc = instruct.dlc;
@@ -577,6 +913,15 @@ namespace WindowsFormsControlLibrary
             }
         }
 
-        
+        public static string GetAppConfig(string strKey)
+        {
+            string Path = System.Windows.Forms.Application.StartupPath;// 获取路径
+            string FileName = Path + "\\File.config";
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            map.ExeConfigFilename = FileName;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+            string key = config.AppSettings.Settings[strKey].Value;
+            return key;
+        }
     }
 }
