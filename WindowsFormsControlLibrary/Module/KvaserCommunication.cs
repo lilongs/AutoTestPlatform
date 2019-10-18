@@ -236,6 +236,54 @@ namespace WindowsFormsControlLibrary.Module
             }
             return sb.ToString();
         }
+        public  byte[] HexStringToBinary(string hexstring)
+        {
+            string[] tmpary = hexstring.Trim().Split(' ');
+            byte[] buff = new byte[tmpary.Length];
+            for (int i = 0; i < buff.Length; i++)
+            {
+                buff[i] = Convert.ToByte(tmpary[i], 16);
+            }
+            return buff;
+        }
+        public  string HexstringToASCII(string hexstring)
+        {
+            byte[] bt = HexStringToBinary(hexstring);
+            string lin = "";
+            for (int i = 0; i < bt.Length; i++)
+            {
+                lin = lin + bt[i] + " ";
+            }
+            string[] ss = lin.Trim().Split(new char[] { ' ' });
+            char[] c = new char[ss.Length];
+            int a;
+            for (int i = 0; i < c.Length; i++)
+            {
+                a = Convert.ToInt32(ss[i]);
+                c[i] = Convert.ToChar(a);
+            }
+            string b = new String(c);
+            return b;
+        }
+        public  int Compare(string st1, string st2, int length)
+        {
+            if (st1.Length < length || st2.Length < length)
+            {
+                return -1;
+            }
+            string ss1 = st1.Substring(0, length);
+            string ss2 = st2.Substring(0, length);
+            if (ss1 == ss2)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+
         public void busOff()
         {
             Canlib.canStatus status = Canlib.canBusOff(handle);

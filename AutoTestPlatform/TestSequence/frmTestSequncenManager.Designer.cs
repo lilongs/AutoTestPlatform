@@ -41,7 +41,6 @@
             this.txtstepname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtmodename = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtcycletime = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -50,6 +49,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtmodename = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +64,7 @@
             this.quit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(930, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(947, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -176,13 +177,6 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Modename:";
             // 
-            // txtmodename
-            // 
-            this.txtmodename.Location = new System.Drawing.Point(743, 209);
-            this.txtmodename.Name = "txtmodename";
-            this.txtmodename.Size = new System.Drawing.Size(142, 21);
-            this.txtmodename.TabIndex = 1;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -254,11 +248,36 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "(S)";
             // 
+            // txtmodename
+            // 
+            this.txtmodename.FormattingEnabled = true;
+            this.txtmodename.Items.AddRange(new object[] {
+            "Init Hardware",
+            "Sleep mode",
+            "Normal mode",
+            "Operation mode"});
+            this.txtmodename.Location = new System.Drawing.Point(743, 210);
+            this.txtmodename.Name = "txtmodename";
+            this.txtmodename.Size = new System.Drawing.Size(142, 20);
+            this.txtmodename.TabIndex = 14;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(888, 166);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 15);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "(Step1)";
+            // 
             // frmTestSequncenManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 599);
+            this.ClientSize = new System.Drawing.Size(947, 599);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtmodename);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label7);
@@ -268,7 +287,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtvoltage);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtmodename);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtstepname);
             this.Controls.Add(this.dataGridView1);
@@ -301,7 +319,6 @@
         private System.Windows.Forms.TextBox txtstepname;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtmodename;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtcycletime;
         private System.Windows.Forms.Label label6;
@@ -311,5 +328,7 @@
         private System.Windows.Forms.ToolStripButton delete;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox txtmodename;
+        private System.Windows.Forms.Label label9;
     }
 }

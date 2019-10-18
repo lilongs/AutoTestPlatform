@@ -96,7 +96,7 @@ namespace AutoTestPlatform
             TestThread_2.TempSensor1Add = Convert.ToByte(GetAppConfig("TempSensor1Add"));
             TestThread_2.TempSensor2Add = Convert.ToByte(GetAppConfig("TempSensor2Add"));
             TestThread_2.TempSensor3Add = Convert.ToByte(GetAppConfig("TempSensor3Add"));
-
+            TestThread_2.TempFileRecordStep = Convert.ToInt32(GetAppConfig("TempFileRecordStep"));
             if (GetAppConfig("TempFileEnable") == "TRUE")
             {
                 TestThread_2.MeasurTempSwitch = true;

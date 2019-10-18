@@ -166,7 +166,6 @@
     <EmbeddedResource Include="Countdown.resx">
       <DependentUpon>Countdown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="PublicElectricControl.resx">
       <DependentUpon>PublicElectricControl.cs</DependentUpon>
     </EmbeddedResource>

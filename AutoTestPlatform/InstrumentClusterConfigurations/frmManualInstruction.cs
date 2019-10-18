@@ -153,5 +153,10 @@ namespace AutoTestPlatform.InstrumentClusterConfigurations
         {
             this.DialogResult = DialogResult.OK;
         }
+
+        private void txttype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

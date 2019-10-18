@@ -52,41 +52,63 @@ namespace AutoTestPlatform.TestSequence
 
         private void InitTree()
         {
-            this.treeView1.Nodes.Clear();
-            foreach(TypeList type in list)
+            try
             {
-                if (type.parentname == "")
+                this.treeView1.Nodes.Clear();
+                foreach (TypeList type in list)
                 {
-                    TreeNode node = new TreeNode();
-                    node.Name = type.parentname;
-                    node.Text = type.typename;
-                    node.Tag = type.typename;
-                    this.treeView1.Nodes.Add(node);
-                    addChildNode(type,node);
+                    if (type.parentname == "")
+                    {
+                        TreeNode node = new TreeNode();
+                        node.Name = type.parentname;
+                        node.Text = type.typename;
+                        node.Tag = type.typename;
+                        this.treeView1.Nodes.Add(node);
+                        addChildNode(type, node);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }            
         }
 
         private void addChildNode(TypeList parenttype,TreeNode parentNode)
         {
-            foreach (TypeList type in list)
+            try
             {
-                if (type.parentname == parenttype.typename)
+                foreach (TypeList type in list)
                 {
-                    TreeNode node = new TreeNode();
-                    node.Name = type.parentname;
-                    node.Text = type.typename+","+ type.typeinfo;
-                    node.Tag = type.typename;
-                    parentNode.Nodes.Add(node);
-                    addChildNode(type,node);
+                    if (type.parentname == parenttype.typename)
+                    {
+                        TreeNode node = new TreeNode();
+                        node.Name = type.parentname;
+                        node.Text = type.typename + "," + type.typeinfo;
+                        node.Tag = type.typename;
+                        parentNode.Nodes.Add(node);
+                        addChildNode(type, node);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         private void save_Click(object sender, EventArgs e)
         {
             try
             {
+                #region CheckInput
+                if (String.IsNullOrEmpty(txttypename.Text)){
+                    MessageBox.Show("typename can't be empty!");
+                    return;
+                }
+                #endregion
+
                 string path = Application.StartupPath + "\\TestInfo";
                 var item = list.Where(c => c.typename == txttypename.Text.Trim()).FirstOrDefault();
                 if (item != null)

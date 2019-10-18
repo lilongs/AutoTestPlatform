@@ -13,7 +13,7 @@ namespace AutoTestDLL.Util
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
 
-            string filepath = folder  + filename;
+            string filepath = folder  +"\\"+ filename;
             if (File.Exists(filepath))
             {
                 FileStream fs = new FileStream(filepath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);

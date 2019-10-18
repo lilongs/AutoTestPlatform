@@ -231,7 +231,7 @@
             // 
             this.txttype.FormattingEnabled = true;
             this.txttype.Items.AddRange(new object[] {
-            "KL_15",
+            "KL_15_ON",
             "Dimming",
             "Speed",
             "Tacho",
@@ -244,11 +244,13 @@
             "Buzzer",
             "Door",
             "Rader",
-            "Other"});
+            "Other",
+            "KL_15_OFF"});
             this.txttype.Location = new System.Drawing.Point(730, 40);
             this.txttype.Name = "txttype";
             this.txttype.Size = new System.Drawing.Size(142, 20);
             this.txttype.TabIndex = 0;
+            this.txttype.SelectedIndexChanged += new System.EventHandler(this.txttype_SelectedIndexChanged);
             // 
             // frmManualInstruction
             // 
