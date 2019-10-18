@@ -31,7 +31,6 @@ namespace WindowsFormsControlLibrary
         Dictionary<string, List<TestStep>> ReadyTestInfo = null;
         private List<TypeList> selectedList = new List<TypeList>();
         private List<TestStep> testInfo = new List<TestStep>();
-        private DateTime testStartTime = new DateTime();
 
         private List<TestStep> CompletedList = new List<TestStep>();
 
@@ -113,8 +112,7 @@ namespace WindowsFormsControlLibrary
         PCBcontrol PB = new PCBcontrol();
         private void btnStart_Click(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
-            btnPause.Enabled = true;
+           
             TestThread_.MeterSourceName = GetPowerMeterName();
             if (TestThread_.MeterSourceName.Length == 0)
             {
@@ -123,8 +121,6 @@ namespace WindowsFormsControlLibrary
             }
             try
             {
-                testStartTime = DateTime.Now;
-
                 CompletedList.Clear();
                 this.dataGridView1.DataSource = null;
                 if (!String.IsNullOrEmpty(richTextBox1.Text))
@@ -135,19 +131,31 @@ namespace WindowsFormsControlLibrary
                 {
                     GetAllSelectedNode(node);
                 }
+                if (selectedList.Count <= 0)
+                {
+                    MessageBox.Show("Please select test nodes!");
+                    return;
+                }
+                btnStart.Enabled = false;
+                btnPause.Enabled = true;
+                btnStop.Enabled = true;
+
                 LoadStepInfo();
                 ReadyTestInfo = new Dictionary<string, List<TestStep>>();
                 foreach (TypeList tp in selectedList)
                 {
-                    ReadyTestInfo.Add(tp.typename, testInfo.Where(x => x.typename == tp.typename).ToList());
+                    List<TestStep> tempList = testInfo.Where(x => x.typename == tp.typename).ToList();
+                    ReadyTestInfo.Add(tp.typename, tempList.OrderBy(x => Convert.ToInt32(x.stepname.Replace("Step", ""))).ToList());
                 }
+                IsStop = false;
+                IsTestEnd = false;
+
                 //测试步骤线程
                 th = new Thread(RunTest);
-                th.IsBackground = true;
                 th.Start();
 
                 //循环发送BCM、Gateway信息
-                IsTestEnd = false;
+               
                 th2 = new Thread(Send_BCM_Gateway_CanMessage);
                 th2.IsBackground = true;
                 th2.Start();
@@ -192,6 +200,7 @@ namespace WindowsFormsControlLibrary
                     btnPause.Enabled = false;
                     //Enable the resume button
                     btnResume.Enabled = true;
+                    btnStop.Enabled = false;
                 }
 
                 if (TestTimestate == ThreadState.Running || TestTimestate == ThreadState.WaitSleepJoin || TestTimestate == ThreadState.Background)
@@ -202,6 +211,7 @@ namespace WindowsFormsControlLibrary
                     btnPause.Enabled = false;
                     //Enable the resume button
                     btnResume.Enabled = true;
+                    btnStop.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -221,6 +231,7 @@ namespace WindowsFormsControlLibrary
                     th.Resume();
                     btnResume.Enabled = false;
                     btnPause.Enabled = true;
+                    btnStop.Enabled = true;
                 }
 
                 if (thTestTime.ThreadState == ThreadState.SuspendRequested || thTestTime.ThreadState == ThreadState.Suspended)
@@ -228,6 +239,7 @@ namespace WindowsFormsControlLibrary
                     thTestTime.Resume();
                     btnResume.Enabled = false;
                     btnPause.Enabled = true;
+                    btnStop.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -242,6 +254,10 @@ namespace WindowsFormsControlLibrary
             {
                 IsStop = true;
                 TestThread_.IsStop = true;
+                btnStop.Enabled = false;
+                btnStart.Enabled = true;
+                btnPause.Enabled = false;
+                btnResume.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -311,15 +327,16 @@ namespace WindowsFormsControlLibrary
             testInfo = JsonConvert.DeserializeObject<List<TestStep>>(json);
         }
 
-        double CountTime = 0;
+        double CountTime=0;
         private void RunTest()
         {
             TestStartTime = DateTime.Now;
+            TimePause = TimeSpan.FromMilliseconds(0);
             //获取待测试步骤的总CycleTime
             thTestTime = new Thread(UpdateTestTime);
             //thTestTime.IsBackground = true;
             thTestTime.Start();
-
+            CountTime = 0;
             foreach (var it in ReadyTestInfo)
             {
                 CountTime += it.Value.Sum(t => t.cycletime);
@@ -338,6 +355,7 @@ namespace WindowsFormsControlLibrary
                     {
                         if (IsStop)
                         {
+                            IsStop = false;
                             return;
                         }
                         if (i > step.repeat)
@@ -354,48 +372,25 @@ namespace WindowsFormsControlLibrary
                         });
 
                         FillStepInfo(step);
-                        string type = step.typename;
-                        switch (step.typename)
+                        UpdateTestStepInfo(step);
+                        //string modename = step.modelname.ToUpper().Replace(" ","");
+                        
+                        switch (step.modelname)
                         {
-                            case "PTL":
-                                PTLTestStep(step);
+                            case "Init Hardware":
+                                InitHardware(step);
                                 break;
-                            case "K03":
+                            case "Sleep mode":
+                                SleepMode(step);
+                                break;
+                            case "Normal mode":
+                                Normalmode(step);
+                                break;
+                            case "Operation mode":
+                                OperationMode(step);
+                                break;
 
-                                break;
                         }
-
-                        //string stepname = step.stepname;
-                        //string modelname = step.modelname;
-                        //ShowInfo(richTextBox1, "正在进行：" + typename + "--" + stepname + "测试！", Color.Red);
-                        ////Actual test steps
-                        //ShowInfo(richTextBox2, typename + "-" + stepname);
-                        ////Measuring value
-                        //ShowInfo(richTextBox3, "OK");
-                        ////Model
-                        //ShowInfo(richTextBox4, modelname);
-
-                        //TimeSpan sp = DateTime.Now - TestStartTime;
-                        ////测试持续时间
-                        //txttesttime.BeginInvoke((MethodInvoker)delegate
-                        //{
-                        //    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
-                        //});
-                        ////测试倒计时
-                        //double diff = CountTime - sp.TotalSeconds;
-                        //TimeSpan sp2 = TimeSpan.FromSeconds(diff);
-                        //countdown1.BeginInvoke((MethodInvoker)delegate
-                        //{
-                        //    if (diff <= 0)
-                        //    {
-                        //        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
-                        //    }
-                        //    else
-                        //    {
-                        //        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
-                        //    }
-                        //});
-
                     }
                 }
             }
@@ -406,18 +401,22 @@ namespace WindowsFormsControlLibrary
             //TestThread_.IsTestEnd = true;
         }
         KvaserCommunication DIDV = new KvaserCommunication();
+
+        #region TestStep
+
         string FazitString = "";
-        private void InitHardware()
+        private void InitHardware(TestStep ts)
         {
+            DateTime centuryBegin = DateTime.Now;
             //Read HW version
             //string msg = "";
             //DIDV.CANmsgSend(msg);
             //byte[] received1 = DIDV.CANmsgReceived();
             //string HW=DIDV.HexstringToASCII(DIDV.ByteToHex(received1));
             string HW = "123";
-            HWversion.BeginInvoke((MethodInvoker)delegate
+            txthw.BeginInvoke((MethodInvoker)delegate
             {
-                this.HWversion.Text = HW;
+                this.txthw.Text = HW;
             });
             // SW version
             //msg = "";
@@ -425,9 +424,9 @@ namespace WindowsFormsControlLibrary
             //byte[] received2 = DIDV.CANmsgReceived();
             //string SW = DIDV.HexstringToASCII(DIDV.ByteToHex(received2));
             string SW = "123";
-            SWversion.BeginInvoke((MethodInvoker)delegate
+            txtsw.BeginInvoke((MethodInvoker)delegate
             {
-                this.SWversion.Text = SW;
+                this.txtsw.Text = SW;
             });
             //Fazit
             //msg = "";
@@ -436,9 +435,9 @@ namespace WindowsFormsControlLibrary
             //string Fazit1 = DIDV.HexstringToASCII(DIDV.ByteToHex(received3));
             string Fazit1 = "123";
             FazitString = Fazit1;
-            Fazit.BeginInvoke((MethodInvoker)delegate
+            txtfazit.BeginInvoke((MethodInvoker)delegate
             {
-                this.Fazit.Text = Fazit1;
+                this.txtfazit.Text = Fazit1;
             });
             // part number
             //msg = "";
@@ -446,9 +445,9 @@ namespace WindowsFormsControlLibrary
             //byte[] received4 = DIDV.CANmsgReceived();
             //string PartNum = DIDV.HexstringToASCII(DIDV.ByteToHex(received4));
             string PartNum = "123";
-            partnumber.BeginInvoke((MethodInvoker)delegate
+            txtpart.BeginInvoke((MethodInvoker)delegate
             {
-                this.partnumber.Text = PartNum;
+                this.txtpart.Text = PartNum;
             });
             //serial number
             //msg = "";
@@ -456,13 +455,15 @@ namespace WindowsFormsControlLibrary
             //byte[] received5 = DIDV.CANmsgReceived();
             //string SerialNum = DIDV.HexstringToASCII(DIDV.ByteToHex(received5));
             string SerialNum = "123";
-            Serialnumber.BeginInvoke((MethodInvoker)delegate
+            txtserial.BeginInvoke((MethodInvoker)delegate
             {
-                this.Serialnumber.Text = SerialNum;
+                this.txtserial.Text = SerialNum;
             });
+            Timespend(centuryBegin, ts.cycletime);
         }
-        private void SleepMode(double powerval, string step)
+        private void SleepMode(TestStep ts)
         {
+            DateTime centuryBegin = DateTime.Now;
             //enter sleep mode
             int cnt = 0;
             string msg = "";
@@ -489,26 +490,28 @@ namespace WindowsFormsControlLibrary
                 fazittemp = FazitString;
             }
             else fazittemp = "0000000000";
-            TestThread_.PowerSourceVal = powerval;
-            TestThread_.MeterFileName = step + "_SleepMode" + Datesandhour1 + ".txt";
+            TestThread_.PowerSourceVal = ts.voltage;
+            TestThread_.MeterFileName = ts.stepname + "_SleepMode" + Datesandhour1 + ".txt";
             TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
             TestThread_.MeterRange = 0.01;
             TestThread_.MeterResolution = 0.0001;
             TestThread_.MeasureMetertSwitch = true;
+            Timespend(centuryBegin, ts.cycletime);
         }
 
-        private void OperationMode(double powerval, string step)
+        private void OperationMode(TestStep ts)
         {
+            DateTime centuryBegin = DateTime.Now;
             string fazittemp = "";
             if (FazitString.Length != 0)
             {
                 fazittemp = FazitString;
             }
             else fazittemp = "0000000000";
-            TestThread_.PowerSourceVal = powerval;
+            TestThread_.PowerSourceVal = ts.voltage;
             string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
             string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
-            TestThread_.MeterFileName = step + "_OperationMode" + Datesandhour1 + ".txt";
+            TestThread_.MeterFileName = ts.stepname + "_OperationMode" + Datesandhour1 + ".txt";
             TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
             TestThread_.MeterRange = 10;
             TestThread_.MeterResolution = 0.0001;
@@ -519,19 +522,21 @@ namespace WindowsFormsControlLibrary
             Thread.Sleep(3000);
             TestThread_.PowerONOFF = true;
             TestThread_.Function = 0;
+            Timespend(centuryBegin, ts.cycletime);
         }
-        private void FunctionTest(double powerval, string step)
+        private void Normalmode(TestStep ts)
         {
+            DateTime centuryBegin = DateTime.Now;
             string fazittemp = "";
             if (FazitString.Length != 0)
             {
                 fazittemp = FazitString;
             }
             else fazittemp = "0000000000";
-            TestThread_.PowerSourceVal = powerval;
+            TestThread_.PowerSourceVal = ts.voltage;
             string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
             string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
-            TestThread_.MeterFileName = step + "_OperationMode" + Datesandhour1 + ".txt";
+            TestThread_.MeterFileName = ts.stepname + "_OperationMode" + Datesandhour1 + ".txt";
             TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + fazittemp + "_" + Datesandhour + "\\";
             TestThread_.MeterRange = 10;
             TestThread_.MeterResolution = 0.0001;
@@ -540,10 +545,10 @@ namespace WindowsFormsControlLibrary
             //Check Reset counter
             //Check Telletales
             //Check Gauges:
+            Timespend(centuryBegin, ts.cycletime);
         }
 
-        
-        TimeSpan TimePause;
+        TimeSpan TimePause = TimeSpan.FromMilliseconds(0);
         bool IsResume = false;
         private void UpdateTestTime()
         {
@@ -553,14 +558,14 @@ namespace WindowsFormsControlLibrary
                 {
                     break;
                 }
-
+                
                 if (IsResume)
                 {
                     TimePause = TimePause + (ResumeTime - PauseTime);
-                    IsResume=false;
+                    IsResume = false;
                 }
-
-                TimeSpan sp = (DateTime.Now - TestStartTime)-(TimePause);
+                TimeSpan sp = (DateTime.Now - TestStartTime) - TimePause;
+         
                 //测试持续时间
                 txttesttime.BeginInvoke((MethodInvoker)delegate
                 {
@@ -599,120 +604,30 @@ namespace WindowsFormsControlLibrary
             ShowInfo(richTextBox4, modelname);
             #endregion
         }
-
-        private void PTLTestStep(TestStep step)
+        private void Timespend(DateTime dt,double time)
         {
-            UpdateTestStepInfo(step);
-
-            DateTime centuryBegin = DateTime.Now;
-          
             TimeSpan elapsedSpan = new TimeSpan();
-            if (step.stepname == "Step1")
+           // while (true)
+           while(!IsStop || !IsTestEnd)
             {
-                InitHardware();
-               
-                while (true)
+                DateTime currentDate = DateTime.Now;
+                elapsedSpan = currentDate - dt;
+                if (elapsedSpan.TotalSeconds >= time)
                 {
-                    DateTime currentDate = DateTime.Now;             
-                    elapsedSpan = currentDate - centuryBegin;
-                    if(elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
+                    break;
                 }
-            }
-            else if (step.stepname == "Step2")
-            {
-             //   SleepMode(14.0, step.stepname);
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step3")
-            {
-              //  OperationMode(14.0, step.stepname);
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step4")
-            {
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step5")
-            {
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step6")
-            {
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step7")
-            {
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
-            }
-            else if (step.stepname == "Step8")
-            {
-                while (true)
-                {
-                    DateTime currentDate = DateTime.Now;
-                    elapsedSpan = currentDate - centuryBegin;
-                    if (elapsedSpan.TotalSeconds >= step.cycletime)
-                    {
-                        break;
-                    }
-                }
+                Thread.Sleep(10);
             }
         }
+     
 
+       
+        #endregion
         KvaserDbcMessage dBCCan = new KvaserDbcMessage();
         List<AutoTestDLL.Model.Message> message_List1 = new List<AutoTestDLL.Model.Message>();
         List<AutoTestDLL.Model.Message> message_List2 = new List<AutoTestDLL.Model.Message>();
         bool IsTestEnd = false;
+        bool IsStop = false;
         private List<InstrumentClusterConfiguration> LoadICInfo()
         {
             List<InstrumentClusterConfiguration> temp = new List<InstrumentClusterConfiguration>();
@@ -767,7 +682,7 @@ namespace WindowsFormsControlLibrary
             //initChannel
             dBCCan.initChannel(channelNo, bitrate);
         }
-        public bool IsStop = false;
+        
         private void Send_BCM_Gateway_CanMessage()
         {
             if (message_List1.Count > 0)

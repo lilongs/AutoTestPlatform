@@ -78,7 +78,7 @@ namespace AutoTestPlatform.TestSequence
             if (temp != null)
             {
                 stepList = temp;
-                this.dataGridView1.DataSource = list;
+                this.dataGridView1.DataSource = list.OrderBy(x => Convert.ToInt32(x.stepname.Replace("Step",""))).ToList();
             }
         }
 
@@ -107,6 +107,11 @@ namespace AutoTestPlatform.TestSequence
                 if (String.IsNullOrEmpty(txtstepname.Text.Trim()))
                 {
                     MessageBox.Show("Stepname can't be empty!");
+                    return;
+                }
+                if(!txtstepname.Text.Trim().Contains("Step"))
+                {
+                    MessageBox.Show("Stepname should be like 'Step1'!");
                     return;
                 }
                 if (String.IsNullOrEmpty(combtypename.Text))
