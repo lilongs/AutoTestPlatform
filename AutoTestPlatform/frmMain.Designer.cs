@@ -33,6 +33,7 @@
             this.cANConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.maualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iCRefreshCycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureSensorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cOMConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.iCRefreshCycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -100,6 +100,13 @@
             this.maualToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.maualToolStripMenuItem.Text = "Manual instruction config";
             this.maualToolStripMenuItem.Click += new System.EventHandler(this.maualToolStripMenuItem_Click);
+            // 
+            // iCRefreshCycleToolStripMenuItem
+            // 
+            this.iCRefreshCycleToolStripMenuItem.Name = "iCRefreshCycleToolStripMenuItem";
+            this.iCRefreshCycleToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.iCRefreshCycleToolStripMenuItem.Text = "IC refresh cycle";
+            this.iCRefreshCycleToolStripMenuItem.Click += new System.EventHandler(this.iCRefreshCycleToolStripMenuItem_Click);
             // 
             // temperatureSensorConfigurationToolStripMenuItem
             // 
@@ -228,13 +235,6 @@
             this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
             this.xtraTabControl1.TabIndex = 14;
             // 
-            // iCRefreshCycleToolStripMenuItem
-            // 
-            this.iCRefreshCycleToolStripMenuItem.Name = "iCRefreshCycleToolStripMenuItem";
-            this.iCRefreshCycleToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.iCRefreshCycleToolStripMenuItem.Text = "IC refresh cycle";
-            this.iCRefreshCycleToolStripMenuItem.Click += new System.EventHandler(this.iCRefreshCycleToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -246,7 +246,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TestPlatform";
+            this.Text = "Instrument cluster test bench";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);

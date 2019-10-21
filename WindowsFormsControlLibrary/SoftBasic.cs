@@ -192,21 +192,19 @@ namespace WindowsFormsControlLibrary
         /// <example>
         /// <code lang="cs" source="HslCommunication_Net45.Test\Documentation\Samples\BasicFramework\SoftBasicExample.cs" region="AddArrayDataExample" title="AddArrayData示例" />
         /// </example>
-        public static void AddArrayData<T>( ref T[] array, T[] data, int max,int interval)
+        public static void AddArrayData<T>( ref T[] array, T[] data, int max )
         {
             if (data == null) return;           // 数据为空
             if (data.Length == 0) return;       // 数据长度为空
 
-            int n = interval / 2;
-
-            if (array.Length == max-n)
+            if (array.Length == max)
             {
                 Array.Copy( array, data.Length, array, 0, array.Length - data.Length );
                 Array.Copy( data, 0, array, array.Length - data.Length, data.Length );
             }
             else
             {
-                if ((array.Length + data.Length) > max-n)
+                if ((array.Length + data.Length) > max)
                 {
                     T[] tmp = new T[max];
                     for (int i = 0; i < (max - data.Length); i++)

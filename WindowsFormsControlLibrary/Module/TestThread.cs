@@ -10,13 +10,14 @@ using AutoTestDLL.Model;
 using System.Threading;
 using AutoTestDLL.Util;
 using WindowsFormsControlLibrary.Module;
+using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace TestThread
 {
     public partial class TestThread1
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-
         public string MeterSourceName = "";
        public string PowerSourceName = "";
        public string TempSourceName = "";
@@ -95,82 +96,98 @@ namespace TestThread
         }
         public void MeasureTempandHumidity(Object tp)
         {
-            StringBuilder TempVal = new StringBuilder();
-            Temperature_humidity value = new Temperature_humidity();
-            Random rd1 = new Random();
-            int count = 0;
-            int countrecord = 0;
-            while (true)
-            {               
-                Temp = rd1.Next(1, 100);
-                Humidity = rd1.Next(1, 100);
-                if (MeasurTempSwitch)
+            try
+            {
+                StringBuilder TempVal = new StringBuilder();
+                Temperature_humidity value = new Temperature_humidity();
+                Random rd1 = new Random();
+                int count = 0;
+                int countrecord = 0;
+                while (true)
                 {
-                    count++;
-                    countrecord++;
-                    if (countrecord == TempFileRecordStep)
+                    Temp = rd1.Next(1, 100);
+                    Humidity = rd1.Next(1, 100);
+                    if (MeasurTempSwitch)
                     {
-                        countrecord = 0;
-                        TempVal.Append(Temp.ToString() + "℃," + Humidity.ToString() + "%RH" + Environment.NewLine);
+                        count++;
+                        countrecord++;
+                        if (countrecord == TempFileRecordStep)
+                        {
+                            countrecord = 0;
+                            TempVal.Append(Temp.ToString().PadLeft(10,' ') + "℃,  " + Humidity.ToString().PadLeft(10,' ') + "%RH  " + Environment.NewLine);
+                        }
+                        if (count > 120)
+                        {
+                            count = 0;
+                            FileOperation.createFile(TempFilePath, TempFileName, TempVal.ToString());
+                            TempVal.Clear();
+                        }
                     }
-                    if (count > 120)
+                    Thread.Sleep(1000);
+                    value.now = DateTime.Now;
+                    value.temperatureValue = (float)Temp;
+                    value.humidtyValue = (float)Humidity;
+
+                    List<TemperatureControl> tp2 = new List<TemperatureControl>();
+
+                    tp2 = (List<TemperatureControl>)tp;
+                    foreach (TemperatureControl t in tp2)
                     {
-                        count = 0;
-                        FileOperation.createFile(TempFilePath, TempFileName, TempVal.ToString());
-                        TempVal.Clear();
-                    }                  
+                        t.ChartValueFill(value);
+                    }
                 }
-                Thread.Sleep(1000);
-                value.now = DateTime.Now;
-                value.temperatureValue = (float)Temp;
-                value.humidtyValue = (float)Humidity;
-
-                List<TemperatureControl> tp2 = new List<TemperatureControl>();
-
-                tp2 = (List<TemperatureControl>)tp;
-                foreach(TemperatureControl t in tp2)
-                {
-                    t.ChartValueFill(value);
-                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
             }
         }
         public bool IsStop = false;
         public bool IsTestEnd = false;
         public void MeasureMeterCurrent(object tu)
         {
+            TestUnit tu2=new TestUnit();
+          
+            tu2 = (TestUnit)tu;
             try
             {
                 StringBuilder MeterVal = new StringBuilder();
                 string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
                 MeterConfig.MeterInit(MeterSourceName);
-                MeterConfig.SetVoltage(MeterRange, MeterResolution);
-                MeterConfig.MeasurementInit();
+                MeterConfig.SetCurrent(MeterRange, MeterResolution);
+              //  MeterConfig.MeasurementInit();
                 decimal data = 0;
-                string danwei = "A";
+                string danwei = "A ";
                 int count = 0;
                 int countrecord = 0;
+                float max = 1;
                 // Random rd1 = new Random();        
                 while (!IsStop || !IsTestEnd)
                 {
                     //  MeterCurrent = rd1.Next(1, 100);
                     MeterCurrent = MeterConfig.MeasureSinglePoint();
-                    Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_,");
+                    Datesandhour1 = DateTime.Now.ToString("hh:mm:ss , ");
                     data = ChangeDataToD(MeterCurrent);
                     if (data >= (decimal)0.1)
                     {
-                        danwei = "A";
+                        danwei = "A ";
+                        max = 1.5f;
                     }
                     else if (data < (decimal)0.1 && data > (decimal)0.0001)
                     {
                         data = data * 1000;
-                        danwei = "mA";
+                        danwei = "mA ";
+                        max = 0.1f;
                     }
                     else
                     {
                         data = data * 1000000;
-                        danwei = "uA";
+                        danwei = "uA ";
+                        max = 0.0001f;
                     }
+                    data = Math.Round(data, 2);
 
+                    tu2.SetScale(max, -0.2f, data.ToString()+danwei);
                     if (MeasureMetertSwitch)
                     {
                         count++;
@@ -178,7 +195,7 @@ namespace TestThread
                         if (countrecord == MeterFileRecordStep)
                         {
                             countrecord = 0;
-                            MeterVal.Append(Datesandhour1 + MeterCurrent.ToString() + danwei + PowerSourceVal.ToString() + "V" + Environment.NewLine);
+                            MeterVal.Append(Datesandhour1 + data.ToString().PadLeft(10,' ') + danwei + ",  " + PowerSourceVal.ToString() + "V  " + Environment.NewLine);
                         }
                         if (count > 120)
                         {
@@ -188,29 +205,35 @@ namespace TestThread
                         }
                     }
                     Thread.Sleep(500);
-                    TestUnit tu2 = new TestUnit();
-                    tu2 = (TestUnit)tu;
                     tu2.ChartValueFill((float)MeterCurrent);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 logger.Error(ex, ex.Message);
+                tu2.ShowInfo(tu2.richTextBox1, ex.Message,Color.Red);
+                tu2.Setnoticecolor(Color.Red);
             }
-            
         }
         public static object locker = new object();
 
         public void PCBcontrol()
         {
-            while (true)
+            try
             {
-                lock (locker)
+                while (!IsStop || !IsTestEnd)
                 {
-                    PCBControl123(Function);
-                    Function = 100;
+                    lock (locker)
+                    {
+                        PCBControl123(Function);
+                        Function = 5;
+                    }
+                    Thread.Sleep(100);
                 }
-                Thread.Sleep(100);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
             }
         }
         //Function 0:SetPowerONOFF
@@ -221,15 +244,17 @@ namespace TestThread
         //Function 5:SetFule
         //Fucntion 100:NON
         public byte Channal = 0;
-        public Int16 Fuel1 = 0;
-        public Int16 Fuel2 = 0;
-        public Int16 Fuel3 = 0;
-        public Int16 Fuel4 = 0;
+        public Int16[] Fuel1 = new Int16[] { 270,70,270,70,70,70 };
+        public Int16[] Fuel2 = new Int16[] { 270,70,270,70,70,70 };
+        public Int16[] Fuel3 = new Int16[] { 270,70,270,70,70,70 };
+        public Int16[] Fuel4 = new Int16[] { 270,70,270,70,70,70 };
         public bool PowerONOFF=true; //true--on false--off
         public bool Level = true;//true--high ,false --low
         public bool LEDONOFF = true;
         public byte LED = 0;
         public int Function = 100;
+        public bool FuleEnbale = false;
+        int cnt = 0;
         public void PCBControl123(int Function)
         {
             if(Function!=100)
@@ -256,7 +281,16 @@ namespace TestThread
                 }
                 else if(Function==5)
                 {
-                    PB.SetFule(Channal, Fuel1, Fuel2, Fuel3, Fuel4);
+                    if (FuleEnbale)
+                    {
+                        cnt++;
+                        if(cnt>=6)
+                        {
+                            cnt = 0;
+                        }
+                        PB.SetFule(Channal, Fuel1[cnt], Fuel2[cnt], Fuel3[cnt], Fuel4[cnt]);
+                        Thread.Sleep(2000);
+                    }
                 }
 
             }
@@ -264,16 +298,18 @@ namespace TestThread
         public static decimal ChangeDataToD(double strData1)
         {
             decimal dData = 0.0M;
-            string strData = strData1.ToString();
+            string strData = Convert.ToString(strData1).ToUpper();
             try
             {
                 if (strData.Contains("E") || strData.Contains("e"))
                 {
-                    strData = strData.Substring(0, strData.Length - 1).Trim();
-                    dData = Convert.ToDecimal(Decimal.Parse(strData.ToString(), System.Globalization.NumberStyles.Float));
+                    double b = double.Parse(strData.ToUpper().Split('E')[0].ToString());//整数部分
+                    double c = double.Parse(strData.ToUpper().Split('E')[1].ToString());//指数部分
+                    dData =(decimal) (b * Math.Pow(10, c));
                 }
                 else
                 {
+               
                     dData = decimal.Parse(strData);
                 }
             }
