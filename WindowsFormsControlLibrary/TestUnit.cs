@@ -48,7 +48,8 @@ namespace WindowsFormsControlLibrary
                 }
                 InitChart();
                 InitCan();
-                LoadManualInstruction();
+                //  LoadManualInstruction();
+                TestCANmessageDefine();
                 this.groupControl3.Text = this.Tag.ToString() + " step info:";
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace WindowsFormsControlLibrary
 
         private void InitChart()
         {
-            userCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
+            userCurve1.SetLeftCurve("A", null, Color.DarkRed);
         }
 
         public void ChartValueFill(float value)
@@ -103,17 +104,18 @@ namespace WindowsFormsControlLibrary
            );
         }
         TestThread1 TestThread_ = new TestThread1();
-        Thread th;
-        Thread th2;
-        Thread th3;
-        Thread th4;
-        Thread th5;
+        Thread thread_Maintest;
+        Thread thread_SendDBCmessage;
+        Thread thread_SendRealTimeMessage;
+        Thread thread_RunMeterMeasure;
+        Thread thread_PCBcontrol;
         Thread thTestTime;
         PCBcontrol PB = new PCBcontrol();
         private void btnStart_Click(object sender, EventArgs e)
         {
            
             TestThread_.MeterSourceName = GetPowerMeterName();
+            Setnoticecolor(Color.White);
             if (TestThread_.MeterSourceName.Length == 0)
             {
                 //  MessageBox.Show("Error Meter Source Name");
@@ -151,29 +153,44 @@ namespace WindowsFormsControlLibrary
                 IsTestEnd = false;
 
                 //测试步骤线程
-                th = new Thread(RunTest);
-                th.Start();
 
                 //循环发送BCM、Gateway信息
-               
-                th2 = new Thread(Send_BCM_Gateway_CanMessage);
-                th2.IsBackground = true;
-                th2.Start();
+
+                thread_SendDBCmessage = new Thread(Send_BCM_Gateway_CanMessage);
+                //thread_SendDBCmessage.IsBackground = true;
+                thread_SendDBCmessage.Start();
+                //while(thread_SendDBCmessage.ThreadState!= ThreadState.Background)
+                //{
+
+                //}
                 //循环发送手动指令
-                th3 = new Thread(Send_ManualInstruction);
-                th3.IsBackground = true;
-                th3.Start();
+                thread_SendRealTimeMessage = new Thread(Send_ManualInstruction);
+               // thread_SendRealTimeMessage.IsBackground = true;
+                thread_SendRealTimeMessage.Start();
+                //while (thread_SendRealTimeMessage.ThreadState != ThreadState.Background)
+                //{
+
+                //}
                 //电流表
                 // TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
                 TestThread_.MeterFileRecordStep = Convert.ToInt32(GetAppConfig("MeterFileRecordStep"));
-                th4 = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
-                th4.IsBackground = true;
-                th4.Start(this);
+                thread_RunMeterMeasure = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
+               // thread_RunMeterMeasure.IsBackground = true;
+                thread_RunMeterMeasure.Start(this);
+                //while (thread_RunMeterMeasure.ThreadState != ThreadState.Background)
+                //{
 
-                th5 = new Thread(TestThread_.PCBcontrol);
-                th5.IsBackground = true;
-                th5.Start();
+                //}
+                thread_PCBcontrol = new Thread(TestThread_.PCBcontrol);
+                //thread_PCBcontrol.IsBackground = true;
+                thread_PCBcontrol.Start();
+                //while (thread_PCBcontrol.ThreadState != ThreadState.Background)
+                //{
 
+                //}
+                thread_Maintest = new Thread(RunTest);
+                thread_Maintest.Start();
+                btnStart.BackColor= Color.DimGray;
                 selectedList.Clear();
             }
             catch (Exception ex)
@@ -181,7 +198,6 @@ namespace WindowsFormsControlLibrary
                 logger.Error(ex, ex.Message);
             }
         }
-
         private DateTime PauseTime;
         private DateTime ResumeTime;
         private void btnPause_Click(object sender, EventArgs e)
@@ -189,13 +205,13 @@ namespace WindowsFormsControlLibrary
             try
             {
                 PauseTime = DateTime.Now;
-                ThreadState Nowstate = th.ThreadState;
+              
                 ThreadState TestTimestate = thTestTime.ThreadState;
-
+                ThreadState Nowstate = thread_Maintest.ThreadState;
                 if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin || Nowstate==ThreadState.Background)
                 {
                     //Pause the thread
-                    th.Suspend();
+                    thread_Maintest.Suspend();
                     //Disable the Pause button
                     btnPause.Enabled = false;
                     //Enable the resume button
@@ -226,14 +242,13 @@ namespace WindowsFormsControlLibrary
             {
                 ResumeTime = DateTime.Now;
                 IsResume = true;
-                if (th.ThreadState == ThreadState.SuspendRequested || th.ThreadState == ThreadState.Suspended)
+                if (thread_Maintest.ThreadState == ThreadState.SuspendRequested || thread_Maintest.ThreadState == ThreadState.Suspended)
                 {
-                    th.Resume();
+                    thread_Maintest.Resume();
                     btnResume.Enabled = false;
                     btnPause.Enabled = true;
                     btnStop.Enabled = true;
                 }
-
                 if (thTestTime.ThreadState == ThreadState.SuspendRequested || thTestTime.ThreadState == ThreadState.Suspended)
                 {
                     thTestTime.Resume();
@@ -252,12 +267,15 @@ namespace WindowsFormsControlLibrary
         {
             try
             {
+
                 IsStop = true;
                 TestThread_.IsStop = true;
+                thread_RunMeterMeasure.Abort();
                 btnStop.Enabled = false;
                 btnStart.Enabled = true;
                 btnPause.Enabled = false;
                 btnResume.Enabled = false;
+                btnStart.BackColor = Color.Red;
             }
             catch (Exception ex)
             {
@@ -281,7 +299,6 @@ namespace WindowsFormsControlLibrary
                 }
             }
         }
-
         private void addChildNode(TypeList parenttype, TreeNode parentNode)
         {
             foreach (TypeList type in list)
@@ -297,7 +314,6 @@ namespace WindowsFormsControlLibrary
                 }
             }
         }
-
         private void ExpandTree()
         {
             foreach (TreeNode nodes in treeView1.Nodes)
@@ -305,7 +321,6 @@ namespace WindowsFormsControlLibrary
                 nodes.ExpandAll();
             }
         }
-
         private void GetAllSelectedNode(TreeNode parentNode)
         {
             foreach (TreeNode node in parentNode.Nodes)
@@ -319,7 +334,6 @@ namespace WindowsFormsControlLibrary
                 }
             }
         }
-
         private void LoadStepInfo()
         {
             string path = Application.StartupPath + "\\TestInfo";
@@ -389,7 +403,6 @@ namespace WindowsFormsControlLibrary
                             case "Operation mode":
                                 OperationMode(step);
                                 break;
-
                         }
                     }
                 }
@@ -399,6 +412,7 @@ namespace WindowsFormsControlLibrary
 
             //IsTestEnd = true;
             //TestThread_.IsTestEnd = true;
+            btnStart.BackColor = Color.Red;
         }
         KvaserCommunication DIDV = new KvaserCommunication();
 
@@ -408,6 +422,11 @@ namespace WindowsFormsControlLibrary
         private void InitHardware(TestStep ts)
         {
             DateTime centuryBegin = DateTime.Now;
+            KL15ONOFF(true);
+            TestThread_.PowerONOFF = true;
+            TestThread_.Function = 0;
+            TestThread_.FuleEnbale = false;
+
             //Read HW version
             //string msg = "";
             //DIDV.CANmsgSend(msg);
@@ -464,6 +483,24 @@ namespace WindowsFormsControlLibrary
         private void SleepMode(TestStep ts)
         {
             DateTime centuryBegin = DateTime.Now;
+            TestThread_.FuleEnbale = false;
+            ThreadState Nowstate = thread_SendDBCmessage.ThreadState;
+            ThreadState Nowstate2 = thread_SendRealTimeMessage.ThreadState;
+            try
+            {
+                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin || Nowstate == ThreadState.Background)
+                {
+                    thread_SendDBCmessage.Suspend();
+                }
+                if (Nowstate2 == ThreadState.Running || Nowstate2 == ThreadState.WaitSleepJoin || Nowstate2 == ThreadState.Background)
+                {
+                    thread_SendRealTimeMessage.Suspend();
+                }
+            }
+            catch (Exception ex )
+            {
+                logger.Error(ex, ex.Message);
+            }
             //enter sleep mode
             int cnt = 0;
             string msg = "";
@@ -484,7 +521,7 @@ namespace WindowsFormsControlLibrary
             }
             string fazittemp = "";
             string Datesandhour = DateTime.Now.ToString("dd_MM_yyyy");
-            string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
+            string Datesandhour1 = DateTime.Now.ToString("hh_mm_ss_");
             if (FazitString.Length != 0)
             {
                 fazittemp = FazitString;
@@ -501,7 +538,25 @@ namespace WindowsFormsControlLibrary
 
         private void OperationMode(TestStep ts)
         {
+            ThreadState Nowstate = thread_SendDBCmessage.ThreadState;
+            ThreadState Nowstate2 = thread_SendRealTimeMessage.ThreadState;
+            try
+            {
+                if (Nowstate == ThreadState.SuspendRequested || Nowstate == ThreadState.Suspended)
+                {
+                    thread_SendDBCmessage.Resume();
+                }
+                if (Nowstate2 == ThreadState.SuspendRequested || Nowstate2 == ThreadState.Suspended)
+                {
+                    thread_SendRealTimeMessage.Resume();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
             DateTime centuryBegin = DateTime.Now;
+            TestThread_.FuleEnbale = false;
             string fazittemp = "";
             if (FazitString.Length != 0)
             {
@@ -526,6 +581,24 @@ namespace WindowsFormsControlLibrary
         }
         private void Normalmode(TestStep ts)
         {
+            ThreadState Nowstate = thread_SendDBCmessage.ThreadState;
+            ThreadState Nowstate2 = thread_SendRealTimeMessage.ThreadState;
+            try
+            {
+                if (Nowstate == ThreadState.SuspendRequested || Nowstate == ThreadState.Suspended)
+                {
+                    thread_SendDBCmessage.Resume();
+                }
+                if (Nowstate2 == ThreadState.SuspendRequested || Nowstate2 == ThreadState.Suspended)
+                {
+                    thread_SendRealTimeMessage.Resume();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
+
             DateTime centuryBegin = DateTime.Now;
             string fazittemp = "";
             if (FazitString.Length != 0)
@@ -541,6 +614,12 @@ namespace WindowsFormsControlLibrary
             TestThread_.MeterRange = 10;
             TestThread_.MeterResolution = 0.0001;
             TestThread_.MeasureMetertSwitch = true;
+
+            LED.enable = true;
+            Temp.enable = true;
+            Speed.enable = true;
+            TestThread_.FuleEnbale = true;
+
             //Check IC clock time;
             //Check Reset counter
             //Check Telletales
@@ -558,7 +637,6 @@ namespace WindowsFormsControlLibrary
                 {
                     break;
                 }
-                
                 if (IsResume)
                 {
                     TimePause = TimePause + (ResumeTime - PauseTime);
@@ -578,11 +656,11 @@ namespace WindowsFormsControlLibrary
                 {
                     if (diff <= 0)
                     {
-                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                        countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
                     }
                     else
                     {
-                        countdown1.SetText(string.Format("{0:D2}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                        countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
                     }
                 });
                 Thread.Sleep(100);
@@ -619,9 +697,94 @@ namespace WindowsFormsControlLibrary
                 Thread.Sleep(10);
             }
         }
-     
+        List<ManualInstruction> listManualInstruction = new List<ManualInstruction>();
+        ManualInstruction KL15 = new ManualInstruction();
+        ManualInstruction Dimming = new ManualInstruction();
+        ManualInstruction LED = new ManualInstruction();
+        ManualInstruction Tacho = new ManualInstruction();
+        ManualInstruction Speed = new ManualInstruction();
+        ManualInstruction Temp = new ManualInstruction();
 
-       
+
+        private void KL15ONOFF(bool onoff)
+        {
+
+            if (onoff)
+            {
+                KL15.enable = true;
+                Dimming.enable = true;
+                KL15.data = "00 00 02 00";
+            }
+            else
+            {
+                KL15.enable = false;
+                Dimming.enable = false;
+                KL15.data = "00 00 00 00";
+            }
+           
+        }
+
+        private void TestCANmessageDefine()
+        {
+            KL15.cycletime = 100;
+            KL15.cyclecount = 0;
+            KL15.data = "00 00 00 00";
+            KL15.dlc = 4;
+            KL15.enable = false;
+            KL15.id = "3C0";
+            KL15.type = "KL15";
+
+            Dimming.cycletime = 100;
+            Dimming.cyclecount = 0;
+            Dimming.data = "C0 00 00 00 00 00 00 00";
+            Dimming.dlc = 8;
+            Dimming.enable = false;
+            Dimming.id = "5F0";
+            Dimming.type = "Dimming";
+
+            LED.cycletime = 100;
+            LED.cyclecount = 0;
+            LED.data = "C0 00 00 00 00 00 00 00";
+            LED.dlc = 8;
+            LED.enable = false;
+            LED.id = "5F1";
+            LED.type = "LED";
+
+            Tacho.cycletime = 100;
+            Tacho.cyclecount = 0;
+            Tacho.data = "C0 00 00 00 00 00 00 00";
+            Tacho.dlc = 8;
+            Tacho.enable = false;
+            Tacho.id = "5F3";
+            Tacho.type = "Tacho";
+
+            Speed.cycletime = 100;
+            Speed.cyclecount = 0;
+            Speed.data = "C0 00 00 00 00 00 00 00";
+            Speed.dlc = 8;
+            Speed.enable = false;
+            Speed.id = "5F2";
+            Speed.type = "Speed";
+
+            Temp.cycletime = 100;
+            Temp.cyclecount = 0;
+            Temp.data = "C0 00 00 00 00 00 00 00";
+            Temp.dlc = 8;
+            Temp.enable = false;
+            Temp.id = "5F1";
+            Temp.type = "Temp";
+            listManualInstruction.Add(KL15);
+            listManualInstruction.Add(Dimming);
+            listManualInstruction.Add(LED);
+            listManualInstruction.Add(Tacho);
+            listManualInstruction.Add(Speed);
+            listManualInstruction.Add(Temp);
+
+        }
+        private void TestCANmessageReflash()
+        {
+
+        }
         #endregion
         KvaserDbcMessage dBCCan = new KvaserDbcMessage();
         List<AutoTestDLL.Model.Message> message_List1 = new List<AutoTestDLL.Model.Message>();
@@ -718,36 +881,50 @@ namespace WindowsFormsControlLibrary
 
         }
 
-        List<ManualInstruction> listManualInstruction = new List<ManualInstruction>();
-        private void LoadManualInstruction()
-        {
-            string path = Application.StartupPath + "\\SysConfig";
-            string json = JsonOperate.GetJson(path, "ManualInstrustion.json");
-            listManualInstruction = JsonConvert.DeserializeObject<List<ManualInstruction>>(json);
-        }
+      
+        //private void LoadManualInstruction()
+        //{
+        //    string path = Application.StartupPath + "\\SysConfig";
+        //    string json = JsonOperate.GetJson(path, "ManualInstrustion.json");
+        //    listManualInstruction = JsonConvert.DeserializeObject<List<ManualInstruction>>(json);
+        //}
+       
+      
 
         private void Send_ManualInstruction()
         {
             if (listManualInstruction.Count > 0)
             {
+                DateTime timestart = DateTime.Now;
+                TimeSpan sp = new TimeSpan();
                 while (!IsStop)
                 {
                     if(!IsTestEnd)
                     {
+                        //更新 can信息
+                        DateTime now = DateTime.Now;
+                        sp = now - timestart;
+                        if(sp.TotalMilliseconds>=2000)
+                        {
+                            TestCANmessageReflash();
+                            timestart = now;
+                        }
                         foreach (ManualInstruction instruct in listManualInstruction)
-                        {    //&& instruct.enable
-                            if (instruct.cycletime == instruct.cyclecount )
+                        {
+                            if (instruct.enable)//&& instruct.enable
                             {
-                                int id = Convert.ToInt32(instruct.id,16);
-                                int dlc = instruct.dlc;
-                                byte[] data= Sys.HexStringToBytes(instruct.data);
-
-                                dBCCan.send(id,dlc,data,0);
-                                instruct.cyclecount = 0;
-                            }
-                            else
-                            {
-                                instruct.cyclecount += 10;
+                                if (instruct.cycletime == instruct.cyclecount)
+                                {
+                                    int id = Convert.ToInt32(instruct.id, 16);
+                                    int dlc = instruct.dlc;
+                                    byte[] data = Sys.HexStringToBytes(instruct.data);
+                                    dBCCan.send(id, dlc, data, 0);
+                                    instruct.cyclecount = 0;
+                                }
+                                else
+                                {
+                                    instruct.cyclecount += 10;
+                                }
                             }
                         }
                         Thread.Sleep(10);
@@ -759,7 +936,23 @@ namespace WindowsFormsControlLibrary
                 }
             }
         }
-
+        public void Setnoticecolor(Color cl)
+        {
+            treeView1.BeginInvoke((MethodInvoker)delegate
+            {
+                this.treeView1.BackColor = cl;
+            });
+        }
+        public void SetScale(float max, float min,string danwei)
+        {
+          //  userCurve1.ValueMaxLeft = max;
+          //  userCurve1.ValueMinLeft = min;
+          
+            Current.BeginInvoke((MethodInvoker)delegate
+            {
+                this.Current.Text = danwei;
+            });
+        }
         private void FillStepInfo(TestStep step)
         {
             txttypename.BeginInvoke((MethodInvoker)delegate

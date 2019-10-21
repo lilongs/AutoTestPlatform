@@ -74,7 +74,7 @@ namespace WindowsFormsControlLibrary
 
         #region Const Data
 
-        private const int value_count_max = 2048;           // 缓存的数据的最大量
+        private const int value_count_max = 3000;           // 缓存的数据的最大量
 
         #endregion
 
@@ -502,12 +502,12 @@ namespace WindowsFormsControlLibrary
                     if (value_IsAbscissaStrech)
                     {
                         // 填充玩整个图形的情况
-                        SoftBasic.AddArrayData( ref curve.Data, values, value_StrechDataCountMax );
+                        SoftBasic.AddArrayData( ref curve.Data, values, value_StrechDataCountMax, value_IntervalAbscissaText);
                     }
                     else
                     {
                         // 指定点的情况，必然存在最大值情况
-                        SoftBasic.AddArrayData( ref curve.Data, values, value_count_max );
+                        SoftBasic.AddArrayData( ref curve.Data, values, value_count_max, value_IntervalAbscissaText);
                     }
 
                     if (isUpdateUI) Invalidate( );
@@ -528,11 +528,11 @@ namespace WindowsFormsControlLibrary
 
             if(value_IsAbscissaStrech)
             {
-                SoftBasic.AddArrayData( ref data_text, values, value_StrechDataCountMax );
+                SoftBasic.AddArrayData( ref data_text, values, value_StrechDataCountMax, value_IntervalAbscissaText);
             }
             else
             {
-                SoftBasic.AddArrayData( ref data_text, values, value_count_max );
+                SoftBasic.AddArrayData( ref data_text, values, value_count_max, value_IntervalAbscissaText);
             }
         }
 

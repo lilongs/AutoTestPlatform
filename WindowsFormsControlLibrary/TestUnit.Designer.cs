@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestUnit));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.Current = new System.Windows.Forms.Label();
             this.userCurve1 = new WindowsFormsControlLibrary.UserCurve();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.Serialnumber = new System.Windows.Forms.Label();
@@ -166,6 +168,7 @@
             this.groupControl2.AppearanceCaption.Options.UseBorderColor = true;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
             this.groupControl2.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl2.CaptionImageOptions.Image")));
+            this.groupControl2.Controls.Add(this.Current);
             this.groupControl2.Controls.Add(this.userCurve1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 201);
@@ -174,16 +177,31 @@
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "Current curve";
             // 
+            // Current
+            // 
+            this.Current.AutoSize = true;
+            this.Current.BackColor = System.Drawing.Color.Lime;
+            this.Current.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Current.Location = new System.Drawing.Point(169, 12);
+            this.Current.Name = "Current";
+            this.Current.Size = new System.Drawing.Size(17, 16);
+            this.Current.TabIndex = 59;
+            this.Current.Text = "A";
+            // 
             // userCurve1
             // 
             this.userCurve1.BackColor = System.Drawing.Color.Transparent;
             this.userCurve1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userCurve1.IsAbscissaStrech = true;
             this.userCurve1.Location = new System.Drawing.Point(2, 39);
             this.userCurve1.Name = "userCurve1";
             this.userCurve1.Size = new System.Drawing.Size(689, 126);
+            this.userCurve1.StrechDataCountMax = 10000;
             this.userCurve1.TabIndex = 2;
-            this.userCurve1.ValueMaxLeft = 1.5F;
+            this.userCurve1.ValueMaxLeft = 1.6F;
             this.userCurve1.ValueMaxRight = 1.5F;
+            this.userCurve1.ValueMinLeft = -0.2F;
+            this.userCurve1.ValueSegment = 10;
             // 
             // groupControl3
             // 
@@ -225,20 +243,20 @@
             // Serialnumber
             // 
             this.Serialnumber.AutoSize = true;
-            this.Serialnumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Serialnumber.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Serialnumber.Location = new System.Drawing.Point(224, 59);
             this.Serialnumber.Name = "Serialnumber";
-            this.Serialnumber.Size = new System.Drawing.Size(85, 15);
+            this.Serialnumber.Size = new System.Drawing.Size(119, 18);
             this.Serialnumber.TabIndex = 42;
             this.Serialnumber.Text = "Serial number";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(5, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 15);
+            this.label2.Size = new System.Drawing.Size(98, 18);
             this.label2.TabIndex = 24;
             this.label2.Text = "TypeName:";
             // 
@@ -255,100 +273,105 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(224, 93);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.Size = new System.Drawing.Size(96, 18);
             this.label3.TabIndex = 26;
             this.label3.Text = "StepName:";
             // 
             // txthw
             // 
             this.txthw.AutoSize = true;
-            this.txthw.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txthw.Location = new System.Drawing.Point(125, 39);
+            this.txthw.BackColor = System.Drawing.Color.Aqua;
+            this.txthw.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txthw.Location = new System.Drawing.Point(115, 39);
             this.txthw.Name = "txthw";
-            this.txthw.Size = new System.Drawing.Size(30, 16);
+            this.txthw.Size = new System.Drawing.Size(36, 18);
             this.txthw.TabIndex = 58;
             this.txthw.Text = "null";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(5, 107);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 15);
+            this.label4.Size = new System.Drawing.Size(106, 18);
             this.label4.TabIndex = 28;
             this.label4.Text = "ModelName:";
             // 
             // txtfazit
             // 
             this.txtfazit.AutoSize = true;
-            this.txtfazit.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtfazit.Location = new System.Drawing.Point(125, 72);
+            this.txtfazit.BackColor = System.Drawing.Color.Aqua;
+            this.txtfazit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtfazit.Location = new System.Drawing.Point(115, 72);
             this.txtfazit.Name = "txtfazit";
-            this.txtfazit.Size = new System.Drawing.Size(30, 16);
+            this.txtfazit.Size = new System.Drawing.Size(36, 18);
             this.txtfazit.TabIndex = 57;
             this.txtfazit.Text = "null";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(224, 110);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.Size = new System.Drawing.Size(74, 18);
             this.label5.TabIndex = 30;
             this.label5.Text = "Voltage:";
             // 
             // txtserial
             // 
             this.txtserial.AutoSize = true;
-            this.txtserial.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtserial.Location = new System.Drawing.Point(360, 59);
+            this.txtserial.BackColor = System.Drawing.Color.Aqua;
+            this.txtserial.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtserial.Location = new System.Drawing.Point(352, 59);
             this.txtserial.Name = "txtserial";
-            this.txtserial.Size = new System.Drawing.Size(30, 16);
+            this.txtserial.Size = new System.Drawing.Size(36, 18);
             this.txtserial.TabIndex = 56;
             this.txtserial.Text = "null";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(5, 124);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 15);
+            this.label6.Size = new System.Drawing.Size(92, 18);
             this.label6.TabIndex = 32;
             this.label6.Text = "Cycletime:";
             // 
             // txtsw
             // 
             this.txtsw.AutoSize = true;
-            this.txtsw.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtsw.Location = new System.Drawing.Point(125, 55);
+            this.txtsw.BackColor = System.Drawing.Color.Aqua;
+            this.txtsw.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtsw.Location = new System.Drawing.Point(115, 55);
             this.txtsw.Name = "txtsw";
-            this.txtsw.Size = new System.Drawing.Size(30, 16);
+            this.txtsw.Size = new System.Drawing.Size(36, 18);
             this.txtsw.TabIndex = 55;
             this.txtsw.Text = "null";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(224, 127);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 15);
+            this.label7.Size = new System.Drawing.Size(48, 18);
             this.label7.TabIndex = 34;
             this.label7.Text = "Test:";
             // 
             // txtpart
             // 
             this.txtpart.AutoSize = true;
-            this.txtpart.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtpart.Location = new System.Drawing.Point(360, 39);
+            this.txtpart.BackColor = System.Drawing.Color.Aqua;
+            this.txtpart.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtpart.Location = new System.Drawing.Point(352, 39);
             this.txtpart.Name = "txtpart";
-            this.txtpart.Size = new System.Drawing.Size(30, 16);
+            this.txtpart.Size = new System.Drawing.Size(36, 18);
             this.txtpart.TabIndex = 54;
             this.txtpart.Text = "null";
             // 
@@ -362,100 +385,106 @@
             // txttesttime
             // 
             this.txttesttime.AutoSize = true;
-            this.txttesttime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttesttime.Location = new System.Drawing.Point(360, 128);
+            this.txttesttime.BackColor = System.Drawing.Color.Aqua;
+            this.txttesttime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txttesttime.Location = new System.Drawing.Point(352, 128);
             this.txttesttime.Name = "txttesttime";
-            this.txttesttime.Size = new System.Drawing.Size(30, 16);
+            this.txttesttime.Size = new System.Drawing.Size(36, 18);
             this.txttesttime.TabIndex = 53;
             this.txttesttime.Text = "null";
             // 
             // partnumber
             // 
             this.partnumber.AutoSize = true;
-            this.partnumber.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partnumber.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.partnumber.Location = new System.Drawing.Point(224, 39);
             this.partnumber.Name = "partnumber";
-            this.partnumber.Size = new System.Drawing.Size(78, 15);
+            this.partnumber.Size = new System.Drawing.Size(112, 18);
             this.partnumber.TabIndex = 38;
             this.partnumber.Text = "Part number:";
             // 
             // txtcycletime
             // 
             this.txtcycletime.AutoSize = true;
-            this.txtcycletime.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcycletime.Location = new System.Drawing.Point(125, 123);
+            this.txtcycletime.BackColor = System.Drawing.Color.Aqua;
+            this.txtcycletime.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcycletime.Location = new System.Drawing.Point(115, 123);
             this.txtcycletime.Name = "txtcycletime";
-            this.txtcycletime.Size = new System.Drawing.Size(30, 16);
+            this.txtcycletime.Size = new System.Drawing.Size(36, 18);
             this.txtcycletime.TabIndex = 52;
             this.txtcycletime.Text = "null";
             // 
             // SWversion
             // 
             this.SWversion.AutoSize = true;
-            this.SWversion.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SWversion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SWversion.Location = new System.Drawing.Point(5, 56);
             this.SWversion.Name = "SWversion";
-            this.SWversion.Size = new System.Drawing.Size(69, 15);
+            this.SWversion.Size = new System.Drawing.Size(97, 18);
             this.SWversion.TabIndex = 40;
             this.SWversion.Text = "SW version";
             // 
             // txtvoltage
             // 
             this.txtvoltage.AutoSize = true;
-            this.txtvoltage.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvoltage.Location = new System.Drawing.Point(360, 112);
+            this.txtvoltage.BackColor = System.Drawing.Color.Aqua;
+            this.txtvoltage.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvoltage.Location = new System.Drawing.Point(352, 112);
             this.txtvoltage.Name = "txtvoltage";
-            this.txtvoltage.Size = new System.Drawing.Size(30, 16);
+            this.txtvoltage.Size = new System.Drawing.Size(36, 18);
             this.txtvoltage.TabIndex = 51;
             this.txtvoltage.Text = "null";
             // 
             // Fazit
             // 
             this.Fazit.AutoSize = true;
-            this.Fazit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fazit.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Fazit.Location = new System.Drawing.Point(5, 73);
             this.Fazit.Name = "Fazit";
-            this.Fazit.Size = new System.Drawing.Size(69, 15);
+            this.Fazit.Size = new System.Drawing.Size(101, 18);
             this.Fazit.TabIndex = 44;
             this.Fazit.Text = "Fazit string:";
             // 
             // txtmodelname
             // 
             this.txtmodelname.AutoSize = true;
-            this.txtmodelname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtmodelname.Location = new System.Drawing.Point(125, 106);
+            this.txtmodelname.BackColor = System.Drawing.Color.Aqua;
+            this.txtmodelname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtmodelname.Location = new System.Drawing.Point(115, 106);
             this.txtmodelname.Name = "txtmodelname";
-            this.txtmodelname.Size = new System.Drawing.Size(30, 16);
+            this.txtmodelname.Size = new System.Drawing.Size(36, 18);
             this.txtmodelname.TabIndex = 50;
             this.txtmodelname.Text = "null";
             // 
             // HWversion
             // 
             this.HWversion.AutoSize = true;
-            this.HWversion.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HWversion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HWversion.Location = new System.Drawing.Point(5, 39);
             this.HWversion.Name = "HWversion";
-            this.HWversion.Size = new System.Drawing.Size(73, 15);
+            this.HWversion.Size = new System.Drawing.Size(103, 18);
             this.HWversion.TabIndex = 46;
             this.HWversion.Text = "HW version:";
             // 
             // txtstepname
             // 
             this.txtstepname.AutoSize = true;
-            this.txtstepname.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtstepname.Location = new System.Drawing.Point(360, 92);
+            this.txtstepname.BackColor = System.Drawing.Color.Aqua;
+            this.txtstepname.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtstepname.Location = new System.Drawing.Point(352, 92);
             this.txtstepname.Name = "txtstepname";
-            this.txtstepname.Size = new System.Drawing.Size(30, 16);
+            this.txtstepname.Size = new System.Drawing.Size(36, 18);
             this.txtstepname.TabIndex = 49;
             this.txtstepname.Text = "null";
             // 
             // txttypename
             // 
             this.txttypename.AutoSize = true;
-            this.txttypename.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttypename.Location = new System.Drawing.Point(125, 89);
+            this.txttypename.BackColor = System.Drawing.Color.Aqua;
+            this.txttypename.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txttypename.Location = new System.Drawing.Point(115, 89);
             this.txttypename.Name = "txttypename";
-            this.txttypename.Size = new System.Drawing.Size(30, 16);
+            this.txttypename.Size = new System.Drawing.Size(36, 18);
             this.txttypename.TabIndex = 48;
             this.txttypename.Text = "null";
             // 
@@ -500,52 +529,61 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.BackColor = System.Drawing.Color.Red;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(1, 285);
+            this.btnStop.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(1, 278);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(83, 25);
+            this.btnStop.Size = new System.Drawing.Size(90, 30);
             this.btnStop.TabIndex = 15;
             this.btnStop.Text = "TestStop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnResume
             // 
             this.btnResume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnResume.BackColor = System.Drawing.Color.Yellow;
             this.btnResume.Enabled = false;
-            this.btnResume.Location = new System.Drawing.Point(123, 285);
+            this.btnResume.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResume.Location = new System.Drawing.Point(112, 278);
             this.btnResume.Name = "btnResume";
-            this.btnResume.Size = new System.Drawing.Size(83, 25);
+            this.btnResume.Size = new System.Drawing.Size(90, 30);
             this.btnResume.TabIndex = 15;
             this.btnResume.Text = "TestResume";
-            this.btnResume.UseVisualStyleBackColor = true;
+            this.btnResume.UseVisualStyleBackColor = false;
             this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
             // 
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStart.Location = new System.Drawing.Point(1, 254);
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStart.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(1, 239);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(83, 25);
+            this.btnStart.Size = new System.Drawing.Size(90, 30);
             this.btnStart.TabIndex = 12;
             this.btnStart.Text = "TestStart";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnPause
             // 
             this.btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPause.BackColor = System.Drawing.Color.Yellow;
             this.btnPause.Enabled = false;
-            this.btnPause.Location = new System.Drawing.Point(123, 254);
+            this.btnPause.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Location = new System.Drawing.Point(112, 239);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(83, 25);
+            this.btnPause.Size = new System.Drawing.Size(90, 30);
             this.btnPause.TabIndex = 12;
             this.btnPause.Text = "TestPause";
-            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // treeView1
             // 
+            this.treeView1.BackColor = System.Drawing.Color.White;
             this.treeView1.CheckBoxes = true;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
@@ -565,6 +603,14 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -582,6 +628,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(909, 370);
@@ -606,7 +653,7 @@
             // richTextBox4
             // 
             this.richTextBox4.BackColor = System.Drawing.SystemColors.MenuText;
-            this.richTextBox4.Font = new System.Drawing.Font("宋体", 16F);
+            this.richTextBox4.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox4.ForeColor = System.Drawing.Color.LimeGreen;
             this.richTextBox4.Location = new System.Drawing.Point(462, 21);
             this.richTextBox4.Name = "richTextBox4";
@@ -617,7 +664,7 @@
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.SystemColors.MenuText;
-            this.richTextBox3.Font = new System.Drawing.Font("宋体", 16F);
+            this.richTextBox3.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox3.ForeColor = System.Drawing.Color.LimeGreen;
             this.richTextBox3.Location = new System.Drawing.Point(224, 22);
             this.richTextBox3.Name = "richTextBox3";
@@ -628,7 +675,7 @@
             // richTextBox2
             // 
             this.richTextBox2.BackColor = System.Drawing.SystemColors.MenuText;
-            this.richTextBox2.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox2.ForeColor = System.Drawing.Color.LimeGreen;
             this.richTextBox2.Location = new System.Drawing.Point(11, 21);
             this.richTextBox2.Name = "richTextBox2";
@@ -681,6 +728,7 @@
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            this.groupControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
@@ -746,10 +794,11 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        public System.Windows.Forms.RichTextBox richTextBox1;
         private UserCurve userCurve1;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnResume;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Label Current;
     }
 }

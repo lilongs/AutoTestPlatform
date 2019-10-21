@@ -15,7 +15,9 @@ namespace TestThread
 {
     public partial class TestThread1
     {
-       public string MeterSourceName = "";
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
+        public string MeterSourceName = "";
        public string PowerSourceName = "";
        public string TempSourceName = "";
 
@@ -136,58 +138,66 @@ namespace TestThread
         public bool IsTestEnd = false;
         public void MeasureMeterCurrent(object tu)
         {
-            StringBuilder MeterVal = new StringBuilder();
-            string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
-            MeterConfig.MeterInit(MeterSourceName);
-            MeterConfig.SetVoltage(MeterRange, MeterResolution);
-            MeterConfig.MeasurementInit();
-            decimal data = 0;
-            string danwei = "A";
-            int count = 0;
-            int countrecord = 0;
-           // Random rd1 = new Random();        
-               while (!IsStop||!IsTestEnd)
-               {
-                 //  MeterCurrent = rd1.Next(1, 100);
-                   MeterCurrent = MeterConfig.MeasureSinglePoint();
-                   Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_,");
-                   data = ChangeDataToD(MeterCurrent);
-                if(data>=(decimal)0.1)
+            try
+            {
+                StringBuilder MeterVal = new StringBuilder();
+                string Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_");
+                MeterConfig.MeterInit(MeterSourceName);
+                MeterConfig.SetVoltage(MeterRange, MeterResolution);
+                MeterConfig.MeasurementInit();
+                decimal data = 0;
+                string danwei = "A";
+                int count = 0;
+                int countrecord = 0;
+                // Random rd1 = new Random();        
+                while (!IsStop || !IsTestEnd)
                 {
-                    danwei = "A";
-                }
-                else if(data < (decimal)0.1 && data > (decimal)0.0001)
-                {
-                    data = data * 1000;
-                    danwei = "mA";
-                }
-                else
-                {
-                    data = data * 1000000;
-                    danwei = "uA";
-                }
+                    //  MeterCurrent = rd1.Next(1, 100);
+                    MeterCurrent = MeterConfig.MeasureSinglePoint();
+                    Datesandhour1 = DateTime.Now.ToString("_hh_mm_ss_,");
+                    data = ChangeDataToD(MeterCurrent);
+                    if (data >= (decimal)0.1)
+                    {
+                        danwei = "A";
+                    }
+                    else if (data < (decimal)0.1 && data > (decimal)0.0001)
+                    {
+                        data = data * 1000;
+                        danwei = "mA";
+                    }
+                    else
+                    {
+                        data = data * 1000000;
+                        danwei = "uA";
+                    }
 
-                if (MeasureMetertSwitch)
-                   {
-                       count++;
-                    countrecord++;
+                    if (MeasureMetertSwitch)
+                    {
+                        count++;
+                        countrecord++;
                         if (countrecord == MeterFileRecordStep)
                         {
                             countrecord = 0;
-                            MeterVal.Append(Datesandhour1+MeterCurrent.ToString() + danwei + PowerSourceVal.ToString() + "V" + Environment.NewLine);
+                            MeterVal.Append(Datesandhour1 + MeterCurrent.ToString() + danwei + PowerSourceVal.ToString() + "V" + Environment.NewLine);
                         }
-                       if (count > 120)
-                       {
-                           count = 0;
-                           FileOperation.createFile(MeterFilePath, MeterFileName, MeterVal.ToString());
-                           MeterVal.Clear();
-                       }                  
-                   }
-                   Thread.Sleep(500);                
-                   TestUnit tu2 = new TestUnit();
-                   tu2 = (TestUnit)tu;
-                   tu2.ChartValueFill((float)MeterCurrent);
-               }
+                        if (count > 120)
+                        {
+                            count = 0;
+                            FileOperation.createFile(MeterFilePath, MeterFileName, MeterVal.ToString());
+                            MeterVal.Clear();
+                        }
+                    }
+                    Thread.Sleep(500);
+                    TestUnit tu2 = new TestUnit();
+                    tu2 = (TestUnit)tu;
+                    tu2.ChartValueFill((float)MeterCurrent);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, ex.Message);
+            }
+            
         }
         public static object locker = new object();
 
