@@ -51,9 +51,25 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.combIC = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnResume = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.combIC.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -69,7 +85,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1797, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // sysConfigToolStripMenuItem
             // 
@@ -232,17 +247,143 @@
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 25);
+            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.Size = new System.Drawing.Size(1395, 646);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1177, 642);
             this.xtraTabControl1.TabIndex = 14;
+            // 
+            // groupControl4
+            // 
+            this.groupControl4.AllowBorderColorBlending = true;
+            this.groupControl4.AppearanceCaption.BorderColor = System.Drawing.Color.LightGreen;
+            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("Arial", 10F);
+            this.groupControl4.AppearanceCaption.Options.UseBorderColor = true;
+            this.groupControl4.AppearanceCaption.Options.UseFont = true;
+            this.groupControl4.CaptionImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("groupControl4.CaptionImageOptions.Image")));
+            this.groupControl4.Controls.Add(this.panel5);
+            this.groupControl4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupControl4.Location = new System.Drawing.Point(0, 25);
+            this.groupControl4.Name = "groupControl4";
+            this.groupControl4.Size = new System.Drawing.Size(214, 646);
+            this.groupControl4.TabIndex = 15;
+            this.groupControl4.Text = "Select test step:";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.combIC);
+            this.panel5.Controls.Add(this.btnStop);
+            this.panel5.Controls.Add(this.btnResume);
+            this.panel5.Controls.Add(this.btnStart);
+            this.panel5.Controls.Add(this.btnPause);
+            this.panel5.Controls.Add(this.treeView1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(2, 39);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(210, 605);
+            this.panel5.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 14);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Select test IC:";
+            // 
+            // combIC
+            // 
+            this.combIC.Location = new System.Drawing.Point(6, 30);
+            this.combIC.Name = "combIC";
+            this.combIC.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.combIC.Size = new System.Drawing.Size(199, 20);
+            this.combIC.TabIndex = 0;
+            // 
+            // btnStop
+            // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.BackColor = System.Drawing.Color.Red;
+            this.btnStop.Enabled = false;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(1, 556);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(90, 30);
+            this.btnStop.TabIndex = 15;
+            this.btnStop.Text = "TestStop";
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnResume
+            // 
+            this.btnResume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnResume.BackColor = System.Drawing.Color.Yellow;
+            this.btnResume.Enabled = false;
+            this.btnResume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResume.Location = new System.Drawing.Point(112, 556);
+            this.btnResume.Name = "btnResume";
+            this.btnResume.Size = new System.Drawing.Size(90, 30);
+            this.btnResume.TabIndex = 15;
+            this.btnResume.Text = "TestResume";
+            this.btnResume.UseVisualStyleBackColor = false;
+            this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(1, 517);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(90, 30);
+            this.btnStart.TabIndex = 12;
+            this.btnStart.Text = "TestStart";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPause.BackColor = System.Drawing.Color.Yellow;
+            this.btnPause.Enabled = false;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Location = new System.Drawing.Point(112, 517);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(90, 30);
+            this.btnPause.TabIndex = 12;
+            this.btnPause.Text = "TestPause";
+            this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeView1.BackColor = System.Drawing.Color.White;
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Location = new System.Drawing.Point(-2, 56);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(210, 455);
+            this.treeView1.TabIndex = 14;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.xtraTabControl1);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl1.Location = new System.Drawing.Point(214, 25);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1181, 646);
+            this.panelControl1.TabIndex = 16;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1797, 671);
-            this.Controls.Add(this.xtraTabControl1);
+            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -258,6 +399,13 @@
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.combIC.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +435,16 @@
         private System.Windows.Forms.ToolStripMenuItem histroyDataRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historicalInformationReviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iCRefreshCycleToolStripMenuItem;
+        private DevExpress.XtraEditors.GroupControl groupControl4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnResume;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnPause;
+        public System.Windows.Forms.TreeView treeView1;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit combIC;
+        private System.Windows.Forms.Label label1;
     }
 }
 

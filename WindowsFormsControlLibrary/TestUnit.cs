@@ -35,24 +35,24 @@ namespace WindowsFormsControlLibrary
             string str = "";
             string str1 = "01 02 03 04 05 06 07 08";
             string M = "80 01 01 02 03 04 05 06 07 08 00";
-            Int32 id_send=0x17FC0114;
+            Int32 id_send = 0x17FC0114;
             Int32 id_recv = 0x17FE0114;
-            DIDV.CANmsgSend(id_send,M);
-            byte[] recv=DIDV.CANmsgReceived(id_recv);
+            DIDV.CANmsgSend(id_send, M);
+            byte[] recv = DIDV.CANmsgReceived(id_recv);
             byte[] K = recv.Skip(2).Take(8).ToArray();
             str = DIDV.ByteToHex(K).Replace(" ", "");
 
-            Challenge_M=Sys.HexStringToBytes(str1);
-            Challenge_K=K;
-          //  Response_M.Append("");
-            int i=Generate_Response_KS(Challenge_M, Challenge_K,  Response_M);
-      
-            string send = "80 02 " + DIDV.ByteToHex(Response_M) +" 00";
+            Challenge_M = Sys.HexStringToBytes(str1);
+            Challenge_K = K;
+            //  Response_M.Append("");
+            int i = Generate_Response_KS(Challenge_M, Challenge_K, Response_M);
+
+            string send = "80 02 " + DIDV.ByteToHex(Response_M) + " 00";
             DIDV.CANmsgSend(id_send, send);
-            byte[] ttt=DIDV.CANmsgReceived(id_recv);
+            byte[] ttt = DIDV.CANmsgReceived(id_recv);
         }
-        
-#endregion
+
+        #endregion
 
         #region not important
         public TestUnit()
@@ -63,7 +63,7 @@ namespace WindowsFormsControlLibrary
 
         private List<TypeList> list = new List<TypeList>();
         Dictionary<string, List<TestStep>> ReadyTestInfo = null;
-        private List<TypeList> selectedList = new List<TypeList>();
+        public List<TypeList> selectedList = new List<TypeList>();
         private List<TestStep> testInfo = new List<TestStep>();
 
         private List<TestStep> CompletedList = new List<TestStep>();
@@ -86,7 +86,7 @@ namespace WindowsFormsControlLibrary
                 TestCANmessageDefine();
                 this.groupControl3.Text = this.Tag.ToString() + " step info:";
                 Thread.Sleep(500);
-                PB.LEDcontrol(0,false);     
+                PB.LEDcontrol(0, false);
             }
             catch (Exception ex)
             {
@@ -130,10 +130,10 @@ namespace WindowsFormsControlLibrary
             userCurve1.SetRightCurve("B", null, Color.Black);
         }
 
-        public void ChartValueFill(float value,float voltage)
+        public void ChartValueFill(float value, float voltage)
         {
             userCurve1.AddCurveData(
-               new string[] { "A" ,"B"},
+               new string[] { "A", "B" },
                new float[]
                {
                     value,voltage
@@ -199,45 +199,57 @@ namespace WindowsFormsControlLibrary
             testInfo = JsonConvert.DeserializeObject<List<TestStep>>(json);
         }
         //}
-  
+
         public void Setnoticecolor(Color cl)
         {
-            treeView1.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
-                this.treeView1.BackColor = cl;
-            });
+                treeView1.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.treeView1.BackColor = cl;
+                });
+            }
+
         }
         public void SetScale(float max, float min, string danwei)
         {
             //  userCurve1.ValueMaxLeft = max;
             //  userCurve1.ValueMinLeft = min;  
-            Current.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
-                this.Current.Text = danwei;
-            });
+                Current.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.Current.Text = danwei;
+                });
+            }
+
         }
         private void FillStepInfo(TestStep step)
         {
-            txttypename.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
+
+                txttypename.BeginInvoke((MethodInvoker)delegate
+                {
                 this.txttypename.Text = step.typename;
-            });
-            txtstepname.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtstepname.Text = step.stepname;
-            });
-            txtmodelname.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtmodelname.Text = step.modelname;
-            });
-            txtvoltage.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtvoltage.Text = step.voltage.ToString()+"v";
-            });
-            txtcycletime.BeginInvoke((MethodInvoker)delegate
-            {
-                this.txtcycletime.Text = step.cycletime.ToString()+"s";
-            });
+                });
+                txtstepname.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txtstepname.Text = step.stepname;
+                });
+                txtmodelname.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txtmodelname.Text = step.modelname;
+                });
+                txtvoltage.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txtvoltage.Text = step.voltage.ToString() + "v";
+                });
+                txtcycletime.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txtcycletime.Text = step.cycletime.ToString() + "s";
+                });
+            }
         }
         string DebugFileName = "";
 
@@ -246,12 +258,13 @@ namespace WindowsFormsControlLibrary
         {
             string Datesandhour = DateTime.Now.ToString("yyyy_MM_dd");
 
-            string path = GetAppConfig("DebugFilePath") + this.Tag.ToString() + "_Debug\\"+ Datesandhour +"\\";
+            string path = GetAppConfig("DebugFilePath") + this.Tag.ToString() + "_Debug\\" + Datesandhour + "\\";
             try
             {
                 FileOperation.createFile(path, DebugFileName, info);
-
-                richTextBox.BeginInvoke((MethodInvoker)delegate
+                if (this.IsHandleCreated)
+                {
+                    richTextBox.BeginInvoke((MethodInvoker)delegate
                 {
                     richTextBox.SelectionStart = richTextBox.TextLength;
                     richTextBox.SelectionLength = 0;
@@ -265,6 +278,7 @@ namespace WindowsFormsControlLibrary
 
                     richTextBox.ScrollToCaret();
                 });
+                }
 
             }
             catch (Exception ex)
@@ -275,10 +289,13 @@ namespace WindowsFormsControlLibrary
 
         public void ShowInfo(RichTextBox richTextBox, string info)
         {
-            richTextBox.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
+            {
+                richTextBox.BeginInvoke((MethodInvoker)delegate
             {
                 richTextBox.Text = info;
             });
+            }
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
@@ -400,17 +417,17 @@ namespace WindowsFormsControlLibrary
 
         #region Button event
 
-        private void btnStart_Click(object sender, EventArgs e)
+        public void btnStart_Click(object sender, EventArgs e)
         {
-           
+
             TestThread_.MeterSourceName = GetPowerMeterName();
             Setnoticecolor(Color.White);
             PowerControl.PowerSourceControl(1, 14);  //PCB 供电
             PowerControl.PowerSourceControl(2, 14);
             string Datesandhour = DateTime.Now.ToString("yyyy_MM_dd");
             string Datesandhour1 = DateTime.Now.ToString("hh_mm_ss");
-            DIDV.LogFileName = Datesandhour1+".txt";
-            DIDV.LogFilePath = GetAppConfig("CANlogFilePath")+this.Tag.ToString() + "_CANlog\\"+ Datesandhour + "\\";
+            DIDV.LogFileName = Datesandhour1 + ".txt";
+            DIDV.LogFilePath = GetAppConfig("CANlogFilePath") + this.Tag.ToString() + "_CANlog\\" + Datesandhour + "\\";
 
             if (TestThread_.MeterSourceName.Length == 0)
             {
@@ -424,10 +441,10 @@ namespace WindowsFormsControlLibrary
                 {
                     richTextBox1.Text = string.Empty;
                 }
-                foreach (TreeNode node in treeView1.Nodes)
-                {
-                    GetAllSelectedNode(node);
-                }
+                //foreach (TreeNode node in treeView1.Nodes)
+                //{
+                //    GetAllSelectedNode(node);
+                //}
                 if (selectedList.Count <= 0)
                 {
                     MessageBox.Show("Please select test nodes!");
@@ -448,7 +465,7 @@ namespace WindowsFormsControlLibrary
                 IsTestEnd = false;
                 TestThread_.IsStop = false;
                 TestThread_.IsTestEnd = false;
-               
+
                 // TestThread_.MeterFileName = this.Tag.ToString() + "_Current.txt";
                 TestThread_.MeterFileRecordStep = Convert.ToInt32(GetAppConfig("MeterFileRecordStep")); ////电流表
                 thread_RunMeterMeasure = new Thread(new ParameterizedThreadStart(TestThread_.MeasureMeterCurrent));
@@ -463,9 +480,9 @@ namespace WindowsFormsControlLibrary
                 thread_Maintest.Start();
 
                 string Datesandhour2 = DateTime.Now.ToString("dd_MM_yyyy_hh_mm_ss_");
-                DebugFileName =  Datesandhour2+".txt";
-                btnStart.BackColor= Color.DimGray;
-                selectedList.Clear();
+                DebugFileName = Datesandhour2 + ".txt";
+                btnStart.BackColor = Color.DimGray;
+                this.selectedList.Clear();
             }
             catch (Exception ex)
             {
@@ -473,16 +490,16 @@ namespace WindowsFormsControlLibrary
             }
         }
 
-        private void btnPause_Click(object sender, EventArgs e)
+        public void btnPause_Click(object sender, EventArgs e)
         {
             try
             {
                 PauseTime = DateTime.Now;
-              
+
                 ThreadState TestTimestate = thTestTime.ThreadState;
                 ThreadState Nowstate = thread_Maintest.ThreadState;
-                
-                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin || Nowstate==ThreadState.Background)
+
+                if (Nowstate == ThreadState.Running || Nowstate == ThreadState.WaitSleepJoin || Nowstate == ThreadState.Background)
                 {
                     //Pause the thread
                     thread_Maintest.Suspend();
@@ -515,7 +532,7 @@ namespace WindowsFormsControlLibrary
                 logger.Error(ex, ex.Message);
             }
         }
-        private void btnResume_Click(object sender, EventArgs e)
+        public void btnResume_Click(object sender, EventArgs e)
         {
             try
             {
@@ -548,7 +565,7 @@ namespace WindowsFormsControlLibrary
             }
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        public void btnStop_Click(object sender, EventArgs e)
         {
             try
             {
@@ -582,27 +599,33 @@ namespace WindowsFormsControlLibrary
         {
             DateTime centuryBegin = DateTime.Now;
             TestThread_.PowerSourceVal = ts.voltage;
-            string msg;          
+            string msg;
             string HW = DIDV.ReadHWVersion(out msg);
             if (msg.Length != 0)
             {
                 ShowInfo(richTextBox1, msg, Color.Red);
                 Setnoticecolor(Color.Red);
             }
-            txthw.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
+            {
+                txthw.BeginInvoke((MethodInvoker)delegate
             {
                 this.txthw.Text = HW;
             });
+            }
             string SW = DIDV.ReadSWVersion(out msg);
             if (msg.Length != 0)
             {
                 ShowInfo(richTextBox1, msg, Color.Red);
                 Setnoticecolor(Color.Red);
             }
-            txtsw.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
+            {
+                txtsw.BeginInvoke((MethodInvoker)delegate
             {
                 this.txtsw.Text = SW;
             });
+            }
             string Fazit1 = DIDV.ReadFazitnum(out msg);
             if (msg.Length != 0)
             {
@@ -610,20 +633,27 @@ namespace WindowsFormsControlLibrary
                 Setnoticecolor(Color.Red);
             }
             FazitString = Fazit1;
-            txtfazit.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
+            {
+                txtfazit.BeginInvoke((MethodInvoker)delegate
             {
                 this.txtfazit.Text = Fazit1;
             });
+            }
             string PartNum = DIDV.ReadPartNumber(out msg);
             if (msg.Length != 0)
             {
                 ShowInfo(richTextBox1, msg, Color.Red);
                 Setnoticecolor(Color.Red);
             }
-            txtpart.BeginInvoke((MethodInvoker)delegate
+            if (this.IsHandleCreated)
             {
-                this.txtpart.Text = PartNum;
-            });
+                txtpart.BeginInvoke((MethodInvoker)delegate
+                {
+                    this.txtpart.Text = PartNum;
+                });
+            }
+
             UnlockCluster_CP();
             Timespend(centuryBegin, ts.cycletime);
 
@@ -644,7 +674,7 @@ namespace WindowsFormsControlLibrary
             else fazittemp = "0000000000";
             TestThread_.PowerSourceVal = ts.voltage;
             TestThread_.MeterFileName = ts.stepname + "_SleepMode" + Datesandhour1 + ".txt";
-            TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + this.Tag.ToString() + "_Current\\" +fazittemp + "_" + Datesandhour + "\\";
+            TestThread_.MeterFilePath = GetAppConfig("MeterFilePath") + this.Tag.ToString() + "_Current\\" + fazittemp + "_" + Datesandhour + "\\";
             TestThread_.MeterRange = 1;
             TestThread_.SetMeterScal = true;
             TestThread_.MeasureMetertSwitch = true;
@@ -696,7 +726,7 @@ namespace WindowsFormsControlLibrary
             catch (Exception ex)
             {
             }
-           
+
         }
 
         private void Normalmode(TestStep ts)
@@ -762,7 +792,7 @@ namespace WindowsFormsControlLibrary
         {
             while (true)
             {
-                if(IsTestEnd||IsStop)
+                if (IsTestEnd || IsStop)
                 {
                     break;
                 }
@@ -772,28 +802,34 @@ namespace WindowsFormsControlLibrary
                     IsResume = false;
                 }
                 TimeSpan sp = (DateTime.Now - TestStartTime) - TimePause;
-         
+
                 //测试持续时间
-                txttesttime.BeginInvoke((MethodInvoker)delegate
+                if (this.IsHandleCreated)
                 {
-                    this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
-                });
+                    txttesttime.BeginInvoke((MethodInvoker)delegate
+                    {
+                        this.txttesttime.Text = string.Format("{0:F2}s", sp.TotalSeconds);
+                    });
+                }
                 //测试倒计时
                 double diff = CountTime - sp.TotalSeconds;
                 TimeSpan sp2 = TimeSpan.FromSeconds(diff);
-                countdown1.BeginInvoke((MethodInvoker)delegate
+                if (this.IsHandleCreated)
                 {
-                    if (diff <= 0)
+                    countdown1.BeginInvoke((MethodInvoker)delegate
                     {
-                        countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
-                    }
-                    else
-                    {
-                        countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
-                    }
-                });
+                        if (diff <= 0)
+                        {
+                            countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", 0, 0, 0, 0));
+                        }
+                        else
+                        {
+                            countdown1.SetText(string.Format("{0:D3}D{1:D2}H{2:D2}M{3:D2}S", sp2.Days, sp2.Hours, sp2.Minutes, sp2.Seconds));
+                        }
+                    });
+                }
                 Thread.Sleep(100);
-            }            
+            }
         }
 
         private void UpdateTestStepInfo(TestStep step)
@@ -811,11 +847,11 @@ namespace WindowsFormsControlLibrary
             ShowInfo(richTextBox4, modelname);
             #endregion
         }
-        private void Timespend(DateTime dt,double time)
+        private void Timespend(DateTime dt, double time)
         {
             TimeSpan elapsedSpan = new TimeSpan();
-           // while (true)
-           while(!IsStop || !IsTestEnd)
+            // while (true)
+            while (!IsStop || !IsTestEnd)
             {
                 DateTime currentDate = DateTime.Now;
                 elapsedSpan = currentDate - dt;
@@ -823,7 +859,7 @@ namespace WindowsFormsControlLibrary
                 {
                     break;
                 }
-                if(elapsedSpan.TotalSeconds >= time-50)
+                if (elapsedSpan.TotalSeconds >= time - 50)
                 {
                     TestThread_.TestStepFinish = true;
                 }
@@ -856,7 +892,7 @@ namespace WindowsFormsControlLibrary
                 Dimming.enable = false;
                 KL15.data = "00 00 00 00";
             }
-           
+
         }
 
         private void TestCANmessageDefine()
@@ -936,9 +972,9 @@ namespace WindowsFormsControlLibrary
 
         public void Speed_CRC_BZReflash()
         {
-            byte speed_crc= DIDV.CalcCrc(Convert.ToInt64(Speed.id,16), Speed.dlc, Sys.HexStringToBytes(Speed.data));
+            byte speed_crc = DIDV.CalcCrc(Convert.ToInt64(Speed.id, 16), Speed.dlc, Sys.HexStringToBytes(Speed.data));
             byte speed_bz = DIDV.BZCount(Sys.HexStringToBytes(Speed.data)[1]);
-            Speed.data = Convert.ToString(speed_crc,16).PadLeft(2,'0') + " " + Convert.ToString(speed_bz, 16).PadLeft(2,'0') + Speed.data.Substring(5);
+            Speed.data = Convert.ToString(speed_crc, 16).PadLeft(2, '0') + " " + Convert.ToString(speed_bz, 16).PadLeft(2, '0') + Speed.data.Substring(5);
         }
 
         public void LH_EPS_CRC_BZReflash()
@@ -966,7 +1002,7 @@ namespace WindowsFormsControlLibrary
                             {
                                 List<Signal> signalList = new List<Signal>();
                                 signalList = dBCCan.LoadSignalsById(message.id);
-                              //  dBCCan.sendMsg(message.dlc,signalList);
+                                //  dBCCan.sendMsg(message.dlc,signalList);
                                 message.CycleCount = 0;
                             }
                             else
@@ -993,12 +1029,12 @@ namespace WindowsFormsControlLibrary
             byte[] EngineSpeed_L = new byte[] { 0, 0x05, 0, 0x15, 0, 0x44, 0, 0xFF };
             byte[] Tachospeed = new byte[] { 0, 1, 2, 3, 4, 5, 0, 1 };
 
-            Speed.data = Speed.data.Substring(0, 6) + Convert.ToString(EngineSpeed_H[MessageReflahCounter],16).PadLeft(2, '0') + " " +
-                                         Convert.ToString(EngineSpeed_L[MessageReflahCounter],16).PadLeft(2, '0') + Speed.data.Substring(11);
-            Tacho.data = Tacho.data.Substring(0, 3) + Convert.ToString(Tachospeed[MessageReflahCounter],16).PadLeft(2, '0') + " " + Tacho.data.Substring(5);
+            Speed.data = Speed.data.Substring(0, 6) + Convert.ToString(EngineSpeed_H[MessageReflahCounter], 16).PadLeft(2, '0') + " " +
+                                         Convert.ToString(EngineSpeed_L[MessageReflahCounter], 16).PadLeft(2, '0') + Speed.data.Substring(11);
+            Tacho.data = Tacho.data.Substring(0, 3) + Convert.ToString(Tachospeed[MessageReflahCounter], 16).PadLeft(2, '0') + " " + Tacho.data.Substring(5);
 
             string[] turnLED = { "FF FF FF FF FF FF FF FF", "00 00 00 00 00 00 00 00" };
-            LED.data = turnLED[MessageReflahCounter%2];
+            LED.data = turnLED[MessageReflahCounter % 2];
 
             MessageReflahCounter++;
             if (MessageReflahCounter > 7)
@@ -1057,8 +1093,8 @@ namespace WindowsFormsControlLibrary
                                 Lamp_OBD.enable = true;
                                 break;
                         }
-                     
-                        if (spflash.TotalMilliseconds>= 3000)
+
+                        if (spflash.TotalMilliseconds >= 3000)
                         {
                             TestCANmessageReflash();
                             timestartflash = now1;
@@ -1068,7 +1104,7 @@ namespace WindowsFormsControlLibrary
                             j++;
                             if (j > 1) j = 0;
                             timestart = now;
-                        }               
+                        }
                         foreach (ManualInstruction instruct in listManualInstruction)
                         {
                             if (instruct.enable)//&& instruct.enable
@@ -1084,7 +1120,7 @@ namespace WindowsFormsControlLibrary
                                     {
                                         Speed_CRC_BZReflash();
                                     }
-                                    else if(id == Convert.ToInt32(LH_EPS_01.id, 16))
+                                    else if (id == Convert.ToInt32(LH_EPS_01.id, 16))
                                     {
                                         LH_EPS_CRC_BZReflash();
                                     }
@@ -1112,7 +1148,7 @@ namespace WindowsFormsControlLibrary
             string dtcmsg = "";
             string icclockmsg = "";
             string checkcounter = "";
-            byte hour, min,second;
+            byte hour, min, second;
             int offset = 30000;
 
 
@@ -1123,20 +1159,20 @@ namespace WindowsFormsControlLibrary
                     //check dtc
                     DIDV.ReadDTC(out dtcmsg);
                     Thread.Sleep(50);
-                    DIDV.IC_Clock_Readtime(out hour,out min, out second);
+                    DIDV.IC_Clock_Readtime(out hour, out min, out second);
                     double starttime = hour * 3600 + min * 60 + second;
                     Thread.Sleep(offset);
                     DIDV.IC_Clock_Readtime(out hour, out min, out second);
-                    double endtime= hour * 3600 + min * 60 + second;
-                    if(endtime<starttime)
+                    double endtime = hour * 3600 + min * 60 + second;
+                    if (endtime < starttime)
                     {
                         endtime = endtime + 24 * 3600;
                     }
-                   if(endtime-starttime>32)
+                    if (endtime - starttime > 32)
                     {
                         string date = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss: ");
 
-                        icclockmsg =date+ " Check clock error . offset: " + (endtime - starttime).ToString()+Environment.NewLine;
+                        icclockmsg = date + " Check clock error . offset: " + (endtime - starttime).ToString() + Environment.NewLine;
                     }
                     ////Check Reset counter
                     DIDV.CheckResetCounter(out checkcounter);
@@ -1147,7 +1183,7 @@ namespace WindowsFormsControlLibrary
                     if (msg.Length != 0)
                     {
                         ShowInfo(richTextBox1, msg, Color.Red);
-                       // Setnoticecolor(Color.Red);
+                        // Setnoticecolor(Color.Red);
                         msg = "";
                         icclockmsg = "";
                         dtcmsg = "";
@@ -1245,7 +1281,7 @@ namespace WindowsFormsControlLibrary
         }
         private void PowerVoltageControl(TestStep ts)
         {
-            if(ts.voltage<6)
+            if (ts.voltage < 6)
             {
                 if (ts.voltage != 0)
                 {
@@ -1260,7 +1296,7 @@ namespace WindowsFormsControlLibrary
             else
             {
                 PowerControl.PowerSourceControl(1, (int)ts.voltage);
-                if(TestThread_.PowerONOFF==false)
+                if (TestThread_.PowerONOFF == false)
                 {
                     TestThread_.PowerONOFF = true;
                 }

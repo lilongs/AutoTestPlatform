@@ -17,7 +17,7 @@ using WindowsFormsControlLibrary;
 using System.Configuration;
 using System.Threading;
 using TestThread;
-
+using System.Linq;
 
 namespace AutoTestPlatform
 {
@@ -34,7 +34,9 @@ namespace AutoTestPlatform
         Dictionary<string, TestUnit> DicEquipmentInfo = new Dictionary<string, TestUnit>();
         Dictionary<string, TemperatureControl> DicTemperatureInfo = new Dictionary<string, TemperatureControl>();
         Dictionary<string, PublicElectricControl> DicPublicElectricInfo = new Dictionary<string, PublicElectricControl>();
+        private List<TypeList> list = new List<TypeList>();
         
+
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -51,6 +53,15 @@ namespace AutoTestPlatform
                     changeSelectedPageTimer.Start();
                 else
                     changeSelectedPageTimer.Stop();
+
+                SetCombIC();
+                List<TypeList> temp = LoadEquipmentTestInfo();
+                if (temp != null)
+                {
+                    list = temp;
+                    InitTree();
+                    ExpandTree();
+                }
 
                 LoadEquipmentInfo();
                 LoadTestUnitControl();
@@ -117,9 +128,85 @@ namespace AutoTestPlatform
 
             //PCB control thread
             TestThread1 ThreadPCBcontrol = new TestThread1();
-
-
         }
+
+        private void SetCombIC()
+        {
+            string path = Application.StartupPath + "\\SysConfig";
+            string json = JsonOperate.GetJson(path, "InstrumentClusterConfiguration.json");
+            List<InstrumentClusterConfiguration> list= JsonConvert.DeserializeObject<List<InstrumentClusterConfiguration>>(json);
+
+            combIC.Properties.Items.Clear();
+            foreach(InstrumentClusterConfiguration ic in list)
+            {
+                combIC.Properties.Items.Add(ic.InstrumentCluster);
+            }
+        }
+
+        private List<TypeList> LoadEquipmentTestInfo()
+        {
+            string path = Application.StartupPath + "\\TestInfo";
+            string json2 = JsonOperate.GetJson(path, "TypeList.json");
+
+            List<TypeList> temp2 = JsonConvert.DeserializeObject<List<TypeList>>(json2);
+            return temp2;
+        }
+
+        private void InitTree()
+        {
+            this.treeView1.Nodes.Clear();
+            foreach (TypeList type in list)
+            {
+                if (type.parentname == "")
+                {
+                    TreeNode node = new TreeNode();
+                    node.Name = type.parentname;
+                    node.Text = type.typename;
+                    node.Tag = type.typename;
+                    this.treeView1.Nodes.Add(node);
+                    addChildNode(type, node);
+                }
+            }
+        }
+
+        private void addChildNode(TypeList parenttype, TreeNode parentNode)
+        {
+            foreach (TypeList type in list)
+            {
+                if (type.parentname == parenttype.typename)
+                {
+                    TreeNode node = new TreeNode();
+                    node.Name = type.parentname;
+                    node.Text = type.typename + "," + type.typeinfo;
+                    node.Tag = type.typename;
+                    parentNode.Nodes.Add(node);
+                    addChildNode(type, node);
+                }
+            }
+        }
+
+        private void ExpandTree()
+        {
+            foreach (TreeNode nodes in treeView1.Nodes)
+            {
+                nodes.ExpandAll();
+            }
+        }
+        List<TypeList> selectedList = new List<TypeList>();
+        private void GetAllSelectedNode(TreeNode parentNode)
+        {
+            foreach (TreeNode node in parentNode.Nodes)
+            {
+                if (node.Name != "" && node.Checked)
+                {
+                    TypeList type = new TypeList();
+                    type.parentname = node.Name;
+                    type.typename = node.Tag.ToString();
+                    selectedList.Add(type);
+                }
+            }
+        }
+
         private void ForcePageReflash()
         {
             xtraTabControl1.BeginInvoke((MethodInvoker)delegate
@@ -284,6 +371,7 @@ namespace AutoTestPlatform
             form.ShowDialog();
         }
 
+        #region FormClose
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -301,7 +389,9 @@ namespace AutoTestPlatform
                 e.Cancel = true;
             }
         }
+        #endregion
 
+        #region FormMenu
         private void temperatureConfiguration_Click(object sender, EventArgs e)
         {
             frmTemperatureConfiguration frm = new frmTemperatureConfiguration();
@@ -360,10 +450,142 @@ namespace AutoTestPlatform
             }
 
         }
+        #endregion
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
+            treeView1.SelectedNode = e.Node;
+            SetTreeNodeChecked(treeView1.SelectedNode);
+        }
+
+        private void SetTreeNodeChecked(TreeNode tn)
+        {
+            if (tn == null) return;
+            if (tn.Nodes.Count > 0)
+            {
+                foreach (TreeNode item in tn.Nodes)
+                {
+                    item.Checked = tn.Checked;
+                    SetTreeNodeChecked(item);
+                }
+            }
+        }
+
+        #region Button event
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                GetAllSelectedNode(node);
+            }
+            if (selectedList.Count > 0)
+            {
+                btnStart.Enabled = false;
+                btnPause.Enabled = true;
+                btnStop.Enabled = true;
+                btnStart.BackColor = Color.DimGray;
+
+                foreach (var item in DicEquipmentInfo)
+                {
+                    string SelectIC=combIC.EditValue.ToString().Replace(", ", ",");
+                    if (SelectIC.Contains(item.Key))
+                    {
+                        TypeList[] arr = new TypeList[selectedList.Count()];
+                        this.selectedList.CopyTo(arr);
+                        item.Value.selectedList = arr.ToList();
+                        item.Value.btnStart_Click(sender, e);
+                    }
+                   
+                }
+                selectedList.Clear();
+            }
+            else
+            {
+                MessageBox.Show("请选择要测试的项目!");
+            }
 
         }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            btnPause.Enabled = false;
+            btnPause.BackColor = Color.Gray;
+            btnResume.Enabled = true;
+            btnResume.BackColor = Color.Yellow;
+            btnStop.Enabled = false;
+            btnStop.BackColor = Color.Gray;
+
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                GetAllSelectedNode(node);
+            }
+            foreach (var item in DicEquipmentInfo)
+            {
+                string SelectIC = combIC.EditValue.ToString().Replace(", ", ",");
+                if (SelectIC.Contains(item.Key))
+                {
+                    item.Value.btnPause_Click(sender, e);
+                }
+
+            }
+            selectedList.Clear();
+        }
+        private void btnResume_Click(object sender, EventArgs e)
+        {
+            btnResume.Enabled = false;
+            btnResume.BackColor = Color.Gray;
+            btnPause.Enabled = true;
+            btnPause.BackColor = Color.Yellow;
+            btnStop.Enabled = true;
+            btnStop.BackColor = Color.Red;
+
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                GetAllSelectedNode(node);
+            }
+            foreach (var item in DicEquipmentInfo)
+            {
+                string SelectIC = combIC.EditValue.ToString().Replace(", ", ",");
+                if (SelectIC.Contains(item.Key))
+                {
+                    item.Value.btnResume_Click(sender, e);
+                }
+
+            }
+            selectedList.Clear();
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            btnStop.Enabled = false;
+            btnStop.BackColor = Color.Red;
+            btnStart.Enabled = true;
+            btnStart.BackColor = Color.Lime;
+            btnPause.Enabled = false;
+            btnPause.BackColor = Color.Yellow;
+            btnResume.Enabled = false;
+            btnResume.BackColor = Color.Yellow;
+            btnStart.BackColor = Color.LimeGreen;
+
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                GetAllSelectedNode(node);
+            }
+            foreach (var item in DicEquipmentInfo)
+            {
+                string SelectIC = combIC.EditValue.ToString().Replace(", ", ",");
+                if (SelectIC.Contains(item.Key))
+                {
+                    item.Value.btnStop_Click(sender, e);
+                }
+
+            }
+            selectedList.Clear();
+        }
+
+        #endregion
+        
     }
 }

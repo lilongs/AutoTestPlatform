@@ -154,9 +154,9 @@
             this.panel3.Controls.Add(this.groupControl2);
             this.panel3.Controls.Add(this.groupControl3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(214, 0);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(693, 368);
+            this.panel3.Size = new System.Drawing.Size(907, 368);
             this.panel3.TabIndex = 18;
             // 
             // groupControl2
@@ -172,7 +172,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 201);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(693, 167);
+            this.groupControl2.Size = new System.Drawing.Size(907, 167);
             this.groupControl2.TabIndex = 3;
             this.groupControl2.Text = "Current curve";
             // 
@@ -194,7 +194,7 @@
             this.userCurve1.Location = new System.Drawing.Point(2, 39);
             this.userCurve1.Name = "userCurve1";
             this.userCurve1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.userCurve1.Size = new System.Drawing.Size(689, 126);
+            this.userCurve1.Size = new System.Drawing.Size(903, 126);
             this.userCurve1.StrechDataCountMax = 1000;
             this.userCurve1.TabIndex = 2;
             this.userCurve1.ValueMaxLeft = 1.6F;
@@ -236,7 +236,7 @@
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(693, 201);
+            this.groupControl3.Size = new System.Drawing.Size(907, 201);
             this.groupControl3.TabIndex = 4;
             this.groupControl3.Text = "Step info:";
             // 
@@ -496,7 +496,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(214, 368);
+            this.panel4.Size = new System.Drawing.Size(0, 368);
             this.panel4.TabIndex = 17;
             // 
             // groupControl4
@@ -511,7 +511,7 @@
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl4.Location = new System.Drawing.Point(0, 0);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(214, 368);
+            this.groupControl4.Size = new System.Drawing.Size(0, 368);
             this.groupControl4.TabIndex = 3;
             this.groupControl4.Text = "Select test step:";
             // 
@@ -523,9 +523,9 @@
             this.panel5.Controls.Add(this.btnPause);
             this.panel5.Controls.Add(this.treeView1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(2, 39);
+            this.panel5.Location = new System.Drawing.Point(1, 39);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(210, 327);
+            this.panel5.Size = new System.Drawing.Size(0, 327);
             this.panel5.TabIndex = 16;
             // 
             // btnStop
@@ -590,7 +590,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(210, 327);
+            this.treeView1.Size = new System.Drawing.Size(0, 327);
             this.treeView1.TabIndex = 14;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             // 
