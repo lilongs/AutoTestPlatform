@@ -416,14 +416,23 @@ namespace WindowsFormsControlLibrary
         #endregion
 
         #region Button event
-
+        private void PowerSourceControl()
+        {
+            PowerControl.PowerSourceControl(1, 14);  //PCB 供电
+            PowerControl.PowerSourceControl(2, 14);
+        }
         public void btnStart_Click(object sender, EventArgs e)
         {
 
             TestThread_.MeterSourceName = GetPowerMeterName();
             Setnoticecolor(Color.White);
-            PowerControl.PowerSourceControl(1, 14);  //PCB 供电
-            PowerControl.PowerSourceControl(2, 14);
+            //PowerControl.PowerSourceControl(1, 14);  //PCB 供电
+            //PowerControl.PowerSourceControl(2, 14);
+
+            Thread powerTh = new Thread(PowerSourceControl);
+            powerTh.IsBackground = true;
+            powerTh.Start();
+
             string Datesandhour = DateTime.Now.ToString("yyyy_MM_dd");
             string Datesandhour1 = DateTime.Now.ToString("hh_mm_ss");
             DIDV.LogFileName = Datesandhour1 + ".txt";

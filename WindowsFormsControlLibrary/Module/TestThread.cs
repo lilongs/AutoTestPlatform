@@ -254,7 +254,6 @@ namespace TestThread
                         PCBControl123(Function);
                         Function = 5;
                     }
-                    Thread.Sleep(50);
                 }
             }
             catch (Exception ex)
