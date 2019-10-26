@@ -6,17 +6,28 @@ using System.Threading.Tasks;
 using RS485;
 using System.Threading;
 using WindowsFormsControlLibrary;
+using System.Configuration;
 
 namespace WindowsFormsControlLibrary.Module
 {
     class PCBcontrol
     {
         RS485Control RS485 = new RS485Control();
-       string PCBPortName = "COM1";
-     
+        string PCBPortName =  GetAppConfig("PCBboardAdd");
+      public static string GetAppConfig(string strKey)
+        {
+            string Path = System.Windows.Forms.Application.StartupPath;// 获取路径
+            string FileName = Path + "\\File.config";
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            map.ExeConfigFilename = FileName;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+            string key = config.AppSettings.Settings[strKey].Value;
+            return key;
+        }
 
         public int SetPowerONOFF(byte channal,bool ONOFF)
         {
+
             byte[] CMD = new byte[8] { 0xA5, 0x5A, 0x01, 0x0D, channal, 0, 0, 0 };
             if (ONOFF)
             {
@@ -24,16 +35,39 @@ namespace WindowsFormsControlLibrary.Module
             }
             else CMD[5] = 0x01;
             RS485.OPenPort(PCBPortName);
-            RS485.Send(PCBPortName, CMD);
+            int result = 0;
+            int cnt = 0;
+            while (result != 1 && cnt<5)
+            {
+                RS485.Send(PCBPortName, CMD);
+                byte[] tt=RS485.Recv(PCBPortName);
+                if(tt.Length>2 && tt[0]==0xA5 && tt[1]==0x5A && tt[6]==0x00)
+                {
+                    result = 1;
+                }
+                Thread.Sleep(50);
+                cnt++;
+            }
             RS485.ClosePort(PCBPortName);
             return 0;
         }
        public int SetCurrentMeterChannal(byte channal)
        {
             byte[] CMD = new byte[8] { 0xA5, 0x5A, 0x01, 0x0C, channal, 0, 0, 0 };
- 
-           RS485.OPenPort(PCBPortName);
-           RS485.Send(PCBPortName,CMD);
+            RS485.OPenPort(PCBPortName);
+            int result = 0;
+            int cnt = 0;
+            while (result != 1 && cnt < 5)
+            {
+                RS485.Send(PCBPortName, CMD);
+                byte[] tt = RS485.Recv(PCBPortName);
+                if (tt.Length > 2 && tt[0] == 0xA5 && tt[1] == 0x5A && tt[6] == 0x00)
+                {
+                    result = 1;
+                }
+                Thread.Sleep(50);
+                cnt++;
+            }
            RS485.ClosePort(PCBPortName);
            return 0;
        }
@@ -72,7 +106,7 @@ namespace WindowsFormsControlLibrary.Module
         public int SetLevel(byte channal,bool level)
         {
             byte[] CMD = new byte[8] { 0xA5, 0x5A, 0x00, 0x0E, 0, 0, 0, 0 };
-            byte[] CMDSet = new byte[8] { 0xA5, 0x5A, 0x00, 0xC0, 0, 0, 0, 0 };
+           // byte[] CMDSet = new byte[8] { 0xA5, 0x5A, 0x00, 0xC0, 0, 0, 0, 0 };
             byte[][] bt = new byte[6][];
             bt[0] =new byte[]{0x12};
             bt[1] =new byte[]{0x17};
@@ -83,15 +117,12 @@ namespace WindowsFormsControlLibrary.Module
             if (channal == 1)
             {
                 CMD[2] = 0x01;
-                CMDSet[2] = 0x01;
             }
             else
             {
                 CMD[2] = 0x05;
-                CMDSet[2] = 0x05;
             }
             CMD[4] = bt[channal][0];
-            CMDSet[4]= bt[channal][0];
             if (level)
             {
                 CMD[5] = 0;
@@ -99,55 +130,50 @@ namespace WindowsFormsControlLibrary.Module
             else CMD[5] = 1;
 
             RS485.OPenPort(PCBPortName);
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
+
             RS485.Send(PCBPortName, CMD);
             RS485.ClosePort(PCBPortName);
             return 0;
         }
 
-        public int LEDcontrol(int led,bool ONOFF)
+        public int LEDcontrol(int led, bool ONOFF)
         {
-            byte[] CMD_Accurate = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0, 0, 0 };
-            byte[] CMD_Fault = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0, 0, 0 };
-            byte[] CMD_Buzzer = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0, 0, 0 };
-            byte[] CMDSet = new byte[8] { 0xA5, 0x5A, 0x01, 0xC0, 0x12, 0, 0, 0 };
-
+            byte[] CMD_Accurate = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0x0F, 0, 0 };
+            byte[] CMD_Fault = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0x0F, 0, 0 };
+            byte[] CMD_Buzzer = new byte[8] { 0xA5, 0x5A, 0x01, 0x0E, 0x12, 0x0F, 0, 0 };
             RS485.OPenPort(PCBPortName);
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
-            if (led==0)
+            if (led == 0)
             {
-                if(ONOFF)
+                if (ONOFF)
                 {
-                    CMD_Accurate[5] = 2;
+                    CMD_Accurate[5] = (byte)(CMD_Accurate[5] & 0x0D);
                 }
                 RS485.Send(PCBPortName, CMD_Accurate);
             }
-            else if(led==1)
+            else if (led == 1)
             {
                 if (ONOFF)
                 {
-                    CMD_Accurate[5] = 4;
+                    CMD_Fault[5] = (byte)(CMD_Accurate[5] & 0x0B);
+                    RS485.Send(PCBPortName, CMD_Fault);
                 }
-                RS485.Send(PCBPortName, CMD_Fault);
-            }
-            else if(led==2)
-            {
-                if (ONOFF)
+                else if (led == 2)
                 {
-                    CMD_Accurate[5] = 8;
+                    if (ONOFF)
+                    {
+                        CMD_Buzzer[5] = (byte)(CMD_Accurate[5] & 0x07);
+                    }
+                    RS485.Send(PCBPortName, CMD_Buzzer);
                 }
-                RS485.Send(PCBPortName, CMD_Buzzer);
             }
-            RS485.ClosePort(PCBPortName);
-            return 0;
+                RS485.ClosePort(PCBPortName);
+                return 0;
         }
-
+       
        public int SetFule(byte channal,Int16 fuel1,Int16 fuel2,Int16 fuel3,Int16 fuel4)
         {
             byte[] CMD = new byte[8] { 0xA5, 0x5A, 0x00, 0xC1, 0, 0, 0, 0 };
-            byte[] CMDSet = new byte[8] { 0xA5, 0x5A, 0x01, 0xC0, 0x12, 0, 0, 0 };
+         //   byte[] CMDSet = new byte[8] { 0xA5, 0x5A, 0x01, 0xC0, 0x12, 0, 0, 0 };
 
             byte[][] bt = new byte[6][];
             bt[0] = new byte[] { 0x10,0x11,0x13,0x14 };
@@ -157,54 +183,46 @@ namespace WindowsFormsControlLibrary.Module
             bt[4] = new byte[] { 0x35,0x36,0x40,0x41 };
             bt[5] = new byte[] { 0x42,0x43,0x45,0x46 };
 
-
             if (channal == 1)
             {
                 CMD[2] = 0x01;
-                CMDSet[2] = 0x01;
             }
             else
             {
                 CMD[2] = 0x05;
-                CMDSet[2] = 0x05;
             }
            
             RS485.OPenPort(PCBPortName);
-           //1
-            CMD[4] = bt[channal][ 0];
-            CMDSet[4] = bt[channal][ 0];
+            CMD[4] = bt[channal-1][ 0];
             CMD[5] = (byte)((fuel1 & 0xff00) >> 8);
             CMD[6] = (byte)((fuel1 & 0x00ff));
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
             RS485.Send(PCBPortName, CMD);
             Thread.Sleep(100);
-            //2
-            CMD[4] = bt[channal][1];
-            CMDSet[4] = bt[channal][1];
+            CMD[4] = bt[channal-1][1];
             CMD[5] = (byte)((fuel2 & 0xff00) >> 8);
             CMD[6] = (byte)((fuel2 & 0x00ff));
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
             RS485.Send(PCBPortName, CMD);
             Thread.Sleep(100);
             //3
-            CMD[4] = bt[channal][2];
-            CMDSet[4] = bt[channal][2];
+            if (channal == 1)
+            {
+                CMD[2] = 0x05;
+            }
+            if (channal == 2)
+            {
+                Thread.Sleep(1000);
+            }
+            CMD[4] = bt[channal-1][2];
             CMD[5] = (byte)((fuel3 & 0xff00) >> 8);
             CMD[6] = (byte)((fuel3 & 0x00ff));
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
             RS485.Send(PCBPortName, CMD);
             Thread.Sleep(100);
             //4
-            CMD[4] = bt[channal][3];
-            CMDSet[4] = bt[channal][3];
+            CMD[4] = bt[channal-1][3];
             CMD[5] = (byte)((fuel4 & 0xff00) >> 8);
             CMD[6] = (byte)((fuel4 & 0x00ff));
-            RS485.Send(PCBPortName, CMDSet);
-            Thread.Sleep(100);
             RS485.Send(PCBPortName, CMD);
+
             Thread.Sleep(100);
             RS485.ClosePort(PCBPortName);
            return 0;

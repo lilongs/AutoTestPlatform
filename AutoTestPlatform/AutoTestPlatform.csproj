@@ -301,6 +301,7 @@
     <EmbeddedResource Include="TestSequence\frmTestTypeManager.resx">
       <DependentUpon>frmTestTypeManager.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Icon\4358_Catch.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

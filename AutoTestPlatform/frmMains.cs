@@ -186,7 +186,7 @@ namespace AutoTestPlatform
 
                 foreach (var item in DicEquipmentInfo)
                 {
-                    item.Value.ChartValueFill(new Random().Next(1, 100));
+                  //  item.Value.ChartValueFill(new Random().Next(1, 100));
                 }
 
                 foreach (var its in DicPublicElectricInfo)

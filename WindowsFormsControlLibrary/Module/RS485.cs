@@ -43,6 +43,11 @@ namespace RS485
                return 2;
            }
        }
+        else
+        {
+                sp.Close();
+                sp.Dispose();
+            }
        return 2;
    }
 

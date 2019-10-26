@@ -103,12 +103,15 @@
     <Compile Include="Countdown.Designer.cs">
       <DependentUpon>Countdown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module\TemperatureSensor.cs" />
+    <Compile Include="Module\RealtimeCAN.cs" />
     <Compile Include="Module\KvaserCommunication.cs" />
     <Compile Include="Module\Meter34465.cs" />
     <Compile Include="Module\PCBcontrol.cs" />
     <Compile Include="Module\Power3544A.cs" />
     <Compile Include="Module\RS485.cs" />
     <Compile Include="Module\TestThread.cs" />
+    <Compile Include="Module\_Lib_Power.cs" />
     <Compile Include="PublicElectricControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,6 +169,7 @@
     <EmbeddedResource Include="Countdown.resx">
       <DependentUpon>Countdown.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="PublicElectricControl.resx">
       <DependentUpon>PublicElectricControl.cs</DependentUpon>
     </EmbeddedResource>

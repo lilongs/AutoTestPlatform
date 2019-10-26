@@ -6,11 +6,14 @@ using System.Text;
 using System.Windows.Forms;
 using canlibCLSNET;
 using System.Threading;
+using AutoTestDLL.Util;
 
 namespace WindowsFormsControlLibrary.Module
 {
-    public class KvaserCommunication
+    public partial class KvaserCommunication
     {
+        FileOperate FileOperation = new FileOperate();
+
         public int handle = -1;
         private int channel = -1;
         private int readHandle = -1;
@@ -20,7 +23,9 @@ namespace WindowsFormsControlLibrary.Module
 
         public int DigSendID = 0x714;
         public int DigRecivedID = 0x77E;
-      
+        public string LogFilePath = "";
+        public string LogFileName = "";
+
         //Initializes Canlib
         public void init()
         {
@@ -39,7 +44,31 @@ namespace WindowsFormsControlLibrary.Module
             }
             return hnd;
         }
+        public void initChannel(int channel, string bitrate)
+        {
+            Canlib.canStatus status;
 
+            Canlib.canInitializeLibrary();
+            int hnd = Canlib.canOpenChannel(channel, Canlib.canOPEN_ACCEPT_VIRTUAL);
+            if (hnd >= 0)
+            {
+                handle = hnd;
+
+                Dictionary<string, int> dicBitRates = new Dictionary<string, int>() {
+                    { "125 kb/s", Canlib.canBITRATE_125K},
+                    { "250 kb/s", Canlib.canBITRATE_250K},
+                    { "500 kb/s", Canlib.canBITRATE_500K},
+                    { "1 Mb/s", Canlib.BAUD_1M}
+                };
+
+                status = Canlib.canSetBusParams(handle, dicBitRates[bitrate], 0, 0, 0, 0, 0);
+                status = Canlib.canBusOn(handle);
+                if (status == Canlib.canStatus.canOK)
+                {
+                    onBus = true;
+                }
+            }
+        }
         //Sets the bitrate
         public void setBitrate(int bitrate)
         {
@@ -53,7 +82,6 @@ namespace WindowsFormsControlLibrary.Module
             if (status == Canlib.canStatus.canOK)
             {
                 onBus = true;
-               
             }
         }
 
@@ -62,9 +90,8 @@ namespace WindowsFormsControlLibrary.Module
         public void send(int id, int dlc, byte[] data, int flags)
         {
             Canlib.canStatus status = Canlib.canWrite(handle, id, data, dlc, flags);
-          
         }
-          public static byte[] strToToHexByte(string hexString)
+        public static byte[] strToToHexByte(string hexString)
         {
             hexString = hexString.Replace(" ", "");
             if ((hexString.Length % 2) != 0)
@@ -76,9 +103,10 @@ namespace WindowsFormsControlLibrary.Module
         }
         public  void CANmsgSend(string datastr)
         {
-          
-            int collection=0;
-            
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ") + Convert.ToString(DigSendID, 16) + "----"+datastr;
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
+            int collection =0;
             byte[] sendmsg=strToToHexByte(datastr);
             if(datastr.Length==0)
             {
@@ -87,17 +115,15 @@ namespace WindowsFormsControlLibrary.Module
             decimal a = sendmsg.Length;
             decimal b = 7;
             decimal c = (a-6) / b;
-            if (a > 6)
+            if (a > 7)
             {
-                collection = (int)Math.Ceiling(c);
+                collection = (int)Math.Ceiling(c)+1;
             }
             else collection = 1;
             Canlib.canFlushReceiveQueue(handle);
-            // Create an event collection with 2 messages (events)
             if (collection == 1)
             {
                 byte[] Send = new byte[8];
-
                 for (int i = 0; i < 7; i++)
                 {
                     if (i + 1 > sendmsg.Length)
@@ -108,10 +134,8 @@ namespace WindowsFormsControlLibrary.Module
                     {
                         Send[i+1] = sendmsg[i];
                     }
-
                 }
                 Send[0]=(byte)sendmsg.Length;
-                // event 1
                 send(DigSendID,8,Send,0);             
             }
             else if (collection > 1)
@@ -122,15 +146,12 @@ namespace WindowsFormsControlLibrary.Module
                 Send1[1]=(byte)sendmsg.Length;
                 for(int i=0;i<6;i++)
                 {
-                 Send1[i+2]=sendmsg[i];
+                    Send1[i+2]=sendmsg[i];
                 }
                 send(DigSendID,8,Send1,0);    
-                Thread.Sleep(20);
-
-
+                Thread.Sleep(25);
                 length = length - 6;
-
-                for (int i = 1; i < collection+1; i++)
+                for (int i = 1; i < collection; i++)
                 {
                     byte[] Send = new byte[8];
                     length = length - 7;
@@ -139,7 +160,6 @@ namespace WindowsFormsControlLibrary.Module
                     {
                         for (int j = 0; j < 7; j++)
                         {
-
                             Send[j+1] = sendmsg[(i-1) * 7 + j + 6];
                         }
                     }
@@ -157,14 +177,12 @@ namespace WindowsFormsControlLibrary.Module
                             }
                         }
                     }
-                    // event 1
                     send(DigSendID,8,Send,0);      
-                    Thread.Sleep(10);
                 }      
-                // Transmit events
             }
-           
         }
+        bool singleframe = true;
+        bool multipleframe = false;
         public  byte[]  CANmsgReceived()
         {
             string recvstring = " ";
@@ -172,25 +190,20 @@ namespace WindowsFormsControlLibrary.Module
             int cnt = 0;
             string[] multFlame = new string[100];
             string REcv = " ";        
-          
-                DumpMessageLoop(out multFlame);
-                REcv = multFlame[0];
-                if (REcv == null)
-                {
-                    REcv = " ";
-                }
-          
+            DumpMessageLoop(singleframe,out multFlame);
+            REcv = multFlame[0];
+            if (REcv == null)
+            {
+              REcv = " ";
+            }
             if (REcv.Length == 16)
             {              
                 if (REcv.Substring(0, 2) == "10")
                 {
                     recvstring = REcv.Substring(4);
-
                     length = Convert.ToByte(REcv.Substring(2, 2), 16) - 6;
-
-                    //     c_log.Debug(length);
                     Send30();
-                    DumpMessageLoop(out multFlame);
+                    DumpMessageLoop(multipleframe,out multFlame);
                     for (int i = 0; i < multFlame.Length; i++)
                     {
                         if (multFlame[i] == null)
@@ -217,14 +230,178 @@ namespace WindowsFormsControlLibrary.Module
                     }
                 }
             }
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ")+  Convert.ToString(DigRecivedID,16) + "----"+recvstring;
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
             return strToToHexByte(recvstring);
 
         }
         public  void Send30()
         {
-            byte[] msg = new byte[8] { 0x30, 0, 0, 0, 0, 0, 0, 0 };
+            byte[] msg = new byte[8] { 0x30,0x0F, 0x05, 0, 0, 0, 0, 0 };
             send(DigSendID,8,msg,0);
+
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ") + Convert.ToString(DigSendID, 16)+ "----"+"300F050000000000";
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
             Thread.Sleep(10);
+
+        }
+
+        public  void CANmsgSend(Int32 id, string datastr)
+        {
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ") + Convert.ToString(id, 16) + datastr + Environment.NewLine;
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
+            int collection = 0;
+                byte[] sendmsg = strToToHexByte(datastr);
+                if(datastr.Length==0)
+                {
+                    return;
+                }
+                decimal a = sendmsg.Length;
+                decimal b = 7;
+                decimal c = (a - 6) / b;
+                if (a > 7)
+                {
+                    collection = (int) Math.Ceiling(c)+1;
+                }
+                else collection = 1;
+                Canlib.canFlushReceiveQueue(handle);
+                // Create an event collection with 2 messages (events)
+                if (collection == 1)
+                {
+                    byte[] Send = new byte[8];
+                    for (int i = 0; i< 7; i++)
+                    {
+                        if (i + 1 > sendmsg.Length)
+                        {
+                            Send[i + 1] = 0xFF;
+                        }
+                        else
+                        {
+                            Send[i + 1] = sendmsg[i];
+                        }
+                    }
+                    Send[0]=(byte) sendmsg.Length;
+                    send(id,8, Send,4);             
+                }
+                else if (collection > 1)
+                {
+                    int length = sendmsg.Length;
+                    byte[] Send1 = new byte[8];
+                    Send1[0] = 0x10;
+                    Send1[1]=(byte) sendmsg.Length;
+                    for(int i=0;i<6;i++)
+                    {
+                        Send1[i + 2]=sendmsg[i];
+                    }
+                    send(id,8, Send1,4);
+                    Thread.Sleep(30);
+                    length = length - 6;
+                    for (int i = 1; i<collection; i++)
+                    {
+                        byte[] Send = new byte[8];
+                        length = length - 7;
+                        Send[0]=(byte) (0x20+i);
+                        if (length >= 7)
+                        {
+                            for (int j = 0; j< 7; j++)
+                            {
+                                Send[j + 1] = sendmsg[(i - 1) * 7 + j + 6];
+                            }
+                        }
+                        else
+                        {
+                            for (int j = 0; j< 7; j++)
+                            {
+                                if (((i-1) * 7 + j + 6) < sendmsg.Length)
+                                {
+                                    Send[j + 1] = sendmsg[(i - 1) * 7 + j + 6];
+                                }
+                                else
+                                {
+                                    Send[j + 1] = 0xFF;
+                                }
+                            }
+                        }
+                        send(id,8, Send,4);
+                      
+                    }      
+                }
+            }
+        public byte[] CANmsgReceived(Int32 id)
+        {
+            string recvstring = " ";
+            int length = 0;
+            int cnt = 0;
+            string[] multFlame = new string[100];
+            string REcv = " ";
+
+            DumpMessageLoop(singleframe,id,out multFlame);
+            REcv = multFlame[0];
+            if (REcv == null)
+            {
+                REcv = " ";
+            }
+
+            if (REcv.Length == 16)
+            {
+                if (REcv.Substring(0, 2) == "10")
+                {
+                    recvstring = REcv.Substring(4);
+
+                    length = Convert.ToByte(REcv.Substring(2, 2), 16) - 6;
+
+                    //     c_log.Debug(length);
+                    Send30(0x17FC0114);
+                    DumpMessageLoop(multipleframe,id,out multFlame);
+                    for (int i = 0; i < multFlame.Length; i++)
+                    {
+                        if (multFlame[i] == null)
+                        {
+                            break;
+                        }
+                        if (length > 7)
+                        {
+                            recvstring += multFlame[i].Substring(2);
+                            length -= 7;
+                        }
+                        else
+                        {
+                            recvstring += multFlame[i].Substring(2, length * 2);
+                        }
+                    }
+                }
+                else
+                {
+                    if (REcv.Substring(0, 2) != "30")
+                    {
+                        length = Convert.ToInt16(REcv.Substring(0, 2)) * 2;
+                        recvstring = REcv.Substring(2, length);
+                    }
+                }
+            }
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ") + Convert.ToString(id, 16) +"----"+ recvstring ;
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
+            return strToToHexByte(recvstring);
+
+         }
+        public void Send30(Int32 id)
+        {
+            byte[] msg = new byte[8] { 0x30, 0x0F, 0x05, 0, 0, 0, 0, 0 };
+            if(id>0x7ff)
+            {
+                send(id, 8, msg, 4);
+            }
+            else
+            {
+                send(id, 8, msg, 0);
+            }
+            string str = DateTime.Now.ToString("hh:mm:ss:fff---- ") + Convert.ToString(id, 16)+ "----"+"300F050000000000" ;
+            FileOperation.createFile(LogFilePath, LogFileName, str);
+
         }
         public  string ByteToHex(byte[] bcd)
         {
@@ -297,10 +474,10 @@ namespace WindowsFormsControlLibrary.Module
         }
 
         /*
-         * Looks for messages and sends them to the output box. 
-         */
+            * Looks for messages and sends them to the output box. 
+            */
 
-        private  void DumpMessageLoop(out string[] msg)
+        private  void DumpMessageLoop(bool singleframe,out string[] msg)
         {    
             Canlib.canStatus status;
             int id;
@@ -310,57 +487,77 @@ namespace WindowsFormsControlLibrary.Module
             long time;
             bool noError = true;
             int i = 0,j=0;
-            msg = new string[1000];
-
-            //Open up a new handle for reading
-            //  readHandle = Canlib.canOpenChannel(channel, Canlib.canOPEN_ACCEPT_VIRTUAL);
-
-            //    status = Canlib.canBusOn(readHandle);
-            // 
-            Thread.Sleep(200);
-
+            msg = new string[30];
             while (j<200)
             {           
                 status = Canlib.canReadWait(handle, out id, data, out dlc, out flags, out time, 5);
-
-                if (status == Canlib.canStatus.canOK && id == DigRecivedID)
+                if ( id == DigRecivedID)
                 {
-                    if ((flags & Canlib.canMSG_ERROR_FRAME) == Canlib.canMSG_ERROR_FRAME)
+                    if(data[0]!=0x30)
                     {
-                       // msg[i] = "***ERROR FRAME RECEIVED***";
-                    }
-                    else
-                    {
-                        msg[i] = String.Format("{0}  {1}  {2:x2} {3:x2} {4:x2} {5:x2} {6:x2} {7:x2} {8:x2} {9:x2}   {10}\r",
-                                                 id, dlc, data[0], data[1], data[2], data[3], data[4],
-                                                 data[5], data[6], data[7], time);
-
-                    }
-                    //Sends the message to the ProcessMessage method    
-                    i++;
+                        msg[i] = String.Format("{0:x2}{1:x2}{2:x2}{3:x2}{4:x2}{5:x2}{6:x2}{7:x2}",
+                                                    data[0], data[1], data[2], data[3], data[4],
+                                                    data[5], data[6], data[7]);
+                        i++;
+                        if(singleframe)
+                        {
+                            break;
+                        }
+                     }
+                    Thread.Sleep(15);
                 }
                 else if (status != Canlib.canStatus.canERR_NOMSG)
                 {
-                    //Sends the error status to the ProcessMessage method and breaks the loop
-                  
                     noError = false;
                 }              
                 j++;
+             }
+        }
+        private void DumpMessageLoop(bool singlefram,Int32 Id,out string[] msg)
+        {
+            Canlib.canStatus status;
+            int id;
+            byte[] data = new byte[8];
+            int dlc;
+            int flags;
+            long time;
+            bool noError = true;
+            int i = 0, j = 0;
+            msg = new string[1000];
+            while (j < 200)
+            {
+                status = Canlib.canReadWait(handle, out id, data, out dlc, out flags, out time, 50);
+                if (id == Id)
+                {
+                    if (data[0] != 0x30)
+                    {
+                        msg[i] = String.Format("{0:x2}{1:x2}{2:x2}{3:x2}{4:x2}{5:x2}{6:x2}{7:x2}",
+                                                        data[0], data[1], data[2], data[3], data[4],
+                                                        data[5], data[6], data[7]);
+                        id = 0;
+                        i++;
+                        if(singlefram)
+                        {
+                            break;
+                        }
+                    }
+                    Thread.Sleep(15);
+                }
+                else if (status != Canlib.canStatus.canERR_NOMSG)
+                {
+                    noError = false;
+                }
+                j++;
             }
-          //  Canlib.canBusOff(readHandle);
-          
         }
 
-        /*
-         * Adds the messages to the output box
-         */
         private void ProcessMessage(object sender, ProgressChangedEventArgs e)
         {
             if (e.ProgressPercentage == 0)
             {
                 string output = (string)e.UserState;
                 if(box!=null)
-                    AppendText(output);
+                AppendText(output);
             }
         }
 

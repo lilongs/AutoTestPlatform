@@ -4,43 +4,63 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AutoTestDLL.Util
 {
     public  class FileOperate
     {
-        public  void createFile(string folder,string filename,string info) { 
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+        public  void createFile(string folder,string filename,string info)
+        {
+            try
+            {
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
 
-            string filepath = folder  +"\\"+ filename;
-            if (File.Exists(filepath))
-            {
-                FileStream fs = new FileStream(filepath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
-                StreamWriter sr = new StreamWriter(fs);
-                sr.WriteLine(info);
-                sr.Close();
-                fs.Close();
+                string filepath = folder + "\\" + filename;
+                if (File.Exists(filepath))
+                {
+                    FileStream fs = new FileStream(filepath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+                    StreamWriter sr = new StreamWriter(fs);
+                    sr.WriteLine(info);
+                    sr.Close();
+                    fs.Close();
+                }
+                else
+                {
+                    FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                    StreamWriter sr = new StreamWriter(fs);
+                    sr.WriteLine(info);
+                    sr.Close();
+                    fs.Close();
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-                StreamWriter sr = new StreamWriter(fs);
-                sr.WriteLine(info);
-                sr.Close();
-                fs.Close();
+                throw ex;
             }
         }
 
-        public static  string ReadFile(string path) { 
-            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            StreamReader sr = new StreamReader(fs, System.Text.Encoding.UTF8);
-            StringBuilder sb = new StringBuilder();
-            while (!sr.EndOfStream)
+        public static  string ReadFile(string path)
+        {
+            try
             {
-                sb.AppendLine(sr.ReadLine());
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader sr = new StreamReader(fs, System.Text.Encoding.UTF8);
+                StringBuilder sb = new StringBuilder();
+                while (!sr.EndOfStream)
+                {
+                    sb.AppendLine(sr.ReadLine());
+                }
+                return sb.ToString();
+
             }
-            return sb.ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return "";
+            }
         }
 
         /// <summary>
@@ -51,16 +71,24 @@ namespace AutoTestDLL.Util
         /// <param name="info"></param>
         public static void CoverOldFile(string folder, string filename, string info)
         {
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+            try
+            {
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
 
-            string filepath = folder + "/" + filename;
+                string filepath = folder + "/" + filename;
 
-            FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-            StreamWriter sr = new StreamWriter(fs);
-            sr.WriteLine(info);
-            sr.Close();
-            fs.Close();
+                FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+                StreamWriter sr = new StreamWriter(fs);
+                sr.WriteLine(info);
+                sr.Close();
+                fs.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

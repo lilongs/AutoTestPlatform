@@ -87,14 +87,13 @@ namespace WindowsFormsControlLibrary
 
         private int value_Segment = 5;                      // 纵轴的片段分割
         private bool value_IsAbscissaStrech = false;        // 指示横坐标是否填充满整个坐标系
-        private int value_StrechDataCountMax = 300;         // 拉伸模式下的最大数据量
+        private int value_StrechDataCountMax = 3000;         // 拉伸模式下的最大数据量
         private bool value_IsRenderDashLine = true;         // 是否显示虚线的信息
         // private bool value_IsRenderAbscissaText = false;    // 指示是否显示横轴的文本信息
         private string textFormat = "HH:mm";                // 时间文本的信息
         private int value_IntervalAbscissaText = 100;       // 指示显示横轴文本的间隔数据
         private Random random = null;                       // 获取随机颜色使用
         private string value_title = "";                    // 图表的标题
-
 
         private int leftRight = 50;
         private int upDowm = 25;
@@ -392,7 +391,7 @@ namespace WindowsFormsControlLibrary
         /// <param name="lineColor"></param>
         public void SetLeftCurve( string key, float[] data, Color lineColor )
         {
-            SetCurve( key, true, data, lineColor, 1f );
+            SetCurve( key, true, data, lineColor, 1.5f );
         }
 
         /// <summary>
@@ -415,8 +414,6 @@ namespace WindowsFormsControlLibrary
         {
             SetCurve( key, false, data, lineColor, 1f );
         }
-
-
         /// <summary>
         /// 新增或修改一条指定关键字的曲线数据，需要指定参考系及数据，颜色，线条宽度
         /// </summary>
@@ -445,12 +442,9 @@ namespace WindowsFormsControlLibrary
 
                 if (data_text == null) data_text = new string[data.Length];
             }
-
             // 重绘图形
             Invalidate( );
         }
-
-
         /// <summary>
         /// 移除指定关键字的曲线
         /// </summary>
@@ -465,8 +459,6 @@ namespace WindowsFormsControlLibrary
             // 重绘图形
             Invalidate( );
         }
-
-
         /// <summary>
         /// 移除指定关键字的曲线
         /// </summary>
@@ -479,10 +471,7 @@ namespace WindowsFormsControlLibrary
             if (count > 0) Invalidate( );
         }
 
-
         // ======================================================================================================
-
-
 
         /// <summary>
         /// 新增指定关键字曲线的一个数据，注意该关键字的曲线必须存在，否则无效
@@ -502,7 +491,7 @@ namespace WindowsFormsControlLibrary
                     if (value_IsAbscissaStrech)
                     {
                         // 填充玩整个图形的情况
-                        SoftBasic.AddArrayData( ref curve.Data, values, value_StrechDataCountMax );
+                        SoftBasic.AddArrayData( ref curve.Data, values, value_StrechDataCountMax- value_StrechDataCountMax/10);
                     }
                     else
                     {
@@ -524,8 +513,6 @@ namespace WindowsFormsControlLibrary
             {
                 values[i] = DateTime.Now.ToString( textFormat );
             }
-
-
             if(value_IsAbscissaStrech)
             {
                 SoftBasic.AddArrayData( ref data_text, values, value_StrechDataCountMax );
@@ -571,13 +558,10 @@ namespace WindowsFormsControlLibrary
             if (keys == null) throw new ArgumentNullException( "keys" );
             if (values == null) throw new ArgumentNullException( "values" );
             if (keys.Length != values.Length) throw new Exception( "两个参数的数组长度不一致。" );
-
-            
             for (int i = 0; i < keys.Length; i++)
             {
                 AddCurveData( keys[i], new float[] { values[i] }, false );
             }
-
             AddCurveTime( 1 );
             // 统一的更新显示
             Invalidate( );
@@ -1059,6 +1043,11 @@ namespace WindowsFormsControlLibrary
         }
 
         #endregion
+
+        private void UserCurve_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

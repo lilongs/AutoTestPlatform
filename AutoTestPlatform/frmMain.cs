@@ -59,6 +59,7 @@ namespace AutoTestPlatform
                 //LoadPublicElectricControl();
                 LoadTemperatureInfo();
                 LoadTemperatureControl();
+                ForcePageReflash();
             }
             catch (Exception ex)
             {
@@ -89,8 +90,10 @@ namespace AutoTestPlatform
 
             //Thread Temp&Humidity
             TestThread1 TestThread_2 = new TestThread1();
-            string Datesandhour2 = DateTime.Now.ToString("MMdd_hh_mm_ss");
-            TestThread_2.TempFilePath = GetAppConfig("TempFilePath");
+            string Datesandhour2 = DateTime.Now.ToString("hh_mm_ss");
+            string Datesandhour3 = DateTime.Now.ToString("yyyy_MM_dd");
+
+            TestThread_2.TempFilePath = GetAppConfig("TempFilePath")+Datesandhour3+"\\";
             TestThread_2.TempFileName = Datesandhour2 + ".txt";
             TestThread_2.TempSourceName = GetAppConfig("TempSouceName");
             TestThread_2.TempSensor1Add = Convert.ToByte(GetAppConfig("TempSensor1Add"));
@@ -116,6 +119,19 @@ namespace AutoTestPlatform
             TestThread1 ThreadPCBcontrol = new TestThread1();
 
 
+        }
+        private void ForcePageReflash()
+        {
+            xtraTabControl1.BeginInvoke((MethodInvoker)delegate
+            {
+                for(int j=0;j< xtraTabControl1.TabPages.Count;j++)
+                {
+                    xtraTabControl1.SelectedTabPageIndex = j;
+                    Thread.Sleep(50);
+                }
+                xtraTabControl1.SelectedTabPageIndex = 0;
+
+            });
         }
 
         private void changeSelectedPage(object sender, EventArgs e)
@@ -342,6 +358,11 @@ namespace AutoTestPlatform
             {
                 this.changeSelectedPageTimer = frm.changeSelectedPageTimer;
             }
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
 
         }
     }

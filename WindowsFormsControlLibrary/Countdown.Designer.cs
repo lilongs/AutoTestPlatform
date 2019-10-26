@@ -54,13 +54,13 @@
             this.digitalGauge1.BackgroundLayers.AddRange(new DevExpress.XtraGauges.Win.Gauges.Digital.DigitalBackgroundLayerComponent[] {
             this.digitalBackgroundLayerComponent1});
             this.digitalGauge1.Bounds = new System.Drawing.Rectangle(6, 1, 270, 56);
-            this.digitalGauge1.DigitCount = 12;
+            this.digitalGauge1.DigitCount = 13;
             this.digitalGauge1.Name = "digitalGauge1";
-            this.digitalGauge1.Text = "00D00H00M00S";
+            this.digitalGauge1.Text = "000D00H00M00S";
             // 
             // digitalBackgroundLayerComponent1
             // 
-            this.digitalBackgroundLayerComponent1.BottomRight = new DevExpress.XtraGauges.Core.Base.PointF2D(595.55F, 99.9625F);
+            this.digitalBackgroundLayerComponent1.BottomRight = new DevExpress.XtraGauges.Core.Base.PointF2D(643.5125F, 99.9625F);
             this.digitalBackgroundLayerComponent1.Name = "digitalBackgroundLayerComponent7";
             this.digitalBackgroundLayerComponent1.ShapeType = DevExpress.XtraGauges.Core.Model.DigitalBackgroundShapeSetType.Style16;
             this.digitalBackgroundLayerComponent1.TopLeft = new DevExpress.XtraGauges.Core.Base.PointF2D(20F, 0F);

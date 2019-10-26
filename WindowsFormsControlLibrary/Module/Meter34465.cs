@@ -15,17 +15,25 @@ namespace Ag3446x_CS
    
     class Meter
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
         Ag3446x driver = new Ag3446x();
         public  bool MeterInit(string resourceDesc)
         {
-           
-            string initOptions = "QueryInstrStatus=true, Simulate=false, DriverSetup= Model=34460A, Trace=false, TraceName=c:\\temp\\traceOut";
+            string initOptions = "QueryInstrStatus=true, Simulate=true, DriverSetup= Model=34460A, Trace=false, TraceName=c:\\temp\\traceOut";
             bool idquery = true;
             bool reset = true;
             if (driver.Initialized == false)
             {
-                driver.Initialize(resourceDesc, idquery, reset, initOptions);
+                try
+                {
+                    driver.Initialize(resourceDesc, idquery, reset, initOptions);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, ex.Message);
+                }
+
             }
             Thread.Sleep(10);
             return !driver.Initialized;
@@ -33,7 +41,6 @@ namespace Ag3446x_CS
 
         public void SetVoltage(double range,double resolution)
         {
-            
             driver.DCVoltage.Configure(range, resolution);
             driver.DCVoltage.AutoZero = Ag3446xAutoZeroEnum.Ag3446xAutoZeroOnce;
             // Set reading rate to 0.02 NPLC's
@@ -49,7 +56,7 @@ namespace Ag3446x_CS
             driver.DCCurrent.AutoZero = Ag3446xAutoZeroEnum.Ag3446xAutoZeroOnce;
 
             // Set reading rate to 0.02 NPLC's
-            driver.DCCurrent.NPLC = 10;
+            driver.DCCurrent.NPLC = 0.02;
 
             // Set up triggering for 1000 samples from a single trigger event
             driver.Trigger.Source = Ag3446xTriggerSourceEnum.Ag3446xTriggerSourceImmediate;
@@ -91,12 +98,16 @@ namespace Ag3446x_CS
         }
         public double MeasureSinglePoint()
         {
-          
-            double data2 = 0;
-              //driver.Measurement.Initiate();
+              double data2 = 0;
+          //  TimeSpan sp = new TimeSpan();
+          //  DateTime start = DateTime.Now;
+                  driver.Measurement.Initiate();
                   driver.System.WaitForOperationComplete(1000);
-                   data2 = driver.Measurement.Fetch(1000);
-              return data2;
+                  data2 = driver.Measurement.Fetch(5000);
+          //  DateTime now = DateTime.Now;
+          //  sp = now - start;
+          //  logger.Error( sp.TotalMilliseconds.ToString());
+            return data2;
         }    
     }
 }
